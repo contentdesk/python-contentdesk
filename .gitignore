@@ -5,3 +5,5 @@ output.xml
 src/env.Github.py
 src/env
 src/env/*
+
+output/*

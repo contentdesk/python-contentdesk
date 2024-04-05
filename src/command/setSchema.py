@@ -1,5 +1,9 @@
 import requests
 import json
+import sys
+sys.path.append("..")
+
+import config
 
 # Filter properties with rangeIncludes "schema:Number", "schema:Text", or "schema:URL"
 # properties = [prop for prop in data["@graph"] if prop["@type"] == "rdf:Property" and
@@ -13,11 +17,7 @@ import json
 # Create a Tree with subClassOf
 # types = [type for type in data["@graph"] if type["@type"] == "rdfs:Class" and "rdfs:subClassOf" in type]
 
-ignoreTypes = ["schema:AskPublicNewsArticle", 
-               "schema:UseAction", 
-               "schema:FollowAction", 
-               "schema:InteractionCounter",
-               "schema:LodgingBusiness"]
+ignoreTypes = config.ignoreTypes
 
 # Load the JSON-LD file from the URL
 def load_jsonld(url):
@@ -25,23 +25,34 @@ def load_jsonld(url):
     data = response.json()
     return data
 
+# def checkTypeSubClassOf(data):
+#     value = any(ignoreType in data["rdfs:subClassOf"] for ignoreType in ignoreTypes)
+#     return value
+
 def checkTypeSubClassOf(data):
-    value = any(ignoreType in data["rdfs:subClassOf"] for ignoreType in ignoreTypes)
+    if "rdfs:subClassOf" in data:
+        print("Check SubClassOf")
+        print(data["rdfs:subClassOf"])
+        print(type(data["rdfs:subClassOf"]))
+        if type(data["rdfs:subClassOf"]) == str:
+            print("SubClassOf = str")
+            value = data["rdfs:subClassOf"] in ignoreTypes
+            print(value)
+        elif type(data["rdfs:subClassOf"]) == list:
+            print("SubClassOf = list")
+            value = any(ignoreType in data["rdfs:subClassOf"] for ignoreType in ignoreTypes)
+            print(value)
+        elif type(data["rdfs:subClassOf"]) == dict:
+            print("SubClassOf = dict")
+            value = any(ignoreType in data["rdfs:subClassOf"] for ignoreType in ignoreTypes)
+            print(value)
     return value
 
 def createTreeTypes(data):
     types = [type for type in data["@graph"] 
-                if type["@type"] == "rdfs:Class"
-                and type["@id"] not in ignoreTypes
-                or (type["@type"] == "rdfs:Class"
-                    and "rdfs:subClassOf" in type 
-                    and checkTypeSubClassOf(type)
-                    )
-             ]
-    types = [type for type in data["@graph"] 
-             if "rdfs:subClassOf" in type 
-             and "@id" in type["rdfs:subClassOf"] 
-             and not type["rdfs:subClassOf"]["@id"] == "schema:LodgingBusiness"]
+        if type["@type"] == "rdfs:Class"
+        and checkTypeSubClassOf(type)
+    ]
     return types
 
 def createTreeProperties(data):
@@ -81,7 +92,7 @@ def checkData(data):
                 #print ("DataType")
 
 def main():
-    url = "https://schema.org/version/latest/schemaorg-current-https.jsonld"
+    url = config.schemaorgURL
     data = load_jsonld(url)
     checkData(data)
     types = createTreeTypes(data)

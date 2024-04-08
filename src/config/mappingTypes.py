@@ -11,4 +11,5 @@ mappingTypesAttribute = {
 
 mappingTypeAssociations = {
     "schema:geo": "geo",
+    
 }

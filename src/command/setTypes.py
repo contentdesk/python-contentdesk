@@ -66,7 +66,7 @@ def createJsonTypes(data, types, filepath):
             filename = filepath + type["@id"].split(":")[1] + ".json"
             createJson(type, filename)
             # Create Index
-            index[type["@id"]] = type["@id"]
+            index[type["@id"]] = type
     
     # Create Index JSON file
     filename = "../../output/index/types.json"

@@ -6,6 +6,7 @@ sys.path.append("..")
 import setting
 
 ignoreTypesList = setting.ignoreTypesList
+ignoreProperties = setting.ignorePropertiesList
 
 # Load the JSON-LD file from the URL
 def load_jsonld(url):

@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Define the CSV URL
-csv_url = "https://docs.google.com/spreadsheets/d/187orB1Qx9YgeS8cVyI29DuGLhr-oj8yIiCIR5wqyqXk/gviz/tq?tqx=out:csv&sheet=setupAttributes"
+csv_url = "https://docs.google.com/spreadsheets/d/187orB1Qx9YgeS8cVyI29DuGLhr-oj8yIiCIR5wqyqXk/gviz/tq?tqx=out:csv&sheet=setupAttribute"
 
 # Read the CSV data into a pandas DataFrame
 df = pd.read_csv(csv_url)

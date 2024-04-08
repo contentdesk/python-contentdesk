@@ -3,7 +3,7 @@ import json
 import sys
 sys.path.append("..")
 
-import config
+import setting
 
 # Filter properties with rangeIncludes "schema:Number", "schema:Text", or "schema:URL"
 # properties = [prop for prop in data["@graph"] if prop["@type"] == "rdf:Property" and
@@ -17,7 +17,7 @@ import config
 # Create a Tree with subClassOf
 # types = [type for type in data["@graph"] if type["@type"] == "rdfs:Class" and "rdfs:subClassOf" in type]
 
-ignoreTypes = config.ignoreTypes
+ignoreTypes = setting.ignoreTypes
 
 # Load the JSON-LD file from the URL
 def load_jsonld(url):
@@ -92,7 +92,7 @@ def checkData(data):
                 #print ("DataType")
 
 def main():
-    url = config.schemaorgURL
+    url = setting.schemaorgURL
     data = load_jsonld(url)
     checkData(data)
     types = createTreeTypes(data)

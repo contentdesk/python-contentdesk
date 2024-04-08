@@ -1,0 +1,3 @@
+ignoreProperties = [
+    "schema:alternateName",
+]

@@ -11,6 +11,17 @@ ignoreTypes = [
     "schema:MedicalEntity",
     "schema:Patient",
     "schema:Taxon",
+    "schema:3DModel",
+    "schema:AboutPage",
+    "schema:AcceptAction",
     ]
+
+ignoreProperties = [
+    "schema:alternateName",
+]
+
+mappingProperties = {
+    "schema:additionalType": "schema:URL",
+}
 
 schemaorgURL = "https://schema.org/version/latest/schemaorg-current-https.jsonld"

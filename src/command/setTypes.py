@@ -53,7 +53,8 @@ def clearFolder(folder):
         os.remove(f)
 
 def createJsonTypes(data, types, filepath):
-    index = {}
+    indexTypes = {}
+    indexProperties = {}
     clearFolder(filepath + "*.json")
     for type in types:
         print("Check type: ", type["@id"])
@@ -65,12 +66,17 @@ def createJsonTypes(data, types, filepath):
             print("Create JSON file for type: ", type["@id"])
             filename = filepath + type["@id"].split(":")[1] + ".json"
             createJson(type, filename)
-            # Create Index
-            index[type["@id"]] = type
+            # Create Index Types
+            indexTypes[type["@id"]] = type
+            # Create Index Properties
+            for prop in properties:
+                indexProperties[prop] = properties[prop]
     
     # Create Index JSON file
     filename = "../../output/index/types.json"
-    createJson(index, filename)
+    createJson(indexTypes, filename)
+    filename = "../../output/index/properties.json"
+    createJson(indexProperties, filename)
 
 def main():
     url = setting.schemaorgURL

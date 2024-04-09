@@ -1,4 +1,5 @@
 import json
+import requests
 from akeneo.akeneo import Akeneo
 from os import getenv
 from dotenv import find_dotenv, load_dotenv
@@ -10,6 +11,10 @@ AKENEO_CLIENT_SECRET = getenv('AKENEO_CLIENT_SECRET')
 AKENEO_USERNAME = getenv('AKENEO_USERNAME')
 AKENEO_PASSWORD = getenv('AKENEO_PASSWORD')
 
+import sys
+sys.path.append("..")
+
+import setting
 # Load properties.json
 def getFamilies():
     with open('../../output/index/akeneo/families.json', 'r') as f:
@@ -20,6 +25,23 @@ def getTypefromJson(type):
     with open('../../output/types/'+type+'.json', 'r') as f:
         type = json.load(f)
     return type
+
+def getTypefromData(type, types):
+    print("Get Type: ", type)
+    for t in types:
+        print("Type: ", t)
+        if t["@id"] == type:
+            return t
+    return None
+
+def getTypes(data):
+    types = [types for types in data["@graph"] if types["@type"] == "rdfs:Class"]
+    return types
+
+def load_jsonld(url):
+    response = requests.get(url)
+    data = response.json()
+    return data
 
 def getIgnoreProperties():
     with open('../../output/ignoreProperties.json', 'r') as f:
@@ -41,13 +63,13 @@ def getTypeProperties(code):
     attributes = {}
     print("Get Family Attributes: ", code)
     typeClass = getTypefromJson(code)
-    print("Type: ", typeClass)
+    #typeClass = getTypefromData(code, types)
 
     if typeClass["properties"]:
         attributes = merge_dicts(attributes, typeClass["properties"])
 
     if "rdfs:subClassOf" in typeClass:
-        print(type(typeClass["rdfs:subClassOf"]))
+        #print(type(typeClass["rdfs:subClassOf"]))
         if type(typeClass["rdfs:subClassOf"]) == dict:
             attributes = merge_dicts(attributes, getTypeProperties(typeClass["rdfs:subClassOf"]["@id"].split(":")[1]))
         elif type(typeClass["rdfs:subClassOf"]) == list:
@@ -58,12 +80,12 @@ def getTypeProperties(code):
 
 def getFamilyAttributes(code):
     attributes = getTypeProperties(code)
-    print ("Complete Attributes befor Removed: ", attributes)
+    #print ("Complete Attributes befor Removed: ", attributes)
     ignoreProperties = getIgnoreProperties()
     attributes = removeIgnoreProperties(attributes, ignoreProperties)
     # add sku to attributes dict
     attributes["sku"] = "sku"
-    print ("Clear Attributes: ", attributes)
+    #print ("Clear Attributes: ", attributes)
     return attributes
 
 def createFamily(family):
@@ -102,8 +124,8 @@ def createFamily(family):
 
     # Type specific attributes
     attributes = getFamilyAttributes(code)
-    print("Attributes: ")
-    print(attributes)
+    #print("Attributes: ")
+    #print(attributes)
     body["attributes"] = attributes
 
     akeneo = Akeneo(
@@ -125,10 +147,11 @@ def createFamily(family):
 def createFamilies():
     families = getFamilies()
     for family in families:
-        print ("Create Family: "+ family["label"])
+        print ("CREATE - Family: "+ family["label"])
         if family["enabled"] == 1:
             print("patch Family: ", family["label"])
             createFamily(family)
+            print("FINISH - patch Family: ", family["label"])
 
 def main():
     createFamilies()

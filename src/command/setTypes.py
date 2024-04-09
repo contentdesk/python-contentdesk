@@ -57,6 +57,8 @@ def clearFolder(folder):
     for f in files:
         os.remove(f)
 
+# Get all Types from Schema.org as singel JSON file
+# TODO: Create all Types JSON files
 def createJsonTypes(data, types, filepath):
     indexTypes = {}
     indexAllTypes = {}
@@ -64,20 +66,19 @@ def createJsonTypes(data, types, filepath):
     clearFolder(filepath + "*.json")
     for type in types:
         print("Check type: ", type["@id"])
-        if type["@id"] not in ignoreTypesList:
-            # get Properties by Type
-            print ("Get Properties by Type: ", type["@id"])
-            properties = getPropertiesbyType(data, type)
-            type["properties"] = properties
-            print("Create JSON file for type: ", type["@id"])
-            filename = filepath + type["@id"].split(":")[1] + ".json"
-            createJson(type, filename)
-            # Create Index Types
-            indexTypes[type["@id"]] = type
-            indexAllTypes[type["@id"]] = type["@id"]
-            # Create Index Properties
-            for prop in properties:
-                indexProperties[prop] = properties[prop]
+        # get Properties by Type
+        print ("Get Properties by Type: ", type["@id"])
+        properties = getPropertiesbyType(data, type)
+        type["properties"] = properties
+        print("Create JSON file for type: ", type["@id"])
+        filename = filepath + type["@id"].split(":")[1] + ".json"
+        createJson(type, filename)
+        # Create Index Types
+        indexTypes[type["@id"]] = type
+        indexAllTypes[type["@id"]] = type["@id"]
+        # Create Index Properties
+        for prop in properties:
+            indexProperties[prop] = properties[prop]
     
     # Create Index JSON file
     filename = "../../output/index/types.json"

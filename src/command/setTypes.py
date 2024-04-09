@@ -6,7 +6,6 @@ sys.path.append("..")
 import setting
 
 ignoreTypesList = setting.ignoreTypesList
-ignoreProperties = setting.ignorePropertiesList
 
 # Load the JSON-LD file from the URL
 def load_jsonld(url):
@@ -72,7 +71,7 @@ def createJsonTypes(data, types, filepath):
             indexAllTypes[type["@id"]] = type["@id"]
             # Create Index Properties
             for prop in properties:
-                indexProperties[prop.split(":")[1]] = properties[prop]
+                indexProperties[prop] = properties[prop]
     
     # Create Index JSON file
     filename = "../../output/index/types.json"

@@ -27,17 +27,10 @@ def getIgnoreProperties():
     return ignoreProperties
 
 def removeIgnoreProperties(properties, ignoreProperties):
-    print("Remove Ignore Properties: ")
-    print ("Properties: ", ignoreProperties)
     newProperties = {}
     for prop in properties:
-        print ("Property:", prop)
-        if prop == "accommodationCategory":
-            print("Found accommodationCategory in ignoreProperties")
         if prop not in ignoreProperties:
-            print("Not in ignoreProperties: ", prop)
             newProperties[prop] = properties[prop]
-    print ("Ignore Properties Removed")
     return newProperties
 
 def merge_dicts(dict1, dict2):
@@ -50,11 +43,9 @@ def getTypeProperties(code):
     type = getTypefromJson(code)
 
     if type["properties"]:
-        print("Type Properties: ", type["properties"])
         attributes = merge_dicts(attributes, type["properties"])
 
     if "rdfs:subClassOf" in type:
-        print("Parent Type: ", type["rdfs:subClassOf"]["@id"])
         attributes = merge_dicts(attributes, getTypeProperties(type["rdfs:subClassOf"]["@id"].split(":")[1]))
 
     return attributes
@@ -64,6 +55,9 @@ def getFamilyAttributes(code):
     print ("Complete Attributes befor Removed: ", attributes)
     ignoreProperties = getIgnoreProperties()
     attributes = removeIgnoreProperties(attributes, ignoreProperties)
+    # add sku to attributes dict
+    print(type(attributes))
+    attributes["sku"] = "sku"
     print ("Clear Attributes: ", attributes)
     return attributes
 
@@ -74,7 +68,7 @@ def createFamily(family):
     if family["attribute_requirements.ecommerce"] != None:
         attribute_requirements = family["attribute_requirements.ecommerce"].split(",")
     else:
-        family["attribute_requirements.ecommerce"] = ["sku", "name", "image"]
+        attribute_requirements = family["attribute_requirements.ecommerce"] = ["sku", "name", "image"]
 
     if family["attribute_as_label"] == None:
         family["attribute_as_label"] = "name"

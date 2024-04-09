@@ -3,9 +3,6 @@ import config.properties as properties
 
 ignoreTypesList = ignoreTypes.ignoreTypes
 
-ignorePropertiesList = properties.ignorePropertiesList
-indexPropertiesAllneededTypesList = properties.indexPropertiesAllneededTypesList
-
 mappingProperties = {
     "schema:additionalType": "schema:URL",
 }

@@ -32,6 +32,8 @@ def createAttribute(attribute):
 
     if attribute["allowed_extensions"] == None:
         attribute["allowed_extensions"] = []
+    elif type(attribute["allowed_extensions"]) == str:
+        attribute["allowed_extensions"] = attribute["allowed_extensions"].split(",")
 
     if attribute["localizable"] == None:
         attribute["localizable"] = False
@@ -45,6 +47,15 @@ def createAttribute(attribute):
     if attribute["useable_as_grid_filter"] == None:
         attribute["useable_as_grid_filter"] = False
 
+    if attribute["wysiwyg_enabled"] == None:
+        attribute["wysiwyg_enabled"] = False
+    
+    if attribute["decimals_allowed"] == None:
+        attribute["decimals_allowed"] = False
+    
+    if attribute["negative_allowed"] == None:
+        attribute["negative_allowed"] = False
+
     body = {
         "code": code,
         "type": attribute["type"],
@@ -55,6 +66,9 @@ def createAttribute(attribute):
         "unique": attribute["unique"],
         "useable_as_grid_filter": attribute["useable_as_grid_filter"],
         "max_characters": attribute["max_characters"],
+        "wysiwyg_enabled ": attribute["wysiwyg_enabled"],
+        "decimals_allowed": attribute["decimals_allowed"],
+        "negative_allowed": attribute["negative_allowed"],
         "metric_family": attribute["metric_family"],
         "default_metric_unit": attribute["default_metric_unit"],
         "allowed_extensions": attribute["allowed_extensions"],

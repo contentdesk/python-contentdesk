@@ -66,7 +66,7 @@ def createAttribute(attribute):
         "unique": attribute["unique"],
         "useable_as_grid_filter": attribute["useable_as_grid_filter"],
         "max_characters": attribute["max_characters"],
-        "wysiwyg_enabled ": attribute["wysiwyg_enabled"],
+        "wysiwyg_enabled": attribute["wysiwyg_enabled"],
         "decimals_allowed": attribute["decimals_allowed"],
         "negative_allowed": attribute["negative_allowed"],
         "metric_family": attribute["metric_family"],

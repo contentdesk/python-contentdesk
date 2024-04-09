@@ -47,15 +47,7 @@ def createAttribute(attribute):
     if attribute["useable_as_grid_filter"] == None:
         attribute["useable_as_grid_filter"] = False
 
-    if attribute["wysiwyg_enabled"] == None:
-        attribute["wysiwyg_enabled"] = False
-    
-    if attribute["decimals_allowed"] == None:
-        attribute["decimals_allowed"] = False
-    
-    if attribute["negative_allowed"] == None:
-        attribute["negative_allowed"] = False
-
+    # Create body
     body = {
         "code": code,
         "type": attribute["type"],
@@ -66,9 +58,9 @@ def createAttribute(attribute):
         "unique": attribute["unique"],
         "useable_as_grid_filter": attribute["useable_as_grid_filter"],
         "max_characters": attribute["max_characters"],
-        "wysiwyg_enabled": attribute["wysiwyg_enabled"],
-        "decimals_allowed": attribute["decimals_allowed"],
-        "negative_allowed": attribute["negative_allowed"],
+        #"wysiwyg_enabled": attribute["wysiwyg_enabled"],
+        #"decimals_allowed": attribute["decimals_allowed"],
+        #"negative_allowed": attribute["negative_allowed"],
         "metric_family": attribute["metric_family"],
         "default_metric_unit": attribute["default_metric_unit"],
         "allowed_extensions": attribute["allowed_extensions"],
@@ -80,6 +72,24 @@ def createAttribute(attribute):
             "it_IT": attribute["label.it_IT"],
             }
     }
+
+    # Type specific attributes
+    if attribute["type"] == "pim_catalog_textarea":
+        if attribute["wysiwyg_enabled"] != None:
+            body["wysiwyg_enabled"] = attribute["wysiwyg_enabled"]
+        else:
+            attribute["wysiwyg_enabled"] = False
+    
+    if attribute["type"] == "pim_catalog_number":
+        if attribute["decimals_allowed"] != None:
+            body["decimals_allowed"] = attribute["decimals_allowed"]
+        else:
+            attribute["decimals_allowed"] = False
+        
+        if attribute["negative_allowed"] != None:
+            body["negative_allowed"] = attribute["negative_allowed"]
+        else:
+            attribute["negative_allowed"] = False
 
     try:
         response = akeneo.patchAttribut(code, body)

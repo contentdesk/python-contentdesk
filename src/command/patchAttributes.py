@@ -11,21 +11,12 @@ AKENEO_USERNAME = getenv('AKENEO_USERNAME')
 AKENEO_PASSWORD = getenv('AKENEO_PASSWORD')
 
 # Load properties.json
-def getProperties():
-    with open('/output/index/properties.json', 'r') as f:
-        properties = json.load(f)
+def getAttributes():
+    with open('/output/index/akeneo/attributes.json', 'r') as f:
+        attributes = json.load(f)
+    return attributes
 
-    return properties
-
-
-# Check if properties.json is not in ignoreProperties.json
-def getIgnoreProperties():
-    with open('/output/ignoreProperties.json', 'r') as f:
-        ignore_properties = json.load(f)
-
-    return ignore_properties
-
-def createAttribute(prop):
+def createAttribute(attribute):
     akeneo = Akeneo(
         AKENEO_HOST,
         AKENEO_CLIENT_ID,
@@ -33,26 +24,34 @@ def createAttribute(prop):
         AKENEO_USERNAME,
         AKENEO_PASSWORD
     )
-    code = prop["@id"].split(":")[1]
+    code = attribute["label"]
     body = {
         "code": code,
-        "type": "pim_catalog_text",
-        "group": "schemaorg"
+        "type": attribute["type"],
+        "group": attribute["group"],
+        "localizable": attribute["localizable"],
+        "scopable": attribute["scopable"],
+        "allowed_locales": attribute["allowed_locales"],
+        "unique": attribute["unique"],
+        "useable_as_grid_filter": attribute["useable_as_grid_filter"],
+        "max_characters": attribute["max_characters"],
+        "metric_family": attribute["metric_family"],
+        "default_metric_unit": attribute["default_metric_unit"],
+        "allowed_extensions": attribute["allowed_extensions"],
+        "max_file_size": attribute["max_file_size"],
     }
-    return akeneo.patchAttribut(prop, body)
+    return akeneo.patchAttribut(code, body)
 
 def createAttributesinAkeneo():
-    properties = getProperties()
-    ignoreProperties = getIgnoreProperties()
-    for prop in properties:
-        print("Check Property: ", prop["@id"])
-        if prop not in ignoreProperties:
-            print("Create Attribute: ", prop["@id"])
-            createAttribute(prop)
+    attributes = getAttributes()
+    for attribute in attributes:
+        print ("Check Property if Attribut: "+ attribute["label"])
+        if attribute["pimType"] == "attribute":
+            print("patch Attribute: ", attribute["label"])
+            createAttribute(attribute)
 
 def main():
     createAttributesinAkeneo()
-
 
 if __name__ == '__main__':
     main()

@@ -31,7 +31,7 @@ def getPropertiesbyType(data, classType):
                 if type(props["schema:domainIncludes"]) == str:
                     print("String")
                     if classType["@id"] in props["schema:domainIncludes"]["@id"]:
-                        properties[props["@id"]] = props
+                        properties[props["@id"]] = props["@id"]
                 elif type(props["schema:domainIncludes"]) == dict:
                     print("Dict")
                     print(props["schema:domainIncludes"]["@id"])
@@ -54,6 +54,7 @@ def clearFolder(folder):
 
 def createJsonTypes(data, types, filepath):
     indexTypes = {}
+    indexAllTypes = {}
     indexProperties = {}
     clearFolder(filepath + "*.json")
     for type in types:
@@ -68,6 +69,7 @@ def createJsonTypes(data, types, filepath):
             createJson(type, filename)
             # Create Index Types
             indexTypes[type["@id"]] = type
+            indexAllTypes[type["@id"]] = type["@id"]
             # Create Index Properties
             for prop in properties:
                 indexProperties[prop] = properties[prop]
@@ -75,6 +77,8 @@ def createJsonTypes(data, types, filepath):
     # Create Index JSON file
     filename = "../../output/index/types.json"
     createJson(indexTypes, filename)
+    filename = "../../output/index/allTypes.json"
+    createJson(indexAllTypes, filename)
     filename = "../../output/index/allProperties.json"
     createJson(indexProperties, filename)
 

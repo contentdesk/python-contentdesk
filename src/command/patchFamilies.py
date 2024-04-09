@@ -40,13 +40,19 @@ def merge_dicts(dict1, dict2):
 def getTypeProperties(code):
     attributes = {}
     print("Get Family Attributes: ", code)
-    type = getTypefromJson(code)
+    typeClass = getTypefromJson(code)
+    print("Type: ", typeClass)
 
-    if type["properties"]:
-        attributes = merge_dicts(attributes, type["properties"])
+    if typeClass["properties"]:
+        attributes = merge_dicts(attributes, typeClass["properties"])
 
-    if "rdfs:subClassOf" in type:
-        attributes = merge_dicts(attributes, getTypeProperties(type["rdfs:subClassOf"]["@id"].split(":")[1]))
+    if "rdfs:subClassOf" in typeClass:
+        print(type(typeClass["rdfs:subClassOf"]))
+        if type(typeClass["rdfs:subClassOf"]) == dict:
+            attributes = merge_dicts(attributes, getTypeProperties(typeClass["rdfs:subClassOf"]["@id"].split(":")[1]))
+        elif type(typeClass["rdfs:subClassOf"]) == list:
+            for typeChild in typeClass["rdfs:subClassOf"]:
+                attributes = merge_dicts(attributes, getTypeProperties(typeChild["@id"].split(":")[1]))
 
     return attributes
 
@@ -56,7 +62,6 @@ def getFamilyAttributes(code):
     ignoreProperties = getIgnoreProperties()
     attributes = removeIgnoreProperties(attributes, ignoreProperties)
     # add sku to attributes dict
-    print(type(attributes))
     attributes["sku"] = "sku"
     print ("Clear Attributes: ", attributes)
     return attributes

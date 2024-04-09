@@ -12,7 +12,7 @@ AKENEO_PASSWORD = getenv('AKENEO_PASSWORD')
 
 # Load properties.json
 def getAttributes():
-    with open('/output/index/akeneo/attributes.json', 'r') as f:
+    with open('../../output/index/akeneo/attributes.json', 'r') as f:
         attributes = json.load(f)
     return attributes
 
@@ -31,7 +31,7 @@ def createAttribute(attribute):
         "group": attribute["group"],
         "localizable": attribute["localizable"],
         "scopable": attribute["scopable"],
-        "allowed_locales": attribute["allowed_locales"],
+        "available_locales": attribute["available_locales"],
         "unique": attribute["unique"],
         "useable_as_grid_filter": attribute["useable_as_grid_filter"],
         "max_characters": attribute["max_characters"],
@@ -39,8 +39,20 @@ def createAttribute(attribute):
         "default_metric_unit": attribute["default_metric_unit"],
         "allowed_extensions": attribute["allowed_extensions"],
         "max_file_size": attribute["max_file_size"],
+        "labels": {
+            "en_US": attribute["labels.en_US"],
+            "de_CH": attribute["labels.de_CH"],
+            "fr_FR": attribute["labels.fr_FR"],
+            "it_IT": attribute["labels.it_IT"],
+            }
     }
-    return akeneo.patchAttribut(code, body)
+
+    try:
+        response = akeneo.patchAttribut(code, body)
+    except Exception as e:
+        print("Error: ", e)
+        print("patch Attribute: ", code)
+    return response
 
 def createAttributesinAkeneo():
     attributes = getAttributes()

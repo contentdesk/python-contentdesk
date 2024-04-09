@@ -1,8 +1,5 @@
 import json
 
-ignorePropertiesList = {}
-indexPropertiesAllneededTypesList = {}
-
 def setIgnoreProperties():
     with open('../../output/ignoreProperties.json') as file:
         ignorePropertiesFile = json.load(file)
@@ -22,10 +19,9 @@ def setIndexPropertiesAllneededTypes():
     return indexPropertiesAllneededTypesList
 
 def main():
-    global ignorePropertiesList
-    ignorePropertiesList = setIgnoreProperties()
-    global indexPropertiesAllneededTypesList
-    indexPropertiesAllneededTypesList = setIndexPropertiesAllneededTypes()
+    print("MAIN")
 
 if __name__ == '__main__':
     main()
+    ignorePropertiesList = setIgnoreProperties()
+    indexPropertiesAllneededTypesList = setIndexPropertiesAllneededTypes()

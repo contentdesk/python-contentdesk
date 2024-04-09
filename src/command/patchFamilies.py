@@ -10,12 +10,6 @@ AKENEO_CLIENT_SECRET = getenv('AKENEO_CLIENT_SECRET')
 AKENEO_USERNAME = getenv('AKENEO_USERNAME')
 AKENEO_PASSWORD = getenv('AKENEO_PASSWORD')
 
-import sys
-sys.path.append("..")
-import setting
-
-ignoreProperties = setting.ignorePropertiesList
-
 # Load properties.json
 def getFamilies():
     with open('../../output/index/akeneo/families.json', 'r') as f:
@@ -27,34 +21,51 @@ def getTypefromJson(type):
         type = json.load(f)
     return type
 
-def removeIgnoreProperties(properties):
-    for prop in properties:
-        if prop in ignoreProperties:
-            properties.pop(prop)
-    return properties
+def getIgnoreProperties():
+    with open('../../output/ignoreProperties.json', 'r') as f:
+        ignoreProperties = json.load(f)
+    return ignoreProperties
 
-def getFamilyAttributes(code):
+def removeIgnoreProperties(properties, ignoreProperties):
+    print("Remove Ignore Properties: ")
+    print ("Properties: ", ignoreProperties)
+    newProperties = {}
+    for prop in properties:
+        print ("Property:", prop)
+        if prop == "accommodationCategory":
+            print("Found accommodationCategory in ignoreProperties")
+        if prop not in ignoreProperties:
+            print("Not in ignoreProperties: ", prop)
+            newProperties[prop] = properties[prop]
+    print ("Ignore Properties Removed")
+    return newProperties
+
+def merge_dicts(dict1, dict2):
+    dict1.update(dict2)
+    return dict1
+
+def getTypeProperties(code):
     attributes = {}
     print("Get Family Attributes: ", code)
     type = getTypefromJson(code)
 
     if type["properties"]:
         print("Type Properties: ", type["properties"])
-        attributes = type["properties"]
+        attributes = merge_dicts(attributes, type["properties"])
 
-    print ("Attributes: ", attributes)
-
-    if type["rdfs:subClassOf"]:
+    if "rdfs:subClassOf" in type:
         print("Parent Type: ", type["rdfs:subClassOf"]["@id"])
-        parentType = getTypefromJson(type["rdfs:subClassOf"]["@id"].split(":")[1])
-        if parentType["properties"]:
-            print("Parent Type Properties: ", parentType["properties"])
-            #attributes = attributes + parentType["properties"]
-            attributes.update(parentType["properties"])
-    
-    print ("Attributes: ", attributes)
+        attributes = merge_dicts(attributes, getTypeProperties(type["rdfs:subClassOf"]["@id"].split(":")[1]))
+
     return attributes
 
+def getFamilyAttributes(code):
+    attributes = getTypeProperties(code)
+    print ("Complete Attributes befor Removed: ", attributes)
+    ignoreProperties = getIgnoreProperties()
+    attributes = removeIgnoreProperties(attributes, ignoreProperties)
+    print ("Clear Attributes: ", attributes)
+    return attributes
 
 def createFamily(family):
     code = family["label"]

@@ -6,6 +6,7 @@ sys.path.append("..")
 import setting
 
 ignoreProperties = setting.ignorePropertiesList
+indexPropertiesAllneededTypes = setting.indexPropertiesAllneededTypesList
 
 # Load the JSON-LD file from the URL
 def load_jsonld(url):
@@ -29,7 +30,6 @@ def clearFolder(folder):
         os.remove(f)
 
 def createJsonProperties(data, properties, filepath):
-    indexTypes = {}
     indexProperties = {}
     clearFolder(filepath + "*.json")
     for prop in properties:

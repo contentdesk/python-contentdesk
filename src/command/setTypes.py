@@ -75,7 +75,7 @@ def createJsonTypes(data, types, filepath):
     # Create Index JSON file
     filename = "../../output/index/types.json"
     createJson(indexTypes, filename)
-    filename = "../../output/index/properties.json"
+    filename = "../../output/index/allProperties.json"
     createJson(indexProperties, filename)
 
 def main():

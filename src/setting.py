@@ -1,9 +1,10 @@
 import config.ignoreTypes as ignoreTypes
-import config.ignoreProperties as ignoreProperties
+import src.config.properties as properties
 
 ignoreTypesList = ignoreTypes.ignoreTypes
 
-ignorePropertiesList = ignoreProperties.ignoreProperties
+ignorePropertiesList = properties.ignorePropertiesList
+indexPropertiesAllneededTypesList = properties.indexPropertiesAllneededTypesList
 
 mappingProperties = {
     "schema:additionalType": "schema:URL",

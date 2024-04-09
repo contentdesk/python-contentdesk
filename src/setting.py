@@ -1,5 +1,5 @@
 import config.ignoreTypes as ignoreTypes
-import src.config.properties as properties
+import config.properties as properties
 
 ignoreTypesList = ignoreTypes.ignoreTypes
 

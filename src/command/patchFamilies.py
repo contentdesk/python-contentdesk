@@ -44,7 +44,6 @@ def createFamily(family):
     # Create body
     body = {
         "code": code,
-        "attributes": family["attributes"],
         "attribute_as_label": family["attribute_as_label"],
         "attribute_as_image": family["attribute_as_image"],
         "attribute_requirements": {

@@ -31,12 +31,12 @@ def getPropertiesbyType(data, classType):
                 if type(props["schema:domainIncludes"]) == str:
                     print("String")
                     if classType["@id"] in props["schema:domainIncludes"]["@id"]:
-                        properties[props["@id"]] = props["@id"]
+                        properties[props["@id"].split(":")[1]] = props["@id"].split(":")[1]
                 elif type(props["schema:domainIncludes"]) == dict:
                     print("Dict")
                     print(props["schema:domainIncludes"]["@id"])
                     if classType["@id"] in props["schema:domainIncludes"]["@id"]:
-                        properties[props["@id"]] = props["@id"]
+                        properties[props["@id"].split(":")[1]] = props["@id"].split(":")[1]
 
     #properties = [props for props in data["@graph"] if props["@type"] == "rdf:Property" and "schema:domainIncludes" in props and type["@id"] in props["schema:domainIncludes"]]
     return properties
@@ -72,7 +72,7 @@ def createJsonTypes(data, types, filepath):
             indexAllTypes[type["@id"]] = type["@id"]
             # Create Index Properties
             for prop in properties:
-                indexProperties[prop] = properties[prop]
+                indexProperties[prop.split(":")[1]] = properties[prop]
     
     # Create Index JSON file
     filename = "../../output/index/types.json"

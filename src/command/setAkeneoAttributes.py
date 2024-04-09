@@ -14,5 +14,5 @@ df = df[df["enabled"] == True]
 json_data = df.to_json(orient="records")
 
 # Write the JSON data to a file
-with open("../../output/index/Akeneo/Attributes.json", "w") as file:
+with open("../../output/index/akeneo/attributes.json", "w") as file:
     file.write(json_data)

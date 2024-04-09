@@ -16,14 +16,27 @@ def getFamilies():
         families = json.load(f)
     return families
 
-def createFamilie(family):
-    akeneo = Akeneo(
-        AKENEO_HOST,
-        AKENEO_CLIENT_ID,
-        AKENEO_CLIENT_SECRET,
-        AKENEO_USERNAME,
-        AKENEO_PASSWORD
-    )
+def getTypefromJson(type):
+    with open('../../output/types/'+type+'.json', 'r') as f:
+        type = json.load(f)
+    return type
+
+def getFamilyAttributes(code):
+    attributes = []
+    type = getTypefromJson(code)
+
+    if type["properties"]:
+        attributes = type["properties"]
+
+    if type["rdfs:subClassOf"]:
+        parentType = getTypefromJson(type["rdfs:subClassOf"]["@id"])
+        if parentType["properties"]:
+            attributes = attributes.update(attributes, parentType["properties"])
+    
+    return attributes
+
+
+def createFamily(family):
     code = family["label"]
 
     # Set default values
@@ -35,7 +48,7 @@ def createFamilie(family):
         "attribute_as_label": family["attribute_as_label"],
         "attribute_as_image": family["attribute_as_image"],
         "attribute_requirements": {
-            "ecommerce": family["attribute_requirements.ecommerce"],
+            "ecommerce": family["attribute_requirements.ecommerce"].split(","),
             },
         "labels": {
             "en_US": family["label.en_US"],
@@ -46,25 +59,34 @@ def createFamilie(family):
     }
 
     # Type specific attributes
+    body["attributes"] = getFamilyAttributes(code)
+
+    akeneo = Akeneo(
+        AKENEO_HOST,
+        AKENEO_CLIENT_ID,
+        AKENEO_CLIENT_SECRET,
+        AKENEO_USERNAME,
+        AKENEO_PASSWORD
+    )
 
     try:
-        response = akeneo.patchAttribut(code, body)
+        response = akeneo.patchFamily(code, body)
     except Exception as e:
         print("Error: ", e)
-        print("patch Attribute: ", code)
+        print("patch Family: ", code)
         print("Response: ", response)
     return response
 
-def createAttributesinAkeneo():
-    attributes = getAttributes()
-    for attribute in attributes:
-        print ("Check Property if Attribut: "+ attribute["label"])
-        if attribute["pimType"] == "attribute":
-            print("patch Attribute: ", attribute["label"])
-            createAttribute(attribute)
+def createFamilies():
+    families = getFamilies()
+    for family in families:
+        print ("Create Family: "+ family["label"])
+        if family["enabled"] == 1:
+            print("patch Family: ", family["label"])
+            createFamily(family)
 
 def main():
-    createAttributesinAkeneo()
+    createFamilies()
 
 if __name__ == '__main__':
     main()

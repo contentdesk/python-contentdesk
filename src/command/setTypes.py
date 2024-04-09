@@ -13,8 +13,14 @@ def load_jsonld(url):
     data = response.json()
     return data
 
+def getIgnoreTypes():
+    with open('../../output/ignoreTypes.json') as file:
+        ignoreTypesFile = json.load(file)
+
+    return ignoreTypesFile
+
 def getTypes(data):
-    types = [types for types in data["@graph"] if types["@type"] == "rdfs:Class"] or types["@id"] not in ignoreTypesList
+    types = [types for types in data["@graph"] if types["@type"] == "rdfs:Class"]
     return types
 
 def getPropertiesbyType(data, classType):

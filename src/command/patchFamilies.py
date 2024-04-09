@@ -41,6 +41,8 @@ def createFamily(family):
     code = family["label"]
 
     # Set default values
+    attribute_requirements = family["attribute_requirements.ecommerce"].split(",")
+    print("Attribute Requirements: ", attribute_requirements)
 
     # Create body
     body = {
@@ -48,7 +50,7 @@ def createFamily(family):
         "attribute_as_label": family["attribute_as_label"],
         "attribute_as_image": family["attribute_as_image"],
         "attribute_requirements": {
-            "ecommerce": family["attribute_requirements.ecommerce"].split(","),
+            "ecommerce": attribute_requirements,
             },
         "labels": {
             "en_US": family["label.en_US"],

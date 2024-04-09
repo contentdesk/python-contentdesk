@@ -36,7 +36,7 @@ def getPropertiesbyType(data, classType):
                     print("Dict")
                     print(props["schema:domainIncludes"]["@id"])
                     if classType["@id"] in props["schema:domainIncludes"]["@id"]:
-                        properties[props["@id"]] = props
+                        properties[props["@id"]] = props["@id"]
 
     #properties = [props for props in data["@graph"] if props["@type"] == "rdf:Property" and "schema:domainIncludes" in props and type["@id"] in props["schema:domainIncludes"]]
     return properties

@@ -23,15 +23,16 @@ def getTypefromJson(type):
 
 def getFamilyAttributes(code):
     attributes = []
+    print("Get Family Attributes: ", code)
     type = getTypefromJson(code)
 
     if type["properties"]:
         attributes = type["properties"]
 
     if type["rdfs:subClassOf"]:
-        parentType = getTypefromJson(type["rdfs:subClassOf"]["@id"])
+        parentType = getTypefromJson(type["rdfs:subClassOf"]["@id"].split(":")[1])
         if parentType["properties"]:
-            attributes = attributes.update(attributes, parentType["properties"])
+            attributes = attributes.update(parentType["properties"])
     
     return attributes
 

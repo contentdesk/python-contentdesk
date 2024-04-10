@@ -78,18 +78,18 @@ def createAttribute(attribute):
         if attribute["wysiwyg_enabled"] != None:
             body["wysiwyg_enabled"] = attribute["wysiwyg_enabled"]
         else:
-            attribute["wysiwyg_enabled"] = False
+            body["wysiwyg_enabled"] = False
     
     if attribute["type"] == "pim_catalog_number" or attribute["type"] == "pim_catalog_metric" or attribute["type"] == "pim_catalog_price_collection":
         if attribute["decimals_allowed"] != None:
             body["decimals_allowed"] = attribute["decimals_allowed"]
         else:
-            attribute["decimals_allowed"] = False
+            body["decimals_allowed"] = False
         
         if attribute["negative_allowed"] != None:
             body["negative_allowed"] = attribute["negative_allowed"]
         else:
-            attribute["negative_allowed"] = False
+            body["negative_allowed"] = False
 
     try:
         response = akeneo.patchAttribut(code, body)

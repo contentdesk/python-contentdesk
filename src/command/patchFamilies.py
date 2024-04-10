@@ -78,8 +78,8 @@ def getTypeProperties(code):
 
     return attributes
 
-def getFamilyAttributes(code):
-    attributes = getTypeProperties(code)
+def getFamilyAttributes(code, attributes):
+    attributes = merge_dicts(attributes, getTypeProperties(code))
     #print ("Complete Attributes befor Removed: ", attributes)
     ignoreProperties = getIgnoreProperties()
     attributes = removeIgnoreProperties(attributes, ignoreProperties)
@@ -123,7 +123,8 @@ def createFamily(family):
     }
 
     # Type specific attributes
-    attributes = getFamilyAttributes(code)
+    attributes = family["attributes"]
+    attributes = getFamilyAttributes(code, attributes)
     #print("Attributes: ")
     #print(attributes)
     body["attributes"] = attributes

@@ -80,7 +80,7 @@ def createAttribute(attribute):
         else:
             attribute["wysiwyg_enabled"] = False
     
-    if attribute["type"] == "pim_catalog_number":
+    if attribute["type"] == "pim_catalog_number" or attribute["type"] == "pim_catalog_metric" or attribute["type"] == "pim_catalog_price_collection":
         if attribute["decimals_allowed"] != None:
             body["decimals_allowed"] = attribute["decimals_allowed"]
         else:

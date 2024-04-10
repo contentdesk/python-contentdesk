@@ -149,7 +149,7 @@ def createFamilies():
     families = getFamilies()
     for family in families:
         print ("CREATE - Family: "+ family["label"])
-        if family["enabled"] == 1:
+        if family["enabled"] == 1 & family["type"] == None:
             print("patch Family: ", family["label"])
             createFamily(family)
             print("FINISH - patch Family: ", family["label"])

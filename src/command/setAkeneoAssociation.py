@@ -15,7 +15,7 @@ def main():
     df = pd.concat([df, df_addition])
     # filter df by enabled = false or enabled = empty
     df = df[df["enabled"] == True]
-    df = df[df["pimType"] == "attribute"]
+    df = df[df["pimType"] == "association"]
 
     print(df)
 
@@ -23,7 +23,7 @@ def main():
     json_data = df.to_json(orient="records")
 
     # Write the JSON data to a file
-    with open("../../output/index/akeneo/attributes.json", "w") as file:
+    with open("../../output/index/akeneo/association.json", "w") as file:
         file.write(json_data)
 
 if __name__ == "__main__":

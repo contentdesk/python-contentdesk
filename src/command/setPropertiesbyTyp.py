@@ -10,13 +10,23 @@ def fetchJSONLD():
     return json.loads(response.read())
 
 def getTypesAndProperties(data):
-    types = []
+    types = {}
     properties_by_type = {}
 
     for item in data["@graph"]:
         if item["@type"] == "rdfs:Class":
-            types.append(item["@id"])
+            types[item["@id"]] = []
             #properties_by_type[item["@id"]] = []
+            if "rdfs:subClassOf" in item:
+                sublcass = item["rdfs:subClassOf"]
+                if isinstance(sublcass, list):
+                    for subclass in sublcass:
+                        types[item["@id"]] = []
+                        types[item["@id"]].append(subclass["@id"])
+                else:
+                    if item["rdfs:subClassOf"]["@id"] not in types:
+                        types[item["rdfs:subClassOf"]["@id"]] = []
+                    types[item["@id"]].append(item["rdfs:subClassOf"]["@id"])
         
         if item["@type"] == "rdf:Property":
             print("Check Property")

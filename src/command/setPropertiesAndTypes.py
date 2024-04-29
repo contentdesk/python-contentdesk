@@ -46,8 +46,8 @@ def getTypesAndProperties(data):
     return types, properties_by_type
 
 def main():
-    data = fetchJSONLD()
-    types, properties_by_type = getTypesAndProperties(data)
+    dataURL = fetchJSONLD()
+    types, properties_by_type = getTypesAndProperties(dataURL)
 
     with open("../../output/types_properties.json", "w") as file:
         json.dump(properties_by_type, file)

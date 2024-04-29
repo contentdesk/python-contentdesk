@@ -60,23 +60,53 @@ def getTypesAndProperties(data):
     properties_by_type = getProperties(data)
     return types, properties_by_type
 
+def getTypeProperties(typeClass, types, properties_by_type):
+    typesProperties = []
+    print("TypeClass")
+    print(typeClass)
+    print(type(typeClass))
+    if typeClass in types:
+        print("Type found")
+        print(typeClass)
+        # add properties to type
+        if typeClass in properties_by_type:
+            print(typesProperties)
+            print(properties_by_type[typeClass])
+            # Merge Arrays
+            typesProperties = typesProperties + properties_by_type[typeClass]
+            print(typesProperties)
+        
+        # Check SubclassOf
+        if isinstance(types[typeClass], list):
+            for subclass in types[typeClass]:
+                print("Subclass of")
+                print(subclass)
+                if subclass in properties_by_type:
+                    print(properties_by_type[subclass])
+                    #typesProperties = properties_by_type[subclass]
+                    typesProperties = typesProperties.append(getTypeProperties(subclass, types, properties_by_type))
+        else:
+            if subclass in properties_by_type:
+                print("Subclass of")
+                print(subclass)
+                print(properties_by_type[types[typeClass]])
+                #typesProperties = properties_by_type[types[type]]
+                typesProperties = typesProperties.append(getTypeProperties(subclass, types, properties_by_type))
+    else:
+        print("Type not found")
+
+
+    return typesProperties
+
 def setTypesProperties(types, properties_by_type):
     typesProperties = {}
 
     for type in types:
+        print("Type")
         print(type)
-        print(types[type])
+        #print(types[type])
         # if type a array
-        if isinstance(types[type], list):
-            for subclass in types[type]:
-                print(subclass)
-                if subclass in properties_by_type:
-                    print(properties_by_type[subclass])
-                    typesProperties[type] = properties_by_type[subclass]
-        else:
-            if subclass in properties_by_type:
-                print(properties_by_type[types[type]])
-                typesProperties[type] = properties_by_type[types[type]]
+        typesProperties[type] = getTypeProperties(type, types, properties_by_type)
 
     return typesProperties
 
@@ -90,10 +120,8 @@ def main():
     with open("../../output/typesProperties.json", "w") as file:
         json.dump(properties_by_type, file)
     
-    with open("../../output/typesSubclass.json", "w") as file:
+    with open("../../output/typesSubclassOf.json", "w") as file:
         json.dump(types, file)
-
-    print(typeProperties)
 
     with open("../../output/typesFullProperties.json", "w") as file:
         json.dump(typeProperties, file)

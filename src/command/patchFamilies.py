@@ -141,7 +141,8 @@ def createFamily(family):
 
     # Type specific attributes
     attributes = {attr: attr for attr in family["attributes"].split(",")}
-    attributes = getFamilyAttributes(code, attributes)
+    if family["type"] != "additinalTypes":
+        attributes = getFamilyAttributes(code, attributes)
     #print("Attributes: ")
     #print(attributes)
     body["attributes"] = attributes

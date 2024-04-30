@@ -84,14 +84,14 @@ def getTypeProperties(typeClass, types, properties_by_type):
                 if subclass in properties_by_type:
                     print(properties_by_type[subclass])
                     #typesProperties = properties_by_type[subclass]
-                    typesProperties = typesProperties.append(getTypeProperties(subclass, types, properties_by_type))
+                    typesProperties = typesProperties + getTypeProperties(subclass, types, properties_by_type)
         else:
             if subclass in properties_by_type:
                 print("Subclass of")
                 print(subclass)
                 print(properties_by_type[types[typeClass]])
                 #typesProperties = properties_by_type[types[type]]
-                typesProperties = typesProperties.append(getTypeProperties(subclass, types, properties_by_type))
+                typesProperties = typesProperties + getTypeProperties(subclass, types, properties_by_type)
     else:
         print("Type not found")
 

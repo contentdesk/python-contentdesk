@@ -130,13 +130,13 @@ def createFamily(family):
         "attribute_as_image": family["attribute_as_image"],
         "attribute_requirements": {
             "ecommerce": attribute_requirements,
-            },
+        },
         "labels": {
             "en_US": family["label.en_US"],
             "de_CH": family["label.de_CH"],
             "fr_FR": family["label.fr_FR"],
             "it_IT": family["label.it_IT"],
-            }
+        }
     }
 
     # Type specific attributes

@@ -15,7 +15,7 @@ def main():
     df = pd.concat([df, df_addition])
     # filter df by enabled = false or enabled = empty
     df = df[df["enabled"] == True]
-    df = df[df["pimType"] == "association"]
+    df = df[df["association"] == True]
 
     print(df)
 

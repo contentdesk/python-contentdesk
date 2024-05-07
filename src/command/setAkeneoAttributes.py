@@ -13,11 +13,15 @@ def main():
     df = readCsv(csv_url)
     df_addition = readCsv(addition_csv_url)
     df = pd.concat([df, df_addition])
+
     # filter df by enabled = false or enabled = empty
     df = df[df["enabled"] == True]
-    df = df[df["pimType"] == "attribute"]
+    df = df[df["attribute"] == True]
+
+  
 
     print(df)
+    print(df.dtypes)
 
     # Convert the DataFrame to a JSON object
     json_data = df.to_json(orient="records")

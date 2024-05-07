@@ -103,7 +103,7 @@ def createAttributesinAkeneo():
     attributes = getAttributes()
     for attribute in attributes:
         print ("Check Property if Attribut: "+ attribute["label"])
-        if attribute["pimType"] == "attribute":
+        if attribute["attribute"] == True:
             print("patch Attribute: ", attribute["label"])
             createAttribute(attribute)
 

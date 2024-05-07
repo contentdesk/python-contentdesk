@@ -56,8 +56,9 @@ def createAssociation(association):
 def createAssociationinAkeneo():
     associations = getAssociation()
     for association in associations:
-        print("patch Association: ", association["label"])
-        createAssociation(association)
+        if association["enabled"] == True and association["association"] == True:
+            print("patch Association: ", association["label"])
+            createAssociation(association)
 
 def main():
     createAssociationinAkeneo()

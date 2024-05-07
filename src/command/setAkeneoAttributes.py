@@ -18,10 +18,7 @@ def main():
     df = df[df["enabled"] == True]
     df = df[df["attribute"] == True]
 
-  
-
     print(df)
-    print(df.dtypes)
 
     # Convert the DataFrame to a JSON object
     json_data = df.to_json(orient="records")

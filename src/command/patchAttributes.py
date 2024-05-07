@@ -89,10 +89,11 @@ def createAttribute(attribute):
         else:
             body["decimals_allowed"] = False
         
-        if attribute["negative_allowed"] != None:
-            body["negative_allowed"] = attribute["negative_allowed"]
-        else:
-            body["negative_allowed"] = False
+        if attribute["type"] != "pim_catalog_price_collection":
+            if attribute["negative_allowed"] != None:
+                body["negative_allowed"] = attribute["negative_allowed"]
+            else:
+                body["negative_allowed"] = False
 
     try:
         response = akeneo.patchAttribut(code, body)

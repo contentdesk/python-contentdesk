@@ -26,6 +26,9 @@ def createAttribute(attribute):
     )
     code = attribute["label"]
 
+    if attribute["group"] == None:
+        attribute["group"] = "other"
+
     # Set default values
     if attribute["available_locales"] == None:
         attribute["available_locales"] = []

@@ -108,7 +108,7 @@ def getFamilyAttributes(code, attributes):
     attributes = merge_dicts(attributes, getTypeProperties(code))
     #print ("Complete Attributes befor Removed: ", attributes)
     ignoreProperties = getIgnoreProperties()
-    print ("Ignore Properties: ")
+    #print ("Ignore Properties: ")
     #print(ignoreProperties)
     attributes = removeIgnoreProperties(attributes, ignoreProperties)
     # add sku to attributes dict

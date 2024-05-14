@@ -68,13 +68,13 @@ def getFullPropertiesbyType(code):
 def removeIgnoreProperties(properties, ignoreProperties):
     newProperties = {}
     for prop in properties:
-        print("Check Ignore Property: ", prop)
+        #print("Check Ignore Property: ", prop)
         #print("Ignore Properties: ", ignoreProperties)
         if prop not in ignoreProperties:
-            print("Add Property: ", prop)
+            #print("Add Property: ", prop)
             newProperties[prop] = properties[prop]
-        else:
-            print("Ignore Property: ", prop)
+        #else:
+            #print("Ignore Property: ", prop)
     return newProperties
 
 def merge_dicts(dict1, dict2):

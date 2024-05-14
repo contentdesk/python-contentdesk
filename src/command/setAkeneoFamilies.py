@@ -9,10 +9,14 @@ def main():
     # Define the CSV URL
     csv_url = "https://docs.google.com/spreadsheets/d/1-vZI8rZxwbUVqvxU9tn5dVhZG282LXF7KvDTTvyuOfY/gviz/tq?tqx=out:csv&sheet=setupTypes"
     addition_csv_url = "https://docs.google.com/spreadsheets/d/1-vZI8rZxwbUVqvxU9tn5dVhZG282LXF7KvDTTvyuOfY/gviz/tq?tqx=out:csv&sheet=additionalTypes"
+    discovery_csv_url = "https://docs.google.com/spreadsheets/d/1-vZI8rZxwbUVqvxU9tn5dVhZG282LXF7KvDTTvyuOfY/gviz/tq?tqx=out:csv&sheet=discoveryTypes"
 
     df = readCsv(csv_url)
     df_addition = readCsv(addition_csv_url)
+    df_discovery = readCsv(discovery_csv_url)
+
     df = pd.concat([df, df_addition])
+    df = pd.concat([df, df_discovery])
     # filter df by enabled = false or enabled = empty
     df = df[df["enabled"] == True]
 

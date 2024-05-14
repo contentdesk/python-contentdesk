@@ -27,18 +27,6 @@ def main():
     # merge row with same colum label
     df = df.groupby("label").first().reset_index()
 
-    # merge duplicates
-    #df = df.drop_duplicates(subset=["label"], keep="first")
-
-    print(df)
-
-    # add to file output json
-    # Convert the DataFrame to a JSON object
-    json_data = df.to_json(orient="records")
-    with open("../../output/index/akeneo/families_test.json", "w") as file:
-        file.write(json_data)
-
-
     df = df[df["enabled"] == True]
 
     print(df)

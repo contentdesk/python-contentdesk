@@ -44,8 +44,11 @@ def load_jsonld(url):
     return data
 
 def getIgnoreProperties():
-    with open('../../output/ignoreProperties.json', 'r') as f:
+    with open('../../output/index/ignoreProperties.json', 'r') as f:
         ignoreProperties = json.load(f)
+
+    ignoreProperties = [prop["label"] for prop in ignoreProperties]
+
     return ignoreProperties
 
 def getFullPropertiesbyType(code):
@@ -56,16 +59,22 @@ def getFullPropertiesbyType(code):
     attributes = []
     #print("Get Full Properties: ", typeSchema)
     #print(typeFullProperties[typeSchema])
-    for item in typeFullProperties[typeSchema]:
-        attributes.append(item.split(":")[1])
+    if typeSchema in typeFullProperties:
+        for item in typeFullProperties[typeSchema]:
+            attributes.append(item.split(":")[1])
 
     return attributes
 
 def removeIgnoreProperties(properties, ignoreProperties):
     newProperties = {}
     for prop in properties:
+        print("Check Ignore Property: ", prop)
+        #print("Ignore Properties: ", ignoreProperties)
         if prop not in ignoreProperties:
+            print("Add Property: ", prop)
             newProperties[prop] = properties[prop]
+        else:
+            print("Ignore Property: ", prop)
     return newProperties
 
 def merge_dicts(dict1, dict2):
@@ -99,6 +108,8 @@ def getFamilyAttributes(code, attributes):
     attributes = merge_dicts(attributes, getTypeProperties(code))
     #print ("Complete Attributes befor Removed: ", attributes)
     ignoreProperties = getIgnoreProperties()
+    print ("Ignore Properties: ")
+    #print(ignoreProperties)
     attributes = removeIgnoreProperties(attributes, ignoreProperties)
     # add sku to attributes dict
     attributes["sku"] = "sku"
@@ -141,13 +152,13 @@ def createFamily(family):
 
     # Type specific attributes
     attributes = {attr: attr for attr in family["attributes"].split(",")}
-    if family["type"] != "additinalTypes":
-        attributes = getFamilyAttributes(code, attributes)
+    attributes = getFamilyAttributes(code, attributes)
     #print("Attributes: ")
     #print(attributes)
     body["attributes"] = attributes
 
-    #print("Body: ", body["attributes"])
+    print("Attributes: ")
+    print(body["attributes"])
 
     akeneo = Akeneo(
         AKENEO_HOST,

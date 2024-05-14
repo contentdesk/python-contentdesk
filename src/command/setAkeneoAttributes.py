@@ -14,6 +14,7 @@ def main():
 
     # filter df by enabled = false and attriuibute = false and association = true
     df_association = df[df["association"] == True]
+    df_association = df_association[df_association["attribute"] == False]
     df_ignore = df[df["enabled"] == False]
     df_ignore = pd.concat([df_ignore, df_association], ignore_index=True)
 

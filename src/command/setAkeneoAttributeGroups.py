@@ -6,6 +6,7 @@ csv_url = "https://docs.google.com/spreadsheets/d/1HbcevTJlnt7RuoO6qedT6FY_7np-0
 # Read the CSV data into a pandas DataFrame
 df = pd.read_csv(csv_url)
 
+
 print(df)
 # filter df by enabled = false or enabled = empty
 df = df[df["enabled"] == True]

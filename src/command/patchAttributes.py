@@ -1,8 +1,5 @@
 import json
 from akeneo.akeneo import Akeneo
-from os import getenv
-from dotenv import find_dotenv, load_dotenv
-load_dotenv(find_dotenv())
 
 import sys
 sys.path.append("..")
@@ -106,8 +103,8 @@ def createAttributesinAkeneo(target):
 def main():
     # Load environment variables
     #environments = getEnvironment()
-    environments = ["ziggy"]
-    #environments = ["demo"]
+    #environments = ["ziggy"]
+    environments = ["demo"]
 
     print("START PATCH ATTRIBUTES")
     for environment in environments:

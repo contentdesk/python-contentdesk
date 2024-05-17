@@ -1,15 +1,10 @@
 import json
 import requests
 from akeneo.akeneo import Akeneo
-from os import getenv
-from dotenv import find_dotenv, load_dotenv
-load_dotenv(find_dotenv())
+import sys
+sys.path.append("..")
 
-AKENEO_HOST = getenv('AKENEO_HOST')
-AKENEO_CLIENT_ID = getenv('AKENEO_CLIENT_ID')
-AKENEO_CLIENT_SECRET = getenv('AKENEO_CLIENT_SECRET')
-AKENEO_USERNAME = getenv('AKENEO_USERNAME')
-AKENEO_PASSWORD = getenv('AKENEO_PASSWORD')
+from service.loadEnv import loadEnv, getEnvironment
 
 import sys
 sys.path.append("..")
@@ -116,7 +111,7 @@ def getFamilyAttributes(code, attributes):
     #print ("Clear Attributes: ", attributes)
     return attributes
 
-def createFamily(family):
+def createFamily(family, akeneo):
     code = family["label"]
 
     # Set default values
@@ -159,14 +154,6 @@ def createFamily(family):
 
     print("Attributes: ")
     print(body["attributes"])
-
-    akeneo = Akeneo(
-        AKENEO_HOST,
-        AKENEO_CLIENT_ID,
-        AKENEO_CLIENT_SECRET,
-        AKENEO_USERNAME,
-        AKENEO_PASSWORD
-    )
     try:
         response = akeneo.patchFamily(code, body)
     except Exception as e:
@@ -175,17 +162,27 @@ def createFamily(family):
         print("Response: ", response)
     return response
 
-def createFamilies():
+def createFamilies(target):
     families = getFamilies()
     for family in families:
         print ("CREATE - Family: "+ family["label"])
         if family["enabled"] == 1 and family["type"] == None or family["type"] == "additinalTypes":
             print("patch Family: ", family["label"])
-            createFamily(family)
+            createFamily(family, target)
             print("FINISH - patch Family: ", family["label"])
 
 def main():
-    createFamilies()
+    # Load environment variables
+    #environments = getEnvironment()
+    environments = ["ziggy"]
+    #environments = ["demo"]
+
+    print("START PATCH FAMILIES")
+    for environment in environments:
+        targetCon = loadEnv(environment)
+        target = Akeneo(targetCon["host"], targetCon["clientId"], targetCon["secret"], targetCon["user"], targetCon["passwd"])
+        createFamilies(target)
+    print("FINISH PATCH FAMILIES")
 
 if __name__ == '__main__':
     main()

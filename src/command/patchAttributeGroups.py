@@ -1,14 +1,10 @@
 import json
 from akeneo.akeneo import Akeneo
-from os import getenv
-from dotenv import find_dotenv, load_dotenv
-load_dotenv(find_dotenv())
 
-AKENEO_HOST = getenv('AKENEO_HOST')
-AKENEO_CLIENT_ID = getenv('AKENEO_CLIENT_ID')
-AKENEO_CLIENT_SECRET = getenv('AKENEO_CLIENT_SECRET')
-AKENEO_USERNAME = getenv('AKENEO_USERNAME')
-AKENEO_PASSWORD = getenv('AKENEO_PASSWORD')
+import sys
+sys.path.append("..")
+
+from service.loadEnv import loadEnv, getEnvironment
 
 # Load properties.json
 def getAttributeGroups():
@@ -16,14 +12,7 @@ def getAttributeGroups():
         attributeGroups = json.load(f)
     return attributeGroups
 
-def createAttributeGroup(attributeGroup):
-    akeneo = Akeneo(
-        AKENEO_HOST,
-        AKENEO_CLIENT_ID,
-        AKENEO_CLIENT_SECRET,
-        AKENEO_USERNAME,
-        AKENEO_PASSWORD
-    )
+def createAttributeGroup(attributeGroup, akeneo):
     code = attributeGroup["code"]
     body = {
         "code": code,
@@ -37,14 +26,25 @@ def createAttributeGroup(attributeGroup):
     }
     return akeneo.patchAttributeGroupsbyCode(code, body)
 
-def createAttributeGroupsinAkeneo():
+def createAttributeGroupsinAkeneo(akeneo):
     attributeGoups = getAttributeGroups()
     for attributeGroup in attributeGoups:
         print("patch AttributGroup "+ attributeGroup["code"])
-        createAttributeGroup(attributeGroup)
+        createAttributeGroup(attributeGroup, akeneo)
 
 def main():
-    createAttributeGroupsinAkeneo()
+    # Load environment variables
+    #environments = getEnvironment()
+    #environments = ["ziggy"]
+    environments = ["demo"]
+
+    print("START PATCH ATTRIBUTE GROUPS")
+    for environment in environments:
+        targetCon = loadEnv(environment)
+        print (targetCon["host"])
+        target = Akeneo(targetCon["host"], targetCon["clientId"], targetCon["secret"], targetCon["user"], targetCon["passwd"])
+        createAttributeGroupsinAkeneo(target)
+    print("FINISH PATCH ATTRIBUTE GROUPS")
 
 
 if __name__ == '__main__':

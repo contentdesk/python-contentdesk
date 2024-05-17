@@ -5,7 +5,7 @@ import glob
 def loadEnv(environment):
     # Load environment variables from the file
     print(f'ENV - Loading .env.{environment}')
-    dotenvPath = '../../env/.env.' + environment
+    dotenvPath = '../env/.env.' + environment
     load_dotenv(dotenvPath, override=True)
 
     env = {}

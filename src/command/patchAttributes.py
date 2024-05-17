@@ -4,11 +4,10 @@ from os import getenv
 from dotenv import find_dotenv, load_dotenv
 load_dotenv(find_dotenv())
 
-AKENEO_HOST = getenv('AKENEO_HOST')
-AKENEO_CLIENT_ID = getenv('AKENEO_CLIENT_ID')
-AKENEO_CLIENT_SECRET = getenv('AKENEO_CLIENT_SECRET')
-AKENEO_USERNAME = getenv('AKENEO_USERNAME')
-AKENEO_PASSWORD = getenv('AKENEO_PASSWORD')
+import sys
+sys.path.append("..")
+
+from service.loadEnv import loadEnv, getEnvironment
 
 # Load properties.json
 def getAttributes():
@@ -16,14 +15,7 @@ def getAttributes():
         attributes = json.load(f)
     return attributes
 
-def createAttribute(attribute):
-    akeneo = Akeneo(
-        AKENEO_HOST,
-        AKENEO_CLIENT_ID,
-        AKENEO_CLIENT_SECRET,
-        AKENEO_USERNAME,
-        AKENEO_PASSWORD
-    )
+def createAttribute(attribute, akeneo):
     code = attribute["label"]
 
     if attribute["group"] == None:
@@ -103,16 +95,26 @@ def createAttribute(attribute):
         print("Response: ", response)
     return response
 
-def createAttributesinAkeneo():
+def createAttributesinAkeneo(target):
     attributes = getAttributes()
     for attribute in attributes:
         print ("Check Property if Attribut: "+ attribute["label"])
         if attribute["attribute"] == True:
             print("patch Attribute: ", attribute["label"])
-            createAttribute(attribute)
+            createAttribute(attribute, target)
 
 def main():
-    createAttributesinAkeneo()
+    # Load environment variables
+    #environments = getEnvironment()
+    environments = ["ziggy"]
+    #environments = ["demo"]
+
+    print("START PATCH ATTRIBUTES")
+    for environment in environments:
+        targetCon = loadEnv(environment)
+        target = Akeneo(targetCon["host"], targetCon["clientId"], targetCon["secret"], targetCon["user"], targetCon["passwd"])
+        createAttributesinAkeneo(target)
+    print("FINISH PATCH ATTRIBUTES")
 
 if __name__ == '__main__':
     main()

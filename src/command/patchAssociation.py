@@ -1,14 +1,9 @@
 import json
 from akeneo.akeneo import Akeneo
-from os import getenv
-from dotenv import find_dotenv, load_dotenv
-load_dotenv(find_dotenv())
+import sys
+sys.path.append("..")
 
-AKENEO_HOST = getenv('AKENEO_HOST')
-AKENEO_CLIENT_ID = getenv('AKENEO_CLIENT_ID')
-AKENEO_CLIENT_SECRET = getenv('AKENEO_CLIENT_SECRET')
-AKENEO_USERNAME = getenv('AKENEO_USERNAME')
-AKENEO_PASSWORD = getenv('AKENEO_PASSWORD')
+from service.loadEnv import loadEnv, getEnvironment
 
 # Load properties.json
 def getAssociation():
@@ -16,14 +11,7 @@ def getAssociation():
         association = json.load(f)
     return association
 
-def createAssociation(association):
-    akeneo = Akeneo(
-        AKENEO_HOST,
-        AKENEO_CLIENT_ID,
-        AKENEO_CLIENT_SECRET,
-        AKENEO_USERNAME,
-        AKENEO_PASSWORD
-    )
+def createAssociation(association, akeneo):
     code = association["label"]
 
     # Set default values
@@ -53,15 +41,25 @@ def createAssociation(association):
         print("Response: ", response)
     return response
 
-def createAssociationinAkeneo():
+def createAssociationinAkeneo(akeneo):
     associations = getAssociation()
     for association in associations:
         if association["enabled"] == True and association["association"] == True:
             print("patch Association: ", association["label"])
-            createAssociation(association)
+            createAssociation(association, akeneo)
 
 def main():
-    createAssociationinAkeneo()
+    environments = ["ziggy"]
+
+    print("START PATCH Associatinons")
+    for environment in environments:
+        targetCon = loadEnv(environment)
+        print (targetCon["host"])
+        target = Akeneo(targetCon["host"], targetCon["clientId"], targetCon["secret"], targetCon["user"], targetCon["passwd"])
+        createAssociationinAkeneo(target)
+    print("FINISH PATCH Associatinons")
+
+    
 
 if __name__ == '__main__':
     main()

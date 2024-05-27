@@ -49,7 +49,9 @@ def createAssociationinAkeneo(akeneo):
             createAssociation(association, akeneo)
 
 def main():
+    #environments = getEnvironment()
     environments = ["ziggy"]
+     #environments = ["demo"]
 
     print("START PATCH Associatinons")
     for environment in environments:

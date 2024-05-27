@@ -50,8 +50,8 @@ def createAssociationinAkeneo(akeneo):
 
 def main():
     #environments = getEnvironment()
-    environments = ["ziggy"]
-     #environments = ["demo"]
+    #environments = ["ziggy"]
+    environments = ["demo"]
 
     print("START PATCH Associatinons")
     for environment in environments:

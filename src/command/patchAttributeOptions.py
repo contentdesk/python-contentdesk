@@ -23,7 +23,7 @@ def getAttributeOptions():
     # Merge Data
     df = pd.concat([dfOthers, dfStarRating])
 
-    print(df)
+    #print(df)
 
     json_data = df.to_json(orient="records")
 
@@ -48,7 +48,7 @@ def patchAttributeOptionsAkeneo(akeneo, attributeOptions):
                 "it_IT": attributOption['labels.it_IT'],
             }
         }
-        response = akeneo.patchAttributOptionsByCode(code, attribute, body)
+        response = akeneo.patchAttributOptionsByCode(str(code), attribute, body)
         print(response)
 
 def main():

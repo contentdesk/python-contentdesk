@@ -17,11 +17,13 @@ def getAttributeOptions():
     # get From Google Sheet
     othersUrl = "https://docs.google.com/spreadsheets/d/1J0iDoPqamlvWzBvxmZPDB0_uks0U3UuPLvizGolVeYg/gviz/tq?tqx=out:csv&sheet=others"
     starRatingUrl = "https://docs.google.com/spreadsheets/d/1VtVxnO0YfJ3ztRwcsK3elN8orGhlSRSDbkn8Whl523Y/gviz/tq?tqx=out:csv&sheet=starRating"
+    servesCuisineUrl = "https://docs.google.com/spreadsheets/d/1B3yJroHLuNgIDSCDfxIY5tpX13zyn1ngigGMlNaxVgk/gviz/tq?tqx=out:csv&sheet=servesCuisine"
     dfOthers = readCsv(othersUrl)
     dfStarRating = readCsv(starRatingUrl)
+    dfServesCuisine = readCsv(servesCuisineUrl)
 
     # Merge Data
-    df = pd.concat([dfOthers, dfStarRating])
+    df = pd.concat([dfOthers, dfStarRating, dfServesCuisine])
 
     #print(df)
 

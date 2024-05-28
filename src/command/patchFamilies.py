@@ -156,7 +156,6 @@ def createFamily(family, akeneo):
     # examples potentialAction needs traget
     if 'license' in attributes:
         attributes['copyrightHolder'] = 'copyrightHolder'
-        attributes['author'] = 'author'
     
     if 'potentialAction' in attributes:
         attributes['target'] = 'target'

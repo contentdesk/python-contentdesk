@@ -36,9 +36,9 @@ def patchAttributeOptionsAkeneo(akeneo, attributeOptions):
         print("Attribute: ", attributOption['attribute'])
         print("Code: ", attributOption['code'])
         attribute = attributOption['attribute']
-        code = attributOption['code']
+        code = str(attributOption['code'])
         body = {
-            "code": attributOption['code'],
+            "code": str(attributOption['code']),
             "attribute": attributOption['attribute'],
             "sort_order": attributOption['sort_order'],
             "labels": {
@@ -48,7 +48,7 @@ def patchAttributeOptionsAkeneo(akeneo, attributeOptions):
                 "it_IT": attributOption['labels.it_IT'],
             }
         }
-        response = akeneo.patchAttributOptionsByCode(str(code), attribute, body)
+        response = akeneo.patchAttributOptionsByCode(code, attribute, body)
         print(response)
 
 def main():

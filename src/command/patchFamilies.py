@@ -150,6 +150,17 @@ def createFamily(family, akeneo):
     attributes = getFamilyAttributes(code, attributes)
     #print("Attributes: ")
     #print(attributes)
+
+    # Check if specific attributes are set
+    # examples license needs add copyrightHolder and author
+    # examples potentialAction needs traget
+    if 'license' in attributes:
+        attributes['copyrightHolder'] = 'copyrightHolder'
+        attributes['author'] = 'author'
+    
+    if 'potentialAction' in attributes:
+        attributes['target'] = 'target'
+
     body["attributes"] = attributes
 
     print("Attributes: ")

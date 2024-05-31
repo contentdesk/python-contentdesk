@@ -1,5 +1,6 @@
 import json
 import requests
+import pandas as pd
 from akeneo.akeneo import Akeneo
 import sys
 sys.path.append("..")
@@ -101,6 +102,14 @@ def getTypeProperties(code):
 def getFamilyAttributes(code, attributes):
     # Dict to Array
     attributes = merge_dicts(attributes, getTypeProperties(code))
+    # add sku to attributes dict
+    attributes["sku"] = "sku"
+    #print ("Clear Attributes: ", attributes)
+    return attributes
+
+def removeProperties(code, ignoreProperties):
+    # Dict to Array
+    attributes = merge_dicts(attributes, getTypeProperties(code))
     #print ("Complete Attributes befor Removed: ", attributes)
     ignoreProperties = getIgnoreProperties()
     #print ("Ignore Properties: ")
@@ -111,7 +120,16 @@ def getFamilyAttributes(code, attributes):
     #print ("Clear Attributes: ", attributes)
     return attributes
 
-def createFamily(family, akeneo):
+
+def searchType(type, types, searchType, check = False):
+    if type['parent'] != None:
+        if type['parent'] == searchType:
+            check = True
+        else:
+            check = searchType(type['parent'], types, searchType, check)
+    return check
+
+def createFamily(family, families, akeneo):
     code = family["label"]
 
     # Set default values
@@ -154,12 +172,96 @@ def createFamily(family, akeneo):
     # Check if specific attributes are set
     # examples license needs add copyrightHolder and author
     # examples potentialAction needs traget
+    if 'image' in attributes:
+        attributes['image_description'] = 'image_description'
+
+    if 'openingHoursSpecification' in attributes:
+        attributes['google_opening_hours_use'] = 'google_opening_hours_use'
+
+    # StarRating and Type Hotel
+    if 'starRating' in attributes and code == "Hotel":
+        attributes['garni'] = 'garni'
+        attributes['superior'] = 'superior'
+
+    # Type MeetingRoom
+    if code == "MeetingRoom":
+        attributes['seating_banquet'] = 'seating_banquet'
+        attributes['seating_bar_table'] = 'seating_bar_table'
+        attributes['seating_block'] = 'seating_block'
+        attributes['seating_boardroom'] = 'seating_boardroom'
+        attributes['seating_concert'] = 'seating_concert'
+        attributes['seating_seminar'] = 'seating_seminar'
+        attributes['seating_ushape'] = 'seating_ushape'
+
+    # Image Winter and Summer by Type Hotel
+    if code == "Hotel":
+        attributes['image_winter'] = 'image_winter'
+        attributes['image_summer'] = 'image_summer'
+
+    # Images / Gallery
+    if 'image_01_scope' in attributes:
+        attributes['google_image_gallery_use_pro_channel'] = 'google_image_gallery_use_pro_channel'
+        attributes['image_01_scope_description'] = 'image_01_scope_description'
+    if 'image_02_scope' in attributes:
+        attributes['image_02_scope_description'] = 'image_02_scope_description'
+    if 'image_03_scope' in attributes:
+        attributes['image_03_scope_description'] = 'image_03_scope_description'
+    if 'image_04_scope' in attributes:
+        attributes['image_04_scope_description'] = 'image_04_scope_description'
+    if 'image_05_scope' in attributes:
+        attributes['image_05_scope_description'] = 'image_05_scope_description'
+    if 'image_06_scope' in attributes:
+        attributes['image_06_scope_description'] = 'image_06_scope_description'
+    if 'image_07_scope' in attributes:
+        attributes['image_07_scope_description'] = 'image_07_scope_description'
+    if 'image_08_scope' in attributes:
+        attributes['image_08_scope_description'] = 'image_08_scope_description'
+    if 'image_09_scope' in attributes:
+        attributes['image_09_scope_description'] = 'image_09_scope_description'
+    if 'image_10_scope' in attributes:
+        attributes['image_10_scope_description'] = 'image_10_scope_description'
+
+    if 'geo' in attributes:
+        attributes['longitude'] = 'longitude'
+        attributes['latitude'] = 'latitude'
+
+    if 'address' in attributes:
+        attributes['streetAddress'] = 'streetAddress'
+        attributes['postalCode'] = 'postalCode'
+        attributes['addressLocality'] = 'addressLocality'
+        attributes['addressCountry'] = 'addressCountry'
+        attributes['addressRegion'] = 'addressRegion'
+        attributes['tourismRegion'] = 'tourismRegion'
+        attributes['tourismSubRegion'] = 'tourismSubRegion'
+        # Contact
+        attributes['legalName'] = 'legalName'
+        attributes['department'] = 'department'
+        attributes['honorificPrefix'] = 'honorificPrefix'
+        attributes['givenName'] = 'givenName'
+        attributes['familyName'] = 'familyName'
+        attributes['email'] = 'email'
+
+    # Check Type Parents
+    if searchType(family, families, "Place"):
+        print (searchType(family, families, "Place"))
+
+    # Add to all
+    attributes['search_text_pro_channel'] = 'search_text_pro_channel'
+    attributes['promo_sort_order_scope'] = 'promo_sort_order_scope'
+    attributes['license'] = 'license'
+    attributes['potentialAction'] = 'potentialAction'
+
+    
     if 'license' in attributes:
         attributes['copyrightHolder'] = 'copyrightHolder'
     
     if 'potentialAction' in attributes:
         attributes['target'] = 'target'
 
+    # Remove Properties
+    attributes = removeProperties(code, attributes)
+
+    # add Attributes to Body
     body["attributes"] = attributes
 
     print("Attributes: ")
@@ -172,16 +274,58 @@ def createFamily(family, akeneo):
         print("Response: ", response)
     return response
 
-def createFamilies(target):
-    families = getFamilies()
+def createFamilies(target, families):
     for family in families:
         print ("CREATE - Family: "+ family["label"])
         if family["enabled"] == 1 and family["type"] == None or family["type"] == "additinalTypes":
             print("patch Family: ", family["label"])
-            createFamily(family, target)
+            createFamily(family, families, target)
             print("FINISH - patch Family: ", family["label"])
 
+def getSettings():
+    # Define the CSV URL
+    csv_url = "https://docs.google.com/spreadsheets/d/1-vZI8rZxwbUVqvxU9tn5dVhZG282LXF7KvDTTvyuOfY/gviz/tq?tqx=out:csv&sheet=setupTypes"
+    addition_csv_url = "https://docs.google.com/spreadsheets/d/1-vZI8rZxwbUVqvxU9tn5dVhZG282LXF7KvDTTvyuOfY/gviz/tq?tqx=out:csv&sheet=additionalTypes"
+    discover_csv_url = "https://docs.google.com/spreadsheets/d/1-vZI8rZxwbUVqvxU9tn5dVhZG282LXF7KvDTTvyuOfY/gviz/tq?tqx=out:csv&sheet=discoverTypes"
+
+    df = readCsv(csv_url)
+    df_addition = readCsv(addition_csv_url)
+    print("Add Disocver.swiss Types") 
+    df_discover = readCsv(discover_csv_url)
+    
+
+    df_discover = df_discover[df_discover["enabled"] == True]
+    print(df_discover)
+
+    df = pd.concat([df, df_addition])
+    # concat df and df_discover by column label
+    df = pd.concat([df, df_discover], ignore_index=True)
+
+    # merge row with same colum label
+    df = df.groupby("label").first().reset_index()
+
+    df = df[df["enabled"] == True]
+
+    print(df)
+
+    # Convert the DataFrame to a JSON object
+    json_data = df.to_json(orient="records")
+
+    # Write the JSON data to a file
+    with open("../../output/index/akeneo/families.json", "w") as file:
+        file.write(json_data)
+
+    return json.loads(json_data)
+
+def readCsv(url):
+    # Read the CSV data into a pandas DataFrame
+    df = pd.read_csv(url)
+    return df
+
 def main():
+    # Set Familie Settings
+    families = getSettings()
+
     # Load environment variables
     #environments = getEnvironment()
     #environments = ["ziggy"]
@@ -191,7 +335,7 @@ def main():
     for environment in environments:
         targetCon = loadEnv(environment)
         target = Akeneo(targetCon["host"], targetCon["clientId"], targetCon["secret"], targetCon["user"], targetCon["passwd"])
-        createFamilies(target)
+        createFamilies(target, families)
     print("FINISH PATCH FAMILIES")
 
 if __name__ == '__main__':

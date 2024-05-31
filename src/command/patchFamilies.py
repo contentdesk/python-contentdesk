@@ -145,10 +145,11 @@ def getParentAttributes(type, types, attributes):
             print("Parent Type: ", type['parent'])
             # find in types array type['parent'] as type['label']
             parent = [parent for parent in types if parent["label"] == type['parent']]
-            print("Attributes: ")
-            print(type['attributes'])
             if type['attributes'] != None:
-                attributes = merge_dicts(attributes, type['attributes'])
+                # make type['attributes'] to dict with two values
+                typeAttributes = {attr: attr for attr in type['attributes'].split(",")}
+                # Merge Attributes
+                attributes = merge_dicts(attributes, typeAttributes)
             getParentAttributes(parent[0], types, attributes)
 
     return attributes
@@ -292,7 +293,7 @@ def createFamily(family, families, akeneo):
     # add Attributes to Body
     body["attributes"] = attributes
 
-    print("Attributes: ")
+    print("Attributes with remove Properties: ")
     print(body["attributes"])
     try:
         response = akeneo.patchFamily(code, body)

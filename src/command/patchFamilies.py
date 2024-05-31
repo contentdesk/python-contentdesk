@@ -121,13 +121,34 @@ def removeProperties(code, attributes):
     #print ("Clear Attributes: ", attributes)
     return attributes
 
-def searchType(type, types, searchType, check = False):
-    if type['parent'] != None:
-        if type['parent'] == searchType:
-            check = True
-        else:
-            check = searchType(type['parent'], types, searchType, check)
+def searchParentType(type, types, searchType, check = False):
+    if 'parent' in type:
+        if type['parent'] != None:
+            print("Parent Type: ", type['parent'])
+            if type['parent'] == searchType:
+                print("Found Parent Type: ", type['parent'])
+                check = True
+            else:
+                # find in types array type['parent'] as type['label']
+                parent = [parent for parent in types if parent["label"] == type['parent']]
+                print("Check Parent: ")
+                print(parent)
+                check = searchParentType(parent, types, searchType, check)
+                print("END CHECK Next PARENT")
+    else:
+        check = False
     return check
+
+def getParentAttributes(type, types, attributes):
+    if 'parent' in type:
+        if type['parent'] != None:
+            print("Parent Type: ", type['parent'])
+            # find in types array type['parent'] as type['label']
+            parent = [parent for parent in types if parent["label"] == type['parent']]
+            print("Attributes: ")
+            print(attributes)
+            attributes = getParentAttributes(parent[0], types, attributes)
+    return attributes
 
 def createFamily(family, families, akeneo):
     code = family["label"]
@@ -244,9 +265,15 @@ def createFamily(family, families, akeneo):
         attributes['familyName'] = 'familyName'
         attributes['email'] = 'email'
 
+    print("Parent")
+    print(family['parent'])
     # Check Type Parents
-    #if searchType(family, families, "Place", False):
-    #    print ("Type Place")
+    if searchParentType(family, families, "Place", False):
+        print ("Type Place")
+        # Add Attributes from Place
+        attributes = getFamilyAttributes("Place", attributes)
+    else:
+        print ("Type Not Place")
 
     # Add to all
     attributes['search_text_pro_channel'] = 'search_text_pro_channel'

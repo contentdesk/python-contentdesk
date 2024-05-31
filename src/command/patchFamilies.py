@@ -146,8 +146,11 @@ def getParentAttributes(type, types, attributes):
             # find in types array type['parent'] as type['label']
             parent = [parent for parent in types if parent["label"] == type['parent']]
             print("Attributes: ")
-            print(attributes)
-            attributes = getParentAttributes(parent[0], types, attributes)
+            print(type['attributes'])
+            if type['attributes'] != None:
+                attributes = merge_dicts(attributes, type['attributes'])
+            getParentAttributes(parent[0], types, attributes)
+
     return attributes
 
 def createFamily(family, families, akeneo):
@@ -192,6 +195,9 @@ def createFamily(family, families, akeneo):
     attributes = getFamilyAttributes(code, attributes)
     #print("Attributes: ")
     #print(attributes)
+
+    # add Parent Attributes
+    attributes = getParentAttributes(family, families, attributes)
 
     # Check if specific attributes are set
     # examples license needs add copyrightHolder and author
@@ -264,16 +270,6 @@ def createFamily(family, families, akeneo):
         attributes['givenName'] = 'givenName'
         attributes['familyName'] = 'familyName'
         attributes['email'] = 'email'
-
-    print("Parent")
-    print(family['parent'])
-    # Check Type Parents
-    if searchParentType(family, families, "Place", False):
-        print ("Type Place")
-        # Add Attributes from Place
-        attributes = getFamilyAttributes("Place", attributes)
-    else:
-        print ("Type Not Place")
 
     # Add to all
     attributes['search_text_pro_channel'] = 'search_text_pro_channel'

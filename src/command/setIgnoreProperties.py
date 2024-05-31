@@ -19,7 +19,7 @@ def main():
 
     print(df)
     # filter df by enabled = false or enabled = empty
-    df = df[(df["enabled"] == False) | (df["pimType"] != "attribute")]
+    df = df[(df["enabled"] == False) | (df["attribute"] != True)]
 
     # Convert the DataFrame to a JSON object
     json_data = df.to_json(orient="records")

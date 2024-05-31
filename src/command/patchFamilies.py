@@ -140,34 +140,61 @@ def searchParentType(type, types, searchType, check = False):
     return check
 
 def getParentAttributes(type, types, attributes):
+    if type['attributes'] != None:
+        print("Merge Parent Attributes:")
+        # make type['attributes'] to dict with two values
+        typeAttributes = {attr: attr for attr in type['attributes'].split(",")}
+        # Merge Attributes
+        #print(typeAttributes)
+        attributes = merge_dicts(attributes, typeAttributes)
     if 'parent' in type:
         if type['parent'] != None:
             print("Parent Type: ", type['parent'])
             # find in types array type['parent'] as type['label']
             parent = [parent for parent in types if parent["label"] == type['parent']]
-            if type['attributes'] != None:
-                # make type['attributes'] to dict with two values
-                typeAttributes = {attr: attr for attr in type['attributes'].split(",")}
-                # Merge Attributes
-                attributes = merge_dicts(attributes, typeAttributes)
+            print("Check Parent: ")
+            print(parent)
             getParentAttributes(parent[0], types, attributes)
 
     return attributes
+
+def getParentAttributesRequirements(type, types, attribute_requirements):
+    if type['attribute_requirements.ecommerce'] != None:
+        print("Merge Parent Attributes Requirements:")
+        # make type['attributes'] to dict with two values
+        typeAttributes = {attr: attr for attr in type['attribute_requirements.ecommerce'].split(",")}
+        # Merge Attributes
+        #print(typeAttributes)
+        attribute_requirements = merge_dicts(attribute_requirements, typeAttributes)
+    if 'parent' in type:
+        if type['parent'] != None:
+            print("Parent Type: ", type['parent'])
+            # find in types array type['parent'] as type['label']
+            parent = [parent for parent in types if parent["label"] == type['parent']]
+            print("Check Parent: ")
+            print(parent)
+            attribute_requirements = getParentAttributesRequirements(parent[0], types, attribute_requirements)
+
+    return attribute_requirements
 
 def createFamily(family, families, akeneo):
     code = family["label"]
 
     # Set default values
     if family["attribute_requirements.ecommerce"] != None:
-        attribute_requirements = family["attribute_requirements.ecommerce"].split(",")
+        attribute_requirements = {attrRequ: attrRequ for attrRequ in family["attribute_requirements.ecommerce"].split(",")}
+        #attribute_requirements = family["attribute_requirements.ecommerce"].split(",")
     else:
-        attribute_requirements = family["attribute_requirements.ecommerce"] = ["sku", "name", "image"]
+        attribute_requirements = {"sku": "sku", "name": "name", "image": "image"}
 
     if family["attribute_as_label"] == None:
         family["attribute_as_label"] = "name"
 
     if family["attribute_as_image"] == None:
         family["attribute_as_image"] = "image"
+
+    
+    attribute_requirements = getParentAttributesRequirements(family, families, attribute_requirements)
     
     print("Attribute Requirements: ")
     print(attribute_requirements)
@@ -288,6 +315,8 @@ def createFamily(family, families, akeneo):
     print(attributes)
 
     # Remove Properties
+    print("Remove Attributes: ")
+    print(code)
     attributes = removeProperties(code, attributes)
 
     # add Attributes to Body
@@ -307,7 +336,7 @@ def createFamilies(target, families):
     for family in families:
         print ("CREATE - Family: "+ family["label"])
         if family["enabled"] == 1 and family["type"] == None or family["type"] == "additinalTypes":
-            print("patch Family: ", family["label"])
+            print("PATCH Family: ", family["label"])
             createFamily(family, families, target)
             print("FINISH - patch Family: ", family["label"])
 

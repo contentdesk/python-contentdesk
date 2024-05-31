@@ -104,10 +104,11 @@ def getFamilyAttributes(code, attributes):
     attributes = merge_dicts(attributes, getTypeProperties(code))
     # add sku to attributes dict
     attributes["sku"] = "sku"
+    attributes["name"] = "name"
     #print ("Clear Attributes: ", attributes)
     return attributes
 
-def removeProperties(code, ignoreProperties):
+def removeProperties(code, attributes):
     # Dict to Array
     attributes = merge_dicts(attributes, getTypeProperties(code))
     #print ("Complete Attributes befor Removed: ", attributes)
@@ -119,7 +120,6 @@ def removeProperties(code, ignoreProperties):
     attributes["sku"] = "sku"
     #print ("Clear Attributes: ", attributes)
     return attributes
-
 
 def searchType(type, types, searchType, check = False):
     if type['parent'] != None:
@@ -164,7 +164,10 @@ def createFamily(family, families, akeneo):
     }
 
     # Type specific attributes
-    attributes = {attr: attr for attr in family["attributes"].split(",")}
+    if family["attributes"] != None:
+        attributes = {attr: attr for attr in family["attributes"].split(",")}
+    else:
+        attributes = {}
     attributes = getFamilyAttributes(code, attributes)
     #print("Attributes: ")
     #print(attributes)
@@ -242,8 +245,8 @@ def createFamily(family, families, akeneo):
         attributes['email'] = 'email'
 
     # Check Type Parents
-    if searchType(family, families, "Place"):
-        print (searchType(family, families, "Place"))
+    #if searchType(family, families, "Place", False):
+    #    print ("Type Place")
 
     # Add to all
     attributes['search_text_pro_channel'] = 'search_text_pro_channel'
@@ -251,12 +254,14 @@ def createFamily(family, families, akeneo):
     attributes['license'] = 'license'
     attributes['potentialAction'] = 'potentialAction'
 
-    
     if 'license' in attributes:
         attributes['copyrightHolder'] = 'copyrightHolder'
     
     if 'potentialAction' in attributes:
         attributes['target'] = 'target'
+
+    print("Attributes: ")
+    print(attributes)
 
     # Remove Properties
     attributes = removeProperties(code, attributes)

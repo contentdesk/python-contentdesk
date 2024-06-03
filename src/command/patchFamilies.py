@@ -268,6 +268,10 @@ def createFamily(family, families, akeneo):
         attributes.pop('daytime', None)
         attributes.pop('duration', None)
         attributes.pop('priceRange', None)
+        # Remove openingHoursSpecification
+        attributes.pop('openingHoursSpecification', None)
+        attributes.pop('openingHours', None)
+
 
     # Image Winter and Summer by Type Hotel
     if code == "Hotel":

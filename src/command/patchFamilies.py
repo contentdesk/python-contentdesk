@@ -155,11 +155,12 @@ def getParentAttributes(type, types, attributes):
         # make type['attributes'] to dict with two values
         typeAttributes = {attr: attr for attr in type['attributes'].split(",")}
         # Merge Attributes
-        #print(typeAttributes)
+        print("Parent Attributes:")
+        print(typeAttributes)
         attributes = merge_dicts(attributes, typeAttributes)
     if 'parent' in type:
         if type['parent'] != None:
-            #print("Parent Type: ", type['parent'])
+            print("Parent Type: ", type['parent'])
             # find in types array type['parent'] as type['label']
             parent = [parent for parent in types if parent["label"] == type['parent']]
             #print("Check Parent: ")
@@ -250,28 +251,6 @@ def createFamily(family, families, akeneo):
     if 'starRating' in attributes and code == "Hotel":
         attributes['garni'] = 'garni'
         attributes['superior'] = 'superior'
-
-    # Type MeetingRoom
-    if code == "MeetingRoom":
-        attributes['seating_banquet'] = 'seating_banquet'
-        attributes['seating_bar_table'] = 'seating_bar_table'
-        attributes['seating_block'] = 'seating_block'
-        attributes['seating_boardroom'] = 'seating_boardroom'
-        attributes['seating_concert'] = 'seating_concert'
-        attributes['seating_seminar'] = 'seating_seminar'
-        attributes['seating_ushape'] = 'seating_ushape'
-        # remove Key attribute petAllowed
-        attributes.pop('petsAllowed', None)
-        #attributes.pop('petsAllowed', None)
-        #attributes.pop('weatherDependency', None)
-        #attributes.pop('byMonth', None)
-        #attributes.pop('dayOfWeek', None)
-        #attributes.pop('daytime', None)
-        #attributes.pop('duration', None)
-        #attributes.pop('priceRange', None)
-        #attributes.pop('openingHoursSpecification', None)
-        #attributes.pop('openingHours', None)
-
 
     # Image Winter and Summer by Type Hotel
     if code == "Hotel":
@@ -411,8 +390,6 @@ def createFamilyMeetingRoom(family, families, akeneo):
             print("Response: ", response)
             addToLogFile(code, response)
     return response
-
-
 
 def createFamilies(target, families):
     for family in families:

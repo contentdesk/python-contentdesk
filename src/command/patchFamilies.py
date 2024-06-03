@@ -359,13 +359,54 @@ def createFamily(family, families, akeneo):
         addToLogFile(code, response)
     return response
 
+def createFamilyMeetingRoom(family, families, akeneo):
+    code = family["label"]
+
+    attribute_requirements = getParentAttributesRequirements(family, families, attribute_requirements)
+
+    body = {
+        "code": code,
+        "attribute_as_label": family["attribute_as_label"],
+        "attribute_as_image": family["attribute_as_image"],
+        "attribute_requirements": {
+            "ecommerce": attribute_requirements,
+        },
+        "labels": {
+            "en_US": family["label.en_US"],
+            "de_CH": family["label.de_CH"],
+            "fr_FR": family["label.fr_FR"],
+            "it_IT": family["label.it_IT"],
+        }
+    }
+
+    try:
+        # DEBUG - Write to file
+        addToFile(code, body)
+        # To Akeneo
+        response = akeneo.patchFamily(code, body)
+        addToLogFile(code, response)   
+    except Exception as e:
+            print("Error: ", e)
+            print("patch Family: ", code)
+            print("Response: ", response)
+            addToLogFile(code, response)
+    return response
+
+
+
 def createFamilies(target, families):
     for family in families:
         print ("CREATE - Family: "+ family["label"])
         if family["enabled"] == 1 and family["type"] == None or family["type"] == "additinalTypes":
-            print("PATCH Family: ", family["label"])
-            response = createFamily(family, families, target)
-            print("FINISH - patch Family: ", family["label"])
+            if family["label"] == "MeetingRoom":
+                print("MeetingRoom")
+                print("PATCH Family: ", family["label"])
+                createFamilyMeetingRoom(family, families, target)
+                print("FINISH - patch Family: ", family["label"])
+            else:
+                print("PATCH Family: ", family["label"])
+                response = createFamily(family, families, target)
+                print("FINISH - patch Family: ", family["label"])
 
 def getSettings():
     # Define the CSV URL
@@ -377,7 +418,6 @@ def getSettings():
     df_addition = readCsv(addition_csv_url)
     print("Add Disocver.swiss Types") 
     df_discover = readCsv(discover_csv_url)
-    
 
     df_discover = df_discover[df_discover["enabled"] == True]
     print(df_discover)

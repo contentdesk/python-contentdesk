@@ -134,24 +134,24 @@ def removeProperties(code, attributes):
 def searchParentType(type, types, searchType, check = False):
     if 'parent' in type:
         if type['parent'] != None:
-            print("Parent Type: ", type['parent'])
+            #print("Parent Type: ", type['parent'])
             if type['parent'] == searchType:
-                print("Found Parent Type: ", type['parent'])
+                #print("Found Parent Type: ", type['parent'])
                 check = True
             else:
                 # find in types array type['parent'] as type['label']
                 parent = [parent for parent in types if parent["label"] == type['parent']]
-                print("Check Parent: ")
-                print(parent)
+                #print("Check Parent: ")
+                #print(parent)
                 check = searchParentType(parent, types, searchType, check)
-                print("END CHECK Next PARENT")
+                #print("END CHECK Next PARENT")
     else:
         check = False
     return check
 
 def getParentAttributes(type, types, attributes):
     if type['attributes'] != None:
-        print("Merge Parent Attributes:")
+        #print("Merge Parent Attributes:")
         # make type['attributes'] to dict with two values
         typeAttributes = {attr: attr for attr in type['attributes'].split(",")}
         # Merge Attributes
@@ -159,18 +159,18 @@ def getParentAttributes(type, types, attributes):
         attributes = merge_dicts(attributes, typeAttributes)
     if 'parent' in type:
         if type['parent'] != None:
-            print("Parent Type: ", type['parent'])
+            #print("Parent Type: ", type['parent'])
             # find in types array type['parent'] as type['label']
             parent = [parent for parent in types if parent["label"] == type['parent']]
-            print("Check Parent: ")
-            print(parent)
+            #print("Check Parent: ")
+            #print(parent)
             getParentAttributes(parent[0], types, attributes)
 
     return attributes
 
 def getParentAttributesRequirements(type, types, attribute_requirements):
     if type['attribute_requirements.ecommerce'] != None:
-        print("Merge Parent Attributes Requirements:")
+        #print("Merge Parent Attributes Requirements:")
         # make type['attributes'] to dict with two values
         typeAttributes = {attr: attr for attr in type['attribute_requirements.ecommerce'].split(",")}
         # Merge Attributes
@@ -178,11 +178,11 @@ def getParentAttributesRequirements(type, types, attribute_requirements):
         attribute_requirements = merge_dicts(attribute_requirements, typeAttributes)
     if 'parent' in type:
         if type['parent'] != None:
-            print("Parent Type: ", type['parent'])
+            #print("Parent Type: ", type['parent'])
             # find in types array type['parent'] as type['label']
             parent = [parent for parent in types if parent["label"] == type['parent']]
-            print("Check Parent: ")
-            print(parent)
+            #print("Check Parent: ")
+            #print(parent)
             attribute_requirements = getParentAttributesRequirements(parent[0], types, attribute_requirements)
 
     return attribute_requirements
@@ -206,8 +206,8 @@ def createFamily(family, families, akeneo):
     
     attribute_requirements = getParentAttributesRequirements(family, families, attribute_requirements)
     
-    print("Attribute Requirements: ")
-    print(attribute_requirements)
+    #print("Attribute Requirements: ")
+    #print(attribute_requirements)
 
     # Create body
     body = {
@@ -260,17 +260,17 @@ def createFamily(family, families, akeneo):
         attributes['seating_concert'] = 'seating_concert'
         attributes['seating_seminar'] = 'seating_seminar'
         attributes['seating_ushape'] = 'seating_ushape'
-        # Remove petsAllowed from attribute
+        # remove Key attribute petAllowed
         attributes.pop('petsAllowed', None)
-        attributes.pop('weatherDependency', None)
-        attributes.pop('byMonth', None)
-        attributes.pop('dayOfWeek', None)
-        attributes.pop('daytime', None)
-        attributes.pop('duration', None)
-        attributes.pop('priceRange', None)
-        # Remove openingHoursSpecification
-        attributes.pop('openingHoursSpecification', None)
-        attributes.pop('openingHours', None)
+        #attributes.pop('petsAllowed', None)
+        #attributes.pop('weatherDependency', None)
+        #attributes.pop('byMonth', None)
+        #attributes.pop('dayOfWeek', None)
+        #attributes.pop('daytime', None)
+        #attributes.pop('duration', None)
+        #attributes.pop('priceRange', None)
+        #attributes.pop('openingHoursSpecification', None)
+        #attributes.pop('openingHours', None)
 
 
     # Image Winter and Summer by Type Hotel
@@ -332,19 +332,19 @@ def createFamily(family, families, akeneo):
     if 'potentialAction' in attributes:
         attributes['target'] = 'target'
 
-    print("Attributes: ")
-    print(attributes)
+    #print("Attributes: ")
+    #print(attributes)
 
     # Remove Properties
     print("Remove Attributes: ")
-    print(code)
+    ##print(code)
     attributes = removeProperties(code, attributes)
 
     # add Attributes to Body
     body["attributes"] = attributes
 
-    print("Attributes with remove Properties: ")
-    print(body["attributes"])
+    #print("Attributes with remove Properties: ")
+    #print(body["attributes"])
     try:
         # DEBUG - Write to file
         addToFile(code, body)

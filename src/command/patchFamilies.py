@@ -260,15 +260,14 @@ def createFamily(family, families, akeneo):
         attributes['seating_concert'] = 'seating_concert'
         attributes['seating_seminar'] = 'seating_seminar'
         attributes['seating_ushape'] = 'seating_ushape'
-        #attributes.pop('petsAllowed', None)
         # Remove petsAllowed from attribute
-        del attributes['petsAllowed']
-        del attributes['weatherDependency']
-        del attributes['byMonth']
-        del attributes['dayOfWeek']
-        del attributes['daytime']
-        del attributes['duration']
-        del attributes['priceRange']
+        attributes.pop('petsAllowed', None)
+        attributes.pop('weatherDependency', None)
+        attributes.pop('byMonth', None)
+        attributes.pop('dayOfWeek', None)
+        attributes.pop('daytime', None)
+        attributes.pop('duration', None)
+        attributes.pop('priceRange', None)
 
     # Image Winter and Summer by Type Hotel
     if code == "Hotel":

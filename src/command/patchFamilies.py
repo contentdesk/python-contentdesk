@@ -77,6 +77,11 @@ def merge_dicts(dict1, dict2):
     dict1.update(dict2)
     return dict1
 
+# DEBUG
+def addToFile(code, data):
+    with open("../../output/index/akeneo/families/"+code+".json", "w") as file:
+        file.write(json.dumps(data))
+
 def getTypeProperties(code):
     attributes = {}
     print("Get Family Attributes: ", code)
@@ -250,6 +255,8 @@ def createFamily(family, families, akeneo):
         attributes['seating_concert'] = 'seating_concert'
         attributes['seating_seminar'] = 'seating_seminar'
         attributes['seating_ushape'] = 'seating_ushape'
+        #attributes.pop('petsAllowed', None)
+        attributes.remove('petsAllowed')
 
     # Image Winter and Summer by Type Hotel
     if code == "Hotel":
@@ -325,6 +332,9 @@ def createFamily(family, families, akeneo):
     print("Attributes with remove Properties: ")
     print(body["attributes"])
     try:
+        # DEBUG - Write to file
+        addToFile(code, body)
+        # To Akeneo
         response = akeneo.patchFamily(code, body)
     except Exception as e:
         print("Error: ", e)

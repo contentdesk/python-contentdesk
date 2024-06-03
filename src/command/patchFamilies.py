@@ -362,6 +362,11 @@ def createFamily(family, families, akeneo):
 def createFamilyMeetingRoom(family, families, akeneo):
     code = family["label"]
 
+    if family["attribute_requirements.ecommerce"] != None:
+        attribute_requirements = {attrRequ: attrRequ for attrRequ in family["attribute_requirements.ecommerce"].split(",")}
+    else:
+        attribute_requirements = {"sku": "sku", "name": "name", "image": "image"}
+
     attribute_requirements = getParentAttributesRequirements(family, families, attribute_requirements)
 
     body = {

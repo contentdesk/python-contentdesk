@@ -82,6 +82,11 @@ def addToFile(code, data):
     with open("../../output/index/akeneo/families/"+code+".json", "w") as file:
         file.write(json.dumps(data))
 
+# DEBUG - Log
+def addToLogFile(code, data):
+    with open("../../output/logs/families/"+code+".json", "w") as file:
+        file.write(json.dumps(data))
+
 def getTypeProperties(code):
     attributes = {}
     print("Get Family Attributes: ", code)
@@ -339,6 +344,7 @@ def createFamily(family, families, akeneo):
         print("Error: ", e)
         print("patch Family: ", code)
         print("Response: ", response)
+        addToLogFile(code, response)
     return response
 
 def createFamilies(target, families):

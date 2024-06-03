@@ -346,6 +346,8 @@ def createFamily(family, families, akeneo):
         addToFile(code, body)
         # To Akeneo
         response = akeneo.patchFamily(code, body)
+        addToLogFile(code, response)
+           
     except Exception as e:
         print("Error: ", e)
         print("patch Family: ", code)

@@ -300,8 +300,7 @@ def createFamily(family, families, akeneo):
         attributes['addressLocality'] = 'addressLocality'
         attributes['addressCountry'] = 'addressCountry'
         attributes['addressRegion'] = 'addressRegion'
-        attributes['tourismRegion'] = 'tourismRegion'
-        attributes['tourismSubRegion'] = 'tourismSubRegion'
+        attributes['tourismusregion'] = 'tourismusregion'
         # Contact
         attributes['legalName'] = 'legalName'
         attributes['department'] = 'department'
@@ -344,7 +343,6 @@ def createFamily(family, families, akeneo):
         print("Error: ", e)
         print("patch Family: ", code)
         print("Response: ", response)
-        addToLogFile(code, response)
     return response
 
 def createFamilies(target, families):
@@ -352,7 +350,7 @@ def createFamilies(target, families):
         print ("CREATE - Family: "+ family["label"])
         if family["enabled"] == 1 and family["type"] == None or family["type"] == "additinalTypes":
             print("PATCH Family: ", family["label"])
-            createFamily(family, families, target)
+            response = createFamily(family, families, target)
             print("FINISH - patch Family: ", family["label"])
 
 def getSettings():

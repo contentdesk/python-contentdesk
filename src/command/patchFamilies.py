@@ -369,6 +369,19 @@ def createFamilyMeetingRoom(family, families, akeneo):
 
     attribute_requirements = getParentAttributesRequirements(family, families, attribute_requirements)
 
+    if family["attributes"] != None:
+        attributes = {attr: attr for attr in family["attributes"].split(",")}
+    else:
+        attributes = {}
+    
+    attributes['seating_banquet'] = 'seating_banquet'
+    attributes['seating_bar_table'] = 'seating_bar_table'
+    attributes['seating_block'] = 'seating_block'
+    attributes['seating_boardroom'] = 'seating_boardroom'
+    attributes['seating_concert'] = 'seating_concert'
+    attributes['seating_seminar'] = 'seating_seminar'
+    attributes['seating_ushape'] = 'seating_ushape'
+
     body = {
         "code": code,
         "attribute_as_label": family["attribute_as_label"],
@@ -383,6 +396,8 @@ def createFamilyMeetingRoom(family, families, akeneo):
             "it_IT": family["label.it_IT"],
         }
     }
+
+    body["attributes"] = attributes
 
     try:
         # DEBUG - Write to file

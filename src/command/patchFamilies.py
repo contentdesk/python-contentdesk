@@ -403,7 +403,8 @@ def main():
     # Load environment variables
     #environments = getEnvironment()
     #environments = ["ziggy"]
-    environments = ["demo"]
+    #environments = ["demo"]
+    environments = ["ziggy", "viat"]
 
     print("START PATCH FAMILIES")
     for environment in environments:

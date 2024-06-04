@@ -11,33 +11,6 @@ import sys
 sys.path.append("..")
 
 import setting
-# Load properties.json
-def getFamilies():
-    with open('../../output/index/akeneo/families.json', 'r') as f:
-        families = json.load(f)
-    return families
-
-def getTypefromJson(type):
-    with open('../../output/types/'+type+'.json', 'r') as f:
-        type = json.load(f)
-    return type
-
-def getTypefromData(type, types):
-    print("Get Type: ", type)
-    for t in types:
-        print("Type: ", t)
-        if t["@id"] == type:
-            return t
-    return None
-
-def getTypes(data):
-    types = [types for types in data["@graph"] if types["@type"] == "rdfs:Class"]
-    return types
-
-def load_jsonld(url):
-    response = requests.get(url)
-    data = response.json()
-    return data
 
 def getIgnoreProperties():
     with open('../../output/index/ignoreProperties.json', 'r') as f:
@@ -90,8 +63,6 @@ def addToLogFile(code, data):
 def getTypeProperties(code):
     attributes = {}
     print("Get Family Attributes: ", code)
-    #typeClass = getTypefromJson(code)
-    #typeClass = getTypefromData(code, types)
     typeClassProperties = getFullPropertiesbyType(code)
 
     #attributes = attributes + typeClassProperties
@@ -130,24 +101,6 @@ def removeProperties(code, attributes):
     attributes["sku"] = "sku"
     #print ("Clear Attributes: ", attributes)
     return attributes
-
-def searchParentType(type, types, searchType, check = False):
-    if 'parent' in type:
-        if type['parent'] != None:
-            #print("Parent Type: ", type['parent'])
-            if type['parent'] == searchType:
-                #print("Found Parent Type: ", type['parent'])
-                check = True
-            else:
-                # find in types array type['parent'] as type['label']
-                parent = [parent for parent in types if parent["label"] == type['parent']]
-                #print("Check Parent: ")
-                #print(parent)
-                check = searchParentType(parent, types, searchType, check)
-                #print("END CHECK Next PARENT")
-    else:
-        check = False
-    return check
 
 def getParentAttributes(type, types, attributes):
     if type['attributes'] != None:
@@ -204,7 +157,6 @@ def createFamily(family, families, akeneo):
     if family["attribute_as_image"] == None:
         family["attribute_as_image"] = "image"
 
-    
     attribute_requirements = getParentAttributesRequirements(family, families, attribute_requirements)
     
     #print("Attribute Requirements: ")

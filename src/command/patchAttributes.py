@@ -146,7 +146,7 @@ def main():
     #environments = getEnvironment()
     #environments = ["ziggy"]
     #environments = ["demo"]
-    environments = ["ziggy", "viat"]
+    environments = ["viat"]
 
     print("START PATCH ATTRIBUTES")
     for environment in environments:

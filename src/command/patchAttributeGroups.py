@@ -23,12 +23,6 @@ def getAttributeGroups():
 
     return json.loads(json_data)
 
-# Load properties.json
-def getAttributeGroups():
-    with open('../../output/index/akeneo/attributeGroups.json', 'r') as f:
-        attributeGroups = json.load(f)
-    return attributeGroups
-
 def createAttributeGroup(attributeGroup, akeneo):
     code = attributeGroup["code"]
     body = {
@@ -39,7 +33,7 @@ def createAttributeGroup(attributeGroup, akeneo):
             "de_CH": attributeGroup["labels.de_CH"],
             "fr_FR": attributeGroup["labels.fr_FR"],
             "it_IT": attributeGroup["labels.it_IT"],
-            }
+        }
     }
     return akeneo.patchAttributeGroupsbyCode(code, body)
 

@@ -83,7 +83,8 @@ def main():
 
     #environments = getEnvironment()
     #environments = ["ziggy"]
-    environments = ["demo"]
+    #environments = ["demo"]
+    environments = ["ziggy", "viat"]
 
     print("START PATCH Associatinons")
     for environment in environments:

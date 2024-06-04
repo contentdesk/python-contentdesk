@@ -58,7 +58,8 @@ def main():
     # Load environment variables
     #environments = getEnvironment()
     #environments = ["ziggy"]
-    environments = ["demo"]
+    #environments = ["demo"]
+    environments = ["ziggy", "viat"]
 
     print("START PATCH ATTRIBUTES")
     for environment in environments:
@@ -66,7 +67,7 @@ def main():
         target = Akeneo(targetCon["host"], targetCon["clientId"], targetCon["secret"], targetCon["user"], targetCon["passwd"])
 
         # Get Attribute Options
-        attributeFileToLoad = ["others", "starRating", "amentityFeature", "potentialAction", "award", "typeOfBed" ]
+        #attributeFileToLoad = ["others", "starRating", "amentityFeature", "potentialAction", "award", "typeOfBed" ]
         # leisure --> direct from discover.swiss Categories
 
         # Load Attribute Options

@@ -239,28 +239,28 @@ def createFamily(family, families, akeneo):
         attributes['google_opening_hours_use'] = 'google_opening_hours_use'
 
     # Images / Gallery
-    if 'image_01_scope' in attributes:
-        attributes['image_01_scope_description'] = 'image_01_scope_description'
-        if code != "Person":
+    if code != "Person" or code != "Organization":
+        if 'image_01_scope' in attributes:
+            attributes['image_01_scope_description'] = 'image_01_scope_description'
             attributes['google_image_gallery_use_pro_channel'] = 'google_image_gallery_use_pro_channel'
-    if 'image_02_scope' in attributes:
-        attributes['image_02_scope_description'] = 'image_02_scope_description'
-    if 'image_03_scope' in attributes:
-        attributes['image_03_scope_description'] = 'image_03_scope_description'
-    if 'image_04_scope' in attributes:
-        attributes['image_04_scope_description'] = 'image_04_scope_description'
-    if 'image_05_scope' in attributes:
-        attributes['image_05_scope_description'] = 'image_05_scope_description'
-    if 'image_06_scope' in attributes:
-        attributes['image_06_scope_description'] = 'image_06_scope_description'
-    if 'image_07_scope' in attributes:
-        attributes['image_07_scope_description'] = 'image_07_scope_description'
-    if 'image_08_scope' in attributes:
-        attributes['image_08_scope_description'] = 'image_08_scope_description'
-    if 'image_09_scope' in attributes:
-        attributes['image_09_scope_description'] = 'image_09_scope_description'
-    if 'image_10_scope' in attributes:
-        attributes['image_10_scope_description'] = 'image_10_scope_description'
+        if 'image_02_scope' in attributes:
+            attributes['image_02_scope_description'] = 'image_02_scope_description'
+        if 'image_03_scope' in attributes:
+            attributes['image_03_scope_description'] = 'image_03_scope_description'
+        if 'image_04_scope' in attributes:
+            attributes['image_04_scope_description'] = 'image_04_scope_description'
+        if 'image_05_scope' in attributes:
+            attributes['image_05_scope_description'] = 'image_05_scope_description'
+        if 'image_06_scope' in attributes:
+            attributes['image_06_scope_description'] = 'image_06_scope_description'
+        if 'image_07_scope' in attributes:
+            attributes['image_07_scope_description'] = 'image_07_scope_description'
+        if 'image_08_scope' in attributes:
+            attributes['image_08_scope_description'] = 'image_08_scope_description'
+        if 'image_09_scope' in attributes:
+            attributes['image_09_scope_description'] = 'image_09_scope_description'
+        if 'image_10_scope' in attributes:
+            attributes['image_10_scope_description'] = 'image_10_scope_description'
 
     if 'geo' in attributes:
         attributes['longitude'] = 'longitude'

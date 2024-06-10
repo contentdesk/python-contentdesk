@@ -319,10 +319,33 @@ def createFamily(family, families, akeneo):
 
     # add Attributes to Body
     body["attributes"] = attributes
-
-    #print("Attributes with remove Properties: ")
-    #print(body["attributes"])
+    
+    clearBody = {
+        "code": code,
+        "attribute_as_label": family["attribute_as_label"],
+        "attribute_as_image": family["attribute_as_image"],
+        "attribute_requirements": {
+            "ecommerce": [
+                "sku",
+                "name",
+                "image",
+            ],
+        },
+        "labels": {
+            "en_US": family["label.en_US"],
+            "de_CH": family["label.de_CH"],
+            "fr_FR": family["label.fr_FR"],
+            "it_IT": family["label.it_IT"],
+        },
+        "attributes": [
+            "sku",
+            "name",
+            "image",
+        ]
+    }
     try:
+        # Clear Attributes
+        response = akeneo.patchFamily(code, clearBody)
         # DEBUG - Write to file
         addToFile(code, body)
         # To Akeneo
@@ -376,7 +399,33 @@ def createFamilyMeetingRoom(family, families, akeneo):
 
     body["attributes"] = attributes
 
+    clearBody = {
+        "code": code,
+        "attribute_as_label": family["attribute_as_label"],
+        "attribute_as_image": family["attribute_as_image"],
+        "attribute_requirements": {
+            "ecommerce": [
+                "sku",
+                "name",
+                "image"
+            ],
+        },
+        "labels": {
+            "en_US": family["label.en_US"],
+            "de_CH": family["label.de_CH"],
+            "fr_FR": family["label.fr_FR"],
+            "it_IT": family["label.it_IT"],
+        },
+        "attributes": [
+            "sku",
+            "name",
+            "image"
+        ]
+    }
+
     try:
+        # Clear Attributes
+        #response = akeneo.patchFamily(code, clearBody)
         # DEBUG - Write to file
         addToFile(code, body)
         # To Akeneo
@@ -389,8 +438,16 @@ def createFamilyMeetingRoom(family, families, akeneo):
             addToLogFile(code, response)
     return response
 
-def createFamilies(target, families):
+def createFamilies(target, families, importFamilies = None):
+    #filter families by label = Hotel
+    #families = [family for family in families if family["label"] == "Hotel"]
+
     for family in families:
+        if importFamilies != None:
+            if family["label"] in importFamilies:
+                pass
+            else:
+                continue   
         print ("CREATE - Family: "+ family["label"])
         if family["enabled"] == 1 and family["type"] == None or family["type"] == "additinalTypes":
             if family["label"] == "MeetingRoom":
@@ -406,6 +463,8 @@ def createFamilies(target, families):
 def main():
     # Set Familie Settings
     families = getSettings()
+    #importFamilies = None
+    importFamilies = ["MeetingRoom"]
 
     # Load environment variables
     #environments = getEnvironment()
@@ -415,7 +474,7 @@ def main():
     for environment in environments:
         targetCon = loadEnv(environment)
         target = Akeneo(targetCon["host"], targetCon["clientId"], targetCon["secret"], targetCon["user"], targetCon["passwd"])
-        createFamilies(target, families)
+        createFamilies(target, families, importFamilies)
     print("FINISH PATCH FAMILIES")
 
 if __name__ == '__main__':

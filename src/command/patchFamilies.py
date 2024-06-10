@@ -238,20 +238,11 @@ def createFamily(family, families, akeneo):
     if 'openingHoursSpecification' in attributes:
         attributes['google_opening_hours_use'] = 'google_opening_hours_use'
 
-    # StarRating and Type Hotel
-    if 'starRating' in attributes and code == "Hotel":
-        attributes['garni'] = 'garni'
-        attributes['superior'] = 'superior'
-
-    # Image Winter and Summer by Type Hotel
-    if code == "Hotel":
-        attributes['image_winter'] = 'image_winter'
-        attributes['image_summer'] = 'image_summer'
-
     # Images / Gallery
     if 'image_01_scope' in attributes:
-        attributes['google_image_gallery_use_pro_channel'] = 'google_image_gallery_use_pro_channel'
         attributes['image_01_scope_description'] = 'image_01_scope_description'
+        if code != "Person":
+            attributes['google_image_gallery_use_pro_channel'] = 'google_image_gallery_use_pro_channel'
     if 'image_02_scope' in attributes:
         attributes['image_02_scope_description'] = 'image_02_scope_description'
     if 'image_03_scope' in attributes:
@@ -293,11 +284,12 @@ def createFamily(family, families, akeneo):
     # Add to all
     attributes['search_text_pro_channel'] = 'search_text_pro_channel'
     attributes['promo_sort_order_scope'] = 'promo_sort_order_scope'
-    attributes['license'] = 'license'
+    #attributes['license'] = 'license'
     attributes['potentialAction'] = 'potentialAction'
 
     if 'license' in attributes:
         attributes['copyrightHolder'] = 'copyrightHolder'
+        #attributes['author'] = 'author'
     
     if 'potentialAction' in attributes:
         attributes['target'] = 'target'

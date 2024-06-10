@@ -48,9 +48,7 @@ def main():
 
     # Load environment variables
     #environments = getEnvironment()
-    #environments = ["ziggy"]
-    #environments = ["demo"]
-    environments = ["viat"]
+    environments = ["demo"]
 
     print("START PATCH ATTRIBUTE GROUPS")
     for environment in environments:

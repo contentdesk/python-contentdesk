@@ -394,9 +394,7 @@ def main():
 
     # Load environment variables
     #environments = getEnvironment()
-    #environments = ["ziggy"]
-    #environments = ["demo"]
-    environments = ["ziggy", "viat"]
+    environments = ["demo"]
 
     print("START PATCH FAMILIES")
     for environment in environments:

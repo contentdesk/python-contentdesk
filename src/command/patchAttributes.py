@@ -144,9 +144,7 @@ def createAttributesinAkeneo(target):
 def main():
     # Load environment variables
     #environments = getEnvironment()
-    #environments = ["ziggy"]
-    #environments = ["demo"]
-    environments = ["viat"]
+    environments = ["demo"]
 
     print("START PATCH ATTRIBUTES")
     for environment in environments:

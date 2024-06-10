@@ -237,6 +237,7 @@ def createFamily(family, families, akeneo):
 
     if 'openingHoursSpecification' in attributes:
         attributes['google_opening_hours_use'] = 'google_opening_hours_use'
+        attributes['openingHours'] = 'openingHours'
 
     # Images / Gallery
     if code != "Person" or code != "Organization":
@@ -373,6 +374,9 @@ def createFamilyMeetingRoom(family, families, akeneo):
         attributes = {attr: attr for attr in family["attributes"].split(",")}
     else:
         attributes = {}
+
+    #attributes = getFamilyAttributes(code, attributes)
+    #attributes = getParentAttributes(family, families, attributes)
     
     attributes['seating_banquet'] = 'seating_banquet'
     attributes['seating_bar_table'] = 'seating_bar_table'
@@ -382,6 +386,21 @@ def createFamilyMeetingRoom(family, families, akeneo):
     attributes['seating_seminar'] = 'seating_seminar'
     attributes['seating_ushape'] = 'seating_ushape'
 
+    attributes['openstreetmap_id'] = 'openstreetmap_id'
+    attributes['license'] = 'license'
+    attributes['copyrightHolder'] = 'copyrightHolder'
+    attributes['author'] = 'author'
+
+    attributes['amenityFeature'] = 'amenityFeature'
+    attributes['occupancy'] = 'occupancy'
+    attributes['floorLevel'] = 'floorLevel'
+    attributes['floorSize'] = 'floorSize'
+    attributes['maximumAttendeeCapacity'] = 'maximumAttendeeCapacity'
+    attributes['yearBuilt'] = 'yearBuilt'
+
+    if 'image' in attributes:
+        attributes['image_description'] = 'image_description'
+    
     body = {
         "code": code,
         "attribute_as_label": family["attribute_as_label"],
@@ -396,6 +415,11 @@ def createFamilyMeetingRoom(family, families, akeneo):
             "it_IT": family["label.it_IT"],
         }
     }
+
+    # Remove Properties
+    print("Remove Attributes: ")
+    ##print(code)
+    attributes = removeProperties(code, attributes)
 
     body["attributes"] = attributes
 

@@ -281,6 +281,21 @@ def createFamily(family, families, akeneo):
         attributes['familyName'] = 'familyName'
         attributes['email'] = 'email'
 
+    if (
+        code == "FoodEstablishment" or
+        code == "Bakery" or
+        code == "BarOrPub" or
+        code == "Brewery" or
+        code == "CafeOrCoffeeShop" or 
+        code == "Distillery" or
+        code == "FastFoodRestaurant" or
+        code == "IceCreamShop" or 
+        code == "Restaurant" or
+        code == "Winery"
+        ):
+        if 'starRating' in attributes:
+            attributes.pop('starRating')
+
     # Add to all
     attributes['search_text_pro_channel'] = 'search_text_pro_channel'
     attributes['promo_sort_order_scope'] = 'promo_sort_order_scope'

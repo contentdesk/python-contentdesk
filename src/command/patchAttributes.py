@@ -81,6 +81,12 @@ def createAttribute(attribute, akeneo):
     if attribute["useable_as_grid_filter"] == None:
         attribute["useable_as_grid_filter"] = False
 
+    if attribute["validation_rule"] == None:
+        attribute["validation_rule"] = False
+
+    if attribute["validation_regexp"] == None:
+        attribute["validation_regexp"] = False
+
     # Create body
     body = {
         "code": code,
@@ -92,6 +98,8 @@ def createAttribute(attribute, akeneo):
         "unique": attribute["unique"],
         "useable_as_grid_filter": attribute["useable_as_grid_filter"],
         "max_characters": attribute["max_characters"],
+        "validation_rule": attribute["validation_rule"],
+        "validation_regexp": attribute["validation_regexp"],
         #"wysiwyg_enabled": attribute["wysiwyg_enabled"],
         #"decimals_allowed": attribute["decimals_allowed"],
         #"negative_allowed": attribute["negative_allowed"],

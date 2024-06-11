@@ -14,4 +14,6 @@ def getArguments(sys):
         arguments = None
     else:
         arguments = sys.argv[2:]
+    
+    print(arguments)
     return arguments

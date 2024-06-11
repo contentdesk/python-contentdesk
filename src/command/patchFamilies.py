@@ -479,14 +479,31 @@ def createFamilies(target, families, importFamilies = None):
                 print("FINISH - patch Family: ", family["label"])
 
 def main():
+    # sys.argv to array
+    print("Arguments: ")
+    print(sys.argv[1])
+
+    # Set Environments
+    if sys.argv[1] == "all":
+        environments = getEnvironment()
+        #environments = ["demo"]
+    else:
+        environments = [sys.argv[1]]
+    
+    # Set Import Families
+    if sys.argv[2:] == []:
+        importFamilies = None
+    else:
+        importFamilies = sys.argv[2:]
+    print("Import Families: ")
+    print(importFamilies)
+
     # Set Familie Settings
     families = getSettings()
-    #importFamilies = None
-    importFamilies = ["MeetingRoom"]
 
     # Load environment variables
     #environments = getEnvironment()
-    environments = ["demo"]
+    #environments = ["demo"]
 
     print("START PATCH FAMILIES")
     for environment in environments:

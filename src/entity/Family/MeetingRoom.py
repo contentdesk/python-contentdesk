@@ -1,6 +1,6 @@
 import service.debug as debug
 
-def setBody(family, families, akeneo):
+def setBody(family, families):
     code = family["label"]
 
     if family["attribute_requirements.ecommerce"] != None:

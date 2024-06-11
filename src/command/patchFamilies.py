@@ -368,7 +368,7 @@ def createFamilyMeetingRoom(family, families, akeneo):
     else:
         attribute_requirements = {"sku": "sku", "name": "name", "image": "image"}
 
-    attribute_requirements = getParentAttributesRequirements(family, families, attribute_requirements)
+    #attribute_requirements = getParentAttributesRequirements(family, families, attribute_requirements)
 
     if family["attributes"] != None:
         attributes = {attr: attr for attr in family["attributes"].split(",")}
@@ -397,6 +397,8 @@ def createFamilyMeetingRoom(family, families, akeneo):
     attributes['floorSize'] = 'floorSize'
     attributes['maximumAttendeeCapacity'] = 'maximumAttendeeCapacity'
     attributes['yearBuilt'] = 'yearBuilt'
+    attributes['offers'] = 'offers'
+    attributes['priceRange'] = 'priceRange'
 
     if 'image' in attributes:
         attributes['image_description'] = 'image_description'
@@ -417,9 +419,9 @@ def createFamilyMeetingRoom(family, families, akeneo):
     }
 
     # Remove Properties
-    print("Remove Attributes: ")
+    #print("Remove Attributes: ")
     ##print(code)
-    attributes = removeProperties(code, attributes)
+    #attributes = removeProperties(code, attributes)
 
     body["attributes"] = attributes
 

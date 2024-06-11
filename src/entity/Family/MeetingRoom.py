@@ -1,5 +1,3 @@
-from akeneo.akeneo import Akeneo
-
 import service.debug as debug
 
 def create(family, families, akeneo):

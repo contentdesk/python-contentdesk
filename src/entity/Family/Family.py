@@ -314,3 +314,146 @@ def create(family, families, akeneo):
         print("Response: ", response)
         debug.addToLogFile(code, response)
     return response
+
+def setBody(family, families):
+    code = family["label"]
+
+    # Set default values
+    if family["attribute_requirements.ecommerce"] != None:
+        attribute_requirements = {attrRequ: attrRequ for attrRequ in family["attribute_requirements.ecommerce"].split(",")}
+        #attribute_requirements = family["attribute_requirements.ecommerce"].split(",")
+    else:
+        attribute_requirements = {"sku": "sku", "name": "name", "image": "image"}
+
+    if family["attribute_as_label"] == None:
+        family["attribute_as_label"] = "name"
+
+    if family["attribute_as_image"] == None:
+        family["attribute_as_image"] = "image"
+
+    attribute_requirements = getParentAttributesRequirements(family, families, attribute_requirements)
+    
+    #print("Attribute Requirements: ")
+    #print(attribute_requirements)
+
+    # Create body
+    body = {
+        "code": code,
+        "attribute_as_label": family["attribute_as_label"],
+        "attribute_as_image": family["attribute_as_image"],
+        "attribute_requirements": {
+            "ecommerce": attribute_requirements,
+        },
+        "labels": {
+            "en_US": family["label.en_US"],
+            "de_CH": family["label.de_CH"],
+            "fr_FR": family["label.fr_FR"],
+            "it_IT": family["label.it_IT"],
+        }
+    }
+
+    # Type specific attributes
+    if family["attributes"] != None:
+        attributes = {attr: attr for attr in family["attributes"].split(",")}
+    else:
+        attributes = {}
+    attributes = getFamilyAttributes(code, attributes)
+    #print("Attributes: ")
+    #print(attributes)
+
+    # add Parent Attributes
+    attributes = getParentAttributes(family, families, attributes)
+
+    # Check if specific attributes are set
+    # examples license needs add copyrightHolder and author
+    # examples potentialAction needs traget
+    if 'image' in attributes:
+        attributes['image_description'] = 'image_description'
+
+    if 'openingHoursSpecification' in attributes:
+        attributes['google_opening_hours_use'] = 'google_opening_hours_use'
+        attributes['openingHours'] = 'openingHours'
+
+    # Images / Gallery
+    if code != "Person" or code != "Organization":
+        if 'image_01_scope' in attributes:
+            attributes['image_01_scope_description'] = 'image_01_scope_description'
+            attributes['google_image_gallery_use_pro_channel'] = 'google_image_gallery_use_pro_channel'
+        if 'image_02_scope' in attributes:
+            attributes['image_02_scope_description'] = 'image_02_scope_description'
+        if 'image_03_scope' in attributes:
+            attributes['image_03_scope_description'] = 'image_03_scope_description'
+        if 'image_04_scope' in attributes:
+            attributes['image_04_scope_description'] = 'image_04_scope_description'
+        if 'image_05_scope' in attributes:
+            attributes['image_05_scope_description'] = 'image_05_scope_description'
+        if 'image_06_scope' in attributes:
+            attributes['image_06_scope_description'] = 'image_06_scope_description'
+        if 'image_07_scope' in attributes:
+            attributes['image_07_scope_description'] = 'image_07_scope_description'
+        if 'image_08_scope' in attributes:
+            attributes['image_08_scope_description'] = 'image_08_scope_description'
+        if 'image_09_scope' in attributes:
+            attributes['image_09_scope_description'] = 'image_09_scope_description'
+        if 'image_10_scope' in attributes:
+            attributes['image_10_scope_description'] = 'image_10_scope_description'
+
+    if 'geo' in attributes:
+        attributes['longitude'] = 'longitude'
+        attributes['latitude'] = 'latitude'
+
+    if 'address' in attributes:
+        attributes['streetAddress'] = 'streetAddress'
+        attributes['postalCode'] = 'postalCode'
+        attributes['addressLocality'] = 'addressLocality'
+        attributes['addressCountry'] = 'addressCountry'
+        attributes['addressRegion'] = 'addressRegion'
+        attributes['tourismusregion'] = 'tourismusregion'
+        # Contact
+        attributes['legalName'] = 'legalName'
+        attributes['department'] = 'department'
+        attributes['honorificPrefix'] = 'honorificPrefix'
+        attributes['givenName'] = 'givenName'
+        attributes['familyName'] = 'familyName'
+        attributes['email'] = 'email'
+
+    if (
+        code == "FoodEstablishment" or
+        code == "Bakery" or
+        code == "BarOrPub" or
+        code == "Brewery" or
+        code == "CafeOrCoffeeShop" or 
+        code == "Distillery" or
+        code == "FastFoodRestaurant" or
+        code == "IceCreamShop" or 
+        code == "Restaurant" or
+        code == "Winery"
+        ):
+        if 'starRating' in attributes:
+            attributes.pop('starRating')
+
+    # Add to all
+    attributes['search_text_pro_channel'] = 'search_text_pro_channel'
+    attributes['promo_sort_order_scope'] = 'promo_sort_order_scope'
+    #attributes['license'] = 'license'
+    attributes['potentialAction'] = 'potentialAction'
+
+    if 'license' in attributes:
+        attributes['copyrightHolder'] = 'copyrightHolder'
+        attributes['author'] = 'author'
+    
+    if 'potentialAction' in attributes:
+        attributes['target'] = 'target'
+
+    #print("Attributes: ")
+    #print(attributes)
+
+    # Remove Properties
+    print("Remove Attributes: ")
+    ##print(code)
+    attributes = removeProperties(code, attributes)
+
+    # add Attributes to Body
+    body["attributes"] = attributes
+    
+    return body

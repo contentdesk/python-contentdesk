@@ -271,6 +271,10 @@ def create(family, families, akeneo):
                 "name",
                 "image",
             ],
+            "mice": [],
+            "print": [],
+            "intern": []
+
         },
         "labels": {
             "en_US": family["label.en_US"],
@@ -286,10 +290,12 @@ def create(family, families, akeneo):
     }
     try:
         # Clear Attributes
+        print("Clear Attributes")
         response = akeneo.patchFamily(code, clearBody)
         # DEBUG - Write to file
         debug.addToFile(code, body)
         # To Akeneo
+        print("Patch family")
         response = akeneo.patchFamily(code, body)
         debug.addToLogFile(code, response)
            

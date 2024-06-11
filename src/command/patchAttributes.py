@@ -81,11 +81,11 @@ def createAttribute(attribute, akeneo):
     if attribute["useable_as_grid_filter"] == None:
         attribute["useable_as_grid_filter"] = False
 
-    if attribute["validation_rule"] == None:
-        attribute["validation_rule"] = False
+    #if attribute["validation_rule"] == None:
+    #    attribute["validation_rule"] = False
 
-    if attribute["validation_regexp"] == None:
-        attribute["validation_regexp"] = False
+    #if attribute["validation_regexp"] == None:
+    #    attribute["validation_regexp"] = None
 
     # Create body
     body = {
@@ -98,8 +98,6 @@ def createAttribute(attribute, akeneo):
         "unique": attribute["unique"],
         "useable_as_grid_filter": attribute["useable_as_grid_filter"],
         "max_characters": attribute["max_characters"],
-        "validation_rule": attribute["validation_rule"],
-        "validation_regexp": attribute["validation_regexp"],
         #"wysiwyg_enabled": attribute["wysiwyg_enabled"],
         #"decimals_allowed": attribute["decimals_allowed"],
         #"negative_allowed": attribute["negative_allowed"],
@@ -114,6 +112,10 @@ def createAttribute(attribute, akeneo):
             "it_IT": attribute["label.it_IT"],
             }
     }
+
+    if attribute["type"] == "pim_catalog_text" or attribute["type"] == "pim_catalog_identifier":
+        body["validation_rule"] = attribute["validation_rule"]
+        body["validation_regexp"] = attribute["validation_regexp"]
 
     # Type specific attributes
     if attribute["type"] == "pim_catalog_textarea":
@@ -142,28 +144,29 @@ def createAttribute(attribute, akeneo):
         print("Response: ", response)
     return response
 
-def createAttributesinAkeneo(target, importAttributes = None):
-    attributes = getAttributes()
+def createAttributesinAkeneo(target, attributes, importAttributes = None):
     for attribute in attributes:
         if importAttributes != None:
             if attribute["label"] in importAttributes:
                 pass
             else:
-                continue   
-            print ("Check Property if Attribut: "+ attribute["label"])
-            if attribute["attribute"] == True:
-                print("patch Attribute: ", attribute["label"])
-                createAttribute(attribute, target)
+                continue
+        print ("Check Property if Attribut: "+ attribute["label"])
+        if attribute["attribute"] == True:
+            print("patch Attribute: ", attribute["label"])
+            createAttribute(attribute, target)
 
 def main():
     environments = cliArguments.getEnvironment(sys)
     arguments = cliArguments.getArguments(sys)
 
+    attributes = getAttributes()
+
     print("START PATCH ATTRIBUTES")
     for environment in environments:
         targetCon = loadEnv(environment)
         target = Akeneo(targetCon["host"], targetCon["clientId"], targetCon["secret"], targetCon["user"], targetCon["passwd"])
-        createAttributesinAkeneo(target, arguments)
+        createAttributesinAkeneo(target, attributes, arguments)
     print("FINISH PATCH ATTRIBUTES")
 
 if __name__ == '__main__':

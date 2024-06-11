@@ -8,7 +8,6 @@ def getEnvironment(sys):
     return environments
 
 def getArguments(sys):
-    # Set Import Families
     if sys.argv[2:] == []:
         arguments = None
     else:

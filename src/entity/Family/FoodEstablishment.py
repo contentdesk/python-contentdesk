@@ -1,7 +1,12 @@
 import service.debug as debug
+import entity.Family.Family as Family
 
 def setBody(family, families):
-    body = {}
+    body = Family.setBody(family, families)
+
+    if 'starRating' in body['attributes']:
+        body['attributes'].pop('starRating')
+    
     return body
 
 

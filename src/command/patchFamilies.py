@@ -115,7 +115,6 @@ def createFamilies(target, families, importFamilies = None):
                 print("FINISH - patch Family: ", family["label"])
             else:
                 print("PATCH Family: ", family["label"])
-                print("Family: ", family)
                 body = Family.setBody(family, families)
                 response = patchFamily(family["label"], body, target)
                 print("FINISH - patch Family: ", family["label"])

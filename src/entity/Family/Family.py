@@ -263,7 +263,7 @@ def create(family, families, akeneo):
     #print(attributes)
 
     # Remove Properties
-    print("Remove Attributes: ")
+    #print("Remove Attributes: ")
     ##print(code)
     attributes = removeProperties(code, attributes)
 
@@ -299,12 +299,12 @@ def create(family, families, akeneo):
     }
     try:
         # Clear Attributes
-        print("Clear Attributes")
+        #print("Clear Attributes")
         response = akeneo.patchFamily(code, clearBody)
         # DEBUG - Write to file
         debug.addToFile(code, body)
         # To Akeneo
-        print("Patch family")
+        print("Patch family: ", code)
         response = akeneo.patchFamily(code, body)
         debug.addToLogFile(code, response)
            
@@ -449,7 +449,7 @@ def setBody(family, families):
     #print(attributes)
 
     # Remove Properties
-    print("Remove Attributes: ")
+    #print("Remove Attributes: ")
     ##print(code)
     attributes = removeProperties(code, attributes)
 

@@ -49,8 +49,6 @@ def readCsv(url):
     df = pd.read_csv(url)
     return df
 
-
-
 def createFamilies(target, families, importFamilies = None):
     #filter families by label = Hotel
     #families = [family for family in families if family["label"] == "Hotel"]

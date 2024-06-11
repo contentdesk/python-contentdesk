@@ -11,6 +11,8 @@ import sys
 sys.path.append("..")
 
 import setting
+import service.debug as debug
+import entity.MeetingRoom as MeetingRoom
 
 def getSettings():
     # Define the CSV URL
@@ -88,16 +90,6 @@ def removeIgnoreProperties(properties, ignoreProperties):
 def merge_dicts(dict1, dict2):
     dict1.update(dict2)
     return dict1
-
-# DEBUG
-def addToFile(code, data):
-    with open("../../output/index/akeneo/families/"+code+".json", "w") as file:
-        file.write(json.dumps(data))
-
-# DEBUG - Log
-def addToLogFile(code, data):
-    with open("../../output/logs/families/"+code+".json", "w") as file:
-        file.write(json.dumps(data))
 
 def getTypeProperties(code):
     attributes = {}
@@ -348,16 +340,16 @@ def createFamily(family, families, akeneo):
         # Clear Attributes
         response = akeneo.patchFamily(code, clearBody)
         # DEBUG - Write to file
-        addToFile(code, body)
+        debug.addToFile(code, body)
         # To Akeneo
         response = akeneo.patchFamily(code, body)
-        addToLogFile(code, response)
+        debug.addToLogFile(code, response)
            
     except Exception as e:
         print("Error: ", e)
         print("patch Family: ", code)
         print("Response: ", response)
-        addToLogFile(code, response)
+        debug.addToLogFile(code, response)
     return response
 
 def createFamilyMeetingRoom(family, families, akeneo):
@@ -479,7 +471,7 @@ def createFamilies(target, families, importFamilies = None):
             if family["label"] == "MeetingRoom":
                 print("MeetingRoom")
                 print("PATCH Family: ", family["label"])
-                createFamilyMeetingRoom(family, families, target)
+                MeetingRoom.create(family, families, target)
                 print("FINISH - patch Family: ", family["label"])
             else:
                 print("PATCH Family: ", family["label"])

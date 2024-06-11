@@ -6,6 +6,8 @@ def setBody(family, families):
 
     if 'starRating' in body['attributes']:
         body['attributes'].pop('starRating')
+        if 'starRating' in body['attributes']:
+            del body['attributes']['starRating']
     
     return body
 

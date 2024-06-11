@@ -26,6 +26,8 @@ def importFamilyEnitity(code):
         code == "Restaurant" or
         code == "Winery"):
         import entity.Family.FoodEstablishment as Family
+    else:
+        import entity.Family.Family as Family
     return Family
 
 def patchAkeneoFamily(family, families, target):

@@ -7,8 +7,6 @@ sys.path.append("..")
 
 from service.loadEnv import loadEnv
 import service.debug as debug
-import entity.Family.Family as Family
-import entity.Family.MeetingRoom as MeetingRoom
 import service.cliArguments as cliArguments
 import service.patchAkeneoFamily as patchAkeneoFamily
 

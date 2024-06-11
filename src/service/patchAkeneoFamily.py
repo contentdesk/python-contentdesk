@@ -26,6 +26,10 @@ def importFamilyEnitity(code):
         code == "Restaurant" or
         code == "Winery"):
         import entity.Family.FoodEstablishment as Family
+    elif ( code == "TouristAttraction"):
+        import entity.Family.TouristAttraction as Family
+    elif ( code == "CivicStructure"):
+        import entity.Family.CivicStructure as Family
     else:
         import entity.Family.Family as Family
     return Family

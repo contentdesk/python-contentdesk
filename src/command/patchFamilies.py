@@ -79,10 +79,6 @@ def main():
     # Set Familie Settings
     families = getSettings()
 
-    # Load environment variables
-    #environments = getEnvironment()
-    #environments = ["demo"]
-
     print("START PATCH FAMILIES")
     for environment in environments:
         targetCon = loadEnv(environment)

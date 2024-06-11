@@ -63,10 +63,20 @@ def getParentAttributes(type, types, attributes):
     if type['attributes'] != None:
         #print("Merge Parent Attributes:")
         # make type['attributes'] to dict with two values
-        typeAttributes = {attr: attr for attr in type['attributes'].split(",")}
+        # by Google Sheet
+        typeAttributes = {attr: attr for attr in type['attributes'].split(",")} 
+        # by Schema.org
+        typeClassProperties = getTypeProperties(type["label"])
+        #print("Parent Attributes Schema.org:")
+        #print(typeClassProperties)
+
+        attributes = merge_dicts(attributes, typeClassProperties)
+        #print("Attributes with Schema.org:")
+        #print(attributes)
+
         # Merge Attributes
-        print("Parent Attributes:")
-        print(typeAttributes)
+        #print("Parent Attributes:")
+        #print(typeAttributes)
         attributes = merge_dicts(attributes, typeAttributes)
     if 'parent' in type:
         if type['parent'] != None:
@@ -76,7 +86,6 @@ def getParentAttributes(type, types, attributes):
             #print("Check Parent: ")
             #print(parent)
             getParentAttributes(parent[0], types, attributes)
-
     return attributes
 
 def getParentAttributesRequirements(type, types, attribute_requirements):

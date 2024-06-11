@@ -5,7 +5,6 @@ def getEnvironment(sys):
         environments = getEnvironment()
     else:
         environments = [sys.argv[1]]
-
     return environments
 
 def getArguments(sys):
@@ -14,6 +13,5 @@ def getArguments(sys):
         arguments = None
     else:
         arguments = sys.argv[2:]
-    
     print(arguments)
     return arguments

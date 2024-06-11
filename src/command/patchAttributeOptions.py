@@ -6,6 +6,7 @@ import sys
 sys.path.append("..")
 
 from service.loadEnv import loadEnv, getEnvironment
+import service.cliArguments as cliArguments
 
 def readCsv(url):
     # Read the CSV data into a pandas DataFrame
@@ -55,11 +56,8 @@ def patchAttributeOptionsAkeneo(akeneo, attributeOptions):
         print(response)
 
 def main():
-    # Load environment variables
-    #environments = getEnvironment()
-    #environments = ["ziggy"]
-    #environments = ["demo"]
-    environments = ["viat"]
+    environments = cliArguments.getEnvironment(sys)
+    #arguments = cliArguments.getArguments(sys)
 
     print("START PATCH ATTRIBUTES")
     for environment in environments:

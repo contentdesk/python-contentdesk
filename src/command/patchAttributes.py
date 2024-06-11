@@ -6,6 +6,7 @@ import sys
 sys.path.append("..")
 
 from service.loadEnv import loadEnv, getEnvironment
+import service.cliArguments as cliArguments
 
 def readCsv(url):
     # Read the CSV data into a pandas DataFrame
@@ -133,24 +134,28 @@ def createAttribute(attribute, akeneo):
         print("Response: ", response)
     return response
 
-def createAttributesinAkeneo(target):
+def createAttributesinAkeneo(target, importAttributes = None):
     attributes = getAttributes()
     for attribute in attributes:
-        print ("Check Property if Attribut: "+ attribute["label"])
-        if attribute["attribute"] == True:
-            print("patch Attribute: ", attribute["label"])
-            createAttribute(attribute, target)
+        if importAttributes != None:
+            if attribute["label"] in importAttributes:
+                pass
+            else:
+                continue   
+            print ("Check Property if Attribut: "+ attribute["label"])
+            if attribute["attribute"] == True:
+                print("patch Attribute: ", attribute["label"])
+                createAttribute(attribute, target)
 
 def main():
-    # Load environment variables
-    #environments = getEnvironment()
-    environments = ["demo"]
+    environments = cliArguments.getEnvironment(sys)
+    arguments = cliArguments.getArguments(sys)
 
     print("START PATCH ATTRIBUTES")
     for environment in environments:
         targetCon = loadEnv(environment)
         target = Akeneo(targetCon["host"], targetCon["clientId"], targetCon["secret"], targetCon["user"], targetCon["passwd"])
-        createAttributesinAkeneo(target)
+        createAttributesinAkeneo(target, arguments)
     print("FINISH PATCH ATTRIBUTES")
 
 if __name__ == '__main__':

@@ -15,13 +15,16 @@ def importFamilyEnitity(code):
         ):
         import entity.Family.LodgingBusiness as Family
     elif (
-        code == "FoodEstablishment" or 
-        code == "Bakery" or 
-        code == "BarOrPub" or 
-        code == "Brewery" or 
+        code == "FoodEstablishment" or
+        code == "Bakery" or
+        code == "BarOrPub" or
+        code == "Brewery" or
         code == "CafeOrCoffeeShop" or 
-        code == "FastFoodRestaurant" or 
-        code == "IceCreamShop" or code == "Restaurant"):
+        code == "Distillery" or
+        code == "FastFoodRestaurant" or
+        code == "IceCreamShop" or 
+        code == "Restaurant" or
+        code == "Winery"):
         import entity.Family.FoodEstablishment as Family
     return Family
 

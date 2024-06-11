@@ -2,15 +2,22 @@ import entity.Family.Family as Family
 
 def setBody(family, families):
     body = Family.setBody(family, families)
+    print("Family Body: ", body)
 
-    if 'dayTime' in body['attributes']:
+    attributes = body['attributes']
+
+    if 'daytime' in attributes:
         print("Remove DayTime: ")
-        body['attributes'].pop('dayTime')
-        body['attributes'].remove('dayTime')
+        attributes.pop('daytime', None)
+        if 'daytime' in attributes:
+            del attributes['daytime']
     
-    if 'duration' in body['attributes']:
-        body['attributes'].pop('duration')
+    if 'duration' in attributes:
+        attributes.pop('duration', None)
+        if 'duration' in attributes:
+            del attributes['duration']
 
+    body['attributes'] = attributes
     
     print("LodgingBusiness Body: ", body)
 

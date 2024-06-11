@@ -479,14 +479,9 @@ def createFamilies(target, families, importFamilies = None):
                 print("FINISH - patch Family: ", family["label"])
 
 def main():
-    # sys.argv to array
-    print("Arguments: ")
-    print(sys.argv[1])
-
     # Set Environments
     if sys.argv[1] == "all":
         environments = getEnvironment()
-        #environments = ["demo"]
     else:
         environments = [sys.argv[1]]
     

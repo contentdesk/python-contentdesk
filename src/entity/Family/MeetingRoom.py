@@ -1,6 +1,6 @@
 import service.debug as debug
 
-def create(family, families, akeneo):
+def setBody(family, families, akeneo):
     code = family["label"]
 
     if family["attribute_requirements.ecommerce"] != None:
@@ -104,18 +104,4 @@ def create(family, families, akeneo):
         ]
     }
 
-    try:
-        # Clear Attributes
-        #response = akeneo.patchFamily(code, clearBody)
-        # DEBUG - Write to file
-        debug.addToFile(code, body)
-        # To Akeneo
-        response = akeneo.patchFamily(code, body)
-        debug.addToLogFile(code, response)
-
-    except Exception as e:
-        print("Error: ", e)
-        print("patch Family: ", code)
-        print("Response: ", response)
-        debug.addToLogFile(code, response)
-    return response
+    return body

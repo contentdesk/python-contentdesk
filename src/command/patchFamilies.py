@@ -111,7 +111,8 @@ def createFamilies(target, families, importFamilies = None):
             if family["label"] == "MeetingRoom":
                 print("MeetingRoom")
                 print("PATCH Family: ", family["label"])
-                MeetingRoom.create(family, families, target)
+                body = MeetingRoom.setBody(family, families, target)
+                response = patchFamily(family["label"], body, target)
                 print("FINISH - patch Family: ", family["label"])
             else:
                 print("PATCH Family: ", family["label"])

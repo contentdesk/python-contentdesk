@@ -1,4 +1,4 @@
-import Family
+import entity.Family as Family
 
 def setBody(family, families):
     body = Family.setBody(family, families)

@@ -138,6 +138,7 @@ def createAttribute(attribute, akeneo):
 
     try:
         response = akeneo.patchAttribut(code, body)
+        print("Response: ", response)
     except Exception as e:
         print("Error: ", e)
         print("patch Attribute: ", code)
@@ -154,7 +155,9 @@ def createAttributesinAkeneo(target, attributes, importAttributes = None):
         print ("Check Property if Attribut: "+ attribute["label"])
         if attribute["attribute"] == True:
             print("patch Attribute: ", attribute["label"])
-            createAttribute(attribute, target)
+            response = createAttribute(attribute, target)
+
+            print(response.text)
 
 def main():
     environments = cliArguments.getEnvironment(sys)

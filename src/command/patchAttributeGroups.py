@@ -48,7 +48,7 @@ def main():
 
     # Load environment variables
     #environments = getEnvironment()
-    environments = ["demo"]
+    environments = ["viat"]
 
     print("START PATCH ATTRIBUTE GROUPS")
     for environment in environments:

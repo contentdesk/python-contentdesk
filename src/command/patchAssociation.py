@@ -5,6 +5,7 @@ import sys
 sys.path.append("..")
 
 from service.loadEnv import loadEnv, getEnvironment
+import service.cliArguments as cliArguments
 
 def readCsv(url):
     # Read the CSV data into a pandas DataFrame
@@ -81,10 +82,7 @@ def main():
     # Set Familie Settings
     associations = getSettings()
 
-    #environments = getEnvironment()
-    #environments = ["ziggy"]
-    #environments = ["demo"]
-    environments = ["ziggy", "viat"]
+    environments = cliArguments.getEnvironment(sys)
 
     print("START PATCH Associatinons")
     for environment in environments:

@@ -6,6 +6,7 @@ import sys
 sys.path.append("..")
 
 from service.loadEnv import loadEnv, getEnvironment
+import service.cliArguments as cliArguments
 
 def getAttributeGroups():
     # Define the CSV URL
@@ -46,9 +47,7 @@ def createAttributeGroupsinAkeneo(attributeGroups, akeneo):
 def main():
     attributeGroups = getAttributeGroups()
 
-    # Load environment variables
-    #environments = getEnvironment()
-    environments = ["viat"]
+    environments = cliArguments.getEnvironment(sys)
 
     print("START PATCH ATTRIBUTE GROUPS")
     for environment in environments:

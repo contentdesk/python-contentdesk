@@ -55,7 +55,6 @@ def patchFamily(code, body, akeneo):
             "mice": [],
             "print": [],
             "intern": []
-
         },
         "labels": {
             "en_US": body["labels"]["en_US"],
@@ -66,7 +65,7 @@ def patchFamily(code, body, akeneo):
         "attributes": [
             "sku",
             "name",
-            "image",
+            "image"
         ]
     }
     try:
@@ -78,7 +77,8 @@ def patchFamily(code, body, akeneo):
         # To Akeneo
         print("Patch family")
         response = akeneo.patchFamily(code, body)
-        debug.addToLogFile(code, response)
+        print("Response: ", response)
+        debug.addToLogFile(code, response.text)
            
     except Exception as e:
         print("Error: ", e)

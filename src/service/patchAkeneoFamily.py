@@ -78,6 +78,7 @@ def patchFamily(code, body, akeneo):
         print("Patch family")
         response = akeneo.patchFamily(code, body)
         print("Response: ", response)
+        print("Status Code: ", response.status_code)
         debug.addToLogFile(code, response.text)
            
     except Exception as e:

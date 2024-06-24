@@ -16,6 +16,8 @@ def loadEnv(environment):
     env['secret'] = os.getenv("AKENEO_CLIENT_SECRET")
     env['user'] = os.getenv("AKENEO_USERNAME")
     env['passwd'] = os.getenv("AKENEO_PASSWORD")
+    env['userLocal'] = os.getenv("USER")
+    env['passwdLocal'] = os.getenv("PASSWORD")
 
     # Use the environment variables in your code
     return env

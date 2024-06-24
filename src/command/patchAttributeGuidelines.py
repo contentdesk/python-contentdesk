@@ -83,8 +83,10 @@ def main():
     for environment in environments:
         targetCon = loadEnv(environment)
         if arguemnts == None:
+            # filter attributes guidlines.de_CH not empty
+            attributes = [attribute for attribute in attributes if attribute["guidelines.de_DE"] != ""]
             for attribute in attributes:
-                print(attribute["code"])
+                print(attribute["label"])
                 startBrowser(targetCon, attribute)
         else:
             for arg in arguemnts:

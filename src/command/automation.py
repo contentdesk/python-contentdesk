@@ -28,28 +28,26 @@ def main():
 
         driver.implicitly_wait(5)
 
-        message = driver.find_element(by=By.CLASS_NAME, value="Messages")
-        text = message.text
-        print(text)
-
-        driver.implicitly_wait(5)
-
         #https://ziggy.pim.tso.ch/#/configuration/attribute/startTime/edit
 
         print("Go To Attribute Site")
 
         driver.get(targetCon["host"]+"/#/configuration/attribute/startTime/edit")
 
-        driver.implicitly_wait(5)
+        driver.implicitly_wait(20)
 
-        attributeRequired = driver.find_element(by=By.ID, value="input_e46d4907-041e-4f79-aed1-8e8cadc7743b")
+        #attributeRequired = driver.find_element(by=By.CLASS_NAME, value="tab-container tab-content")
 
-        attributeRequired.send_keys("Bswp. 15:00")
+        #inputAttributeRequired = driver.find_element(by=By.XPATH, value="//textarea[@name='guidelines']")
+        inputAttributeRequired = driver.find_element(by=By.TAG_NAME, value="textarea")
+        #inputAttributeRequired = driver.find_element(by=By.ID, value="input_1c80c719-d78e-4457-8379-944c4f9096f8")
 
-        saveButton = driver.find_element(by=By.CLASS_NAME, value="AknButton AknButton--apply save")
+        inputAttributeRequired.send_keys("Bswp. 15:00")
+
+        saveButton = driver.find_element(by=By.CLASS_NAME, value="save")
         saveButton.click()
 
-        driver.quit()
+        driver.close()
 
         print(title)
 

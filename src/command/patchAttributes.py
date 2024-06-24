@@ -8,17 +8,12 @@ sys.path.append("..")
 from service.loadEnv import loadEnv, getEnvironment
 import service.cliArguments as cliArguments
 
-def readCsv(url):
-    # Read the CSV data into a pandas DataFrame
-    df = pd.read_csv(url)
-    return df
-
 def getAttributes():
     # Define the CSV URL
     csv_url = "https://docs.google.com/spreadsheets/d/187orB1Qx9YgeS8cVyI29DuGLhr-oj8yIiCIR5wqyqXk/gviz/tq?tqx=out:csv&sheet=setupAttribute"
     addition_csv_url = "https://docs.google.com/spreadsheets/d/187orB1Qx9YgeS8cVyI29DuGLhr-oj8yIiCIR5wqyqXk/gviz/tq?tqx=out:csv&sheet=additionalAttribute"
 
-    df = readCsv(csv_url)
+    df = pd.read_csv(csv_url)
 
     # filter df by enabled = false and attriuibute = false and association = true
     df_association = df[df["association"] == True]
@@ -26,7 +21,7 @@ def getAttributes():
     df_ignore = df[df["enabled"] == False]
     df_ignore = pd.concat([df_ignore, df_association], ignore_index=True)
 
-    df_addition = readCsv(addition_csv_url)
+    df_addition = pd.read_csv(addition_csv_url)
     df = pd.concat([df, df_addition])
 
     # filter df by enabled = false or enabled = empty

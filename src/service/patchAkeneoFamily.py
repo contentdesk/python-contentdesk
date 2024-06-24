@@ -35,6 +35,8 @@ def importFamilyEnitity(code):
           code == "StaticWebcam" or
           code == "WebLink"):
         import entity.Family.Webcam as Family
+    elif (code == "Event"):
+        import entity.Family.Event as Family
     else:
         import entity.Family.Family as Family
     return Family

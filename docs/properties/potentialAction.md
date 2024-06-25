@@ -4,8 +4,6 @@ gemäss Schema.org
 https://schema.org/potentialAction
 
 
-
-
 Nutzt Typ Action:
 
 https://schema.org/docs/actions.html

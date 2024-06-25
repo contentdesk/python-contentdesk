@@ -6,7 +6,7 @@
 
 ```mermaid
 graph LR
-    Place --> VideoObject["subjectOF"]
+    Place((Place)) -->|subjectOF| VideoObject(("VideoObject"))
 ```
 
 

@@ -77,6 +77,7 @@ def startBrowser(target, attribute):
     inputAttributeCode.send_keys(label)
 
     #find button with Text "Löschen"
+    print("Delete Attribute!")
     deleteButton = modal.find_element(by=By.XPATH, value="//button[text()='Löschen']")
     #deleteButton.click()
     ActionChains(driver)\

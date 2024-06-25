@@ -38,7 +38,6 @@ def getAttributeOptions():
     #print(json_data)
     return json.loads(json_data)
 
-
 def patchAttributeOptionsAkeneo(akeneo, attributeOptions):
     for attributOption in attributeOptions:
         print("Attribute: ", attributOption['attribute'])
@@ -61,7 +60,10 @@ def patchAttributeOptionsAkeneo(akeneo, attributeOptions):
 
 def main():
     environments = cliArguments.getEnvironment(sys)
-    #arguments = cliArguments.getArguments(sys)
+    arguments = cliArguments.getArguments(sys)
+
+    # Load Attribute Options
+    attributeOptions = getAttributeOptions()
 
     print("START PATCH ATTRIBUTES")
     for environment in environments:
@@ -72,11 +74,12 @@ def main():
         #attributeFileToLoad = ["others", "starRating", "amentityFeature", "potentialAction", "award", "typeOfBed" ]
         # leisure --> direct from discover.swiss Categories
 
-        # Load Attribute Options
-        attributeOptions = getAttributeOptions()
-
-        # Patch Attributes
-        patchAttributeOptionsAkeneo(target, attributeOptions)
+        if arguments == None:
+            patchAttributeOptionsAkeneo(target, attributeOptions)
+        else:
+            # Filter Attribute Options by arguements (attribute)
+            attributeOptions = [attribute for attribute in attributeOptions if attribute["attribute"] in arguments]
+            patchAttributeOptionsAkeneo(target, attributeOptions)
     print("FINISH PATCH ATTRIBUTES")
 
 if __name__ == '__main__':

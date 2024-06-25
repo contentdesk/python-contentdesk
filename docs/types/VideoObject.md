@@ -4,7 +4,8 @@
 
 
 
-```graph LR
+```mermaid
+graph LR
     Place --> VideoObject["subjectOF"]
 ```
 

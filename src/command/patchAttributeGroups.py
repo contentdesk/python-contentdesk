@@ -48,13 +48,19 @@ def main():
     attributeGroups = getAttributeGroups()
 
     environments = cliArguments.getEnvironment(sys)
+    arguemnts = cliArguments.getArguments(sys)
 
     print("START PATCH ATTRIBUTE GROUPS")
     for environment in environments:
         targetCon = loadEnv(environment)
         print (targetCon["host"])
         target = Akeneo(targetCon["host"], targetCon["clientId"], targetCon["secret"], targetCon["user"], targetCon["passwd"])
-        createAttributeGroupsinAkeneo(attributeGroups,target)
+        if arguemnts == None:
+            createAttributeGroupsinAkeneo(attributeGroups,target)
+        else:
+            for arg in arguemnts:
+                attributeGroups = [attributeGroup for attributeGroup in attributeGroups if attributeGroup["code"] == arg]
+                createAttributeGroupsinAkeneo(attributeGroups,target)
     print("FINISH PATCH ATTRIBUTE GROUPS")
 
 if __name__ == '__main__':

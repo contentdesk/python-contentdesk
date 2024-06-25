@@ -1,7 +1,19 @@
 
 
 # VideoObject
+by Schema.org
+https://schema.org/VideoObject
 
+
+# Google
+https://developers.google.com/search/docs/appearance/structured-data/video?hl=de
+
+
+Erforderliche Properties gemäss Google
+
+* name
+* thumbnailUrl
+* uploadDate
 
 
 ```mermaid

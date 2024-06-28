@@ -16,10 +16,10 @@ def getSettings():
     addition_csv_url = "https://docs.google.com/spreadsheets/d/1-vZI8rZxwbUVqvxU9tn5dVhZG282LXF7KvDTTvyuOfY/gviz/tq?tqx=out:csv&sheet=additionalTypes"
     discover_csv_url = "https://docs.google.com/spreadsheets/d/1-vZI8rZxwbUVqvxU9tn5dVhZG282LXF7KvDTTvyuOfY/gviz/tq?tqx=out:csv&sheet=discoverTypes"
 
-    df = readCsv(csv_url)
-    df_addition = readCsv(addition_csv_url)
+    df = pd.read_csv(csv_url)
+    df_addition = pd.read_csv(addition_csv_url)
     print("Add Disocver.swiss Types") 
-    df_discover = readCsv(discover_csv_url)
+    df_discover = pd.read_csv(discover_csv_url)
 
     df_discover = df_discover[df_discover["enabled"] == True]
     print(df_discover)
@@ -29,7 +29,8 @@ def getSettings():
     df = pd.concat([df, df_discover], ignore_index=True)
 
     # merge row with same colum label
-    df = df.groupby("label").first().reset_index()
+    #df = df.groupby("label").first().reset_index()
+    #df = df.drop_duplicates(subset=['label'])
 
     df = df[df["enabled"] == True]
 
@@ -44,11 +45,6 @@ def getSettings():
 
     return json.loads(json_data)
 
-def readCsv(url):
-    # Read the CSV data into a pandas DataFrame
-    df = pd.read_csv(url)
-    return df
-
 def createFamilies(target, families, importFamilies = None):
     #filter families by label = Hotel
     #families = [family for family in families if family["label"] == "Hotel"]
@@ -56,9 +52,11 @@ def createFamilies(target, families, importFamilies = None):
     for family in families:
         if importFamilies != None:
             if family["label"] in importFamilies:
+                print("Pass")
                 pass
             else:
-                continue   
+                #print("Continue")
+                continue
         print ("CREATE - Family: "+ family["label"])
         if family["enabled"] == 1 and family["type"] == None or family["type"] == "additinalTypes":
             patchAkeneoFamily.patchAkeneoFamily(family, families, target)

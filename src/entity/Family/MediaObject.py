@@ -17,7 +17,7 @@ def setBody(family, families):
     code = family["label"]
     body = {}
     body["code"] = code
-    body["attribute_as_image"] = "media"
+    body["attribute_as_image"] = "image"
     body["attribute_as_label"] = "name"
     body["attribute_requirements"] = attribute_requirements
     body["labels"] = {

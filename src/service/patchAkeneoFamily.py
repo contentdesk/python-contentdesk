@@ -41,6 +41,7 @@ def importFamilyEnitity(code):
           code == "AudioObject" or
           code == "VideoObject" or
           code == "ImageObject"):
+        print("MediaObject")
         import entity.Family.MediaObject as Family
     else:
         import entity.Family.Family as Family

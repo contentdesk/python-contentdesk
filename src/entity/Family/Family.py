@@ -80,12 +80,13 @@ def getParentAttributes(type, types, attributes):
         attributes = merge_dicts(attributes, typeAttributes)
     if 'parent' in type:
         if type['parent'] != None:
-            print("Parent Type: ", type['parent'])
-            # find in types array type['parent'] as type['label']
-            parent = [parent for parent in types if parent["label"] == type['parent']]
-            #print("Check Parent: ")
-            #print(parent)
-            getParentAttributes(parent[0], types, attributes)
+            if type['label'] != "Thing":
+                print("Parent Type: ", type['parent'])
+                # find in types array type['parent'] as type['label']
+                parent = [parent for parent in types if parent["label"] == type['parent']]
+                #print("Check Parent: ")
+                #print(parent)
+                getParentAttributes(parent[0], types, attributes)
     return attributes
 
 def getParentAttributesRequirements(type, types, attribute_requirements):
@@ -98,12 +99,14 @@ def getParentAttributesRequirements(type, types, attribute_requirements):
         attribute_requirements = merge_dicts(attribute_requirements, typeAttributes)
     if 'parent' in type:
         if type['parent'] != None:
-            #print("Parent Type: ", type['parent'])
-            # find in types array type['parent'] as type['label']
-            parent = [parent for parent in types if parent["label"] == type['parent']]
-            #print("Check Parent: ")
-            #print(parent)
-            attribute_requirements = getParentAttributesRequirements(parent[0], types, attribute_requirements)
+            if type['label'] != "Thing":
+                print("Parent Type: ", type['parent'])
+                #print("Parent Type: ", type['parent'])
+                # find in types array type['parent'] as type['label']
+                parent = [parent for parent in types if parent["label"] == type['parent']]
+                #print("Check Parent: ")
+                #print(parent)
+                attribute_requirements = getParentAttributesRequirements(parent[0], types, attribute_requirements)
 
     return attribute_requirements
 
@@ -145,6 +148,7 @@ def create(family, families, akeneo):
     if family["attribute_as_image"] == None:
         family["attribute_as_image"] = "image"
 
+    print("Attribute Requirements - Create")
     attribute_requirements = getParentAttributesRequirements(family, families, attribute_requirements)
     
     #print("Attribute Requirements: ")
@@ -331,6 +335,7 @@ def setBody(family, families):
     if family["attribute_as_image"] == None:
         family["attribute_as_image"] = "image"
 
+    print("Attribute Requirements - setBody")
     attribute_requirements = getParentAttributesRequirements(family, families, attribute_requirements)
     
     #print("Attribute Requirements: ")

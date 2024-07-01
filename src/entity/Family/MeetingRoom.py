@@ -6,14 +6,19 @@ def setBody(family, families):
     if family["attribute_requirements.ecommerce"] != None:
         attribute_requirements = {attrRequ: attrRequ for attrRequ in family["attribute_requirements.ecommerce"].split(",")}
     else:
-        attribute_requirements = {"sku": "sku", "name": "name", "image": "image"}
+        attribute_requirements = {"sku": "sku", "name": "name", "image": "image", "license": "license"}
 
     #attribute_requirements = getParentAttributesRequirements(family, families, attribute_requirements)
 
-    if family["attributes"] != None:
-        attributes = {attr: attr for attr in family["attributes"].split(",")}
-    else:
-        attributes = {}
+    #if family["attributes"] != None:
+    #    attributes = {attr: attr for attr in family["attributes"].split(",")}
+    #else:
+    #    attributes = {"sku": "sku", "name": "name", "image": "image"}
+
+    attributes = {}
+    attributes['sku'] = 'sku'
+    attributes['name'] = 'name'
+    attributes['image'] = 'image'
 
     attributes['seating_banquet'] = 'seating_banquet'
     attributes['seating_bar_table'] = 'seating_bar_table'
@@ -42,8 +47,8 @@ def setBody(family, families):
     
     body = {
         "code": code,
-        "attribute_as_label": family["attribute_as_label"],
-        "attribute_as_image": family["attribute_as_image"],
+        "attribute_as_label": 'name',
+        "attribute_as_image": 'image',
         "attribute_requirements": {
             "ecommerce": attribute_requirements,
         },
@@ -60,8 +65,8 @@ def setBody(family, families):
     
     body = {
         "code": code,
-        "attribute_as_label": family["attribute_as_label"],
-        "attribute_as_image": family["attribute_as_image"],
+        "attribute_as_label": 'name',
+        "attribute_as_image": 'image',
         "attribute_requirements": {
             "ecommerce": attribute_requirements,
         },

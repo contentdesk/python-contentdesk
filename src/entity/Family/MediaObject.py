@@ -12,7 +12,7 @@ def setBody(family, families):
     if family["attributes"] != None:
         attributes = {attr: attr for attr in family["attributes"].split(",")}
     else:
-        attributes = {}
+        attributes = {"sku": "sku", "name": "name", "image": "image"}
 
     code = family["label"]
     body = {}

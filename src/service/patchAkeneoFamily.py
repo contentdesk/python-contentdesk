@@ -37,6 +37,11 @@ def importFamilyEnitity(code):
         import entity.Family.Webcam as Family
     elif (code == "Event"):
         import entity.Family.Event as Family
+    elif (code == "MediaObejct" or
+          code == "AudioObject" or
+          code == "VideoObject" or
+          code == "ImageObject"):
+        import entity.Family.MediaObject as Family
     else:
         import entity.Family.Family as Family
     return Family

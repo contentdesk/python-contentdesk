@@ -42,6 +42,9 @@ def setBody(family, families):
     attributes['offers'] = 'offers'
     attributes['priceRange'] = 'priceRange'
 
+    attributes['latitude'] = 'latitude'
+    attributes['longitude'] = 'longitude'
+
     if 'image' in attributes:
         attributes['image_description'] = 'image_description'
     

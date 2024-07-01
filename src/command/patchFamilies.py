@@ -26,7 +26,7 @@ def getSettings():
 
     df = pd.concat([df, df_addition])
     # concat df and df_discover by column label
-    df = pd.concat([df, df_discover], ignore_index=True)
+    df = pd.concat([df_discover, df])
 
     # merge row with same colum label
     #df = df.groupby("label").first().reset_index()

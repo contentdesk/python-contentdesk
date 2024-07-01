@@ -8,11 +8,6 @@ sys.path.append("..")
 from service.loadEnv import loadEnv, getEnvironment
 import service.cliArguments as cliArguments
 
-def readCsv(url):
-    # Read the CSV data into a pandas DataFrame
-    df = pd.read_csv(url)
-    return df
-
 # Load properties.json
 def getAttributeOptions():
     # get From Google Sheet
@@ -21,15 +16,18 @@ def getAttributeOptions():
     servesCuisineUrl = "https://docs.google.com/spreadsheets/d/1B3yJroHLuNgIDSCDfxIY5tpX13zyn1ngigGMlNaxVgk/gviz/tq?tqx=out:csv&sheet=servesCuisine"
     amenityFeatureUrl = "https://docs.google.com/spreadsheets/d/1eK8PI9OEfdeBPDYXegdmA6rs3hl5RcDCAUYlJ5iIrV4/gviz/tq?tqx=out:csv&sheet=amenityFeature"
     awardUrl = "https://docs.google.com/spreadsheets/d/1XDmYmyp46la94TQ4ztPXirWzHPgw4mAwCBf61tEAYIo/gviz/tq?tqx=out:csv&sheet=award"
+    potentialActionUrl = "https://docs.google.com/spreadsheets/d/10kMpDMQRUPbyuDpFlAaJIjIf_vdKllKPQd0a0PppDq8/gviz/tq?tqx=out:csv&sheet=potentialAction"
+
     # Set DataFrame
-    dfOthers = readCsv(othersUrl)
-    dfStarRating = readCsv(starRatingUrl)
-    dfServesCuisine = readCsv(servesCuisineUrl)
-    dfAmenityFeature = readCsv(amenityFeatureUrl)
-    dfAward = readCsv(awardUrl)
+    dfOthers = pd.read_csv(othersUrl)
+    dfStarRating = pd.read_csv(starRatingUrl)
+    dfServesCuisine = pd.read_csv(servesCuisineUrl)
+    dfAmenityFeature = pd.read_csv(amenityFeatureUrl)
+    dfAward = pd.read_csv(awardUrl)
+    dfPotentialAction = pd.read_csv(potentialActionUrl)
 
     # Merge DataFrame
-    df = pd.concat([dfOthers, dfStarRating, dfServesCuisine, dfAmenityFeature, dfAward])
+    df = pd.concat([dfOthers, dfStarRating, dfServesCuisine, dfAmenityFeature, dfAward, dfPotentialAction])
 
     #print(df)
 

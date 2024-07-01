@@ -7,12 +7,12 @@ def setBody(family, families):
     if family["attribute_requirements.ecommerce"] != None:
         attribute_requirements = {attrRequ: attrRequ for attrRequ in family["attribute_requirements.ecommerce"].split(",")}
     else:
-        attribute_requirements = {"sku": "sku", "name": "name", "image": "image"}
+        attribute_requirements = ["sku", "name", "image"]
 
     if family["attributes"] != None:
         attributes = {attr: attr for attr in family["attributes"].split(",")}
     else:
-        attributes = {"sku": "sku", "name": "name", "image": "image"}
+        attributes = ["sku", "name", "image"]
 
     code = family["label"]
     body = {}

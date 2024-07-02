@@ -13,4 +13,12 @@ def setBody(family, families):
         if 'duration' in body['attributes']:
             del body['attributes']['duration']
 
+    attributes = body["attributes"]
+
+    #attributes['license']
+    #attributes['copyrightHolder']
+    #attributes['author']
+
+    body["attributes"] = attributes
+
     return body

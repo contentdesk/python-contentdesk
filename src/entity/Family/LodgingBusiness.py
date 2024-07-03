@@ -15,9 +15,9 @@ def setBody(family, families):
 
     attributes = body["attributes"]
 
-    #attributes['license']
-    #attributes['copyrightHolder']
-    #attributes['author']
+    body['attributes']['license'] = 'license'
+    body['attributes']['copyrightHolder'] = 'copyrightHolder'
+    body['attributes']['author'] = 'author'
 
     body["attributes"] = attributes
 

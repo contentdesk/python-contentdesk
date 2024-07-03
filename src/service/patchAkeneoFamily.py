@@ -45,10 +45,14 @@ def importFamilyEnitity(code):
         import entity.Family.MediaObject as Family
     elif (code == "Landform" or
           code == "BodyOfWater" or
+          code == "LakeBodyOfWater" or
+          code == "Reservoir" or
+          code == "RiverBodyOfWater" or
+          code == "Pond" or
           code == "Continent" or
           code == "Mountain" or
           code == "Volcano" or
-          code == "Waterfall" or):
+          code == "Waterfall"):
         import entity.Family.Landform as Family
     else:
         import entity.Family.Family as Family

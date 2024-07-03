@@ -256,9 +256,10 @@ def create(family, families, akeneo):
     #attributes['license'] = 'license'
     attributes['potentialAction'] = 'potentialAction'
 
-    if 'license' in attributes:
-        attributes['copyrightHolder'] = 'copyrightHolder'
-        attributes['author'] = 'author'
+
+    attributes['license'] = 'license'
+    attributes['copyrightHolder'] = 'copyrightHolder'
+    attributes['author'] = 'author'
     
     if 'potentialAction' in attributes:
         attributes['target'] = 'target'

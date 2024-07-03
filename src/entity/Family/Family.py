@@ -256,7 +256,6 @@ def create(family, families, akeneo):
     #attributes['license'] = 'license'
     attributes['potentialAction'] = 'potentialAction'
 
-
     attributes['license'] = 'license'
     attributes['copyrightHolder'] = 'copyrightHolder'
     attributes['author'] = 'author'

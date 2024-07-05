@@ -18,4 +18,9 @@ def setBody(family, families):
     
     body['attributes']['logo'] = 'logo'
     
+    body['attributes']['metaTitle'] = 'metaTitle'
+    body['attributes']['metaDescription'] = 'metaDescription'
+    body['attributes']['canonicalUrl'] = 'canonicalUrl'
+    
+    
     return body

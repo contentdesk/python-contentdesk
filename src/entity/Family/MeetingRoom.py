@@ -19,6 +19,9 @@ def setBody(family, families):
     attributes['sku'] = 'sku'
     attributes['name'] = 'name'
     attributes['image'] = 'image'
+    
+    attributes['disambiguatingDescription'] = 'disambiguatingDescription'
+    attributes['description'] = 'description'
 
     attributes['seating_banquet'] = 'seating_banquet'
     attributes['seating_bar_table'] = 'seating_bar_table'

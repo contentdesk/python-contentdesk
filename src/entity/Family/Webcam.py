@@ -3,7 +3,14 @@ import entity.Family.Family as Family
 def setBody(family, families):
     #body = Family.setBody(family, families)
     
-    attribute_requirements = {"sku": "sku", "name": "name", "license": "license", "embedUrl": "embedUrl"}
+    attribute_requirements = {
+                                "sku": "sku", 
+                                "name": "name", 
+                                "license": "license", 
+                                "embedUrl": "embedUrl",
+                                "latitude": "latitude",
+                                "longitude": "longitude",
+                              }
     
     body = {}
     body['code'] = family['label']

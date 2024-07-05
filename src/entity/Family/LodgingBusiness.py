@@ -29,6 +29,9 @@ def setBody(family, families):
     body['attributes']['metaDescription'] = 'metaDescription'
     body['attributes']['canonicalUrl'] = 'canonicalUrl'
 
+    body['attributes']['image_summer'] = 'image_summer'
+    body['attributes']['image_winter'] = 'image_winter'
+
     body['attributes']['image_01_scope'] = 'image_01_scope'
     body['attributes']['image_02_scope'] = 'image_02_scope'
     body['attributes']['image_03_scope'] = 'image_03_scope'

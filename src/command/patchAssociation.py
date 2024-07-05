@@ -71,9 +71,14 @@ def createAssociation(association, akeneo):
         print("Response: ", response)
     return response
 
-def createAssociationinAkeneo(associations, akeneo):
+def createAssociationinAkeneo(associations, akeneo, arguments = None):
     #associations = getAssociation()
     for association in associations:
+        if arguments != None:
+            if association["label"] in arguments:
+                pass
+            else:
+                continue
         if association["enabled"] == True and association["association"] == True:
             print("patch Association: ", association["label"])
             createAssociation(association, akeneo)
@@ -83,13 +88,14 @@ def main():
     associations = getSettings()
 
     environments = cliArguments.getEnvironment(sys)
+    arguments = cliArguments.getArguments(sys)
 
     print("START PATCH Associatinons")
     for environment in environments:
         targetCon = loadEnv(environment)
         print (targetCon["host"])
         target = Akeneo(targetCon["host"], targetCon["clientId"], targetCon["secret"], targetCon["user"], targetCon["passwd"])
-        createAssociationinAkeneo(associations, target)
+        createAssociationinAkeneo(associations, target, arguments)
     print("FINISH PATCH Associatinons")
 
     

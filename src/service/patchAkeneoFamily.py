@@ -54,6 +54,27 @@ def importFamilyEnitity(code):
           code == "Volcano" or
           code == "Waterfall"):
         import entity.Family.Landform as Family
+    elif (code == "Event" or
+          code == "BusinessEvent" or
+          code == "ChildrensEvent" or
+          code == "ComedyEvent" or
+          code == "DanceEvent" or
+          code == "DeliveryEvent" or
+          code == "EducationEvent" or
+          code == "ExhibitionEvent" or
+          code == "Festival" or
+          code == "FoodEvent" or
+          code == "Hackathon" or
+          code == "LiteraryEvent" or
+          code == "MusicEvent" or
+          code == "PublicationEvent" or
+          code == "SaleEvent" or
+          code == "ScreeningEvent" or
+          code == "SocialEvent" or
+          code == "SportsEvent" or
+          code == "TheaterEvent" or
+          code == "VisualArtsEvent"):
+        import entity.Family.Event as Family
     else:
         import entity.Family.Family as Family
     return Family

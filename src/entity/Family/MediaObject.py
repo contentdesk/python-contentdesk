@@ -38,5 +38,7 @@ def setBody(family, families):
     body['attributes']['thumbnailUrl'] = 'thumbnailUrl'
     body['attributes']['contentUrl'] = 'contentUrl'
     body['attributes']['embedUrl'] = 'embedUrl'
+    
+    
 
     return body

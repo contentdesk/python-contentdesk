@@ -40,5 +40,7 @@ def setBody(family, families):
     
     body['attributes']['size'] = 'size'
     body['attributes']['color'] = 'color'
+    body['attributes']['gender'] = 'gender'
+    body['attributes']['weight'] = 'weight'
     
     return body

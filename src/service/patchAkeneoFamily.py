@@ -117,8 +117,8 @@ def patchFamily(code, body, akeneo):
     }
     try:
         # Clear Attributes
-        print("Clear Attributes")
-        response = akeneo.patchFamily(code, clearBody)
+        #print("Clear Attributes")
+        #response = akeneo.patchFamily(code, clearBody)
         # DEBUG - Write to file
         debug.addToFile(code, body)
         # To Akeneo

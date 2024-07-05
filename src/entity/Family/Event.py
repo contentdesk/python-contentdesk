@@ -16,4 +16,6 @@ def setBody(family, families):
     body['attributes']['startTime'] = 'startTime'
     body['attributes']['endTime'] = 'endTime'
     
+    body['attributes']['logo'] = 'logo'
+    
     return body

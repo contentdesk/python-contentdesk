@@ -196,6 +196,10 @@ def create(family, families, akeneo):
     # add Parent Attributes
     attributes = getParentAttributes(family, families, attributes)
 
+    # Check if Place Type
+    if checkParentType(family, families, "Place"):
+        print("Yes - Place Type")
+
     # Check if specific attributes are set
     # examples license needs add copyrightHolder and author
     # examples potentialAction needs traget

@@ -431,7 +431,7 @@ def setBody(family, families):
         attributes['addressLocality'] = 'addressLocality'
         attributes['addressCountry'] = 'addressCountry'
         attributes['addressRegion'] = 'addressRegion'
-        attributes['tourismusregion'] = 'tourismusregion'
+        attributes['tourismregion'] = 'tourismregion'
         # Contact
         attributes['legalName'] = 'legalName'
         attributes['department'] = 'department'

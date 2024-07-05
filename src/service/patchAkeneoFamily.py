@@ -77,6 +77,11 @@ def importFamilyEnitity(code):
         import entity.Family.Event as Family
     elif (code == "Product"):
         import entity.Family.Product as Family
+    elif (code == "Webcam" or
+          code == "LiveVideo" or
+          code == "StaticWebcam" or
+          code == "WebLink"):
+        import entity.Family.Webcam as Family
     else:
         import entity.Family.Family as Family
     return Family

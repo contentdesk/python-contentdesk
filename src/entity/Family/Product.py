@@ -42,5 +42,6 @@ def setBody(family, families):
     body['attributes']['color'] = 'color'
     body['attributes']['gender'] = 'gender'
     body['attributes']['weight'] = 'weight'
+    #body['attributes']['duration'] = 'duration' # only ziggy
     
     return body

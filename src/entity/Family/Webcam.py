@@ -10,6 +10,7 @@ def setBody(family, families):
                                 "embedUrl": "embedUrl",
                                 "latitude": "latitude",
                                 "longitude": "longitude",
+                                "openstreetmap_id": "openstreetmap_id",
                               }
     
     body = {}

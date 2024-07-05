@@ -44,6 +44,8 @@ def setBody(family, families):
 
     attributes['latitude'] = 'latitude'
     attributes['longitude'] = 'longitude'
+    
+    attributes['leisure'] = 'leisure'
 
     if 'image' in attributes:
         attributes['image_description'] = 'image_description'

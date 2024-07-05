@@ -110,6 +110,20 @@ def getParentAttributesRequirements(type, types, attribute_requirements):
 
     return attribute_requirements
 
+def checkParentType(type, types, checkType):
+    if type['label'] == checkType:
+        return True
+    
+    if 'parent' in type:
+        if type['parent'] != None:
+            if type['label'] != "Thing":
+                print("Check Parent Type: ", type['parent'])
+                # find in types array type['parent'] as type['label']
+                parent = [parent for parent in types if parent["label"] == type['parent']]
+                #print("Check Parent: ")
+                #print(parent)
+                return checkParentType(parent[0], types, checkType)
+
 def getFamilyAttributes(code, attributes):
     # Dict to Array
     attributes = merge_dicts(attributes, getTypeProperties(code))

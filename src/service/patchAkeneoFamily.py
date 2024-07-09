@@ -74,7 +74,9 @@ def importFamilyEnitity(code):
           code == "SportsEvent" or
           code == "TheaterEvent" or
           code == "VisualArtsEvent"):
-        import entity.Family.Event as Family
+        import entity.Family.Schedule as Family
+    elif (code == "Schedule"):
+        import entity.Family.Schedule as Family
     elif (code == "Product"):
         import entity.Family.Product as Family
     elif (code == "Webcam" or

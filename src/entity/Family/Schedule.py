@@ -2,6 +2,8 @@ import entity.Family.Family as Family
 
 def setBody(family, families):
     
+    print("Family: ", family)
+    
     attribute_requirements = {
                                 "sku": "sku", 
                                 "name": "name", 
@@ -15,10 +17,10 @@ def setBody(family, families):
     body["attribute_requirements"] = {}
     body["attribute_requirements"]['ecommerce'] = attribute_requirements
     body["labels"] = {
-        "en_US": family["label"],
-        "de_CH": family["label"],
-        "fr_FR": family["label"],
-        "it_IT": family["label"]
+        "en_US": family["label.en_US"],
+        "de_CH": family["label.de_CH"],
+        "fr_FR": family["label.fr_FR"],
+        "it_IT": family["label.it_IT"]
     }
     
     body['attributes'] = {}

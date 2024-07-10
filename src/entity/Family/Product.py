@@ -44,4 +44,6 @@ def setBody(family, families):
     body['attributes']['weight'] = 'weight'
     #body['attributes']['duration'] = 'duration' # only ziggy
     
+    body['attributes']['availability'] = 'availability'
+    
     return body

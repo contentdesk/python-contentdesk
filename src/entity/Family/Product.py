@@ -46,6 +46,7 @@ def setBody(family, families):
     
     body['attributes']['availability'] = 'availability'
     
+    body['attributes']['offers'] = 'offers'
     body['attributes']['price'] = 'price'
     body['attributes']['priceValidUntil '] = 'priceValidUntil'
     

@@ -468,6 +468,9 @@ def setBody(family, families):
         attributes['license'] = 'license'
         attributes['copyrightHolder'] = 'copyrightHolder'
         attributes['author'] = 'author'
+        
+    # add license to requirements attributes
+    body['attribute_requirements']['ecommerce']['license'] = 'license'
     
     if 'potentialAction' in attributes:
         attributes['target'] = 'target'

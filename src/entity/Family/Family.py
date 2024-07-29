@@ -464,6 +464,10 @@ def setBody(family, families):
     if 'license' in attributes:
         attributes['copyrightHolder'] = 'copyrightHolder'
         attributes['author'] = 'author'
+    else:
+        attributes['license'] = 'license'
+        attributes['copyrightHolder'] = 'copyrightHolder'
+        attributes['author'] = 'author'
     
     if 'potentialAction' in attributes:
         attributes['target'] = 'target'

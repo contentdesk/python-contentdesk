@@ -203,8 +203,9 @@ def create(family, families, akeneo):
     # Check if specific attributes are set
     # examples license needs add copyrightHolder and author
     # examples potentialAction needs traget
-    if 'image' in attributes:
-        attributes['image_description'] = 'image_description'
+
+    attributes['image'] = 'image'
+    attributes['image_description'] = 'image_description'
 
     if 'openingHoursSpecification' in attributes:
         attributes['google_opening_hours_use'] = 'google_opening_hours_use'

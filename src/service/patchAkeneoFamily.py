@@ -35,7 +35,26 @@ def importFamilyEnitity(code):
           code == "StaticWebcam" or
           code == "WebLink"):
         import entity.Family.Webcam as Family
-    elif (code == "Event"):
+    elif (code == "Event" or
+          code == "BusinessEvent" or
+          code == "ChildrensEvent" or
+          code == "ComedyEvent" or
+          code == "DanceEvent" or
+          code == "DeliveryEvent" or
+          code == "EducationEvent" or
+          code == "ExhibitionEvent" or
+          code == "Festival" or
+          code == "FoodEvent" or
+          code == "Hackathon" or
+          code == "LiteraryEvent" or
+          code == "MusicEvent" or
+          code == "PublicationEvent" or
+          code == "SaleEvent" or
+          code == "ScreeningEvent" or
+          code == "SocialEvent" or
+          code == "SportsEvent" or
+          code == "TheaterEvent" or
+          code == "VisualArtsEvent"):
         import entity.Family.Event as Family
     elif (code == "MediaObejct" or
           code == "AudioObject" or

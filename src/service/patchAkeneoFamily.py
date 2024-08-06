@@ -103,6 +103,8 @@ def importFamilyEnitity(code):
           code == "StaticWebcam" or
           code == "WebLink"):
         import entity.Family.Webcam as Family
+    elif (code == "Trail"):
+        import entity.Family.Trail as Family
     else:
         import entity.Family.Family as Family
     return Family

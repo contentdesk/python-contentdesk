@@ -68,24 +68,6 @@ def setBody(family, families):
         }
     }
 
-    if 'image' in attributes:
-        attributes['image_description'] = 'image_description'
-    
-    body = {
-        "code": code,
-        "attribute_as_label": 'name',
-        "attribute_as_image": 'image',
-        "attribute_requirements": {
-            "ecommerce": attribute_requirements,
-        },
-        "labels": {
-            "en_US": family["label.en_US"],
-            "de_CH": family["label.de_CH"],
-            "fr_FR": family["label.fr_FR"],
-            "it_IT": family["label.it_IT"],
-        }
-    }
-
     # Remove Properties
     #print("Remove Attributes: ")
     ##print(code)

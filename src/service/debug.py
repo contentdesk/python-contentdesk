@@ -11,6 +11,6 @@ def addToLogFile(code, data):
         file.write(json.dumps(data))
         
 # DEBUG - Migration
-def addToFileMigration(environment, attribute, data):
-    with open("../../output/migration/"+environment+"/"+attribute+"/index.json", "w") as file:
+def addToFileMigration(environment, attribute, name, data):
+    with open("../../output/migration/"+environment+"/"+attribute+"/"+name+".json", "w") as file:
         file.write(json.dumps(data))

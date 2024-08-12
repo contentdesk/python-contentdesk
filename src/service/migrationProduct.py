@@ -14,8 +14,10 @@ def main(environment, target, attributes):
         print("START PATCH PRODUCTS for: ", attribute)
         migration = importMigrationSettings(attribute)
         products = migration.getProducts(target, attribute)
-        debug.addToFileMigration(environment, attribute, products)
+        debug.addToFileMigration(environment, attribute, 'products', products)
         #print(products)
         productsTranform = migration.transform(products)
+        debug.addToFileMigration(environment, attribute, 'transform', products)
+        
         productsUpload = migration.uploadProducts(productsTranform)
         print("FINISH PATCH PRODUCTS for: ", attribute)

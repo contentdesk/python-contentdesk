@@ -15,6 +15,14 @@ def getProducts(target, attribute):
     
 def transform(products):
     print("Transform Products")
+    productsUpdated = []
+    for product in products:
+        if "license" in product['values']:
+            if product['values']["license"]['data'] == "cc_by":
+                product['values']["license"]['data'] = "ccby"
+                productsUpdated.append(product)
+    
+    return productsUpdated
     
 def uploadProducts(products):
     print("Upload Products")

@@ -9,7 +9,7 @@
 
 def getProducts(target, attribute):
     #search = 'search={"openingHours_text":[{"operator":"NOT EMPTY","value":"","locale":"de_CH"}]}'
-    search = '{"license":[{"operator":"NOT EMPTY","value":""}]}'
+    search = '{"license":[{"operator":"NOT EMPTY","value":""}]}&attributes=license'
     products = target.getProductBySearch(search)
     return products
     

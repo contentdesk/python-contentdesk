@@ -24,7 +24,7 @@ def main():
         # Transform
 
         # Upload all Products with Attributes license
-        migrationProduct.main(target, arguments)
+        migrationProduct.main(environment, target, arguments)
         
     print("FINISH PATCH FAMILIES")
 

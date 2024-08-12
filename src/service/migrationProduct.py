@@ -9,12 +9,12 @@ def importMigrationSettings(attribute):
         import migration.amenityFeature as migration
     return migration
 
-def main(target, attributes):
+def main(environment, target, attributes):
     for attribute in attributes:
         print("START PATCH PRODUCTS for: ", attribute)
         migration = importMigrationSettings(attribute)
         products = migration.getProducts(target, attribute)
-        debug.addToFileMigration(attribute, products)
+        debug.addToFileMigration(environment, attribute, products)
         print(products)
         productsTranform = migration.transform(products)
         productsUpload = migration.uploadProducts(productsTranform)

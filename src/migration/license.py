@@ -22,15 +22,19 @@ def transform(products):
         if "license" in product['values']:
             if product['values']["license"][0]['data'] == "cc_by":
                 product['values']["license"][0]['data'] = "ccby"
+                products.drop('associations')
                 productsUpdated.append(product)
             elif(product['values']["license"][0]['data'] == "cc_by_sa"):
                 product['values']["license"][0]['data'] = "ccbysa"
+                products.drop('associations')
                 productsUpdated.append(product)
             elif(product['values']["license"][0]['data'] == "cc_by_nd"):
                 product['values']["license"][0]['data'] = "ccbynd"
+                products.drop('associations')
                 productsUpdated.append(product)
             elif(product['values']["license"][0]['data'] == "copyrightHolder"):
                 product['values']["license"][0]['data'] = "copyright"
+                products.drop('associations')
                 productsUpdated.append(product)
     
     return productsUpdated

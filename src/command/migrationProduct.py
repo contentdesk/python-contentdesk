@@ -8,10 +8,7 @@ sys.path.append("..")
 from service.loadEnv import loadEnv
 import service.debug as debug
 import service.cliArguments as cliArguments
-import service.patchAkeneoFamily as patchAkeneoFamily
-
-def getProducts(target, attribute):
-    print("Get Products")
+import src.service.migrationProduct as migrationProduct
 
 def main():
     environments = cliArguments.getEnvironment(sys)
@@ -27,6 +24,7 @@ def main():
         # Transform
 
         # Upload all Products with Attributes license
+        migrationProduct.main(target, arguments)
         
     print("FINISH PATCH FAMILIES")
 

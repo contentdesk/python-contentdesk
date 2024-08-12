@@ -8,6 +8,15 @@
 # Upload all Products with Attribute license
 
 def getProducts(target, attribute):
+    search = {
+        "search": {
+            "query": {
+                "query": "*",
+                "fields": ["categories"]
+            }
+        }
+    }
+    target.getProducts()
     print("Get Products")
     
 def transform(products):

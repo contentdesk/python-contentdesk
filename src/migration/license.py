@@ -11,7 +11,7 @@
 
 def getProducts(target, attribute):
     #search = 'search={"openingHours_text":[{"operator":"NOT EMPTY","value":"","locale":"de_CH"}]}'
-    search = '{"license":[{"operator":"IN","value":["cc_by","cc_by_sa","cc_by_nd","cc0"]}]}&attributes=license'
+    search = '{"license":[{"operator":"IN","value":["cc_by","cc_by_sa","cc_by_nd","copyrightHolder"]}]}&attributes=license'
     products = target.getProductBySearch(search)
     return products
     
@@ -28,6 +28,9 @@ def transform(products):
                 productsUpdated.append(product)
             elif(product['values']["license"][0]['data'] == "cc_by_nd"):
                 product['values']["license"][0]['data'] = "ccbynd"
+                productsUpdated.append(product)
+            elif(product['values']["license"][0]['data'] == "copyrightHolder"):
+                product['values']["license"][0]['data'] = "copyright"
                 productsUpdated.append(product)
     
     return productsUpdated

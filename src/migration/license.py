@@ -35,5 +35,10 @@ def transform(products):
     
     return productsUpdated
     
-def uploadProducts(products):
+def uploadProducts(target, products):
+    for product in products:
+        print("Upload Product: ", product['identifier'])
+        response = target.patchProductByCode(product['identifier'], product)
+        print("Response: ", response)
+        
     print("Upload Products")

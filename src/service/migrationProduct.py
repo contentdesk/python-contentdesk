@@ -19,5 +19,5 @@ def main(environment, target, attributes):
         productsTranform = migration.transform(products)
         debug.addToFileMigration(environment, attribute, 'transform', products)
         
-        productsUpload = migration.uploadProducts(productsTranform)
+        productsUpload = migration.uploadProducts(target, productsTranform)
         print("FINISH PATCH PRODUCTS for: ", attribute)

@@ -18,8 +18,8 @@ def transform(products):
     productsUpdated = []
     for product in products:
         if "license" in product['values']:
-            if product['values']["license"]['data'] == "cc_by":
-                product['values']["license"]['data'] = "ccby"
+            if product['values']["license"][0]['data'] == "cc_by":
+                product['values']["license"][0]['data'] = "ccby"
                 productsUpdated.append(product)
     
     return productsUpdated

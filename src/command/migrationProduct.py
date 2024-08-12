@@ -8,7 +8,7 @@ sys.path.append("..")
 from service.loadEnv import loadEnv
 import service.debug as debug
 import service.cliArguments as cliArguments
-import src.service.migrationProduct as migrationProduct
+import service.migrationProduct as migrationProduct
 
 def main():
     environments = cliArguments.getEnvironment(sys)

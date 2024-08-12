@@ -8,16 +8,10 @@
 # Upload all Products with Attribute license
 
 def getProducts(target, attribute):
-    search = {
-        "search": {
-            "query": {
-                "query": "*",
-                "fields": ["categories"]
-            }
-        }
-    }
-    target.getProducts()
-    print("Get Products")
+    #search = 'search={"openingHours_text":[{"operator":"NOT EMPTY","value":"","locale":"de_CH"}]}'
+    search = '{"license":[{"operator":"NOT EMPTY","value":""}]}'
+    products = target.getProducts(search)
+    return products
     
 def transform(products):
     print("Transform Products")

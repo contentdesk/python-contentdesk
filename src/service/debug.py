@@ -9,3 +9,8 @@ def addToFile(code, data):
 def addToLogFile(code, data):
     with open("../../output/logs/families/"+code+".json", "w") as file:
         file.write(json.dumps(data))
+        
+# DEBUG - Migration
+def addToFileMigration(code, data):
+    with open("../../output/migration/"+code+"/index.json", "w") as file:
+        file.write(json.dumps(data))

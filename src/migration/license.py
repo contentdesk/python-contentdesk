@@ -14,6 +14,11 @@ def getProducts(target, attribute):
     search = '{"license":[{"operator":"IN","value":["cc_by","cc_by_sa","cc_by_nd","copyrightHolder"]}]}&attributes=license'
     products = target.getProductBySearch(search)
     return products
+
+def removeProperties(product):
+    product['_links'].pop('self', None)
+    product['associations'].pop('self', None)
+    return product
     
 def transform(products):
     print("Transform Products")
@@ -22,15 +27,19 @@ def transform(products):
         if "license" in product['values']:
             if product['values']["license"][0]['data'] == "cc_by":
                 product['values']["license"][0]['data'] = "ccby"
+                product = removeProperties(product)
                 productsUpdated.append(product)
             elif(product['values']["license"][0]['data'] == "cc_by_sa"):
                 product['values']["license"][0]['data'] = "ccbysa"
+                product = removeProperties(product)
                 productsUpdated.append(product)
             elif(product['values']["license"][0]['data'] == "cc_by_nd"):
                 product['values']["license"][0]['data'] = "ccbynd"
+                product = removeProperties(product)
                 productsUpdated.append(product)
             elif(product['values']["license"][0]['data'] == "copyrightHolder"):
                 product['values']["license"][0]['data'] = "copyright"
+                product = removeProperties(product)
                 productsUpdated.append(product)
     
     return productsUpdated

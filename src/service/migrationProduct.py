@@ -11,6 +11,8 @@ def importMigrationSettings(attribute):
         import migration.garni as migration
     elif(attribute == "superior"):
         import migration.superior as migration
+    elif(attribute == "starRating"):
+        import migration.starRating as migration
     return migration
 
 def main(environment, target, attributes):

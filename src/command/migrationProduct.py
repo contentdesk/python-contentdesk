@@ -14,13 +14,13 @@ def main():
     environments = cliArguments.getEnvironment(sys)
     arguments = cliArguments.getArguments(sys)
 
-    print("START PATCH FAMILIES")
+    print("START PATCH PRODUCTS")
     for environment in environments:
         targetCon = loadEnv(environment)
         target = Akeneo(targetCon["host"], targetCon["clientId"], targetCon["secret"], targetCon["user"], targetCon["passwd"])
         migrationProduct.main(environment, target, arguments)
         
-    print("FINISH PATCH FAMILIES")
+    print("FINISH PATCH PRODUCTS")
 
 if __name__ == '__main__':
     main()

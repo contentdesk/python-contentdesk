@@ -18,12 +18,6 @@ def main():
     for environment in environments:
         targetCon = loadEnv(environment)
         target = Akeneo(targetCon["host"], targetCon["clientId"], targetCon["secret"], targetCon["user"], targetCon["passwd"])
-        
-        # Export all Products with Attributes - examples license
-
-        # Transform
-
-        # Upload all Products with Attributes license
         migrationProduct.main(environment, target, arguments)
         
     print("FINISH PATCH FAMILIES")

@@ -118,8 +118,8 @@ def transform(products):
                         if mappingValues[key] != "":
                             product['values'][attribute][0]['data'][i] = mappingValues[key]
                         else:
-                            # Remove Value
-                            product['values'][attribute][0]['data'][i] = None
+                            # Remove Value from List
+                            product['values'][attribute][0]['data'].remove(value)
                 i = i + 1
             
             updateProduct = removeProperties(product)

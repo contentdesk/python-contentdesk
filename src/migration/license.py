@@ -1,16 +1,14 @@
 import service.debug as debug
 import logging
-# Export all Products with Attribute license
 
-# Mapping License options
-# cc_by to ccby
-
-# Remove old Options
-
-# Upload all Products with Attribute license
-
+############################################################################################################
 # https://tourismus.atlassian.net/browse/PIM-483
-
+# 1. Export all Products with Attribute license
+# 2. Mapping License options
+# cc_by to ccby
+# Remove old Options
+# 3. Upload all Products with Attribute license
+############################################################################################################
 
 def getProducts(target, attribute):
     #search = 'search={"openingHours_text":[{"operator":"NOT EMPTY","value":"","locale":"de_CH"}]}'

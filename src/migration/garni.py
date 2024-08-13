@@ -10,7 +10,7 @@ import logging
 
 def getProducts(target):
     #search = 'search={"openingHours_text":[{"operator":"NOT EMPTY","value":"","locale":"de_CH"}]}'
-    search = '{"accommodation_classification_garni":[{"operator":"=","value":"TRUE"}]}&attributes=accommodation_classification_garni'
+    search = '{"accommodation_classification_garni":[{"operator":"=","value":"true"}]}&attributes=accommodation_classification_garni'
     products = target.getProductBySearch(search)
     return products
 
@@ -38,8 +38,9 @@ def uploadProducts(target, products):
         print("Upload Product: ", product['identifier'])
         print("Product: ", product)
         try:
-            response = target.patchProductByCode(product['identifier'], product)
-            print("Response: ", response)
+            print("Start Upload")
+            #response = target.patchProductByCode(product['identifier'], product)
+            #print("Response: ", response)
         except Exception as e:
             print("Error: ", e)
             # Add To Error Log File

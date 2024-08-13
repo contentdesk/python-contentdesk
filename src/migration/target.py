@@ -9,10 +9,26 @@ import logging
 ####################################################################################################
 
 def getProducts(target):
+    #locales = ['de_CH', 'en_US', 'fr_FR', 'it_IT']
+    #locales = target.getLocales(search='{"enabled":[{"operator":"=","value":true}]}')
+    #print("locales: ", locales)
+    scopes = target.getChannels()
+    print("scopes: ", scopes)
     #search = 'search={"openingHours_text":[{"operator":"NOT EMPTY","value":"","locale":"de_CH"}]}'
-    search = '{"action_button_url":[{"operator":"NOT EMPTY","value":""}]}&attributes=action_button_url'
-    products = target.getProductBySearch(search)
-    return products
+    getProducts = {}
+    for scope in scopes:
+        print("Scope: ", scope['code'])
+        for locale in scope['locales']:
+            print("Locale: ", locale)
+            search = '{"action_button_url":[{"operator":"NOT EMPTY","value":"","locale":"' + locale+'","scope":"'+scope['code']+'"}]}&attributes=action_button_url'
+            products = target.getProductBySearch(search)
+            for product in products:
+                print("Product: ", product['identifier'])
+                getProducts[product['identifier']] = product
+        
+    #search = '{"action_button_url":[{"operator":"NOT EMPTY","value":"","locale":"en_US","scope":"mobile"}]}&attributes=action_button_url&search_locale=en_US'
+    #products = target.getProductBySearch(search)
+    return getProducts
 
 def removeProperties(product):
     updateProduct = {}
@@ -22,12 +38,13 @@ def removeProperties(product):
     
     return updateProduct
 
-def transform(products):
+def transform(getProducts):
     print("Transform Products")
     productsUpdated = []
-    for product in products:
-        if "action_button_url" in product['values']:
-            updateProduct = removeProperties(product)
+    for products in getProducts:
+        print("Product: ", products)
+        if "action_button_url" in getProducts[products]['values']:
+            updateProduct = removeProperties(getProducts[products])
             productsUpdated.append(updateProduct)
     
     return productsUpdated

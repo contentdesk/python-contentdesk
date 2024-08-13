@@ -1,6 +1,7 @@
 import json
 from datetime import datetime
 import logging
+import os
 
 # DEBUG
 def addToFile(code, data):
@@ -20,6 +21,10 @@ def addToFileMigration(environment, attribute, name, data):
     
     # convert datetime obj to string
     str_current_datetime = str(current_datetime)
+    
+    # Check if folder exists
+    if not os.path.exists("../../output/migration/"+environment+"/"+attribute):
+        os.makedirs("../../output/migration/"+environment+"/"+attribute)
     
     with open("../../output/migration/"+environment+"/"+attribute+"/"+name+"-"+str_current_datetime+".json", "w") as file:
         file.write(json.dumps(data))

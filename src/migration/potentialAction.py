@@ -40,20 +40,21 @@ def removeProperties(product):
 
 def transform(getProducts):
     print("Transform Products")
+    attribute = 'action_button_text'
     productsUpdated = []
     for products in getProducts:
         print("Product: ", products)
-        if "action_button_text" in getProducts[products]['values']:
-            if getProducts[products]['values'][0]['data'] == "ticketing":
-                getProducts[products]['values'][0]['data'] = "ReserveAction"
-            elif getProducts[products]['values'][0]['data'] == "booking":
-                getProducts[products]['values'][0]['data'] = "ReserveAction"
-            elif getProducts[products]['values'][0]['data'] == "offer":
-                getProducts[products]['values'][0]['data'] = "ViewAction"
-            elif getProducts[products]['values'][0]['data'] == "onlineshop":
-                getProducts[products]['values'][0]['data'] = "BuyAction"
-            elif getProducts[products]['values'][0]['data'] == "website":
-                getProducts[products]['values'][0]['data'] = "ViewAction"
+        if attribute in getProducts[products]['values']:
+            if getProducts[products]['values'][attribute][0]['data'] == "ticketing":
+                getProducts[products]['values'][attribute][0]['data'] = "ReserveAction"
+            elif getProducts[products]['values'][attribute][0]['data'] == "booking":
+                getProducts[products]['values'][attribute][0]['data'] = "ReserveAction"
+            elif getProducts[products]['values'][attribute][0]['data'] == "offer":
+                getProducts[products]['values'][attribute][0]['data'] = "ViewAction"
+            elif getProducts[products]['values'][attribute][0]['data'] == "onlineshop":
+                getProducts[products]['values'][attribute][0]['data'] = "BuyAction"
+            elif getProducts[products]['values'][attribute][0]['data'] == "website":
+                getProducts[products]['values'][attribute][0]['data'] = "ViewAction"
             updateProduct = removeProperties(getProducts[products])
             productsUpdated.append(updateProduct)
     

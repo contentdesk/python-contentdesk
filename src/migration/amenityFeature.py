@@ -97,8 +97,8 @@ def mappingList():
         "family_friendly_childrenmenu":"",
         "family_friendly_childcare":"entertainment_childcareservice",
         "veloabstellraum":"general_bicyclestoragearea",
-        "Bikeshop":"",
-        "Trockenraum":"",
+        "Bikeshop":"sport_bikerental",
+        "Trockenraum":"furnishing_tumbledryer",
         "Waescheservice":"general_laundryservice",
     }
     
@@ -113,6 +113,11 @@ def transform(products):
         print("Product: ", product['identifier'])
         i = 0
         for value in product['values'][attribute][0]['data']:
+            print ("Value: ", value)
+            if value in mappingValues:
+                print ("Value in mappingList")
+            else: 
+                print ("Value not in mappingList")
             for key in mappingValues:
                 if value == key:
                     print ("Key: ", key)
@@ -141,8 +146,8 @@ def uploadProducts(target, products):
         print("Product: ", product)
         try:
             print("Start Upload")
-            #response = target.patchProductByCode(product['identifier'], product)
-            #print("Response: ", response)
+            response = target.patchProductByCode(product['identifier'], product)
+            print("Response: ", response)
         except Exception as e:
             print("Error: ", e)
             # Add To Error Log File

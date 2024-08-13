@@ -16,9 +16,8 @@ def getProducts(target):
 
 def removeProperties(product):
     updateProduct = {}
-    updateProduct['values'] = {}
-    
     updateProduct['identifier'] = product['identifier']
+    updateProduct['values'] = {}
     updateProduct['values']['superior'] = product['values']['accommodation_classification_superior']
     
     return updateProduct
@@ -40,8 +39,8 @@ def uploadProducts(target, products):
         print("Product: ", product)
         try:
             print("Start Upload")
-            #response = target.patchProductByCode(product['identifier'], product)
-            #print("Response: ", response)
+            response = target.patchProductByCode(product['identifier'], product)
+            print("Response: ", response)
         except Exception as e:
             print("Error: ", e)
             # Add To Error Log File

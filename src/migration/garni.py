@@ -10,7 +10,7 @@ import logging
 
 def getProducts(target):
     #search = 'search={"openingHours_text":[{"operator":"NOT EMPTY","value":"","locale":"de_CH"}]}'
-    search = '{"accommodation_classification_garni":[{"operator":"=","value":"true"}]}&attributes=accommodation_classification_garni'
+    search = '{"accommodation_classification_garni":[{"operator":"=","value":true}]}&attributes=accommodation_classification_garni'
     products = target.getProductBySearch(search)
     return products
 

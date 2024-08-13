@@ -27,12 +27,30 @@ def transform(products):
     productsUpdated = []
     for product in products:
         if "indoor_outdoor" in product['values']:
-            if product['values']["indoor_outdoor"][0]['data'] == "indoor":
-                product['values']["indoor_outdoor"][0]['data'] = "weatherDependency_indoor"
+            weatherDependency_indoor = False
+            weatherDependency_outoodor = False
+            for value in product['values']["indoor_outdoor"][0]['data']:
+                if "indoor" in value:
+                    weatherDependency_indoor = True
+                    product['values']["indoor_outdoor"][0]['data'] = ["weatherDependency_indoor"]
+                    updateProduct = removeProperties(product)
+                    productsUpdated.append(updateProduct)
+                elif "outdoor" in value:
+                    product['values']["indoor_outdoor"][0]['data'] = ["weatherDependency_outoodor"]
+                    updateProduct = removeProperties(product)
+                    productsUpdated.append(updateProduct)
+                    weatherDependency_outoodor = True
+                
+            if weatherDependency_indoor and weatherDependency_outoodor:
+                product['values']["indoor_outdoor"][0]['data'] = ["weatherDependency_indoor","weatherDependency_outoodor"]
                 updateProduct = removeProperties(product)
                 productsUpdated.append(updateProduct)
-            elif(product['values']["indoor_outdoor"][0]['data'] == "outdoor"):
-                product['values']["indoor_outdoor"][0]['data'] = "weatherDependency_outoodor"
+            elif not weatherDependency_indoor and weatherDependency_outoodor:
+                product['values']["indoor_outdoor"][0]['data'] = ["weatherDependency_outoodor"]
+                updateProduct = removeProperties(product)
+                productsUpdated.append(updateProduct)
+            elif weatherDependency_indoor and not weatherDependency_outoodor:
+                product['values']["indoor_outdoor"][0]['data'] = ["weatherDependency_indoor"]
                 updateProduct = removeProperties(product)
                 productsUpdated.append(updateProduct)
     
@@ -44,8 +62,9 @@ def uploadProducts(target, products):
         print("Upload Product: ", product['identifier'])
         print("Product: ", product)
         try:
-            response = target.patchProductByCode(product['identifier'], product)
-            print("Response: ", response)
+            print("Start Upload")
+            #response = target.patchProductByCode(product['identifier'], product)
+            #print("Response: ", response)
         except Exception as e:
             print("Error: ", e)
             # Add To Error Log File

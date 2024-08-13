@@ -56,7 +56,7 @@ def mappingList():
         "elevators":"general_lift",
         "microwave_oven":"food_microwave",
         "minibar":"food_minibar",
-        "non_smoking":"Non-smoking accommodation",
+        "non_smoking":"characteristics_nonsmoking",
         "public_parking":"general_carpark",
         "public_restaurant":"food_restaurant",
         "outdoor_parking":"Parkplatz",

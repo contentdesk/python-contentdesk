@@ -18,6 +18,7 @@ def removeProperties(product):
     updateProduct = {}
     
     updateProduct['identifier'] = product['identifier']
+    updateProduct['values'] = {}
     updateProduct['values']['weatherDependency'] = product['values']['indoor_outdoor']
     
     return updateProduct

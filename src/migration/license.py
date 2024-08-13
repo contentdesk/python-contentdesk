@@ -1,3 +1,5 @@
+import service.debug as debug
+import logging
 # Export all Products with Attribute license
 
 # Mapping License options
@@ -8,6 +10,7 @@
 # Upload all Products with Attribute license
 
 # https://tourismus.atlassian.net/browse/PIM-483
+
 
 def getProducts(target, attribute):
     #search = 'search={"openingHours_text":[{"operator":"NOT EMPTY","value":"","locale":"de_CH"}]}'
@@ -48,9 +51,23 @@ def transform(products):
     return productsUpdated
     
 def uploadProducts(target, products):
+    logging.basicConfig(
+        filename="output/logs/migrations/app.log",
+        encoding="utf-8",
+        filemode="a",
+        format="{asctime} - {levelname} - {message}",
+        style="{",
+        datefmt="%Y-%m-%d %H:%M",
+    )
     for product in products:
         print("Upload Product: ", product['identifier'])
-        response = target.patchProductByCode(product['identifier'], product)
-        print("Response: ", response)
+        print("Product: ", product)
+        try:
+            response = target.patchProductByCode(product['identifier'], product)
+            print("Response: ", response)
+        except Exception as e:
+            print("Error: ", e)
+            # Add To Error Log File
+            logging.error("Error: ", e)
         
     print("Upload Products")

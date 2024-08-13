@@ -13,6 +13,8 @@ def importMigrationSettings(attribute):
         import migration.superior as migration
     elif(attribute == "starRating"):
         import migration.starRating as migration
+    elif(attribute == "target"):
+        import migration.target as migration
     return migration
 
 def main(environment, target, attributes):

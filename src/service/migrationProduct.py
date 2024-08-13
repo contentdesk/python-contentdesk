@@ -7,6 +7,10 @@ def importMigrationSettings(attribute):
         import migration.openingHours as migration
     elif(attribute == "amenityFeature"):
         import migration.amenityFeature as migration
+    elif(attribute == "garni"):
+        import migration.garni as migration
+    elif(attribute == "superior"):
+        import migration.superior as migration
     return migration
 
 def main(environment, target, attributes):
@@ -14,7 +18,7 @@ def main(environment, target, attributes):
         print("START PATCH PRODUCTS for: ", attribute)
         migration = importMigrationSettings(attribute)
         print("Get Products")
-        products = migration.getProducts(target, attribute)
+        products = migration.getProducts(target)
         debug.addToFileMigration(environment, attribute, 'products', products)
         print("Transform Products")
         productsTranform = migration.transform(products)

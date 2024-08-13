@@ -10,7 +10,7 @@ import logging
 # 3. Upload all Products with Attribute license
 ############################################################################################################
 
-def getProducts(target, attribute):
+def getProducts(target):
     #search = 'search={"openingHours_text":[{"operator":"NOT EMPTY","value":"","locale":"de_CH"}]}'
     search = '{"license":[{"operator":"IN","value":["cc_by","cc_by_sa","cc_by_nd","copyrightHolder"]}]}&attributes=license'
     products = target.getProductBySearch(search)

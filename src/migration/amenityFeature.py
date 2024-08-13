@@ -147,37 +147,10 @@ def transform(products):
     removeValues = removeList()
     for product in products:
         print("Product: ", product['identifier'])
-        i = 0
-        
         # replace Values in List product['values'][attribute][0]['data']
         product['values'][attribute][0]['data'] = [mappingValues.get(value, value) for value in product['values'][attribute][0]['data']]
-        
-        
         # remove Values from List product['values'][attribute][0]['data']
         product['values'][attribute][0]['data'] = [value for value in product['values'][attribute][0]['data'] if value not in removeValues]
-        
-        
-        for value in product['values'][attribute][0]['data']:
-            print ("Value: ", value)
-            if value in mappingValues:
-                print ("Value in mappingList")
-            else: 
-                print ("Value not in mappingList")
-            for key in mappingValues:
-                if value == key:
-                    print ("Key: ", key)
-                    print ("Value: ", value)
-                    print ("Mapping Value: ", mappingValues[key])
-                    if mappingValues[key] != None:
-                        print ("Replace Value: ", mappingValues[key] )
-                        product['values'][attribute][0]['data'][i] = mappingValues[key]
-                    if mappingValues[key] == None:
-                        # Remove Value from List
-                        print ("Remove Value: ", value)
-                        product['values'][attribute][0]['data'][i].remove()
-                if value == "Trockenraum":
-                    print ("Achtung Trockenraum")
-            i = i + 1
             
         updateProduct = removeProperties(product)
         productsUpdated.append(updateProduct)
@@ -191,8 +164,8 @@ def uploadProducts(target, products):
         print("Product: ", product)
         try:
             print("Start Upload")
-            response = target.patchProductByCode(product['identifier'], product)
-            print("Response: ", response)
+            #response = target.patchProductByCode(product['identifier'], product)
+            #print("Response: ", response)
         except Exception as e:
             print("Error: ", e)
             # Add To Error Log File

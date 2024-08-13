@@ -108,32 +108,14 @@ def transform(products):
     print("Transform Products")
     attribute = 'features'
     productsUpdated = []
+    mappingValues = mappingList()
     for product in products:
         if attribute in product['values']:
             i = 0
             for value in product['values'][attribute][0]['data']:
-                if "half_board_supplement" in value:
-                    product['values'][attribute][0]['data'][i] = "food_halfboard"
-                elif "full_board_supplement" in value:
-                    product['values'][attribute][0]['data'][i] = "food_fullboard"
-                elif "balcony" in value:
-                    product['values'][attribute][0]['data'][i] = "marketFreshDishes"
-                elif "bar" in value:
-                    product['values'][attribute][0]['data'][i] = "localKitchen"
-                elif "bar_bistro" in value:
-                    product['values'][attribute][0]['data'][i] = "swissSpecialties"
-                elif "family_friendly" in value:
-                    product['values'][attribute][0]['data'][i] = "sundayBrunch"
-                elif "fumoir" in value:
-                    product['values'][attribute][0]['data'][i] = "traditionalKitchen"
-                elif "hotel_garden_or_park" in value:
-                    product['values'][attribute][0]['data'][i] = "veganFriendly"
-                elif "warm_kitchen" in value:
-                    product['values'][attribute][0]['data'][i] ="warmKitchen"
-                elif "dessert_menu" in value:
-                    product['values'][attribute][0]['data'][i] = "dessertMenu"
-                elif "home_delivery_service" in value:
-                    product['values'][attribute][0]['data'][i] = "homeDeliveryService"
+                for key in mappingValues:
+                    if key in value:
+                        product['values'][attribute][0]['data'][i] = mappingValues[key]
                 i = i + 1
             
             updateProduct = removeProperties(product)

@@ -115,7 +115,11 @@ def transform(products):
             for value in product['values'][attribute][0]['data']:
                 for key in mappingValues:
                     if key in value:
-                        product['values'][attribute][0]['data'][i] = mappingValues[key]
+                        if mappingValues[key] != "":
+                            product['values'][attribute][0]['data'][i] = mappingValues[key]
+                        else:
+                            # Remove Value
+                            product['values'][attribute][0]['data'][i] = None
                 i = i + 1
             
             updateProduct = removeProperties(product)

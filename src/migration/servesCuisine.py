@@ -29,29 +29,31 @@ def transform(products):
     productsUpdated = []
     for product in products:
         if attribute in product['values']:
+            i = 0
             for value in product['values'][attribute][0]['data']:
                 if "simple_kitchen" in value:
-                    product['values'][attribute][0]['data'] = value.replace("simple_kitchen", "simpleKitchen")
+                    product['values'][attribute][0]['data'][i] = "simpleKitchen"
                 elif "gluten_free_cuisine" in value:
-                    product['values'][attribute][0]['data'] = value.replace("gluten_free_cuisine", "glutenFreeCuisine")
+                    product['values'][attribute][0]['data'][i] = "glutenFreeCuisine"
                 elif "market_fresh_dishes" in value:
-                    product['values'][attribute][0]['data'] = value.replace("market_fresh_dishes", "marketFreshDishes")
+                    product['values'][attribute][0]['data'][i] = "marketFreshDishes"
                 elif "local_kitchen" in value:
-                    product['values'][attribute][0]['data'] = value.replace("local_kitchen", "localKitchen")
+                    product['values'][attribute][0]['data'][i] = "localKitchen"
                 elif "swiss_specialties" in value:
-                    product['values'][attribute][0]['data'] = value.replace("swiss_specialties", "swissSpecialties")
+                    product['values'][attribute][0]['data'][i] = "swissSpecialties"
                 elif "sunday_brunch" in value:
-                    product['values'][attribute][0]['data'] = value.replace("sunday_brunch", "sundayBrunch")
+                    product['values'][attribute][0]['data'][i] = "sundayBrunch"
                 elif "traditional_kitchen" in value:
-                    product['values'][attribute][0]['data'] = value.replace("traditional_kitchen", "traditionalKitchen")
+                    product['values'][attribute][0]['data'][i] = "traditionalKitchen"
                 elif "vegan_friendly" in value:
-                    product['values'][attribute][0]['data'] = value.replace("vegan_friendly", "veganFriendly")
+                    product['values'][attribute][0]['data'][i] = "veganFriendly"
                 elif "warm_kitchen" in value:
-                    product['values'][attribute][0]['data'] = value.replace("warm_kitchen", "warmKitchen")
+                    product['values'][attribute][0]['data'][i] ="warmKitchen"
                 elif "dessert_menu" in value:
-                    product['values'][attribute][0]['data'] = value.replace("dessert_menu", "dessertMenu")
+                    product['values'][attribute][0]['data'][i] = "dessertMenu"
                 elif "home_delivery_service" in value:
-                    product['values'][attribute][0]['data'] = value.replace("home_delivery_service", "homeDeliveryService")
+                    product['values'][attribute][0]['data'][i] = "homeDeliveryService"
+                i = i + 1
             
             updateProduct = removeProperties(product)
             productsUpdated.append(updateProduct)

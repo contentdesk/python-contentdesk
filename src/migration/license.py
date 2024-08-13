@@ -51,14 +51,7 @@ def transform(products):
     return productsUpdated
     
 def uploadProducts(target, products):
-    logging.basicConfig(
-        filename="output/logs/migrations/app.log",
-        encoding="utf-8",
-        filemode="a",
-        format="{asctime} - {levelname} - {message}",
-        style="{",
-        datefmt="%Y-%m-%d %H:%M",
-    )
+
     for product in products:
         print("Upload Product: ", product['identifier'])
         print("Product: ", product)
@@ -68,6 +61,6 @@ def uploadProducts(target, products):
         except Exception as e:
             print("Error: ", e)
             # Add To Error Log File
-            logging.error("Error: ", e)
-        
+            debug.loggingToFile("error", e)   
+             
     print("Upload Products")

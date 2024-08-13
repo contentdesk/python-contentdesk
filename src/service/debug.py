@@ -1,5 +1,6 @@
 import json
 from datetime import datetime
+import logging
 
 # DEBUG
 def addToFile(code, data):
@@ -24,4 +25,29 @@ def addToFileMigration(environment, attribute, name, data):
         file.write(json.dumps(data))
         
 # add now Date and Time to Filename
-
+def loggingToFile(type, data):
+    # get current date and time
+    current_datetime = datetime.now().strftime("%Y-%m-%d %H-%M-%S")
+    print("Current date & time : ", current_datetime)
+    
+    # convert datetime obj to string
+    str_current_datetime = str(current_datetime)
+    
+    logging.basicConfig(
+        filename="../../output/logs/migrations/"+str_current_datetime+".log",
+        encoding="utf-8",
+        filemode="a",
+        format="{asctime} - {levelname} - {message}",
+        style="{",
+        datefmt="%Y-%m-%d %H:%M",
+    )
+    if type == "info":
+        logging.info(data)
+    elif type == "warning":
+        logging.warning(data)
+    elif type == "error":
+        logging.error(data)
+    elif type == "critical":
+        logging.critical(data)
+    else:
+        logging.debug(data)

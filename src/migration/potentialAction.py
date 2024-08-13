@@ -45,16 +45,19 @@ def transform(getProducts):
     for products in getProducts:
         print("Product: ", products)
         if attribute in getProducts[products]['values']:
-            if getProducts[products]['values'][attribute][0]['data'] == "ticketing":
-                getProducts[products]['values'][attribute][0]['data'] = "ReserveAction"
-            elif getProducts[products]['values'][attribute][0]['data'] == "booking":
-                getProducts[products]['values'][attribute][0]['data'] = "ReserveAction"
-            elif getProducts[products]['values'][attribute][0]['data'] == "offer":
-                getProducts[products]['values'][attribute][0]['data'] = "ViewAction"
-            elif getProducts[products]['values'][attribute][0]['data'] == "onlineshop":
-                getProducts[products]['values'][attribute][0]['data'] = "BuyAction"
-            elif getProducts[products]['values'][attribute][0]['data'] == "website":
-                getProducts[products]['values'][attribute][0]['data'] = "ViewAction"
+            i = 0
+            for value in getProducts[products]['values'][attribute]:
+                if value['data'] == "ticketing":
+                    getProducts[products]['values'][attribute][i]['data'] = "ReserveAction"
+                elif value['data']  == "booking":
+                    getProducts[products]['values'][attribute][i]['data'] = "ReserveAction"
+                elif value['data']  == "offer":
+                    getProducts[products]['values'][attribute][i]['data'] = "ViewAction"
+                elif value['data']  == "onlineshop":
+                    getProducts[products]['values'][attribute][i]['data'] = "BuyAction"
+                elif value['data']  == "website":
+                    getProducts[products]['values'][attribute][i]['data'] = "ViewAction"
+                i = i + 1
             updateProduct = removeProperties(getProducts[products])
             productsUpdated.append(updateProduct)
     

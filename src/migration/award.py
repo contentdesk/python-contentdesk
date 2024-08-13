@@ -62,61 +62,50 @@ def mappingList():
         "gilde": "gilde",
         "guide_bleu": "guideBleu",
         "jeunes_restaurateurs": "jeunesRestaurateurs",
-        "q1": None,
-        "q2": None,
-        "q3": None,
-        "schweiz_mobil": None,
-        "fisch": None,
-        "family_destination": None,
-        "wellness_destination": None,
-        "gault_millau_12": None,
-        "gault_millau_13": None,
-        "gault_millau_14": None,
-        "gault_millau_15": None,
-        "gault_millau_16": None,
-        "gault_millau_17": None,
-        "gault_millau_18": None,
-        "gault_millau_19": None,
-        "guide_michelin_1": None,
-        "guide_michelin_2": None,
-        "guide_michelin_3": None,
-        "swisstainable_1": None,
-        "swisstainable_2": None,
-        "swisstainable_3": None,
-        "ok_go": None,
+        "schweiz_mobil": "schweizMobil",
+        "fisch": "fisch",
+        "family_destination": "familyDestination",
+        "gault_millau_13": "gaultMillau13",
+        "gault_millau_14": "gaultMillau14",
+        "gault_millau_15": "gaultMillau15",
+        "gault_millau_16": "gaultMillau16",
+        "gault_millau_17": "gaultMillau17",
+        "gault_millau_18": "gaultMillau18",
+        "gault_millau_19": "gaultMillau19",
+        "guide_michelin_1": "guideMichelin1",
+        "guide_michelin_2": "guideMichelin2",
+        "guide_michelin_3": "guideMichelin3",
+        "swisstainable_1": "swisstainable1",
+        "swisstainable_2": "swisstainable2",
+        "swisstainable_3": "swisstainable3"
     }
     
     return mappingList
+
+def removeList():
+    removeList = {
+        "q1",
+        "q2",
+        "q3",
+        "wellness_destination",
+        "gault_millau_12",
+        "ok_go"
+    }
+    return removeList
     
 def transform(products):
     print("Transform Products")
-    attribute = 'features'
+    attribute = 'labels'
     productsUpdated = []
     mappingValues = mappingList()
+    removeValues = removeList()
     for product in products:
         print("Product: ", product['identifier'])
-        i = 0
-        for value in product['values'][attribute][0]['data']:
-            print ("Value: ", value)
-            if value in mappingValues:
-                print ("Value in mappingList")
-            else: 
-                print ("Value not in mappingList")
-            for key in mappingValues:
-                if value == key:
-                    print ("Key: ", key)
-                    print ("Value: ", value)
-                    print ("Mapping Value: ", mappingValues[key])
-                    if mappingValues[key] != "":
-                        print ("Replace Value: ", mappingValues[key] )
-                        product['values'][attribute][0]['data'][i] = mappingValues[key]
-                    if mappingValues[key] == "":
-                        # Remove Value from List
-                        print ("Remove Value: ", value)
-                        product['values'][attribute][0]['data'].remove(key)
-                if value == "Trockenraum":
-                    print ("Achtung Trockenraum")
-            i = i + 1
+        print("Product: ", product['identifier'])
+        # replace Values in List product['values'][attribute][0]['data']
+        product['values'][attribute][0]['data'] = [mappingValues.get(value, value) for value in product['values'][attribute][0]['data']]
+        # remove Values from List product['values'][attribute][0]['data']
+        product['values'][attribute][0]['data'] = [value for value in product['values'][attribute][0]['data'] if value not in removeValues]
             
         updateProduct = removeProperties(product)
         productsUpdated.append(updateProduct)
@@ -130,8 +119,8 @@ def uploadProducts(target, products):
         print("Product: ", product)
         try:
             print("Start Upload")
-            response = target.patchProductByCode(product['identifier'], product)
-            print("Response: ", response)
+            #response = target.patchProductByCode(product['identifier'], product)
+            #print("Response: ", response)
         except Exception as e:
             print("Error: ", e)
             # Add To Error Log File

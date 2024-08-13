@@ -119,7 +119,7 @@ def transform(products):
                             product['values'][attribute][0]['data'][i] = mappingValues[key]
                         else:
                             # Remove Value from List
-                            product['values'][attribute][0]['data'].remove(value)
+                            product['values'][attribute][0]['data'].remove(key)
                 i = i + 1
             
             updateProduct = removeProperties(product)

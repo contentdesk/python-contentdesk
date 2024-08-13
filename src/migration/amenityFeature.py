@@ -59,7 +59,7 @@ def mappingList():
         "non_smoking":"characteristics_nonsmoking",
         "public_parking":"general_carpark",
         "public_restaurant":"food_restaurant",
-        "outdoor_parking":"Parkplatz",
+        "outdoor_parking":"",
         "aII_rooms_with_radio":"media_radio",
         "radio_tv":"media_tv",
         "reservation_also_through_travel_agencies":"",
@@ -99,7 +99,7 @@ def mappingList():
         "veloabstellraum":"general_bicyclestoragearea",
         "Bikeshop":"",
         "Trockenraum":"",
-        "Waescheservice":"general_laundryservice"
+        "Waescheservice":"general_laundryservice",
     }
     
     return mappingList
@@ -110,16 +110,27 @@ def transform(products):
     productsUpdated = []
     mappingValues = mappingList()
     for product in products:
+        print("Product: ", product['identifier'])
         if attribute in product['values']:
             i = 0
             for value in product['values'][attribute][0]['data']:
-                for key in mappingValues:
-                    if key in value:
-                        if mappingValues[key] != "":
-                            product['values'][attribute][0]['data'][i] = mappingValues[key]
-                        else:
-                            # Remove Value from List
-                            product['values'][attribute][0]['data'].remove(key)
+                if value in mappingValues:
+                    for key in mappingValues:
+                        if key == value:
+                            print ("Key: ", key)
+                            print ("Value: ", value)
+                            print ("Mapping Value: ", mappingValues[key])
+                            if mappingValues[key] != "":
+                                print ("Replace Value: ", mappingValues[key] )
+                                product['values'][attribute][0]['data'][i] = mappingValues[key]
+                            if mappingValues[key] == "":
+                                # Remove Value from List
+                                print ("Remove Value: ", value)
+                                product['values'][attribute][0]['data'].remove(key)
+                            if value == "Trockenraum":
+                                product['values'][attribute][0]['data'].remove(key)
+                else:
+                    print ("Not in Mapping List!")
                 i = i + 1
             
             updateProduct = removeProperties(product)

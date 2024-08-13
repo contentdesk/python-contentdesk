@@ -21,6 +21,8 @@ def importMigrationSettings(attribute):
         import migration.potentialAction as migration
     elif(attribute == "servesCuisine"):
         import migration.servesCuisine as migration
+    elif(attribute == "award"):
+        import migration.award as migration
     return migration
 
 def main(environment, target, attributes):

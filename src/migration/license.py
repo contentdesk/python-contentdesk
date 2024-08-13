@@ -16,9 +16,12 @@ def getProducts(target, attribute):
     return products
 
 def removeProperties(product):
-    product['_links'].pop('self', None)
-    product['associations'].pop('self', None)
-    return product
+    updateProduct = {}
+    
+    updateProduct['identifier'] = product['identifier']
+    updateProduct['values'] = product['values']
+    
+    return updateProduct
     
 def transform(products):
     print("Transform Products")
@@ -27,20 +30,20 @@ def transform(products):
         if "license" in product['values']:
             if product['values']["license"][0]['data'] == "cc_by":
                 product['values']["license"][0]['data'] = "ccby"
-                product = removeProperties(product)
-                productsUpdated.append(product)
+                updateProduct = removeProperties(product)
+                productsUpdated.append(updateProduct)
             elif(product['values']["license"][0]['data'] == "cc_by_sa"):
                 product['values']["license"][0]['data'] = "ccbysa"
-                product = removeProperties(product)
-                productsUpdated.append(product)
+                updateProduct = removeProperties(product)
+                productsUpdated.append(updateProduct)
             elif(product['values']["license"][0]['data'] == "cc_by_nd"):
                 product['values']["license"][0]['data'] = "ccbynd"
-                product = removeProperties(product)
-                productsUpdated.append(product)
+                updateProduct = removeProperties(product)
+                productsUpdated.append(updateProduct)
             elif(product['values']["license"][0]['data'] == "copyrightHolder"):
                 product['values']["license"][0]['data'] = "copyright"
-                product = removeProperties(product)
-                productsUpdated.append(product)
+                updateProduct = removeProperties(product)
+                productsUpdated.append(updateProduct)
     
     return productsUpdated
     

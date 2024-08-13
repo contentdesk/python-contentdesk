@@ -19,6 +19,8 @@ def importMigrationSettings(attribute):
         import migration.weatherDependency as migration
     elif(attribute == "potentialAction"):
         import migration.potentialAction as migration
+    elif(attribute == "servesCuisine"):
+        import migration.servesCuisine as migration
     return migration
 
 def main(environment, target, attributes):

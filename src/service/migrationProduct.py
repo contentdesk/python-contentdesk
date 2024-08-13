@@ -13,11 +13,12 @@ def main(environment, target, attributes):
     for attribute in attributes:
         print("START PATCH PRODUCTS for: ", attribute)
         migration = importMigrationSettings(attribute)
+        print("Get Products")
         products = migration.getProducts(target, attribute)
         debug.addToFileMigration(environment, attribute, 'products', products)
-        #print(products)
+        print("Transform Products")
         productsTranform = migration.transform(products)
-        debug.addToFileMigration(environment, attribute, 'transform', products)
-        
-        #productsUpload = migration.uploadProducts(target, productsTranform)
+        debug.addToFileMigration(environment, attribute, 'transform', productsTranform)
+        print("Upload Products")
+        productsUpload = migration.uploadProducts(target, productsTranform)
         print("FINISH PATCH PRODUCTS for: ", attribute)

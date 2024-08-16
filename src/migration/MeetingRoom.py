@@ -28,8 +28,11 @@ def transform(products):
     productsUpdated = []
     for product in products:
         if "MICE_ROOM" in product['associations']:
-            updateProduct = removeProperties(product)
-            productsUpdated.append(updateProduct)
+            if "products" in product['associations']['MICE_ROOM']:
+                # if not empty products
+                if product['associations']['MICE_ROOM']['products']:
+                    updateProduct = removeProperties(product)
+                    productsUpdated.append(updateProduct)
     
     return productsUpdated
 

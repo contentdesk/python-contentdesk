@@ -43,8 +43,8 @@ def uploadProducts(target, products):
         print("Product: ", product)
         try:
             print("Start Upload")
-            #response = target.patchProductByCode(product['identifier'], product)
-            #print("Response: ", response)
+            response = target.patchProductByCode(product['identifier'], product)
+            print("Response: ", response)
         except Exception as e:
             print("Error: ", e)
             # Add To Error Log File

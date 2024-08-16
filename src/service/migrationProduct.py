@@ -25,6 +25,8 @@ def importMigrationSettings(attribute):
         import migration.award as migration
     elif(attribute == "MeetingRoom"):
         import migration.MeetingRoom as migration
+    elif(attribute == "Recommendation"):
+        import migration.Recommendation as migration
     return migration
 
 def main(environment, target, attributes):

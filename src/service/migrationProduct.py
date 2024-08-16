@@ -23,6 +23,8 @@ def importMigrationSettings(attribute):
         import migration.servesCuisine as migration
     elif(attribute == "award"):
         import migration.award as migration
+    elif(attribute == "MeetingRoom"):
+        import migration.MeetingRoom as migration
     return migration
 
 def main(environment, target, attributes):

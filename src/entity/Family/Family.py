@@ -146,6 +146,7 @@ def removeProperties(code, attributes):
     #print ("Clear Attributes: ", attributes)
     return attributes
 
+# TODO: CHEck if needed!
 def create(family, families, akeneo):
     code = family["label"]
 
@@ -203,9 +204,10 @@ def create(family, families, akeneo):
     # Check if specific attributes are set
     # examples license needs add copyrightHolder and author
     # examples potentialAction needs traget
-
-    attributes['image'] = 'image'
-    attributes['image_description'] = 'image_description'
+    
+    if 'image' not in attributes:
+        attributes['image'] = 'image'
+        attributes['image_description'] = 'image_description'
 
     if 'openingHoursSpecification' in attributes:
         attributes['google_opening_hours_use'] = 'google_opening_hours_use'
@@ -391,6 +393,9 @@ def setBody(family, families):
     # Check if specific attributes are set
     # examples license needs add copyrightHolder and author
     # examples potentialAction needs traget
+    if 'image' not in attributes:
+        attributes['image'] = 'image'
+        attributes['image_description'] = 'image_description'
     if 'image' in attributes:
         attributes['image_description'] = 'image_description'
 

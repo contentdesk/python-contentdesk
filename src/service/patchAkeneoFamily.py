@@ -106,7 +106,7 @@ def importFamilyEnitity(code):
     elif (code == "Trail"):
         import entity.Family.Trail as Family
     elif (code == "Recommendation"):
-        import src.entity.Family.Recommendation as Family
+        import entity.Family.Recommendation as Family
     else:
         import entity.Family.Family as Family
     return Family

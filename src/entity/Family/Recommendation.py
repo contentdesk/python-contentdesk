@@ -19,6 +19,7 @@ def setBody(family, families):
     attributes['url'] = 'url'
     attributes['potentialAction'] = 'potentialAction'
     attributes['target'] = 'target'
+    attributes['leisure'] = 'leisure'
     
     attribute_requirements = {"sku": "sku", "name": "name", "image": "image", "license": "license"}
     

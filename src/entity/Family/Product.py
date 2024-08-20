@@ -50,4 +50,7 @@ def setBody(family, families):
     body['attributes']['price'] = 'price'
     body['attributes']['priceValidUntil '] = 'priceValidUntil'
     
+    body['attributes']['validThrough'] = 'validThrough'
+    body['attributes']['validFrom'] = 'validFrom'
+    
     return body

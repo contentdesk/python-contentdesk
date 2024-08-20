@@ -9,6 +9,7 @@ def setBody(family, families):
     
     attributes['disambiguatingDescription'] = 'disambiguatingDescription'
     attributes['description'] = 'description'
+    attributes['channel'] = 'channel'
     
     body = {}
     body["code"] = code
@@ -52,5 +53,6 @@ def setBody(family, families):
     
     body['attributes']['validThrough'] = 'validThrough'
     body['attributes']['validFrom'] = 'validFrom'
+    body['attributes']['channel'] = 'channel'
     
     return body

@@ -105,6 +105,8 @@ def importFamilyEnitity(code):
         import entity.Family.Webcam as Family
     elif (code == "Trail"):
         import entity.Family.Trail as Family
+    elif (code == "Review"):
+        import entity.Family.Review as Family
     else:
         import entity.Family.Family as Family
     return Family

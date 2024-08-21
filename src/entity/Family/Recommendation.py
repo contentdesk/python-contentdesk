@@ -21,7 +21,6 @@ def setBody(family, families):
     attributes['target'] = 'target'
     attributes['leisure'] = 'leisure'
     attributes['channel'] = 'channel'
-    attributes['avs_acceptance_point_id'] = 'avs_acceptance_point_id'
     
     attribute_requirements = {"sku": "sku", "name": "name", "image": "image", "license": "license"}
     

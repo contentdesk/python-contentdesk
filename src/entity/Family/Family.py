@@ -443,6 +443,10 @@ def setBody(family, families):
             attributes['image_09_scope'] = 'image_09_scope'
             attributes['image_10_scope'] = 'image_10_scope'
             
+            # Summer and Winter Image
+            attributes['image_summer'] = 'image_summer'
+            attributes['image_winter'] = 'image_winter'
+            
         if 'image_01_scope' in attributes:
             attributes['image_01_scope_description'] = 'image_01_scope_description'
             attributes['google_image_gallery_use_pro_channel'] = 'google_image_gallery_use_pro_channel'

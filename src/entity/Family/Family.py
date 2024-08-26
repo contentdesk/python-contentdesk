@@ -407,6 +407,42 @@ def setBody(family, families):
     print ("CHECK GALLERY")
     if code != "Person" or code != "Organization":
         print("No Person or Organization")
+        print("Check Partent Place")
+        if (family["parent"] == "Place" or
+            family["parent"] == "LocalBusiness" or
+            family["parent"] == "FoodEstablishment" or
+            family["parent"] == "CivicStructure" or
+            family["parent"] == "Accommodation" or
+            family["parent"] == "Landform" or
+            family["parent"] == "LodgingBusiness" or
+            family["parent"] == "Store" or
+            family["parent"] == "TouristAttraction" or
+            family["parent"] == "HealthAndBeautyBusiness" or
+            family["parent"] == "SportsActivityLocation" or
+            family["parent"] == "PlaceOfWorship" or
+            family["parent"] == "Church" or
+            family["parent"] == "BodyOfWater" or
+            family["parent"] == "AdministrativeArea" or
+            family["parent"] == "GovernmentBuilding" or
+            family["parent"] == "EducationalOrganization" or
+            family["parent"] == "EntertainmentBusiness" or
+            family["parent"] == "AutomotiveBusiness" or
+            family["parent"] == "Room" or
+            family["parent"] == "GovernmentOffice" or
+            family["parent"] == "Resort"
+            ):
+            print("Yes - Place Type")
+            attributes['image_01_scope'] = 'image_01_scope'
+            attributes['image_02_scope'] = 'image_02_scope'
+            attributes['image_03_scope'] = 'image_03_scope'
+            attributes['image_04_scope'] = 'image_04_scope'
+            attributes['image_05_scope'] = 'image_05_scope'
+            attributes['image_06_scope'] = 'image_06_scope'
+            attributes['image_07_scope'] = 'image_07_scope'
+            attributes['image_08_scope'] = 'image_08_scope'
+            attributes['image_09_scope'] = 'image_09_scope'
+            attributes['image_10_scope'] = 'image_10_scope'
+            
         if 'image_01_scope' in attributes:
             attributes['image_01_scope_description'] = 'image_01_scope_description'
             attributes['google_image_gallery_use_pro_channel'] = 'google_image_gallery_use_pro_channel'

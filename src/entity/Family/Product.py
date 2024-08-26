@@ -54,5 +54,6 @@ def setBody(family, families):
     body['attributes']['validThrough'] = 'validThrough'
     body['attributes']['validFrom'] = 'validFrom'
     body['attributes']['channel'] = 'channel'
+    body['attributes']['avs_acceptance_point_id'] = 'avs_acceptance_point_id'
     
     return body

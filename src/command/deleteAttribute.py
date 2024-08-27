@@ -43,7 +43,7 @@ def getAttributes():
 
     return json.loads(json_data)
 
-def startBrowser(target, attribute):
+def startBrowser(target, attributeCode):
     driver = webdriver.Chrome()
     driver.get(target["host"]+"/user/login")
 
@@ -61,10 +61,9 @@ def startBrowser(target, attribute):
 
     #https://ziggy.pim.tso.ch/#/configuration/attribute/startTime/edit
     print("Go To Attribute Site")
-    print (attribute)
-    label = attribute["label"]
+    print (attributeCode)
 
-    driver.get(target["host"]+"/#/configuration/attribute/"+str(label)+"/edit")
+    driver.get(target["host"]+"/#/configuration/attribute/"+str(attributeCode)+"/edit")
     driver.implicitly_wait(20)
 
     #inputAttributeRequired = driver.find_element(by=By.TAG_NAME, value="textarea")
@@ -74,7 +73,7 @@ def startBrowser(target, attribute):
     modal = driver.find_element(by=By.ID, value="modal-root")
 
     inputAttributeCode = modal.find_element(by=By.TAG_NAME, value="input")
-    inputAttributeCode.send_keys(label)
+    inputAttributeCode.send_keys(attributeCode)
 
     #find button with Text "Löschen"
     print("Delete Attribute!")
@@ -95,22 +94,18 @@ def startBrowser(target, attribute):
 def main():
     environments = cliArguments.getEnvironment(sys)
     arguemnts = cliArguments.getArguments(sys)
-    attributes = getAttributes()
+    #attributes = getAttributes()
     for environment in environments:
+        print(environment)
         targetCon = loadEnv(environment)
         if arguemnts == None:
             # filter attributes guidlines.de_CH not empty
-            attributes = [attribute for attribute in attributes if attribute["guidelines.de_DE"] != ""]
-            for attribute in attributes:
-                print(attribute["label"])
-                startBrowser(targetCon, attribute)
+            print("No Arguments")
         else:
             for arg in arguemnts:
+                print("Argument")
                 print(arg)
-                attribute = [attribute for attribute in attributes if attribute["label"] == arg]
-                print (attribute)
-                for attribute in attribute:
-                    startBrowser(targetCon, attribute)
+                startBrowser(targetCon, arg)
 
 if __name__ == '__main__':
     main()

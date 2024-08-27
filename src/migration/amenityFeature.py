@@ -35,6 +35,7 @@ def mappingList():
         "fumoir":"furnishing_smokingrooms",
         "hotel_garden_or_park":"outdoor_garden",
         "free_wifi":"furnishing_wifi",
+        "wlan":"furnishing_wifi",
         "exercise_gym":"sport_fitnessRoom",
         "indoor_pool":"sport_indoorswimmingpool",
         "pets_welcome":"characteristics_petfriendly",
@@ -105,7 +106,11 @@ def removeList():
         "family_friendly_toys",
         "family_friendly_books",
         "family_friendly_diaper",
-        "family_friendly_childrenmenu"
+        "family_friendly_childrenmenu",
+        "doubleroom",
+        "doubleroombalcony",
+        "familyroom",
+        
         }
     return removeList
         

@@ -63,33 +63,37 @@ def startBrowser(target, attributeCode):
     print("Go To Attribute Site")
     print (attributeCode)
 
-    driver.get(target["host"]+"/#/configuration/attribute/"+str(attributeCode)+"/edit")
+    driverresponse = driver.get(target["host"]+"/#/configuration/attribute/"+str(attributeCode)+"/edit")
     driver.implicitly_wait(20)
+    # check if driver.get not 404 Error
+    if driverresponse.su == 404:
+        print("Attribute not found")
+        driver.close()
+    else:
+        #inputAttributeRequired = driver.find_element(by=By.TAG_NAME, value="textarea")
+        #inputAttributeRequired.send_keys(attribute['guidelines.de_DE'])
 
-    #inputAttributeRequired = driver.find_element(by=By.TAG_NAME, value="textarea")
-    #inputAttributeRequired.send_keys(attribute['guidelines.de_DE'])
+        deletelink = driver.find_element(by=By.CLASS_NAME, value="delete").click()
+        modal = driver.find_element(by=By.ID, value="modal-root")
 
-    deletelink = driver.find_element(by=By.CLASS_NAME, value="delete").click()
-    modal = driver.find_element(by=By.ID, value="modal-root")
+        inputAttributeCode = modal.find_element(by=By.TAG_NAME, value="input")
+        inputAttributeCode.send_keys(attributeCode)
 
-    inputAttributeCode = modal.find_element(by=By.TAG_NAME, value="input")
-    inputAttributeCode.send_keys(attributeCode)
+        #find button with Text "Löschen"
+        print("Delete Attribute!")
+        deleteButton = modal.find_element(by=By.XPATH, value="//button[text()='Löschen']")
+        #deleteButton.click()
+        ActionChains(driver)\
+            .context_click(deleteButton)\
+            .perform()
+        
+        driver.implicitly_wait(10)
 
-    #find button with Text "Löschen"
-    print("Delete Attribute!")
-    deleteButton = modal.find_element(by=By.XPATH, value="//button[text()='Löschen']")
-    #deleteButton.click()
-    ActionChains(driver)\
-        .context_click(deleteButton)\
-        .perform()
-    
-    driver.implicitly_wait(10)
+        driver.get(target["host"])
 
-    driver.get(target["host"])
+        driver.close()
 
-    driver.close()
-
-    print(title)
+        print(title)
 
 def main():
     environments = cliArguments.getEnvironment(sys)

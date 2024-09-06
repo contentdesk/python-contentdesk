@@ -109,7 +109,10 @@ def importFamilyEnitity(code):
         import entity.Family.Recommendation as Family
     elif (code == "Organization"):
         import entity.Family.Organization as Family
+    elif (code == "Place"):
+        import entity.Family.Place as Family
     else:
+        # Default all 
         import entity.Family.Family as Family
     return Family
 

@@ -4,9 +4,9 @@ def setBody(family, families):
     code = family["label"]
 
     if family["attribute_requirements.ecommerce"] != None:
-        attribute_requirements = {attrRequ: attrRequ for attrRequ in family["attribute_requirements.ecommerce"].split(",")}
+        attribute_requirements = {"sku": "sku", "name": "name", "license": "license"}
     else:
-        attribute_requirements = {"sku": "sku", "name": "name", "image": "image", "license": "license"}
+        attribute_requirements = {"sku": "sku", "name": "name", "license": "license"}
 
     #attribute_requirements = getParentAttributesRequirements(family, families, attribute_requirements)
 

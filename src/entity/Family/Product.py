@@ -43,6 +43,8 @@ def setBody(family, families):
     body['attributes']['color'] = 'color'
     body['attributes']['gender'] = 'gender'
     body['attributes']['weight'] = 'weight'
+    body['attributes']['width'] = 'width'
+    body['attributes']['height'] = 'height'
     #body['attributes']['duration'] = 'duration' # only ziggy
     
     body['attributes']['availability'] = 'availability'
@@ -54,6 +56,6 @@ def setBody(family, families):
     body['attributes']['validThrough'] = 'validThrough'
     body['attributes']['validFrom'] = 'validFrom'
     body['attributes']['channel'] = 'channel'
-    body['attributes']['avs_acceptance_point_id'] = 'avs_acceptance_point_id'
+    body['attributes']['avs_id'] = 'avs_id'
     
     return body

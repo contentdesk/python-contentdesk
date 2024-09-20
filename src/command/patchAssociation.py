@@ -50,10 +50,10 @@ def createAssociation(association, akeneo):
     body = {
         "code": code,
         "labels": {
-            "en_US": association["label.en_US"],
-            "de_CH": association["label.de_CH"],
-            "fr_FR": association["label.fr_FR"],
-            "it_IT": association["label.it_IT"],
+            "en_US": association["association.label.en_US"],
+            "de_CH": association["association.label.de_CH"],
+            "fr_FR": association["association.label.fr_FR"],
+            "it_IT": association["association.label.it_IT"],
             }
     }
 

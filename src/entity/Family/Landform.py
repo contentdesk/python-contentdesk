@@ -47,6 +47,9 @@ def setBody(family, families):
     body['attributes']['image_08_scope_description'] = 'image_08_scope_description'
     body['attributes']['image_09_scope_description'] = 'image_09_scope_description'
     body['attributes']['image_10_scope_description'] = 'image_10_scope_description'
+    
+    # marker Icon
+    body['attributes'] = 'markerIcon'
 
     body["attributes"] = attributes
 

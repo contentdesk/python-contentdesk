@@ -236,6 +236,10 @@ def create(family, families, akeneo):
             attributes['image_09_scope_description'] = 'image_09_scope_description'
         if 'image_10_scope' in attributes:
             attributes['image_10_scope_description'] = 'image_10_scope_description'
+        # marker Icon
+        attributes['markerIcon'] = 'markerIcon'
+            
+    
 
     if 'geo' in attributes:
         attributes['longitude'] = 'longitude'

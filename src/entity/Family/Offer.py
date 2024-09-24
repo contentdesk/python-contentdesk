@@ -49,6 +49,6 @@ def setBody(family, families):
     body['attributes']['channel'] = 'channel'
     
     # Remove after Release Contentdesk 3.5.0
-    body['attributes']['avs_id'] = 'avs_id' # only now demo and vgl
+    #body['attributes']['avs_id'] = 'avs_id' # only now demo and vgl
     
     return body

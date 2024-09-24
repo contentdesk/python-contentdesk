@@ -113,6 +113,8 @@ def importFamilyEnitity(code):
         import entity.Family.Schedule as Family
     elif (code == "Product"):
         import entity.Family.Product as Family
+    elif (code == "Offer"):
+        import entity.Family.Offer as Family
     elif (code == "GuestCard"):
         import entity.Family.GuestCard as Family
     elif (code == "Webcam" or

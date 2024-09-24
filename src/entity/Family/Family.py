@@ -99,7 +99,7 @@ def getParentAttributesRequirements(type, types, attribute_requirements):
         attribute_requirements = merge_dicts(attribute_requirements, typeAttributes)
     if 'parent' in type:
         if type['parent'] != None:
-            if type['label'] != "Thing" or type['label'] != "Trip":
+            if type['label'] != "Thing" or type['parent'] != "Trip":
                 print("Parent Type: ", type['parent'])
                 #print("Parent Type: ", type['parent'])
                 # find in types array type['parent'] as type['label']

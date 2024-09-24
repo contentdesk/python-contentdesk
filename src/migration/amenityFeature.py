@@ -53,7 +53,6 @@ def mappingList():
         "public_parking":"general_carpark",
         "public_restaurant":"food_restaurant",
         "aII_rooms_with_radio":"media_radio",
-        "radio_tv":"media_tv",
         "restaurant":"food_restaurant",
         "sauna":"wellness_sauna",
         "snack_restaurant":"food_snackbar",
@@ -83,6 +82,7 @@ def removeList():
         "particularly_quiet_rooms",
         "catering",
         "grill_restaurant",
+        "radio_tv",
         "home_delivery_service",
         "historical_building",
         "credit_cards_accepted",
@@ -110,7 +110,12 @@ def removeList():
         "doubleroom",
         "doubleroombalcony",
         "familyroom",
-        
+        "bathroom",
+        "tv",
+        "eventhall",
+        "freeparkting",
+        "tumbler",
+        "bathtube",
         }
     return removeList
         

@@ -11,7 +11,22 @@ def importFamilyEnitity(code):
         code == "Hostel" or
         code == "Hotel" or
         code == "Motel" or
-        code == "Resort"
+        code == "Resort" or
+        code == "HolidayHouse" or
+        code == "HolidayApartment" or
+        code == "Agrotourism" or
+        code == "CountryInn" or
+        code == "FarmLodging" or
+        code == "Garni" or
+        code == "GroupAccommodation" or
+        code == "Guesthouse" or
+        code == "IglooVillage" or
+        code == "Mountainhut" or
+        code == "RescueHut" or
+        code == "SelfCateredHut" or
+        code == "ManagedHut" or
+        code == "Pension" or
+        code == "PrivateRoom"
         ):
         import entity.Family.LodgingBusiness as Family
     elif (

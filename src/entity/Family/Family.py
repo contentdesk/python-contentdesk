@@ -86,7 +86,10 @@ def getParentAttributes(type, types, attributes):
                 parent = [parent for parent in types if parent["label"] == type['parent']]
                 #print("Check Parent: ")
                 #print(parent)
-                getParentAttributes(parent[0], types, attributes)
+                if parent:
+                    getParentAttributes(parent[0], types, attributes)
+                else:
+                    print(f"Parent type '{type['parent']}' not found in types.")
     return attributes
 
 def getParentAttributesRequirements(type, types, attribute_requirements):
@@ -99,18 +102,18 @@ def getParentAttributesRequirements(type, types, attribute_requirements):
         attribute_requirements = merge_dicts(attribute_requirements, typeAttributes)
     if 'parent' in type:
         if type['parent'] != None:
-            if type['label'] != "Thing":
+            if type['label'] != "Thing" or type['parent'] != "Trip":
                 print("Parent Type: ", type['parent'])
                 #print("Parent Type: ", type['parent'])
                 # find in types array type['parent'] as type['label']
                 parent = [parent for parent in types if parent["label"] == type['parent']]
                 #print("Check Parent: ")
                 #print(parent)
-                if parent != []:
-                    print("Parent not found: ", type['parent'])
-                else:
-                    print("Parent found: ", type['parent'])
+                if parent:
+                    print("Parent not Empty: ", type['parent'])
                     attribute_requirements = getParentAttributesRequirements(parent[0], types, attribute_requirements)
+                else:
+                    print("Parent Empty: ", type['parent'])
 
     return attribute_requirements
 

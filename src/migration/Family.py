@@ -10,9 +10,9 @@ import logging
 
 def getProducts(target, family):
     #search = 'search={"openingHours_text":[{"operator":"NOT EMPTY","value":"","locale":"de_CH"}]}'
-    search = '{"code":[{"operator":"IN","value":["'+family+'"]}]}'
+    search = '{"family":[{"operator":"IN","value":["'+family+'"]}]}'
     #products = target.getProductBySearch(search)
-    products = target.getProducts()
+    products = target.getProducts(search)
     return products
 
 def removeProperties(product, newFamily):

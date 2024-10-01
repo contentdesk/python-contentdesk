@@ -528,8 +528,6 @@ def setBody(family, families):
     
     if 'potentialAction' in attributes:
         attributes['target'] = 'target'
-        
-    attributes['channel'] = 'channel'
 
     #print("Attributes: ")
     #print(attributes)

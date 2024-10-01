@@ -9,7 +9,6 @@ def setBody(family, families):
     
     attributes['disambiguatingDescription'] = 'disambiguatingDescription'
     attributes['description'] = 'description'
-    attributes['channel'] = 'channel'
     
     body = {}
     body["code"] = code

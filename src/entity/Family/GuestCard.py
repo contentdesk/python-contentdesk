@@ -11,7 +11,6 @@ def setBody(family, families):
     
     attributes['disambiguatingDescription'] = 'disambiguatingDescription'
     attributes['description'] = 'description'
-    attributes['channel'] = 'channel'
     
     body = {}
     body["code"] = code
@@ -49,7 +48,7 @@ def setBody(family, families):
     
     body['attributes']['validThrough'] = 'validThrough'
     body['attributes']['validFrom'] = 'validFrom'
-    body['attributes']['channel'] = 'channel'
+    
     # Remove after Release Contentdesk 3.5.0
     body['attributes']['avs_id'] = 'avs_id' # only now
     

@@ -43,7 +43,7 @@ def setBody(family, families):
     body['attributes']['image_10_scope_description'] = 'image_10_scope_description'
     
     # marker Icon
-    body['attributes'] = 'markerIcon'
+    body['attributes']['markerIcon'] = 'markerIcon'
     
     return body
 

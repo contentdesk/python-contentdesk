@@ -50,5 +50,7 @@ def setBody(family, families):
     
     body['attributes']['potentialAction'] = 'potentialAction'
     body['attributes']['target'] = 'target'
+    
+    body['attributes']['markerIcon'] = 'markerIcon'
 
     return body

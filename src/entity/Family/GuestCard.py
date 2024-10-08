@@ -47,7 +47,7 @@ def setBody(family, families):
     body['attributes']['potentialAction'] = 'potentialAction'
     body['attributes']['target'] = 'target'
     
-    body['attributes']['availability'] = 'availability'
+    #body['attributes']['availability'] = 'availability'
     
     body['attributes']['offers'] = 'offers'
     body['attributes']['price'] = 'price'

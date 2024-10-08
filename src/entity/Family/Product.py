@@ -3,7 +3,14 @@ import service.debug as debug
 def setBody(family, families):
     code = family["label"]
     
-    attribute_requirements = {"sku": "sku", "name": "name", "image": "image", "license": "license"}
+    attribute_requirements = {
+        "sku": "sku", 
+        "name": "name", 
+        "image": "image", 
+        "license": "license",
+        "validThrough": "validThrough",
+        "validFrom": "validFrom"
+        }
     
     attributes = {}
     
@@ -54,6 +61,10 @@ def setBody(family, families):
     
     body['attributes']['validThrough'] = 'validThrough'
     body['attributes']['validFrom'] = 'validFrom'
-    body['attributes']['channel'] = 'channel'
+    
+    body['attributes']['leisure'] = 'leisure'
+    
+    # only now demo and vgl
+    #body['attributes']['avs_id'] = 'avs_id'
     
     return body

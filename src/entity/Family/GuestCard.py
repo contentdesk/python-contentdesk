@@ -5,7 +5,14 @@ import service.debug as debug
 def setBody(family, families):
     code = family["label"]
     
-    attribute_requirements = {"sku": "sku", "name": "name", "image": "image", "license": "license"}
+    attribute_requirements = {
+        "sku": "sku", 
+        "name": "name", 
+        "image": "image", 
+        "license": "license",
+        "validThrough": "validThrough",
+        "validFrom": "validFrom",
+        }
     
     attributes = {}
     
@@ -49,7 +56,9 @@ def setBody(family, families):
     body['attributes']['validThrough'] = 'validThrough'
     body['attributes']['validFrom'] = 'validFrom'
     
+    body['attributes']['leisure'] = 'leisure'
+    
     # Remove after Release Contentdesk 3.5.0
-    body['attributes']['avs_id'] = 'avs_id' # only now
+    #body['attributes']['avs_id'] = 'avs_id' # only now
     
     return body

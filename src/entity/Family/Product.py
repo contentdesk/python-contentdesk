@@ -7,9 +7,7 @@ def setBody(family, families):
         "sku": "sku", 
         "name": "name", 
         "image": "image", 
-        "license": "license",
-        "validThrough": "validThrough",
-        "validFrom": "validFrom"
+        "license": "license"
         }
     
     attributes = {}

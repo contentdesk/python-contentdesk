@@ -51,7 +51,7 @@ def setBody(family, families):
     body['attributes']['height'] = 'height'
     #body['attributes']['duration'] = 'duration' # only ziggy
     
-    body['attributes']['availability'] = 'availability'
+    #body['attributes']['availability'] = 'availability'
     
     body['attributes']['offers'] = 'offers'
     body['attributes']['price'] = 'price'

@@ -55,6 +55,8 @@ def setBody(family, families):
     
     body['attributes']['leisure'] = 'leisure'
     
+    body['attributes']['offers'] = 'offers'
+    
     # only now demo and vgl
     #body['attributes']['avs_id'] = 'avs_id'
     

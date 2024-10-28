@@ -57,6 +57,28 @@ def setBody(family, families):
     
     body['attributes']['offers'] = 'offers'
     
+    # Befor Release 3.5.0
+    attributes['image_01_scope'] = 'image_01_scope'
+    attributes['image_01_scope_description'] = 'image_01_scope_description'
+    attributes['image_02_scope'] = 'image_02_scope'
+    attributes['image_02_scope_description'] = 'image_02_scope_description'
+    attributes['image_03_scope'] = 'image_03_scope'
+    attributes['image_03_scope_description'] = 'image_03_scope_description'
+    attributes['image_04_scope'] = 'image_04_scope'
+    attributes['image_04_scope_description'] = 'image_04_scope_description'
+    attributes['image_05_scope'] = 'image_05_scope'
+    attributes['image_05_scope_description'] = 'image_05_scope_description'
+    attributes['image_06_scope'] = 'image_06_scope'
+    attributes['image_06_scope_description'] = 'image_06_scope_description'
+    attributes['image_07_scope'] = 'image_07_scope'
+    attributes['image_07_scope_description'] = 'image_07_scope_description'
+    attributes['image_08_scope'] = 'image_08_scope'
+    attributes['image_08_scope_description'] = 'image_08_scope_description'
+    attributes['image_09_scope'] = 'image_09_scope'
+    attributes['image_09_scope_description'] = 'image_09_scope_description'
+    attributes['image_10_scope'] = 'image_10_scope'
+    attributes['image_10_scope_description'] = 'image_10_scope_description'
+    
     # only now demo and vgl
     #body['attributes']['avs_id'] = 'avs_id'
     

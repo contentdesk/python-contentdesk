@@ -41,5 +41,8 @@ def setBody(family, families):
     
     # marker Icon
     body['attributes']['markerIcon'] = 'markerIcon'
+    
+    body['attributes']['publicAccess'] = 'publicAccess'
+    body['attributes']['isAccessibleForFree'] = 'isAccessibleForFree'
 
     return body

@@ -528,6 +528,9 @@ def setBody(family, families):
 
     #print("Attributes: ")
     #print(attributes)
+    
+    attributes['publicAccess'] = 'publicAccess'
+    attributes['isAccessibleForFree'] = 'isAccessibleForFree'
 
     # Remove Properties
     #print("Remove Attributes: ")

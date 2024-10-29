@@ -22,5 +22,6 @@ def setBody(family, families):
     body['attributes']['metaDescription'] = 'metaDescription'
     body['attributes']['canonicalUrl'] = 'canonicalUrl'
     
+    body['attributes']['isAccessibleForFree'] = 'isAccessibleForFree'
     
     return body

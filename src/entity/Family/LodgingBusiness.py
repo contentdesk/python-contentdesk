@@ -56,6 +56,10 @@ def setBody(family, families):
     
     # marker Icon
     body['attributes']['markerIcon'] = 'markerIcon'
+    
+    # discover.swiss Testing
+    body['attributes']['parking'] = 'parking'
+    body['attributes']['publicTransport'] = 'publicTransport'
 
     body["attributes"] = attributes
 

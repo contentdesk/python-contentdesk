@@ -20,11 +20,15 @@ def transform(products):
     productsUpdated = []
     for product in products:
         if attribute in product["values"]:
+            productsUpdated.append(product)
             for openingHours in product["values"][attribute]:
-                if "opens" in openingHours and "closes" in openingHours:
-                    openingHours["opens"] = (datetime.strptime(openingHours["opens"].replace("Z", ""), "%H:%M:%S") + timedelta(hours=2)).strftime("%H:%M:%S")
-                    openingHours["closes"] = (datetime.strptime(openingHours["closes"].replace("Z", ""), "%H:%M:%S") + timedelta(hours=2)).strftime("%H:%M:%S")
-                    productsUpdated.append(product)
+                for hours in openingHours['data']:
+                    print(hours)
+                    for key, value in hours.items():
+                        if key == "opens" or key == "closes":
+                            if value is not None:
+                                openingHours[key] = (datetime.strptime(value.replace("Z", ""), "%H:%M") + timedelta(hours=2)).strftime("%H:%M")
+                                print(openingHours[key])
     return productsUpdated
 
 def uploadProducts(target, products):

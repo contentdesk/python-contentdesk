@@ -29,6 +29,8 @@ def transform(products):
                             if value is not None:
                                 openingHours[key] = (datetime.strptime(value.replace("Z", ""), "%H:%M") + timedelta(hours=2)).strftime("%H:%M")
                                 print(openingHours[key])
+                                # replace value in product
+                    print (hours)
     return productsUpdated
 
 def uploadProducts(target, products):

@@ -39,6 +39,7 @@ def transform(products):
                 openingHours['data'] = newOpeningHours
                 print (openingHours)
             productsUpdated.append(product)
+            print(product["values"][attribute])
     return productsUpdated
 
 def uploadProducts(target, products):

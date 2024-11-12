@@ -27,6 +27,8 @@ def importMigrationSettings(attribute):
         import migration.MeetingRoom as migration
     elif(attribute == "Recommendation"):
         import migration.Recommendation as migration
+    elif(attribute == "openingHoursSpecification"):
+        import migration.openingHoursSpecification as migration
     return migration
 
 def main(environment, target, attributes):

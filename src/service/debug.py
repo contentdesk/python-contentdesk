@@ -28,6 +28,22 @@ def addToFileMigration(environment, attribute, name, data):
     
     with open("../../output/migration/"+environment+"/"+attribute+"/"+name+"-"+str_current_datetime+".json", "w") as file:
         file.write(json.dumps(data))
+
+# DEBUG - Export
+def addToFileExport(environment, attribute, name, data):
+    # get current date and time
+    current_datetime = datetime.now().strftime("%Y-%m-%d %H-%M-%S")
+    print("Current date & time : ", current_datetime)
+    
+    # convert datetime obj to string
+    str_current_datetime = str(current_datetime)
+    
+    # Check if folder exists
+    if not os.path.exists("../../output/export/"+environment+"/"+attribute):
+        os.makedirs("../../output/export/"+environment+"/"+attribute)
+    
+    with open("../../output/export/"+environment+"/"+attribute+"/"+name+"-"+str_current_datetime+".json", "w") as file:
+        file.write(json.dumps(data))
         
 # add now Date and Time to Filename
 def loggingToFile(type, data):

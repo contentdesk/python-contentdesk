@@ -4,7 +4,7 @@ def filter(products, attribute):
     #attribute = "openingHoursSpecification"
     productsUpdated = []
     for product in products:
-        if attribute in product and product["values"][attribute]:
+        if attribute in product["values"]:
             productsUpdated.append(product)
     return productsUpdated
 

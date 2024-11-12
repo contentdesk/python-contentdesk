@@ -8,6 +8,18 @@ def filter(products, attribute):
             productsUpdated.append(product)
     return productsUpdated
 
+def skuList(products):
+    skuList = []
+    for product in products:
+        skuList.append(product["identifier"])
+    return skuList
+
+def uuidList(products):
+    uuidList = []
+    for product in products:
+        uuidList.append(product["uuid"])
+    return uuidList
+
 def main(environment, target, attributes):
     for attribute in attributes:
         print("START Export PRODUCTS for: ", attribute)
@@ -18,6 +30,12 @@ def main(environment, target, attributes):
         print("Filter Products")
         productsTranform = filter(products, attribute)
         debug.addToFileExport(environment, attribute, 'transform', productsTranform)
+        
+        productsSku = skuList(productsTranform)
+        debug.addToFileExport(environment, attribute, 'sku', productsSku)
+        
+        productsUuid = uuidList(productsTranform)
+        debug.addToFileExport(environment, attribute, 'uuid', productsUuid)
         
         # Stop for Export
         #print("Upload Products")

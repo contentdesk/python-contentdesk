@@ -20,8 +20,9 @@ def transform(products):
     productsUpdated = []
     for product in products:
         if attribute in product["values"]:
-            productsUpdated.append(product)
+            #productsUpdated.append(product)
             for openingHours in product["values"][attribute]:
+                newOpeningHours = []
                 for hours in openingHours['data']:
                     print(hours)
                     for key, value in hours.items():
@@ -32,6 +33,12 @@ def transform(products):
                                 # replace value in product
                                 hours[key] = openingHours[key]
                     print (hours)
+                    # add to array
+                    newOpeningHours.append(hours)
+                # replace value in product
+                openingHours['data'] = newOpeningHours
+                print (openingHours)
+            productsUpdated.append(product)
     return productsUpdated
 
 def uploadProducts(target, products):

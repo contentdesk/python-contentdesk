@@ -19,6 +19,8 @@ def transform(products):
     attribute = "openingHoursSpecification"
     productsUpdated = []
     for product in products:
+        productUpdate = {}
+        productUpdate["identifier"] = product["identifier"]
         if attribute in product["values"]:
             #productsUpdated.append(product)
             for openingHours in product["values"][attribute]:
@@ -40,9 +42,9 @@ def transform(products):
                 openingHours['data'] = newOpeningHours
                 print (openingHours)
             # add to product
-            product["values"][attribute][0]['data'] = newOpeningHours
-            print(product["values"][attribute])
-            productsUpdated.append(product)
+            productUpdate["values"][attribute][0]['data'] = newOpeningHours
+            print(productUpdate["values"][attribute])
+            productsUpdated.append(productUpdate)
             #print(product["values"][attribute])
     return productsUpdated
 

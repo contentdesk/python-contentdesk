@@ -32,7 +32,7 @@ def transform(products):
                                     openingHours[key] = (datetime.strptime(value.replace("Z", ""), "%H:%M") + timedelta(hours=2)).strftime("%H:%M")
                                     print(openingHours[key])
                                     # replace value in product
-                                hours[key] = openingHours[key]
+                                    hours[key] = openingHours[key]
                     print (hours)
                     # add to array
                     newOpeningHours.append(hours)
@@ -40,7 +40,7 @@ def transform(products):
                 openingHours['data'] = newOpeningHours
                 print (openingHours)
             # add to product
-            product["values"][attribute]['data'] = newOpeningHours
+            product["values"][attribute][0]['data'] = newOpeningHours
             print(product["values"][attribute])
             productsUpdated.append(product)
             #print(product["values"][attribute])

@@ -28,9 +28,10 @@ def transform(products):
                     for key, value in hours.items():
                         if key == "opens" or key == "closes":
                             if value is not None:
-                                openingHours[key] = (datetime.strptime(value.replace("Z", ""), "%H:%M") + timedelta(hours=2)).strftime("%H:%M")
-                                print(openingHours[key])
-                                # replace value in product
+                                if "Z" in value:
+                                    openingHours[key] = (datetime.strptime(value.replace("Z", ""), "%H:%M") + timedelta(hours=2)).strftime("%H:%M")
+                                    print(openingHours[key])
+                                    # replace value in product
                                 hours[key] = openingHours[key]
                     print (hours)
                     # add to array
@@ -38,11 +39,24 @@ def transform(products):
                 # replace value in product
                 openingHours['data'] = newOpeningHours
                 print (openingHours)
-            productsUpdated.append(product)
+            # add to product
+            product["values"][attribute]['data'] = newOpeningHours
             print(product["values"][attribute])
+            productsUpdated.append(product)
+            #print(product["values"][attribute])
     return productsUpdated
 
 def uploadProducts(target, products):
-    # save on file for manual fix
-    # stop here
-    debug.addToFileMigration("test", "openingHoursSpecification", 'upload', products)
+    for product in products:
+        print("Upload Product: ", product['identifier'])
+        print("Product: ", product)
+        try:
+            print("Start Upload")
+            response = target.patchProductByCode(product['identifier'], product)
+            print("Response: ", response)
+        except Exception as e:
+            print("Error: ", e)
+            # Add To Error Log File
+            debug.loggingToFile("error", e)   
+             
+    print("Upload Products")

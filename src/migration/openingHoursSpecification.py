@@ -14,7 +14,6 @@ def getProducts(target):
     products = target.getProductBySearch()
     return products
 
-
 def transform(products):
     attribute = "openingHoursSpecification"
     productsUpdated = []

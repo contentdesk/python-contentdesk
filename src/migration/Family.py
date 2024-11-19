@@ -3,8 +3,8 @@ import logging
 
 ####################################################################################################
 # https://tourismus.atlassian.net/browse/PIM-511
-# 1. Export all Products with Family xy
-# 2. Migration Family xy to Family xy
+# 1. Export all Products with Family x
+# 2. Migration Family x to Family y
 # 3. Upload all changed Products
 ####################################################################################################
 

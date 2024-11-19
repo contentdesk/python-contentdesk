@@ -11,7 +11,6 @@ def setBody(family, families):
     body['attributes']['addressLocality'] = 'addressLocality'
     body['attributes']['addressCountry'] = 'addressCountry'
     body['attributes']['addressRegion'] = 'addressRegion'
-    body['attributes']['tourismregion'] = 'tourismregion'
     
     body['attributes']['startTime'] = 'startTime'
     body['attributes']['endTime'] = 'endTime'

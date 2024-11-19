@@ -251,7 +251,6 @@ def create(family, families, akeneo):
         attributes['addressLocality'] = 'addressLocality'
         attributes['addressCountry'] = 'addressCountry'
         attributes['addressRegion'] = 'addressRegion'
-        attributes['tourismregion'] = 'tourismregion'
         # Contact
         attributes['legalName'] = 'legalName'
         attributes['department'] = 'department'
@@ -483,7 +482,6 @@ def setBody(family, families):
         attributes['addressLocality'] = 'addressLocality'
         attributes['addressCountry'] = 'addressCountry'
         attributes['addressRegion'] = 'addressRegion'
-        attributes['tourismregion'] = 'tourismregion'
         # Contact
         attributes['legalName'] = 'legalName'
         attributes['department'] = 'department'

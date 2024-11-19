@@ -2,8 +2,6 @@ import entity.Family.Family as Family
 
 def setBody(family, families):
     
-    print("Family: ", family)
-    
     attribute_requirements = {
                                 "sku": "sku", 
                                 "name": "name", 

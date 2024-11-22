@@ -399,6 +399,10 @@ def setBody(family, families):
 
     # add Parent Attributes
     attributes = getParentAttributes(family, families, attributes)
+    
+    # Add default Attributes
+    attributes['disambiguatingDescription'] = 'disambiguatingDescription'
+    attributes['description'] = 'description'
 
     # Check if specific attributes are set
     # examples license needs add copyrightHolder and author

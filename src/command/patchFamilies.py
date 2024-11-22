@@ -58,7 +58,7 @@ def createFamilies(target, families, importFamilies = None):
                 #print("Continue")
                 continue
         print ("CREATE - Family: "+ family["label"])
-        if family["enabled"] == 1 and family["type"] == None or family["type"] == "additinalTypes":
+        if family["enabled"] == 1:
             patchAkeneoFamily.patchAkeneoFamily(family, families, target)
 
 def main():

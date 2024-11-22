@@ -3,6 +3,7 @@ import entity.Family.Family as Family
 
 def importFamilyEnitity(code):
     if (code == "MeetingRoom"):
+        print("Load MeetingRoom")
         import entity.Family.MeetingRoom as Family
     elif (
         code == "LodgingBusiness" or
@@ -28,6 +29,7 @@ def importFamilyEnitity(code):
         code == "Pension" or
         code == "PrivateRoom"
         ):
+        print("Load LodgingBusiness")
         import entity.Family.LodgingBusiness as Family
     elif (
         code == "FoodEstablishment" or
@@ -40,15 +42,19 @@ def importFamilyEnitity(code):
         code == "IceCreamShop" or 
         code == "Restaurant" or
         code == "Winery"):
+        print("Load FoodEstablishment")
         import entity.Family.FoodEstablishment as Family
     elif (code == "TouristAttraction"):
+        print("Load TouristAttraction")
         import entity.Family.TouristAttraction as Family
     elif (code == "CivicStructure"):
+        print("Load CivicStructure")
         import entity.Family.CivicStructure as Family
     elif (code == "Webcam" or
           code == "LiveVideo" or
           code == "StaticWebcam" or
           code == "WebLink"):
+        print("Load Webcam")
         import entity.Family.Webcam as Family
     elif (code == "Event" or
           code == "BusinessEvent" or
@@ -70,12 +76,13 @@ def importFamilyEnitity(code):
           code == "SportsEvent" or
           code == "TheaterEvent" or
           code == "VisualArtsEvent"):
+        print("Load Event")
         import entity.Family.Event as Family
     elif (code == "MediaObejct" or
           code == "AudioObject" or
           code == "VideoObject" or
           code == "ImageObject"):
-        print("MediaObject")
+        print("Load MediaObject")
         import entity.Family.MediaObject as Family
     elif (code == "Landform" or
           code == "BodyOfWater" or
@@ -87,48 +94,31 @@ def importFamilyEnitity(code):
           code == "Mountain" or
           code == "Volcano" or
           code == "Waterfall"):
+        print("Load Landform")
         import entity.Family.Landform as Family
-    elif (code == "Event" or
-          code == "BusinessEvent" or
-          code == "ChildrensEvent" or
-          code == "ComedyEvent" or
-          code == "DanceEvent" or
-          code == "DeliveryEvent" or
-          code == "EducationEvent" or
-          code == "ExhibitionEvent" or
-          code == "Festival" or
-          code == "FoodEvent" or
-          code == "Hackathon" or
-          code == "LiteraryEvent" or
-          code == "MusicEvent" or
-          code == "PublicationEvent" or
-          code == "SaleEvent" or
-          code == "ScreeningEvent" or
-          code == "SocialEvent" or
-          code == "SportsEvent" or
-          code == "TheaterEvent" or
-          code == "VisualArtsEvent"):
-        import entity.Family.Schedule as Family
     elif (code == "Schedule"):
+        print("Load Schedule")
         import entity.Family.Schedule as Family
     elif (code == "Product"):
+        print("Load Product")
         import entity.Family.Product as Family
     elif (code == "Offer"):
+        print("Load Offer")
         import entity.Family.Offer as Family
     elif (code == "GuestCard"):
+        print("Load GuestCard")
         import entity.Family.GuestCard as Family
-    elif (code == "Webcam" or
-          code == "LiveVideo" or
-          code == "StaticWebcam" or
-          code == "WebLink"):
-        import entity.Family.Webcam as Family
     elif (code == "Trail"):
+        print("Load Trail")
         import entity.Family.Trail as Family
     elif (code == "Recommendation"):
+        print("Load Recommendation")
         import entity.Family.Recommendation as Family
     elif (code == "Organization"):
+        print("Load Organization")
         import entity.Family.Organization as Family
     elif (code == "Place"):
+        print("Load Place")
         import entity.Family.Place as Family
     else:
         # Default all 

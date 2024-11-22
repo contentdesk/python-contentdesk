@@ -44,10 +44,11 @@ def main():
         akeneoFamilies = target.getFamilies()
         discoverFamilies = getAllFamilyNotByDiscover()
         
-        # Compare akeneoFamilies colum code with discoverFamilies colum label and save the difference in a JSON file
-        families = [family for family in akeneoFamilies if family["code"] not in discoverFamilies["label"]]
+        # Compare colum code from akeneoFamilies with colum label from discoverFamilies and save the difference in a JSON file
+        # Save the difference in a JSON file
+        differenceFamilies = [family for family in akeneoFamilies if family["code"] not in [df["label"] for df in discoverFamilies]]
         
-        debug.addToFileExport(environment, 'all', 'family', families)
+        debug.addToFileExport(environment, 'all', 'family', differenceFamilies)
         
     print("FINISH EXPORT FAMILIES")
     

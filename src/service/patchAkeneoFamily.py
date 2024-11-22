@@ -138,6 +138,7 @@ def importFamilyEnitity(code):
 def patchAkeneoFamily(family, families, target):
     Family = importFamilyEnitity(family["label"])
     print("PATCH Family: ", family["label"])
+    print("Parent Family: ", family["parent"])
     body = Family.setBody(family, families)
     response = patchFamily(family["label"], body, target)
     print("FINISH - patch Family: ", family["label"])

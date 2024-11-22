@@ -122,6 +122,7 @@ def importFamilyEnitity(code):
         import entity.Family.Place as Family
     else:
         # Default all 
+        print("Load Family")
         import entity.Family.Family as Family
     return Family
 

@@ -205,8 +205,8 @@ def create(family, families, akeneo):
     attributes = getParentAttributes(family, families, attributes)
     
     # Add default Attributes
-    body["attributes"]['disambiguatingDescription'] = 'disambiguatingDescription'
-    body["attributes"]['description'] = 'description'
+    attributes['disambiguatingDescription'] = 'disambiguatingDescription'
+    attributes['description'] = 'description'
 
     # Check if Place Type
     if checkParentType(family, families, "Place"):

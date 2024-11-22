@@ -39,10 +39,26 @@ def addToFileExport(environment, attribute, name, data):
     str_current_datetime = str(current_datetime)
     
     # Check if folder exists
-    if not os.path.exists("../../output/export/"+environment+"/"+attribute):
-        os.makedirs("../../output/export/"+environment+"/"+attribute)
+    if not os.path.exists("../../output/export/"+environment+"/attribute/"+attribute):
+        os.makedirs("../../output/export/"+environment+"/attribute/"+attribute)
     
-    with open("../../output/export/"+environment+"/"+attribute+"/"+name+"-"+str_current_datetime+".json", "w") as file:
+    with open("../../output/export/"+environment+"/attribute/"+attribute+"/"+name+"-"+str_current_datetime+".json", "w") as file:
+        file.write(json.dumps(data))
+        
+# DEBUG - Export Family
+def addToFileExport(environment, family, name, data):
+    # get current date and time
+    current_datetime = datetime.now().strftime("%Y-%m-%d %H-%M-%S")
+    print("Current date & time : ", current_datetime)
+    
+    # convert datetime obj to string
+    str_current_datetime = str(current_datetime)
+    
+    # Check if folder family
+    if not os.path.exists("../../output/export/"+environment+"/family/"+family):
+        os.makedirs("../../output/export/"+environment+"/family/"+family)
+    
+    with open("../../output/export/"+environment+"/family/"+family+"/"+name+"-"+str_current_datetime+".json", "w") as file:
         file.write(json.dumps(data))
         
 # add now Date and Time to Filename

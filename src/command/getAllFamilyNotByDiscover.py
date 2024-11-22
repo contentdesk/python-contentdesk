@@ -12,10 +12,23 @@ from service.loadEnv import loadEnv
 import service.debug as debug
 
 def getAllFamilyNotByDiscover():
-    # Define the CSV URL
+        # Define the CSV URL
+    csv_url = "https://docs.google.com/spreadsheets/d/1-vZI8rZxwbUVqvxU9tn5dVhZG282LXF7KvDTTvyuOfY/gviz/tq?tqx=out:csv&sheet=setupTypes"
+    addition_csv_url = "https://docs.google.com/spreadsheets/d/1-vZI8rZxwbUVqvxU9tn5dVhZG282LXF7KvDTTvyuOfY/gviz/tq?tqx=out:csv&sheet=additionalTypes"
     discover_csv_url = "https://docs.google.com/spreadsheets/d/1-vZI8rZxwbUVqvxU9tn5dVhZG282LXF7KvDTTvyuOfY/gviz/tq?tqx=out:csv&sheet=discoverTypes"
 
-    df = pd.read_csv(discover_csv_url)
+    df = pd.read_csv(csv_url)
+    df_addition = pd.read_csv(addition_csv_url)
+    print("Add Disocver.swiss Types") 
+    df_discover = pd.read_csv(discover_csv_url)
+
+    df_discover = df_discover[df_discover["enabled"] == True]
+    print(df_discover)
+
+    df = pd.concat([df, df_addition])
+    # concat df and df_discover by column label
+    df = pd.concat([df_discover, df])
+
     # merge row with same colum label
     #df = df.groupby("label").first().reset_index()
     #df = df.drop_duplicates(subset=['label'])
@@ -49,6 +62,12 @@ def main():
         differenceFamilies = [family for family in akeneoFamilies if family["code"] not in [df["label"] for df in discoverFamilies]]
         
         debug.addToFileExport(environment, 'all', 'family', differenceFamilies)
+        
+        onlyCode = []
+        for family in differenceFamilies:
+            onlyCode.append(family["code"])
+        
+        debug.addToFileExport(environment, 'family', family["code"], onlyCode)
         
     print("FINISH EXPORT FAMILIES")
     

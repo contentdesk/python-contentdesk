@@ -11,7 +11,7 @@ import service.cliArguments as cliArguments
 from service.loadEnv import loadEnv
 import service.debug as debug
 
-def getAllFamilyNotByDiscover():
+def getAllFamilyNotDefined():
         # Define the CSV URL
     csv_url = "https://docs.google.com/spreadsheets/d/1-vZI8rZxwbUVqvxU9tn5dVhZG282LXF7KvDTTvyuOfY/gviz/tq?tqx=out:csv&sheet=setupTypes"
     addition_csv_url = "https://docs.google.com/spreadsheets/d/1-vZI8rZxwbUVqvxU9tn5dVhZG282LXF7KvDTTvyuOfY/gviz/tq?tqx=out:csv&sheet=additionalTypes"
@@ -55,7 +55,7 @@ def main():
         targetCon = loadEnv(environment)
         target = Akeneo(targetCon["host"], targetCon["clientId"], targetCon["secret"], targetCon["user"], targetCon["passwd"])
         akeneoFamilies = target.getFamilies()
-        discoverFamilies = getAllFamilyNotByDiscover()
+        discoverFamilies = getAllFamilyNotDefined()
         
         # Compare colum code from akeneoFamilies with colum label from discoverFamilies and save the difference in a JSON file
         # Save the difference in a JSON file

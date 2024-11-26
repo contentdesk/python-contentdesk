@@ -162,7 +162,7 @@ def importFamilyEnitity(code):
 def patchAkeneoFamily(family, families, target):
     Family = importFamilyEnitity(family["label"])
     print("PATCH Family: ", family["label"])
-    print("Parent Family: ", family["parent"])
+    print("- Parent Family: ", family["parent"])
     body = Family.setBody(family, families)
     response = patchFamily(family["label"], body, target)
     print("FINISH - patch Family: ", family["label"])
@@ -201,10 +201,10 @@ def patchFamily(code, body, akeneo):
         # DEBUG - Write to file
         debug.addToFile(code, body)
         # To Akeneo
-        print("Patch family")
+        print("- Patch family")
         response = akeneo.patchFamily(code, body)
-        print("Response: ", response)
-        print("Status Code: ", response.status_code)
+        print("- Response: ", response)
+        print("- Status Code: ", response.status_code)
         debug.addToLogFile(code, response.text)
            
     except Exception as e:

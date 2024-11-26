@@ -366,7 +366,7 @@ def setBody(family, families):
     if family["attribute_as_image"] == None:
         family["attribute_as_image"] = "image"
 
-    print("Attribute Requirements - setBody")
+    print("- Attribute Requirements - setBody")
     attribute_requirements = getParentAttributesRequirements(family, families, attribute_requirements)
     
     #print("Attribute Requirements: ")
@@ -418,10 +418,10 @@ def setBody(family, families):
         attributes['openingHours'] = 'openingHours'
 
     # Images / Gallery
-    print ("CHECK GALLERY")
+    print ("- CHECK GALLERY")
     if code != "Person" or code != "Organization":
-        print("No Person or Organization")
-        print("Check Partent Place")
+        print("- No Person or Organization")
+        print("- Check Partent Place")
         if (family["parent"] == "Place" or
             family["parent"] == "LocalBusiness" or
             family["parent"] == "FoodEstablishment" or

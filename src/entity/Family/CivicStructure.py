@@ -2,6 +2,8 @@ import entity.Family.Family as Family
 
 def setBody(family, families):
     body = Family.setBody(family, families)
+    
+    attribute_requirements = {"sku": "sku", "name": "name", "image": "image", "openstreetmap_id": "openstreetmap_id"}
 
     body['attributes']['paymentAccepted'] = 'paymentAccepted'
     body['attributes']['currenciesAccepted'] = 'currenciesAccepted'
@@ -41,5 +43,8 @@ def setBody(family, families):
     
     # marker Icon
     body['attributes'] = 'markerIcon'
+    
+    body['attribute_requirements'] = {}
+    body["attribute_requirements"]['ecommerce'] = attribute_requirements
 
     return body

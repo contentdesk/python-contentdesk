@@ -2,6 +2,8 @@ import entity.Family.Family as Family
 
 def setBody(family, families):
     body = Family.setBody(family, families)
+    
+    attribute_requirements = {"sku": "sku", "name": "name", "image": "image", "openstreetmap_id": "openstreetmap_id"}
 
     if 'daytime' in body['attributes']:
         body['attributes'].pop('daytime', None)
@@ -64,5 +66,8 @@ def setBody(family, families):
     body['attributes']['publicTransport'] = 'publicTransport'
 
     body["attributes"] = attributes
-
+    
+    body['attribute_requirements'] = {}
+    body["attribute_requirements"]['ecommerce'] = attribute_requirements
+    
     return body

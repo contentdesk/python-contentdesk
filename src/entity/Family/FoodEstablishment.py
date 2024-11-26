@@ -3,6 +3,8 @@ import entity.Family.Family as Family
 
 def setBody(family, families):
     body = Family.setBody(family, families)
+    
+    attribute_requirements = {"sku": "sku", "name": "name", "image": "image", "openstreetmap_id": "openstreetmap_id"}
 
     if 'starRating' in body['attributes']:
         body['attributes'].pop('starRating')
@@ -46,6 +48,9 @@ def setBody(family, families):
     
     # marker Icon
     body['attributes']['markerIcon'] = 'markerIcon'
+    
+    body['attribute_requirements'] = {}
+    body["attribute_requirements"]['ecommerce'] = attribute_requirements
     
     return body
 

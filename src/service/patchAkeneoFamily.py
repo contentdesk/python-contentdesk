@@ -117,6 +117,39 @@ def importFamilyEnitity(code):
     elif (code == "Organization"):
         print("Load Organization")
         import entity.Family.Organization as Family
+    elif (code == "LocalBusiness" or
+          code == "AnimalShelter" or
+          code == "ArchiveOrganization" or
+          code == "AutomotiveBusiness" or
+          code == "ChildCare" or
+          code == "Dentist" or
+          code == "DryCleaningOrLaundry" or
+          code == "EmergencyService" or
+          code == "EmploymentAgency" or
+          code == "EntertainmentBusiness" or
+          code == "FinancialService" or
+          code == "FoodEstablishment" or
+          code == "GovernmentOffice" or
+          code == "HealthAndBeautyBusiness" or
+          code == "HomeAndConstructionBusiness" or
+          code == "InternetCafe" or
+          code == "LegalService" or
+          code == "Library" or
+          code == "LodgingBusiness" or
+          code == "MedicalBusiness" or
+          code == "ProfessionalService" or
+          code == "RadioStation" or
+          code == "RealEstateAgent" or
+          code == "RecyclingCenter" or
+          code == "SelfStorage" or
+          code == "ShoppingCenter" or
+          code == "SportsActivityLocation" or
+          code == "Store" or
+          code == "TelevisionStation" or
+          code == "TouristInformationCenter" or
+          code == "TravelAgency"):
+        print("Load LocalBusiness")
+        import entity.Family.Place as Family
     elif (code == "Place"):
         print("Load Place")
         import entity.Family.Place as Family

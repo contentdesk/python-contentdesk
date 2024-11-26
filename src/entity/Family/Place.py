@@ -155,7 +155,7 @@ def create(family, families, akeneo):
         attribute_requirements = {attrRequ: attrRequ for attrRequ in family["attribute_requirements.ecommerce"].split(",")}
         #attribute_requirements = family["attribute_requirements.ecommerce"].split(",")
     else:
-        attribute_requirements = {"sku": "sku", "name": "name", "image": "image"}
+        attribute_requirements = {"sku": "sku", "name": "name", "image": "image", "openstreetmap_id": "openstreetmap_id"}
 
     if family["attribute_as_label"] == None:
         family["attribute_as_label"] = "name"
@@ -283,6 +283,7 @@ def create(family, families, akeneo):
     attributes['license'] = 'license'
     attributes['copyrightHolder'] = 'copyrightHolder'
     attributes['author'] = 'author'
+    attributes['openstreetmap_id'] = 'openstreetmap_id'
     
     if 'potentialAction' in attributes:
         attributes['target'] = 'target'
@@ -351,7 +352,7 @@ def setBody(family, families):
         attribute_requirements = {attrRequ: attrRequ for attrRequ in family["attribute_requirements.ecommerce"].split(",")}
         #attribute_requirements = family["attribute_requirements.ecommerce"].split(",")
     else:
-        attribute_requirements = {"sku": "sku", "name": "name", "image": "image"}
+        attribute_requirements = {"sku": "sku", "name": "name", "image": "image", "openstreetmap_id": "openstreetmap_id"}
 
     if family["attribute_as_label"] == None:
         family["attribute_as_label"] = "name"
@@ -509,6 +510,7 @@ def setBody(family, families):
     attributes['search_text_pro_channel'] = 'search_text_pro_channel'
     attributes['promo_sort_order_scope'] = 'promo_sort_order_scope'
     attributes['potentialAction'] = 'potentialAction'
+    attributes['openstreetmap_id'] = 'openstreetmap_id'
 
     if 'license' in attributes:
         attributes['copyrightHolder'] = 'copyrightHolder'

@@ -41,7 +41,7 @@ def removeIgnoreProperties(properties, ignoreProperties):
 
 def getTypeProperties(code):
     attributes = {}
-    print("Get Family Attributes: ", code)
+    print("- Get Family Attributes: ", code)
     typeClassProperties = getFullPropertiesbyType(code)
 
     #attributes = attributes + typeClassProperties
@@ -81,7 +81,7 @@ def getParentAttributes(type, types, attributes):
     if 'parent' in type:
         if type['parent'] != None:
             if type['label'] != "Thing":
-                print("Parent Type: ", type['parent'])
+                print("- Parent Type: ", type['parent'])
                 # find in types array type['parent'] as type['label']
                 parent = [parent for parent in types if parent["label"] == type['parent']]
                 #print("Check Parent: ")
@@ -89,7 +89,7 @@ def getParentAttributes(type, types, attributes):
                 if parent:
                     getParentAttributes(parent[0], types, attributes)
                 else:
-                    print(f"Parent type '{type['parent']}' not found in types.")
+                    print(f"- Parent type '{type['parent']}' not found in types.")
     return attributes
 
 def getParentAttributesRequirements(type, types, attribute_requirements):
@@ -103,17 +103,17 @@ def getParentAttributesRequirements(type, types, attribute_requirements):
     if 'parent' in type:
         if type['parent'] != None:
             if type['label'] != "Thing" or type['parent'] != "Trip":
-                print("Parent Type: ", type['parent'])
+                print("- Parent Type: ", type['parent'])
                 #print("Parent Type: ", type['parent'])
                 # find in types array type['parent'] as type['label']
                 parent = [parent for parent in types if parent["label"] == type['parent']]
                 #print("Check Parent: ")
                 #print(parent)
                 if parent:
-                    print("Parent not Empty: ", type['parent'])
+                    print("- Parent not Empty: ", type['parent'])
                     attribute_requirements = getParentAttributesRequirements(parent[0], types, attribute_requirements)
                 else:
-                    print("Parent Empty: ", type['parent'])
+                    print("- Parent Empty: ", type['parent'])
 
     return attribute_requirements
 
@@ -124,7 +124,7 @@ def checkParentType(type, types, checkType):
     if 'parent' in type:
         if type['parent'] != None:
             if type['label'] != "Thing":
-                print("Check Parent Type: ", type['parent'])
+                print("- Check Parent Type: ", type['parent'])
                 # find in types array type['parent'] as type['label']
                 parent = [parent for parent in types if parent["label"] == type['parent']]
                 #print("Check Parent: ")

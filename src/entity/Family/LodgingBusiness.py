@@ -28,6 +28,8 @@ def setBody(family, families):
     body['attributes']['metaTitle'] = 'metaTitle'
     body['attributes']['metaDescription'] = 'metaDescription'
     body['attributes']['canonicalUrl'] = 'canonicalUrl'
+    
+    body['attributes']['openstreetmap_id'] = 'openstreetmap_id'
 
     body['attributes']['image_summer'] = 'image_summer'
     body['attributes']['image_winter'] = 'image_winter'

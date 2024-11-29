@@ -153,6 +153,33 @@ def importFamilyEnitity(code):
     elif (code == "Place"):
         print("Load Place")
         import entity.Family.Place as Family
+    elif (code == "Tour" or
+          code == "Longdistance" or
+          code == "Route" or
+          code == "GlacierTour" or
+          code == "HighTour" or
+          code == "MotorisedTours" or
+          code == "BusTour" or
+          code == "CarTour" or
+          code == "MotorTour" or
+          code == "QuadTour" or
+          code == "SegwayTour" or
+          code == "ShipTour" or
+          code == "TrainTour" or
+          code == "ThemeTrail" or
+          code == "ViaFerrata" or
+          code == "Way" or
+          code == "BikeTrail" or
+          code == "CrossCountry" or
+          code == "HikingTrail" or
+          code == "NatureTrail" or
+          code == "SkiRoute" or
+          code == "SkiSlope" or
+          code == "SnowshoeTrail" or
+          code == "TobogganRun" or
+          code == "WinterHiking"):
+        print("Load Tour")
+        import entity.Family.Tour as Family
     else:
         # Default all 
         print("Load Family")

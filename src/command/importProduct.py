@@ -18,7 +18,7 @@ def main():
     for environment in environments:
         targetCon = loadEnv(environment)
         target = Akeneo(targetCon["host"], targetCon["clientId"], targetCon["secret"], targetCon["user"], targetCon["passwd"])
-        importProduct.main(environment, target, arguments)
+        importProduct.main(environment, target)
         
     print("FINISH Import PRODUCTS")
 

@@ -8,10 +8,17 @@ def filter(products, attribute):
             productsUpdated.append(product)
     return productsUpdated
 
-def skuList(products):
+def skuList(products, attribute):
     skuList = []
     for product in products:
-        skuList.append(product["identifier"])
+        if attribute in product["values"]:
+            productData = [
+                product["identifier"], 
+                product["values"][attribute][0]["data"]
+            ]
+            skuList.append(productData)
+        else:
+            skuList.append(product["identifier"])
     return skuList
 
 def uuidList(products):
@@ -31,7 +38,7 @@ def main(environment, target, attributes):
         productsTranform = filter(products, attribute)
         debug.addToFileExport(environment, attribute, 'transform', productsTranform)
         
-        productsSku = skuList(productsTranform)
+        productsSku = skuList(productsTranform, attribute)
         debug.addToFileExport(environment, attribute, 'sku', productsSku)
         
         productsUuid = uuidList(productsTranform)

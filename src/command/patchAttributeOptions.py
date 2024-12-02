@@ -18,6 +18,7 @@ def getAttributeOptions():
     awardUrl = "https://docs.google.com/spreadsheets/d/1XDmYmyp46la94TQ4ztPXirWzHPgw4mAwCBf61tEAYIo/gviz/tq?tqx=out:csv&sheet=award"
     potentialActionUrl = "https://docs.google.com/spreadsheets/d/10kMpDMQRUPbyuDpFlAaJIjIf_vdKllKPQd0a0PppDq8/gviz/tq?tqx=out:csv&sheet=potentialAction"
     leisureUrl = "https://docs.google.com/spreadsheets/d/1AyPg-4SXP5Cm6BbWnFpxtrLvqaO51P1unlmw0KH4UHg/gviz/tq?tqx=out:csv&sheet=leisure"
+    outdooractivePoiCategoriesUrl = "https://docs.google.com/spreadsheets/d/13_igR13FPi2MZevvQGLVcWx8Qv6tznELCIYDUE6dYOY/gviz/tq?tqx=out:csv&sheet=outdooractive_poi_category"
 
     # Set DataFrame
     dfOthers = pd.read_csv(othersUrl)
@@ -27,9 +28,10 @@ def getAttributeOptions():
     dfAward = pd.read_csv(awardUrl)
     dfPotentialAction = pd.read_csv(potentialActionUrl)
     dfLeisure = pd.read_csv(leisureUrl)
+    dfOutdooractivePoiCategories = pd.read_csv(outdooractivePoiCategoriesUrl)
 
     # Merge DataFrame
-    df = pd.concat([dfOthers, dfStarRating, dfServesCuisine, dfAmenityFeature, dfAward, dfPotentialAction, dfLeisure])
+    df = pd.concat([dfOthers, dfStarRating, dfServesCuisine, dfAmenityFeature, dfAward, dfPotentialAction, dfLeisure, dfOutdooractivePoiCategories])
 
     #print(df)
 

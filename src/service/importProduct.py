@@ -97,7 +97,7 @@ def transform(products):
 def load(products,target):
     for product in products:
         print(product)
-        target.patchProductByCode(product['sku'], product)
+        target.patchProductByCode(product['identifier'], product)
     return products
 
 def main(environment, target):

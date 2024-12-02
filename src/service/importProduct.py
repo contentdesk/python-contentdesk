@@ -69,6 +69,7 @@ def load(products,target):
 
 def main(environment, target):
     print("START Import PRODUCTS")
+    # Export / Backup!
     extractProducts = extract()
     debug.addToFileFull('import', environment, '', 'extractProducts', extractProducts)
     

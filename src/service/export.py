@@ -9,16 +9,13 @@ def filter(products, attribute):
     return productsUpdated
 
 def skuList(products, attribute):
-    skuList = []
+    skuList = {}
     for product in products:
         if attribute in product["values"]:
-            productData = [
-                product["identifier"], 
-                product["values"][attribute][0]["data"]
-            ]
-            skuList.append(productData)
+            skuList[product["identifier"]] = {}
+            skuList[product["identifier"]] = product["values"][attribute][0]["data"]
         else:
-            skuList.append(product["identifier"])
+            skuList[product["identifier"]] = {}
     return skuList
 
 def uuidList(products):

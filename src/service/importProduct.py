@@ -15,6 +15,15 @@ def extract():
                     products.append(row)
     return products
 
+def extractTarget(products, target):
+    backuptProducts = []
+    for product in products:
+        getProduct = target.getProductByCode(product['sku'])
+        if getProduct:
+            backuptProducts.append(getProduct)
+            
+    return products
+
 def transform(products):
     transformed_products = []
     for product in products:
@@ -69,11 +78,14 @@ def load(products,target):
 
 def main(environment, target):
     print("START Import PRODUCTS")
-    # Export / Backup!
+
+    # Load List of Products
     extractProducts = extract()
     debug.addToFileFull('import', environment, '', 'extractProducts', extractProducts)
-    
     transformedProducts = transform(extractProducts)
+    
+    # Backup Extracted Products
+    
     
     debug.addToFileFull('import', environment, '', 'transformedProducts', transformedProducts)
     

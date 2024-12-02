@@ -8,3 +8,4 @@ src/env/*
 output/*
 src/config/__pycache__/ignoreTypes.cpython-311.pyc
 *.pyc
+input/*

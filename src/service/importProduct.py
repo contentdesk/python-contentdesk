@@ -22,7 +22,7 @@ def extractTarget(products, target):
         if getProduct:
             backuptProducts.append(getProduct)
             
-    return products
+    return backuptProducts
 
 def transform(products):
     transformed_products = []
@@ -78,19 +78,27 @@ def load(products,target):
 
 def main(environment, target):
     print("START Import PRODUCTS")
-
+    
+    print(" - Extract Products")
+    
     # Load List of Products
     extractProducts = extract()
     debug.addToFileFull('import', environment, '', 'extractProducts', extractProducts)
-    transformedProducts = transform(extractProducts)
+    
+    print(" - Backup exist Products")
     
     # Backup Extracted Products
+    backupProducts = extractTarget(extractProducts, target)
+    debug.addToFileFull('import', environment, '', 'backupProducts', backupProducts)
     
-    
+    print(" - Transform Products")
+
+    transformedProducts = transform(extractProducts)
     debug.addToFileFull('import', environment, '', 'transformedProducts', transformedProducts)
     
-    loadProducts = load(transformedProducts, target)
+    print(" - Load Products")
     
+    loadProducts = load(transformedProducts, target)
     debug.addToFileFull('import', environment, '', 'loadProducts', loadProducts)
     
     print("FINISH Import PRODUCTS")

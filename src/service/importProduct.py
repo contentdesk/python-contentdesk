@@ -27,25 +27,33 @@ def transform(products):
             transformed_product['categories'] = product['categories']
         if 'enabled' in product:
             transformed_product['enabled'] = product['enabled']
+        
         # VALUES
         transformed_product['values'] = {}
         # dynamic Attribut
         for key, value in product.items():
             print (key)
-            if '-' in key:
-                parts = key.split('-')
-                if len(parts) == 2:
-                        attribute, locale = parts
-                        transformed_product['values'].setdefault(attribute, []).append({
-                        'locale': locale,
+            if key not in ['sku', 'family', 'categories', 'enabled', 'groups', 'parent', 'created', 'updated']:
+                if '-' in key:
+                    parts = key.split('-')
+                    if len(parts) == 2:
+                            attribute, locale = parts
+                            transformed_product['values'].setdefault(attribute, []).append({
+                            'locale': locale,
+                            'scope': None,
+                            'data': value
+                        })
+                    elif len(parts) == 3:
+                            attribute, locale, scope = parts
+                            transformed_product['values'].setdefault(attribute, []).append({
+                            'locale': locale,
+                            'scope': scope,
+                            'data': value
+                        })
+                else:
+                    transformed_product['values'].setdefault(key, []).append({
+                        'locale': None,
                         'scope': None,
-                        'data': value
-                    })
-                elif len(parts) == 3:
-                        attribute, locale, scope = parts
-                        transformed_product['values'].setdefault(attribute, []).append({
-                        'locale': locale,
-                        'scope': scope,
                         'data': value
                     })
         

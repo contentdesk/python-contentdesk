@@ -520,6 +520,10 @@ def setBody(family, families):
     attributes['search_text_pro_channel'] = 'search_text_pro_channel'
     attributes['promo_sort_order_scope'] = 'promo_sort_order_scope'
     attributes['potentialAction'] = 'potentialAction'
+    
+    attributes['metaTitle'] = 'metaTitle'
+    attributes['metaDescription'] = 'metaDescription'
+    attributes['canonicalUrl'] = 'canonicalUrl'
 
     if 'license' in attributes:
         attributes['copyrightHolder'] = 'copyrightHolder'

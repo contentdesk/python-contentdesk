@@ -30,7 +30,7 @@ def addToFileMigration(environment, attribute, name, data):
         file.write(json.dumps(data))
 
 # DEBUG - Full
-def addToFileFull(mainpath, environment, attribute, name, data):
+def addToFileFull(mainpath, environment, folder, attribute, name, data):
     # get current date and time
     current_datetime = datetime.now().strftime("%Y-%m-%d %H-%M-%S")
     print("Current date & time : ", current_datetime)
@@ -40,10 +40,10 @@ def addToFileFull(mainpath, environment, attribute, name, data):
     
     if attribute != "":
         # Check if folder exists
-        if not os.path.exists("../../output/"+mainpath+"/"+environment+"/attribute/"+attribute):
-            os.makedirs("../../output/"+mainpath+"/"+environment+"/attribute/"+attribute)
+        if not os.path.exists("../../output/"+mainpath+"/"+environment+"/"+folder+"/"+attribute):
+            os.makedirs("../../output/"+mainpath+"/"+environment+"/"+folder+"/"+attribute)
         
-        with open("../../output/"+mainpath+"/"+environment+"/attribute/"+attribute+"/"+name+"-"+str_current_datetime+".json", "w") as file:
+        with open("../../output/"+mainpath+"/"+environment+"/"+folder+"/"+attribute+"/"+name+"-"+str_current_datetime+".json", "w") as file:
             file.write(json.dumps(data))
     else:
         # Check if folder exists

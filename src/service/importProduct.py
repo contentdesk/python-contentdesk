@@ -93,23 +93,23 @@ def main(environment, target):
     
     # Load List of Products
     extractProducts = extract()
-    debug.addToFileFull('import', environment, '', 'extractProducts', extractProducts)
+    debug.addToFileFull('import', environment, '','', 'extractProducts', extractProducts)
     
     print(" - Backup exist Products")
     
     # Backup Extracted Products
     backupProducts = extractTarget(extractProducts, target)
-    debug.addToFileFull('import', environment, '', 'backupProducts', backupProducts)
+    debug.addToFileFull('import', environment, '','', 'backupProducts', backupProducts)
     
     print(" - Transform Products")
 
     transformedProducts = transform(extractProducts)
-    debug.addToFileFull('import', environment, '', 'transformedProducts', transformedProducts)
+    debug.addToFileFull('import', environment, '','', 'transformedProducts', transformedProducts)
     
     print(" - Load Products")
     
     loadProducts = load(transformedProducts, target)
-    debug.addToFileFull('import', environment, '', 'loadProducts', loadProducts)
+    debug.addToFileFull('import', environment, '','', 'loadProducts', loadProducts)
     
     print("FINISH Import PRODUCTS")
 

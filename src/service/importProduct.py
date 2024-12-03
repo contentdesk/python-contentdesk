@@ -3,6 +3,8 @@ import os
 
 import service.debug as debug
 
+language = ['de_CH', 'en_US', 'fr_FR', 'it_IT']
+
 def extract():
     input_folder = '../../input'
     ##with open("../../output/index/akeneo/families/"+code+".json", "w") as file:
@@ -46,12 +48,20 @@ def transform(products):
                 if '-' in key:
                     parts = key.split('-')
                     if len(parts) == 2:
+                        if parts[1] in language:
                             attribute, locale = parts
                             transformed_product['values'].setdefault(attribute, []).append({
-                            'locale': locale,
-                            'scope': None,
-                            'data': value
-                        })
+                                'locale': locale,
+                                'scope': None,
+                                'data': value
+                            })
+                        else:
+                            attribute, scope = parts
+                            transformed_product['values'].setdefault(attribute, []).append({
+                                'locale': None,
+                                'scope': scope,
+                                'data': value
+                            })
                     elif len(parts) == 3:
                             attribute, locale, scope = parts
                             transformed_product['values'].setdefault(attribute, []).append({

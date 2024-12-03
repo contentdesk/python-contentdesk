@@ -3,7 +3,7 @@ import entity.Family.Family as Family
 def setBody(family, families):
     body = Family.setBody(family, families)
     
-    attribute_requirements = {"sku": "sku", "name": "name", "image": "image", "openstreetmap_id": "openstreetmap_id"}
+    attribute_requirements = {"sku": "sku", "name": "name", "image": "image", "license": "license", "openstreetmap_id": "openstreetmap_id"}
 
     if 'daytime' in body['attributes']:
         body['attributes'].pop('daytime', None)

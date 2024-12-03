@@ -3,7 +3,7 @@ import entity.Family.Family as Family
 def setBody(family, families):
     body = Family.setBody(family, families)
     
-    attribute_requirements = {"sku": "sku", "name": "name", "image": "image"}
+    attribute_requirements = {"sku": "sku", "name": "name", "image": "image", "license": "license"}
     
     body['attributes']['name'] = 'name'
     body['attributes']['disambiguatingDescription'] = 'disambiguatingDescription'

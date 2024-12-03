@@ -23,10 +23,10 @@ def addToFileMigration(environment, attribute, name, data):
     str_current_datetime = str(current_datetime)
     
     # Check if folder exists
-    if not os.path.exists("../../output/migration/"+environment+"/"+attribute):
-        os.makedirs("../../output/migration/"+environment+"/"+attribute)
+    if not os.path.exists("../../output/migration/"+environment+"/"+attribute+"/"+str_current_datetime+"/"):
+        os.makedirs("../../output/migration/"+environment+"/"+attribute+"/"+str_current_datetime+"/")
     
-    with open("../../output/migration/"+environment+"/"+attribute+"/"+name+"-"+str_current_datetime+".json", "w") as file:
+    with open("../../output/migration/"+environment+"/"+attribute+"/"+str_current_datetime+"/"+name+".json", "w") as file:
         file.write(json.dumps(data))
 
 # DEBUG - Full
@@ -53,20 +53,20 @@ def addToFileFull(mainpath, environment, attribute, name, data):
         with open("../../output/"+mainpath+"/"+environment+"/"+str_current_datetime+"/"+name+".json", "w") as file:
             file.write(json.dumps(data))
 
-# DEBUG - Export
-def addToFileExport(environment, attribute, name, data):
+# DEBUG - Export Full neutral
+def addToFileExportFull(environment, folder, attribute, name, data):
     # get current date and time
     current_datetime = datetime.now().strftime("%Y-%m-%d %H-%M-%S")
     print("Current date & time : ", current_datetime)
     
-    # convert datetime obj to string
+    # convert datetime obj to strings
     str_current_datetime = str(current_datetime)
     
     # Check if folder exists
-    if not os.path.exists("../../output/export/"+environment+"/attribute/"+attribute):
-        os.makedirs("../../output/export/"+environment+"/attribute/"+attribute)
+    if not os.path.exists("../../output/export/"+environment+"/"+folder+"/"+attribute+"/"+str_current_datetime+"/"):
+        os.makedirs("../../output/export/"+environment+"/"+folder+"/"+attribute+"/"+str_current_datetime+"/")
     
-    with open("../../output/export/"+environment+"/attribute/"+attribute+"/"+name+"-"+str_current_datetime+".json", "w") as file:
+    with open("../../output/export/"+environment+"/"+folder+"/"+attribute+"/"+str_current_datetime+"/"+name+"-.json", "w") as file:
         file.write(json.dumps(data))
         
 # DEBUG - Export Family

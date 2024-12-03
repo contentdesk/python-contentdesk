@@ -30,16 +30,16 @@ def main(environment, target, attributes):
         #migration = importMigrationSettings(attribute)
         print("Get all Products")
         products = target.getProducts()
-        debug.addToFileExport(environment, attribute, 'products', products)
+        debug.addToFileExportFull(environment, 'attribute', attribute, 'products', products)
         print("Filter Products")
         productsTranform = filter(products, attribute)
-        debug.addToFileExport(environment, attribute, 'transform', productsTranform)
+        debug.addToFileExportFull(environment, 'attribute', attribute, 'transform', productsTranform)
         
         productsSku = skuList(productsTranform, attribute)
-        debug.addToFileExport(environment, attribute, 'sku', productsSku)
+        debug.addToFileExportFull(environment, 'attribute', attribute, 'sku', productsSku)
         
         productsUuid = uuidList(productsTranform)
-        debug.addToFileExport(environment, attribute, 'uuid', productsUuid)
+        debug.addToFileExportFull(environment, 'attribute', attribute, 'uuid', productsUuid)
         
         # Stop for Export
         #print("Upload Products")

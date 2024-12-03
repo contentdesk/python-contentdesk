@@ -5,13 +5,19 @@ def merge_dicts(dict1, dict2):
     dict1.update(dict2)
     return dict1
 
+# TODO: replace
 def getIgnoreProperties():
-    with open('../../output/index/ignoreProperties.json', 'r') as f:
+    with open('../../output/index/schema/ignoreProperties.json', 'r') as f:
         ignoreProperties = json.load(f)
 
-    ignoreProperties = [prop["label"] for prop in ignoreProperties]
+    #ignoreProperties = [prop["label"] for prop in ignoreProperties]
 
     return ignoreProperties
+
+def getIgnorePropertiesList():
+    properties = ['hasCertification']
+    
+    return properties
 
 def getFullPropertiesbyType(code):
     with open('../../output/typesFullProperties.json', 'r') as f:
@@ -27,6 +33,7 @@ def getFullPropertiesbyType(code):
 
     return attributes
 
+# TODO: replace 
 def removeIgnoreProperties(properties, ignoreProperties):
     newProperties = {}
     for prop in properties:
@@ -39,7 +46,14 @@ def removeIgnoreProperties(properties, ignoreProperties):
             #print("Ignore Property: ", prop)
     return newProperties
 
-def getTypeProperties(code):
+def removePropertiesinList(attributes):
+    newAttributes = {}
+    for prop in attributes:
+        if prop not in getIgnorePropertiesList():
+            newAttributes[prop] = attributes[prop]
+    return newAttributes
+    
+def getTypeProperties(code):                            
     attributes = {}
     print("- Get Family Attributes: ", code)
     typeClassProperties = getFullPropertiesbyType(code)
@@ -155,6 +169,7 @@ def removeProperties(code, attributes):
 
 # TODO: CHEck if needed!
 def create(family, families, akeneo):
+    print(" - Create Methode")
     code = family["label"]
 
     # Set default values
@@ -351,6 +366,7 @@ def create(family, families, akeneo):
     return response
 
 def setBody(family, families):
+    print(" - Set Body Methode")
     code = family["label"]
 
     # Set default values
@@ -545,7 +561,9 @@ def setBody(family, families):
     # Remove Properties
     #print("Remove Attributes: ")
     ##print(code)
-    attributes = removeProperties(code, attributes)
+    attributes = removeProperties(code, attributes) # old Check
+    #attributes = removePropertiesinList(attributes) # new Check
+    
 
     # add Attributes to Body
     body["attributes"] = attributes

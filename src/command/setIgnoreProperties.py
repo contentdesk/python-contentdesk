@@ -30,6 +30,10 @@ def main():
     # Write the JSON data to a file
     with open("../../output/ignoreProperties.json", "w") as file:
         file.write(json.dumps(data))
+        
+    # Write the JSON data to a file
+    with open("../../output/index/schema/ignoreProperties.json", "w") as file:
+        file.write(json.dumps(data))
 
 if __name__ == "__main__":
     main()

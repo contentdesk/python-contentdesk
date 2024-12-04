@@ -23,6 +23,8 @@ def setBody(family, families):
 
     body['attributes']['superior'] = 'superior'
     body['attributes']['garni'] = 'garni'
+    
+    body['attributes']['award'] = 'award'
 
     body['attributes']['typicalAgeRange'] = 'typicalAgeRange'
     body['attributes']['gender'] = 'gender'

@@ -27,7 +27,8 @@ def importFamilyEnitity(code):
         code == "SelfCateredHut" or
         code == "ManagedHut" or
         code == "Pension" or
-        code == "PrivateRoom"
+        code == "PrivateRoom" or
+        code == "Pitch"
         ):
         print("Load LodgingBusiness")
         import entity.Family.LodgingBusiness as Family
@@ -135,7 +136,6 @@ def importFamilyEnitity(code):
           code == "InternetCafe" or
           code == "LegalService" or
           code == "Library" or
-          code == "LodgingBusiness" or
           code == "MedicalBusiness" or
           code == "ProfessionalService" or
           code == "RadioStation" or

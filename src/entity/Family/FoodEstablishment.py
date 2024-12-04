@@ -17,6 +17,11 @@ def setBody(family, families):
 
     body['attributes']['typicalAgeRange'] = 'typicalAgeRange'
     body['attributes']['gender'] = 'gender'
+    
+    # https://schema.org/FoodEstablishment
+    body['attributes']['award'] = 'award'
+    body['attributes']['servesCuisine'] = 'servesCuisine'
+    body['attributes']['acceptsReservations'] = 'acceptsReservations'
 
     body['attributes']['metaTitle'] = 'metaTitle'
     body['attributes']['metaDescription'] = 'metaDescription'

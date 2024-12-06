@@ -100,7 +100,51 @@ def importFamilyEnitity(code):
     elif (code == "Schedule"):
         print("Load Schedule")
         import entity.Family.Schedule as Family
-    elif (code == "Product"):
+    elif (
+            code == "Product" or
+            code == "Adventure" or
+            code == "ApartmentOffer" or
+            code == "Beverage" or
+            code == "CampingPitchOffer" or
+            code == "CityTour" or
+            code == "Course" or
+            code == "CrossCountryTicket" or
+            code == "Donation" or
+            code == "EventTicket" or
+            code == "Experience" or
+            code == "Fashion" or
+            code == "Accessoires" or
+            code == "Clothing" or
+            code == "Food" or
+            code == "GuestCard" or
+            code == "IndividualProduct" or
+            code == "Membership" or
+            code == "Merchandise" or
+            code == "NonFood" or
+            code == "Offer" or
+            code == "Package" or
+            code == "ProductCollection" or
+            code == "ProductGroup" or
+            code == "Rental" or
+            code == "RoomOffer" or
+            code == "DormitoryOffer" or
+            code == "HotelRoomOffer" or
+            code == "DoubleRoomOffer" or
+            code == "FamilyRoomOffer" or
+            code == "SingleRoomOffer" or
+            code == "MeetingRoomOffer" or
+            code == "StayHelper" or
+            code == "Services" or
+            code == "SkiTicket" or
+            code == "SomeProducts" or
+            code == "Sportsgood" or
+            code == "SuiteOffer" or
+            code == "TableReservation" or
+            code == "Ticket" or
+            code == "Transport" or
+            code == "Vouchers" or
+            code == "Wellness"
+          ):
         print("Load Product")
         import entity.Family.Product as Family
     elif (code == "Offer"):

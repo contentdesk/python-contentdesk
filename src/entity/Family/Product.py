@@ -43,13 +43,13 @@ def setBody(family, families):
     body['attributes']['potentialAction'] = 'potentialAction'
     body['attributes']['target'] = 'target'
     
-    body['attributes']['size'] = 'size'
-    body['attributes']['color'] = 'color'
-    body['attributes']['gender'] = 'gender'
-    body['attributes']['weight'] = 'weight'
-    body['attributes']['width'] = 'width'
-    body['attributes']['height'] = 'height'
-    #body['attributes']['duration'] = 'duration' # only ziggy
+    if code == "Product":
+        body['attributes']['size'] = 'size'
+        body['attributes']['color'] = 'color'
+        body['attributes']['gender'] = 'gender'
+        body['attributes']['weight'] = 'weight'
+        body['attributes']['width'] = 'width'
+        body['attributes']['height'] = 'height'
     
     #body['attributes']['availability'] = 'availability'
     
@@ -64,5 +64,12 @@ def setBody(family, families):
     
     # only now demo and vgl
     #body['attributes']['avs_id'] = 'avs_id'
+    if (
+        code == "Adventure" or 
+        code == "CityTour" or
+        code == "Course" or
+        code == "Experience"
+        ):
+        body['attributes']['duration'] = 'duration'
     
     return body

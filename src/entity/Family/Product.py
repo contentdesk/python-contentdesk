@@ -62,8 +62,13 @@ def setBody(family, families):
     
     body['attributes']['leisure'] = 'leisure'
     
-    # only now demo and vgl
-    #body['attributes']['avs_id'] = 'avs_id'
+    # seo attributes
+    attributes['metaTitle'] = 'metaTitle'
+    attributes['metaDescription'] = 'metaDescription'
+    attributes['canonicalUrl'] = 'canonicalUrl'
+
+    
+    # duration
     if (
         code == "Adventure" or 
         code == "CityTour" or

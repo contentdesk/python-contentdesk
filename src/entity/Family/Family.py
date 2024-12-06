@@ -537,6 +537,7 @@ def setBody(family, families):
     attributes['promo_sort_order_scope'] = 'promo_sort_order_scope'
     attributes['potentialAction'] = 'potentialAction'
     
+    # seo attributes
     attributes['metaTitle'] = 'metaTitle'
     attributes['metaDescription'] = 'metaDescription'
     attributes['canonicalUrl'] = 'canonicalUrl'

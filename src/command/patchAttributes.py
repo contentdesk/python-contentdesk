@@ -152,7 +152,7 @@ def createAttributesinAkeneo(target, attributes, importAttributes = None):
             print("patch Attribute: ", attribute["label"])
             response = createAttribute(attribute, target)
 
-            print(response.text)
+            print(response)
 
 def main():
     environments = cliArguments.getEnvironment(sys)

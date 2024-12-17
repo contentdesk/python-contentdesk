@@ -1,4 +1,6 @@
+import csv
 import service.debug as debug
+import service.exportCSV as exportCSV
 
 def filter(products, attribute): 
     #attribute = "openingHoursSpecification"
@@ -41,8 +43,13 @@ def main(environment, target, attributes):
         productsUuid = uuidList(productsTranform)
         debug.addToFileExportFull(environment, 'attribute', attribute, 'uuid', productsUuid)
         
+        print("Exporting to CSV")
+        exportCSV.exportCSV(f"{attribute}_products.csv", productsTranform)
+        exportCSV.exportCSV(f"{attribute}_sku.csv", [{'identifier': k, 'data': v} for k, v in productsSku.items()])
+        exportCSV.exportCSV(f"{attribute}_uuid.csv", [{'uuid': uuid} for uuid in productsUuid])
+        
         # Stop for Export
         #print("Upload Products")
         #productsUpload = migration.uploadProducts(target, productsTranform)
-        #print("FINISH PATCH PRODUCTS for: ", attribute)
+        print("FINISH Export PRODUCTS for: ", attribute)
         

@@ -21,6 +21,7 @@ def setBody(family, families):
     body['attributes']['copyrightHolder'] = 'copyrightHolder'
     body['attributes']['author'] = 'author'
 
+    body['attributes']['starRating'] = 'starRating'
     body['attributes']['superior'] = 'superior'
     body['attributes']['garni'] = 'garni'
     

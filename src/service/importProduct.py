@@ -71,11 +71,20 @@ def transform(products):
                             'data': value
                         })
                 else:
-                    transformed_product['values'].setdefault(key, []).append({
-                        'locale': None,
-                        'scope': None,
-                        'data': value
-                    })
+                    if "[" in value:
+                        print("Array: ", value)
+                        transformed_product['values'].setdefault(key, []).append({
+                            'locale': None,
+                            'scope': None,
+                            'data': value.strip('[]').split(',')
+                        })
+                    else:
+                        transformed_product['values'].setdefault(key, []).append({
+                            'locale': None,
+                            'scope': None,
+                            'data': value
+                        })
+                
         
         transformed_products.append(transformed_product)
     
@@ -90,7 +99,7 @@ def load(products,target):
 def main(environment, target):
     print("START Import PRODUCTS")
     
-    print(" - Extract Products")
+    print(" - Extract Products - Backup!")
     
     # Load List of Products
     extractProducts = extract()

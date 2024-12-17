@@ -44,9 +44,9 @@ def main(environment, target, attributes):
         debug.addToFileExportFull(environment, 'attribute', attribute, 'uuid', productsUuid)
         
         print("Exporting to CSV")
-        exportCSV.exportCSV(f"{attribute}_products.csv", productsTranform)
-        exportCSV.exportCSV(f"{attribute}_sku.csv", [{'identifier': k, 'data': v} for k, v in productsSku.items()])
-        exportCSV.exportCSV(f"{attribute}_uuid.csv", [{'uuid': uuid} for uuid in productsUuid])
+        exportCSV.exportCSV('export',environment, 'attribute', attribute, f"{attribute}_products.csv", productsTranform)
+        exportCSV.exportCSV('export',environment, 'attribute', attribute, f"{attribute}_sku.csv", [{'identifier': k, 'data': v} for k, v in productsSku.items()])
+        exportCSV.exportCSV('export',environment, 'attribute', attribute, f"{attribute}_uuid.csv", [{'uuid': uuid} for uuid in productsUuid])
         
         # Stop for Export
         #print("Upload Products")

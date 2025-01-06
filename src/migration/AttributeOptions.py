@@ -22,21 +22,15 @@ def changeAttributeOptions(product, attribute, oldOption, newOptions):
     updateProduct['values'][attribute] = product['values'][attribute]
     options = product['values'][attribute][0]['data']
     
-    # replace oldOption with newOptions in array options
-    options = [newOptions if x == oldOption else x for x in options]
+    # replace oldOption with newOptions in array options and hold the order
+    for i in range(len(options)):
+        if options[i] == oldOption:
+            options[i] = newOptions[0]
     
     print(type(options))
+    print(options)
     
     updateProduct['values'][attribute][0]['data'] = options
-    
-    return updateProduct
-
-def removeProperties(product):
-    updateProduct = {}
-    
-    updateProduct['identifier'] = product['identifier']
-    updateProduct['values'] = {}
-    updateProduct['values']['award'] = product['values']['labels']
     
     return updateProduct
 

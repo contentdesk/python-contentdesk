@@ -10,7 +10,7 @@ import logging
 
 def getProducts(target, attribute, oldOption):
     #search = 'search={"openingHours_text":[{"operator":"NOT EMPTY","value":"","locale":"de_CH"}]}'
-    search = '{"'+attribute+'":[{"operator":"IN,"value":["'+oldOption+'"]}]}&attributes=award'
+    search = '{"'+attribute+'":[{"operator":"IN","value":["'+oldOption+'"]}]}&attributes=award'
     products = target.getProductBySearch(search)
     return products
 
@@ -20,10 +20,12 @@ def changeAttributeOptions(product, attribute, oldOption, newOptions):
     updateProduct['identifier'] = product['identifier']
     updateProduct['values'] = {}
     updateProduct['values'][attribute] = product['values'][attribute]
-    options = product['values'][attribute]['data']
+    options = product['values'][attribute][0]['data']
     
     # replace oldOption with newOptions in array options
     options = [newOptions if x == oldOption else x for x in options]
+    
+    print(type(options))
     
     updateProduct['values'][attribute][0]['data'] = options
     

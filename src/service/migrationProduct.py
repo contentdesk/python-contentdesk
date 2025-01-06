@@ -29,6 +29,8 @@ def importMigrationSettings(attribute):
         import migration.Recommendation as migration
     elif(attribute == "openingHoursSpecification"):
         import migration.openingHoursSpecification as migration
+    elif(attribute == "AttributeOptions"):
+        import migration.AttributeOptions as migration
     return migration
 
 def main(environment, target, attributes):

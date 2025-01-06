@@ -31,7 +31,10 @@ def main(environment, target, attributes):
         print("START Export PRODUCTS for: ", attribute)
         #migration = importMigrationSettings(attribute)
         print("Get all Products")
-        products = target.getProducts()
+        search = '{"'+attribute+'":[{"operator":"NOT EMPTY"}]}&attributes='+attribute
+        products = target.getProductBySearch(search)
+        #products = target.getProducts()
+        
         debug.addToFileExportFull(environment, 'attribute', attribute, 'products', products)
         print("Filter Products")
         productsTranform = filter(products, attribute)

@@ -11,7 +11,7 @@ def exportCSV(mainpath, environment, folder, attribute, filename, data):
         if not os.path.exists("../../output/"+mainpath+"/"+environment+"/"+folder+"/"+attribute):
             os.makedirs("../../output/"+mainpath+"/"+environment+"/"+folder+"/"+attribute)
             
-        createCSV("../../output/"+mainpath+"/"+environment+"/"+folder+"/"+attribute+"/"+filename+"-"+str_current_datetime+".csv", data)
+        createCSV("../../output/"+mainpath+"/"+environment+"/"+folder+"/"+attribute+"/"+str_current_datetime+"/"+filename+".csv", data)
     else:
         # Check if folder exists
         if not os.path.exists("../../output/"+mainpath+"/"+environment+"/"+str_current_datetime+"/"):

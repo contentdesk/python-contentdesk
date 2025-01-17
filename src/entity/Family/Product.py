@@ -76,5 +76,24 @@ def setBody(family, families):
         code == "Experience"
         ):
         body['attributes']['duration'] = 'duration'
+
+        body['attributes']['longitude'] = 'longitude'
+        body['attributes']['latitude'] = 'latitude'
+
+        body['attributes']['streetAddress'] = 'streetAddress'
+        body['attributes']['postalCode'] = 'postalCode'
+        body['attributes']['addressLocality'] = 'addressLocality'
+        body['attributes']['addressCountry'] = 'addressCountry'
+        body['attributes']['addressRegion'] = 'addressRegion'
+        # Contact
+        body['attributes']['legalName'] = 'legalName'
+        body['attributes']['department'] = 'department'
+        body['attributes']['honorificPrefix'] = 'honorificPrefix'
+        body['attributes']['givenName'] = 'givenName'
+        body['attributes']['familyName'] = 'familyName'
+        body['attributes']['email'] = 'email'
+        body['attributes']['telephone'] = 'telephone'
+        body['attributes']['url'] = 'url'
+        
     
     return body

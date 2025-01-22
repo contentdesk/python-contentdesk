@@ -146,6 +146,30 @@ def removeProperties(code, attributes):
     #print ("Clear Attributes: ", attributes)
     return attributes
 
+# Place specific properties
+def getProperties():
+    properties = {}
+
+    # Coordinations
+    properties['longitude'] = 'longitude'
+    properties['latitude'] = 'latitude'
+
+    # Address
+    properties['streetAddress'] = 'streetAddress'
+    properties['postalCode'] = 'postalCode'
+    properties['addressLocality'] = 'addressLocality'
+    properties['addressCountry'] = 'addressCountry'
+    properties['addressRegion'] = 'addressRegion'
+    # Contact
+    properties['legalName'] = 'legalName'
+    properties['department'] = 'department'
+    properties['honorificPrefix'] = 'honorificPrefix'
+    properties['givenName'] = 'givenName'
+    properties['familyName'] = 'familyName'
+    properties['email'] = 'email'
+    
+    return properties
+
 # TODO: CHEck if needed!
 def create(family, families, akeneo):
     code = family["label"]
@@ -239,8 +263,6 @@ def create(family, families, akeneo):
         # marker Icon
         attributes['markerIcon'] = 'markerIcon'
             
-    
-
     if 'geo' in attributes:
         attributes['longitude'] = 'longitude'
         attributes['latitude'] = 'latitude'

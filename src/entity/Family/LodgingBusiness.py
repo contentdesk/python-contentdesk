@@ -1,4 +1,5 @@
 import entity.Family.Family as Family
+import entity.Family.Place as Place
 
 def setBody(family, families):
     body = Family.setBody(family, families)
@@ -72,5 +73,14 @@ def setBody(family, families):
     
     body['attribute_requirements'] = {}
     body["attribute_requirements"]['ecommerce'] = attribute_requirements
+    
+    ## plus Properties from Place! 
+    
+    # Add and merge properties from Place    
+    placeProperties = Place.getProperties()
+    
+    for key, value in placeProperties.items():
+        print(key, value)
+        body["attributes"][key] = value
     
     return body

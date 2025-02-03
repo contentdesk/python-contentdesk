@@ -26,7 +26,7 @@ def exportProductsWithFamily(environment, target, family):
     print("Get all Products")
     print(family[0])
     #search = '{"enabled":[{"operator":"=","value":true,"scope":null}],"completeness":[{"operator":"=","value":100,"scope":"ecommerce"}],"family":[{"operator":"IN","value":["'+str(family[0])+'"]}]}'
-    search = '{"enabled":[{"operator":"=","value":true,"scope":null}],"completeness":[{"operator":"=","value":100,"scope":"ecommerce"}],"family":[{"operator":"IN","value":["Fireplace"]}]}'
+    search = '{"enabled":[{"operator":"=","value":true,"scope":null}],"completeness":[{"operator":"=","value":100,"scope":"ecommerce"}],"family":[{"operator":"IN","value":["Fireplace"]}]}&attributes=name'
     products = target.getProducts(search, None, None, 100)
     #products = target.getProducts()
             
@@ -39,13 +39,12 @@ def exportProductsWithFamily(environment, target, family):
     debug.addToFileExportFull(environment, 'products', family, 'uuid', productsUuid)
             
     print("Exporting to CSV")
-    exportCSV.exportCSV('export',environment, 'products', family, f"{family}_products.csv", products)
-    exportCSV.exportCSV('export',environment, 'products', family, f"{family}_sku.csv", [{'identifier': identifier} for identifier in productsSku])
-    exportCSV.exportCSV('export',environment, 'products', family, f"{family}_uuid.csv", [{'uuid': uuid} for uuid in productsUuid])
+    #exportCSV.exportCSV('export',environment, 'products', family, f"{family}_products.csv", products)
+    #exportCSV.exportCSV('export',environment, 'products', family, f"{family}_sku.csv", [{'identifier': identifier} for identifier in productsSku])
+    #exportCSV.exportCSV('export',environment, 'products', family, f"{family}_uuid.csv", [{'uuid': uuid} for uuid in productsUuid])
 
 def exportProductsDiscvoer(environment, target):
-    
-    search = '{"enabled":[{"operator":"=","value":true,"scope":null}],"completeness":[{"operator":"=","value":100,"scope":"ecommerce"}]}'
+    search = '{"enabled":[{"operator":"=","value":true,"scope":null}],"completeness":[{"operator":"=","value":100,"scope":"ecommerce"}]}&attributes=name'
     products = target.getProductBySearch(search)
     #products = target.getProducts()
             
@@ -58,9 +57,9 @@ def exportProductsDiscvoer(environment, target):
     debug.addToFileExportFull(environment, 'products', 'discover', 'uuid', productsUuid)
             
     print("Exporting to CSV")
-    exportCSV.exportCSV('export',environment, 'products', 'discover', f"discover_products.csv", products)
-    exportCSV.exportCSV('export',environment, 'products', 'discover', f"discover_sku.csv", [{'identifier': identifier} for identifier in productsSku])
-    exportCSV.exportCSV('export',environment, 'products', 'discover', f"discover_uuid.csv", [{'uuid': uuid} for uuid in productsUuid])
+    #exportCSV.exportCSV('export',environment, 'products', 'discover', f"discover_products.csv", products)
+    #exportCSV.exportCSV('export',environment, 'products', 'discover', f"discover_sku.csv", [{'identifier': identifier} for identifier in productsSku])
+    #exportCSV.exportCSV('export',environment, 'products', 'discover', f"discover_uuid.csv", [{'uuid': uuid} for uuid in productsUuid])
 
 def main(environment, target, arguments):
     if arguments == None:

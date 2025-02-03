@@ -24,9 +24,8 @@ def uuidList(products):
 
 def exportProductsWithFamily(environment, target, family):
     print("Get all Products")
-    print(family[0])
-    #search = '{"enabled":[{"operator":"=","value":true,"scope":null}],"completeness":[{"operator":"=","value":100,"scope":"ecommerce"}],"family":[{"operator":"IN","value":["'+str(family[0])+'"]}]}'
-    search = '{"enabled":[{"operator":"=","value":true,"scope":null}],"completeness":[{"operator":"=","value":100,"scope":"ecommerce"}],"family":[{"operator":"IN","value":["Fireplace"]}]}&attributes=name'
+    print(family)
+    search = '{"enabled":[{"operator":"=","value":true,"scope":null}],"completeness":[{"operator":"=","value":100,"scope":"ecommerce"}],"family":[{"operator":"IN","value":["'+str(family)+'"]}]}&attributes=name'
     products = target.getProducts(search, None, None, 100)
     #products = target.getProducts()
             

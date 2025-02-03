@@ -26,7 +26,7 @@ def exportProductsWithFamily(environment, target, family):
     print("Get all Products")
     print(family)
     search = '{"enabled":[{"operator":"=","value":true,"scope":null}],"completeness":[{"operator":"=","value":100,"scope":"ecommerce"}],"family":[{"operator":"IN","value":["'+str(family)+'"]}]}&attributes=name'
-    products = target.getProducts(search, None, None, 100)
+    products = target.getProducts(search, None, None, 100, 'search_after')
     #products = target.getProducts()
             
     debug.addToFileExportFull(environment, 'products', family, 'products', products)
@@ -44,7 +44,7 @@ def exportProductsWithFamily(environment, target, family):
 
 def exportProductsDiscvoer(environment, target):
     search = '{"enabled":[{"operator":"=","value":true,"scope":null}],"completeness":[{"operator":"=","value":100,"scope":"ecommerce"}]}&attributes=name'
-    products = target.getProductBySearch(search)
+    products = target.getProducts(search)
     #products = target.getProducts()
             
     debug.addToFileExportFull(environment, 'products', 'discover', 'products', products)

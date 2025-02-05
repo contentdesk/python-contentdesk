@@ -1,5 +1,6 @@
 import service.debug as debug
 import entity.Family.Family as Family
+import entity.Family.LocalBusiness as LocalBusiness
 
 def importFamilyEnitity(code):
     if (code == "MeetingRoom"):
@@ -28,20 +29,28 @@ def importFamilyEnitity(code):
         code == "ManagedHut" or
         code == "Pension" or
         code == "PrivateRoom" or
-        code == "Pitch"
-        ):
+        code == "Pitch"):
         print("Load LodgingBusiness")
         import entity.Family.LodgingBusiness as Family
-    elif (
-        code == "FoodEstablishment" or
+    elif (code == "FoodEstablishment" or
         code == "Bakery" or
         code == "BarOrPub" or
+        code == "BeerGarden" or
+        code == "Bistro" or
         code == "Brewery" or
-        code == "CafeOrCoffeeShop" or 
+        code == "CafeOrCoffeeShop" or
+        code == "Confectionery" or
+        code == "Dairy" or
         code == "Distillery" or
         code == "FastFoodRestaurant" or
-        code == "IceCreamShop" or 
+        code == "Grotto" or
+        code == "IceCreamShop" or
+        code == "Imbiss" or
+        code == "MountainRestaurant" or
+        code == "Pizzeria" or
         code == "Restaurant" or
+        code == "TakeAway" or
+        code == "Vinotheque" or
         code == "Winery"):
         print("Load FoodEstablishment")
         import entity.Family.FoodEstablishment as Family
@@ -162,36 +171,7 @@ def importFamilyEnitity(code):
     elif (code == "Organization"):
         print("Load Organization")
         import entity.Family.Organization as Family
-    elif (code == "LocalBusiness" or
-          code == "AnimalShelter" or
-          code == "ArchiveOrganization" or
-          code == "AutomotiveBusiness" or
-          code == "ChildCare" or
-          code == "Dentist" or
-          code == "DryCleaningOrLaundry" or
-          code == "EmergencyService" or
-          code == "EmploymentAgency" or
-          code == "EntertainmentBusiness" or
-          code == "FinancialService" or
-          code == "FoodEstablishment" or
-          code == "GovernmentOffice" or
-          code == "HealthAndBeautyBusiness" or
-          code == "HomeAndConstructionBusiness" or
-          code == "InternetCafe" or
-          code == "LegalService" or
-          code == "Library" or
-          code == "MedicalBusiness" or
-          code == "ProfessionalService" or
-          code == "RadioStation" or
-          code == "RealEstateAgent" or
-          code == "RecyclingCenter" or
-          code == "SelfStorage" or
-          code == "ShoppingCenter" or
-          code == "SportsActivityLocation" or
-          code == "Store" or
-          code == "TelevisionStation" or
-          code == "TouristInformationCenter" or
-          code == "TravelAgency"):
+    elif (code in LocalBusiness.getSubClasses()):
         print("Load LocalBusiness")
         import entity.Family.Place as Family
     elif (code == "Place"):

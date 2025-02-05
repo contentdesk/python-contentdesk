@@ -168,6 +168,8 @@ def getProperties():
     properties['familyName'] = 'familyName'
     properties['email'] = 'email'
     
+    properties['openingHoursSpecification'] = 'openingHoursSpecification'
+    
     return properties
 
 # TODO: CHEck if needed!

@@ -148,7 +148,7 @@ def getProperties():
     properties['currenciesAccepted'] = 'currenciesAccepted'
     properties['openingHours'] = 'openingHours'
     properties['paymentAccepted'] = 'paymentAccepted'
-    properties['paymentAccepted'] = 'paymentAccepted'
+    properties['priceRange'] = 'priceRange'
     
     return properties
 

@@ -141,6 +141,17 @@ def getSubClasses():
     #"LodgingBusiness",
     return subClasses
 
+# Place specific properties
+def getProperties():
+    properties = {}
+    
+    properties['currenciesAccepted'] = 'currenciesAccepted'
+    properties['openingHours'] = 'openingHours'
+    properties['paymentAccepted'] = 'paymentAccepted'
+    properties['paymentAccepted'] = 'paymentAccepted'
+    
+    return properties
+
 def setBody(family, families):
     body = Family.setBody(family, families)
     

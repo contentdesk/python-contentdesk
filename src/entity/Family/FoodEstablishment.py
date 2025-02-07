@@ -4,6 +4,7 @@ import entity.Family.Place as Place
 
 def getSubClasses():
     subClasses = [
+        "FoodEstablishment",
         "Bakery",
         "BarOrPub",
         "BeerGarden",
@@ -30,12 +31,17 @@ def setBody(family, families):
     body = Family.setBody(family, families)
     
     attribute_requirements = {"sku": "sku", "name": "name", "image": "image", "license": "license", "openstreetmap_id": "openstreetmap_id"}
-
+    
+    # https://schema.org/FoodEstablishment
+    body['attributes']['acceptsReservations'] = 'acceptsReservations'
+    #body['attributes']['hasMenu'] = 'hasMenu'
+    body['attributes']['servesCuisine'] = 'servesCuisine'
     if 'starRating' in body['attributes']:
         body['attributes'].pop('starRating')
         if 'starRating' in body['attributes']:
             del body['attributes']['starRating']
 
+    ## Contentdesk.io Settings
     body['attributes']['license'] = 'license'
     body['attributes']['copyrightHolder'] = 'copyrightHolder'
     body['attributes']['author'] = 'author'
@@ -43,11 +49,8 @@ def setBody(family, families):
     body['attributes']['typicalAgeRange'] = 'typicalAgeRange'
     body['attributes']['gender'] = 'gender'
     
-    # https://schema.org/FoodEstablishment
     body['attributes']['award'] = 'award'
-    body['attributes']['servesCuisine'] = 'servesCuisine'
-    body['attributes']['acceptsReservations'] = 'acceptsReservations'
-
+    
     body['attributes']['metaTitle'] = 'metaTitle'
     body['attributes']['metaDescription'] = 'metaDescription'
     body['attributes']['canonicalUrl'] = 'canonicalUrl'
@@ -82,7 +85,7 @@ def setBody(family, families):
     body['attribute_requirements'] = {}
     body["attribute_requirements"]['ecommerce'] = attribute_requirements
     
-     # Add and merge properties from Place    
+    # Add and merge properties from Place    
     placeProperties = Place.getProperties()
     
     for key, value in placeProperties.items():

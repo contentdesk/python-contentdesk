@@ -1,10 +1,51 @@
 import entity.Family.Family as Family
 import entity.Family.Place as Place
+import entity.Family.LocalBusiness as LocalBusiness
+
+def getSubClasses():
+    subClasses = [
+        "LodgingBusiness",
+        "Agrotourism",
+        "BedAndBreakfast",
+        "Campground",
+        "FarmLodging",
+        "GroupAccommodation",
+        "GuestHouse",
+        "HolidayApartment",
+        "HolidayHouse",
+        "Hostel",
+        "Hotel",
+        "IglooVillage",
+        "Motel",
+        "Mountainhut",
+        "ManagedHut",
+        "RescueHut",
+        "SelfCateredHut",
+        "Pension",
+        "Pitch",
+        "PrivateRoom",
+        "Resort"
+    ]
+    return subClasses
 
 def setBody(family, families):
     body = Family.setBody(family, families)
     
     attribute_requirements = {"sku": "sku", "name": "name", "image": "image", "license": "license", "openstreetmap_id": "openstreetmap_id"}
+    
+    # https://schema.org/LodgingBusiness
+    body['attributes']['amenityFeature'] = 'amenityFeature'
+    # body['attributes']['audience'] = 'audience' ?
+    body['attributes']['availableLanguage'] = 'availableLanguage'
+    body['attributes']['checkinTime'] = 'checkinTime'
+    body['attributes']['checkoutTime'] = 'checkoutTime'
+    body['attributes']['numberOfRooms'] = 'numberOfRooms'
+    body['attributes']['petsAllowed'] = 'petsAllowed'
+    body['attributes']['starRating'] = 'starRating'
+    
+    ## Contentdesk.io Settings
+    body['attributes']['superior'] = 'superior'
+    body['attributes']['garni'] = 'garni'
 
     if 'daytime' in body['attributes']:
         body['attributes'].pop('daytime', None)
@@ -16,15 +57,9 @@ def setBody(family, families):
         if 'duration' in body['attributes']:
             del body['attributes']['duration']
 
-    attributes = body["attributes"]
-
     body['attributes']['license'] = 'license'
     body['attributes']['copyrightHolder'] = 'copyrightHolder'
     body['attributes']['author'] = 'author'
-
-    body['attributes']['starRating'] = 'starRating'
-    body['attributes']['superior'] = 'superior'
-    body['attributes']['garni'] = 'garni'
     
     body['attributes']['award'] = 'award'
 
@@ -68,13 +103,17 @@ def setBody(family, families):
     # discover.swiss Testing
     body['attributes']['parking'] = 'parking'
     body['attributes']['publicTransport'] = 'publicTransport'
-
-    body["attributes"] = attributes
     
     body['attribute_requirements'] = {}
     body["attribute_requirements"]['ecommerce'] = attribute_requirements
     
-    ## plus Properties from Place! 
+    ## plus Properties from LocalBusiness + Place!
+    # Add and merge properties from Place    
+    localBusinessProperties = LocalBusiness.getProperties()
+    
+    for key, value in localBusinessProperties.items():
+        print(key, value)
+        body["attributes"][key] = value
     
     # Add and merge properties from Place    
     placeProperties = Place.getProperties()

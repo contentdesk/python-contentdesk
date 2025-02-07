@@ -1,5 +1,6 @@
 import service.debug as debug
 import entity.Family.Family as Family
+import entity.Family.LodgingBusiness as LodgingBusiness
 import entity.Family.LocalBusiness as LocalBusiness
 import entity.Family.FoodEstablishment as FoodEstablishment
 
@@ -7,30 +8,7 @@ def importFamilyEnitity(code):
     if (code == "MeetingRoom"):
         print("Load MeetingRoom")
         import entity.Family.MeetingRoom as Family
-    elif (
-        code == "LodgingBusiness" or
-        code == "BedAndBreakfast" or
-        code == "Campground" or 
-        code == "Hostel" or
-        code == "Hotel" or
-        code == "Motel" or
-        code == "Resort" or
-        code == "HolidayHouse" or
-        code == "HolidayApartment" or
-        code == "Agrotourism" or
-        code == "CountryInn" or
-        code == "FarmLodging" or
-        code == "Garni" or
-        code == "GroupAccommodation" or
-        code == "Guesthouse" or
-        code == "IglooVillage" or
-        code == "Mountainhut" or
-        code == "RescueHut" or
-        code == "SelfCateredHut" or
-        code == "ManagedHut" or
-        code == "Pension" or
-        code == "PrivateRoom" or
-        code == "Pitch"):
+    elif (code in LodgingBusiness.getSubClasses()):
         print("Load LodgingBusiness")
         import entity.Family.LodgingBusiness as Family
     elif (code in FoodEstablishment.getSubClasses()):

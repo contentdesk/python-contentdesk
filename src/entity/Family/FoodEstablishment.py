@@ -1,5 +1,30 @@
 import service.debug as debug
 import entity.Family.Family as Family
+import entity.Family.Place as Place
+
+def getSubClasses():
+    subClasses = [
+        "Bakery",
+        "BarOrPub",
+        "BeerGarden",
+        "Bistro",
+        "Brewery",
+        "CafeOrCoffeeShop",
+        "Confectionery",
+        "Dairy",
+        "Distillery",
+        "FastFoodRestaurant",
+        "Grotto",
+        "IceCreamShop",
+        "Imbiss",
+        "MountainRestaurant",
+        "Pizzeria",
+        "Restaurant",
+        "TakeAway",
+        "Vinotheque",
+        "Winery"
+    ]
+    return subClasses
 
 def setBody(family, families):
     body = Family.setBody(family, families)
@@ -56,6 +81,13 @@ def setBody(family, families):
     
     body['attribute_requirements'] = {}
     body["attribute_requirements"]['ecommerce'] = attribute_requirements
+    
+     # Add and merge properties from Place    
+    placeProperties = Place.getProperties()
+    
+    for key, value in placeProperties.items():
+        print(key, value)
+        body["attributes"][key] = value
     
     return body
 

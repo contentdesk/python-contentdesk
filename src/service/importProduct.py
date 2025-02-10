@@ -23,7 +23,10 @@ def extractTarget(products, target):
         print(" - Check Objekct: ", product['sku'])
         getProduct = target.getProductByCode(product['sku'])
         if getProduct:
+            print("OK")
             backuptProducts.append(getProduct)
+        else:
+            print("NOT FOUND")
             
     return backuptProducts
 

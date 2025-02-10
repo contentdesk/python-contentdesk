@@ -1,5 +1,52 @@
 import service.debug as debug
 
+def getSubClasses():
+    subClasses = [
+        "Product",
+        "Adventure",
+        "ApartmentOffer",
+        "Beverage",
+        "CampingPitchOffer",
+        "CityTour",
+        "Course",
+        "CrossCountryTicket",
+        "Donation",
+        "EventTicket",
+        "Experience",
+        "Fashion",
+        "Accessoires",
+        "Clothing",
+        "Food",
+        "GuestCard",
+        "IndividualProduct",
+        "Membership",
+        "Merchandise",
+        "NonFood",
+        # "Offer",
+        "Package",
+        "ProductCollection",
+        "ProductGroup",
+        "Rental",
+        "RoomOffer",
+        "DormitoryOffer",
+        "HotelRoomOffer",
+        "DoubleRoomOffer",
+        "FamilyRoomOffer",
+        "SingleRoomOffer",
+        "MeetingRoomOffer",
+        "StayHelper",
+        "Services",
+        "SkiTicket",
+        "SomeProducts",
+        "Sportsgood",
+        "SuiteOffer",
+        "TableReservation",
+        "Ticket",
+        "Transport",
+        "Vouchers",
+        "Wellness"
+    ]
+
 def setBody(family, families):
     code = family["label"]
     

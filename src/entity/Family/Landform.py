@@ -1,5 +1,20 @@
 import entity.Family.Family as Family
 
+def getSubClasses():
+    subClasses = [
+          "Landform",
+          "BodyOfWater",
+          "LakeBodyOfWater",
+          "Reservoir",
+          "RiverBodyOfWater",
+          "Pond",
+          "Continent",
+          "Mountain",
+          "Volcano",
+          "Waterfall"
+    ]
+    return subClasses
+
 def setBody(family, families):
     body = Family.setBody(family, families)
     

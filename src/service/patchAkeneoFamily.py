@@ -3,6 +3,9 @@ import entity.Family.Family as Family
 import entity.Family.LodgingBusiness as LodgingBusiness
 import entity.Family.LocalBusiness as LocalBusiness
 import entity.Family.FoodEstablishment as FoodEstablishment
+import entity.Family.Landform as Landform
+import entity.Family.Event as Event
+import entity.Family.CivicStructure as CivicStructure
 
 def importFamilyEnitity(code):
     if (code == "MeetingRoom"):
@@ -17,7 +20,7 @@ def importFamilyEnitity(code):
     elif (code == "TouristAttraction"):
         print("Load TouristAttraction")
         import entity.Family.TouristAttraction as Family
-    elif (code == "CivicStructure"):
+    elif (code in CivicStructure.getSubClasses()):
         print("Load CivicStructure")
         import entity.Family.CivicStructure as Family
     elif (code == "Webcam" or
@@ -26,26 +29,7 @@ def importFamilyEnitity(code):
           code == "WebLink"):
         print("Load Webcam")
         import entity.Family.Webcam as Family
-    elif (code == "Event" or
-          code == "BusinessEvent" or
-          code == "ChildrensEvent" or
-          code == "ComedyEvent" or
-          code == "DanceEvent" or
-          code == "DeliveryEvent" or
-          code == "EducationEvent" or
-          code == "ExhibitionEvent" or
-          code == "Festival" or
-          code == "FoodEvent" or
-          code == "Hackathon" or
-          code == "LiteraryEvent" or
-          code == "MusicEvent" or
-          code == "PublicationEvent" or
-          code == "SaleEvent" or
-          code == "ScreeningEvent" or
-          code == "SocialEvent" or
-          code == "SportsEvent" or
-          code == "TheaterEvent" or
-          code == "VisualArtsEvent"):
+    elif (code in Event.getSubClasses()):
         print("Load Event")
         import entity.Family.Event as Family
     elif (code == "MediaObejct" or
@@ -54,16 +38,7 @@ def importFamilyEnitity(code):
           code == "ImageObject"):
         print("Load MediaObject")
         import entity.Family.MediaObject as Family
-    elif (code == "Landform" or
-          code == "BodyOfWater" or
-          code == "LakeBodyOfWater" or
-          code == "Reservoir" or
-          code == "RiverBodyOfWater" or
-          code == "Pond" or
-          code == "Continent" or
-          code == "Mountain" or
-          code == "Volcano" or
-          code == "Waterfall"):
+    elif (code in Landform.getSubClasses()):
         print("Load Landform")
         import entity.Family.Landform as Family
     elif (code == "Schedule"):

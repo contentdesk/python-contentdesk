@@ -1,5 +1,30 @@
 import entity.Family.Family as Family
 
+def getSubClasses():
+    subClasses = [
+          "Event",
+          "BusinessEvent",
+          "ChildrensEvent",
+          "ComedyEvent",
+          "DanceEvent",
+          "DeliveryEvent",
+          "EducationEvent",
+          "ExhibitionEvent",
+          "Festival",
+          "FoodEvent",
+          "Hackathon",
+          "LiteraryEvent",
+          "MusicEvent",
+          "PublicationEvent",
+          "SaleEvent",
+          "ScreeningEvent",
+          "SocialEvent",
+          "SportsEvent",
+          "TheaterEvent",
+          "VisualArtsEvent"
+    ]
+    return subClasses
+
 def setBody(family, families):
     body = Family.setBody(family, families)
     

@@ -169,7 +169,7 @@ def setBody(family, families):
     body['attributes']['image_10_scope_description'] = 'image_10_scope_description'
     
     # marker Icon
-    body['attributes'] = 'markerIcon'
+    body['attributes']['markerIcon'] = 'markerIcon'
     
     body['attribute_requirements'] = {}
     body["attribute_requirements"]['ecommerce'] = attribute_requirements
@@ -179,6 +179,7 @@ def setBody(family, families):
     
     for key, value in placeProperties.items():
         print(key, value)
-        body["attributes"][key] = value
+        if key not in body["attributes"]:
+            body["attributes"][key] = value
 
     return body

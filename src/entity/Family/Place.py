@@ -170,6 +170,7 @@ def getProperties():
     
     properties['openingHoursSpecification'] = 'openingHoursSpecification'
     
+    ## Contentdesk.io Settings
     properties['openstreetmap_id'] = 'openstreetmap_id'
     
     return properties

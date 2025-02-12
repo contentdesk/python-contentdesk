@@ -170,6 +170,8 @@ def getProperties():
     
     properties['openingHoursSpecification'] = 'openingHoursSpecification'
     
+    properties['openstreetmap_id'] = 'openstreetmap_id'
+    
     return properties
 
 # TODO: CHEck if needed!

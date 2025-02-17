@@ -65,6 +65,7 @@ def createAssociation(association, akeneo):
 
     try:
         response = akeneo.patchAssociationTypesByCode(code, body)
+        print("Response: ", response)
     except Exception as e:
         print("Error: ", e)
         print("patch Assocation: ", code)
@@ -90,13 +91,13 @@ def main():
     environments = cliArguments.getEnvironment(sys)
     arguments = cliArguments.getArguments(sys)
 
-    print("START PATCH Associatinons")
+    print("START PATCH Associations")
     for environment in environments:
         targetCon = loadEnv(environment)
         print (targetCon["host"])
         target = Akeneo(targetCon["host"], targetCon["clientId"], targetCon["secret"], targetCon["user"], targetCon["passwd"])
         createAssociationinAkeneo(associations, target, arguments)
-    print("FINISH PATCH Associatinons")
+    print("FINISH PATCH Associations")
 
     
 

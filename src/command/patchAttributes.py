@@ -142,6 +142,8 @@ def createAttribute(attribute, akeneo):
 
 def createAttributesinAkeneo(target, attributes, importAttributes = None):
     for attribute in attributes:
+        print("Attribute: ", attribute["label"])
+        print("Instance: ", attribute["instance"])
         if importAttributes != None:
             if attribute["label"] in importAttributes:
                 pass
@@ -149,10 +151,20 @@ def createAttributesinAkeneo(target, attributes, importAttributes = None):
                 continue
         print ("Check Property if Attribut: "+ attribute["label"])
         if attribute["attribute"] == True:
-            print("patch Attribute: ", attribute["label"])
-            response = createAttribute(attribute, target)
-
-            print(response)
+            if attribute["instance"] != None:
+                checkInstanceArray = attribute["instance"].split(",")
+                print("Check Instance: ", checkInstanceArray)
+                print(target.getHost())
+                if target.getHost() in checkInstanceArray:
+                    print("Attribute in Instance: ", target.getHost())
+                    print("patch Attribute: ", attribute["label"])
+                    response = createAttribute(attribute, target)
+                    print(response)
+            else:
+                print("None Instance")
+                print("patch Attribute: ", attribute["label"])
+                response = createAttribute(attribute, target)
+                print(response)
 
 def main():
     environments = cliArguments.getEnvironment(sys)

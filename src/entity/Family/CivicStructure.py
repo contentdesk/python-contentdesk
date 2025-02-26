@@ -173,6 +173,7 @@ def setBody(family, families):
     
     body['attribute_requirements'] = {}
     body["attribute_requirements"]['ecommerce'] = attribute_requirements
+    body["attribute_requirements"]['mice'] = attribute_requirements
     
     # Add and merge properties from Place    
     placeProperties = Place.getProperties()

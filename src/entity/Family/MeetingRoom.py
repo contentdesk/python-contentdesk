@@ -85,6 +85,11 @@ def setBody(family, families):
                 "name",
                 "image"
             ],
+            "mice": [
+                "sku",
+                "name",
+                "image"
+            ]
         },
         "labels": {
             "en_US": family["label.en_US"],

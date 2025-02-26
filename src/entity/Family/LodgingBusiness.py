@@ -32,6 +32,7 @@ def setBody(family, families):
     body = Family.setBody(family, families)
     
     attribute_requirements = {"sku": "sku", "name": "name", "image": "image", "license": "license", "openstreetmap_id": "openstreetmap_id"}
+    attribute_requirementsMice = {"sku": "sku", "name": "name", "image": "image", "license": "license", "openstreetmap_id": "openstreetmap_id"}
     
     # https://schema.org/LodgingBusiness
     body['attributes']['amenityFeature'] = 'amenityFeature'
@@ -106,6 +107,7 @@ def setBody(family, families):
     
     body['attribute_requirements'] = {}
     body["attribute_requirements"]['ecommerce'] = attribute_requirements
+    body["attribute_requirements"]['mice'] = attribute_requirements
     
     ## plus Properties from LocalBusiness + Place!
     # Add and merge properties from Place    

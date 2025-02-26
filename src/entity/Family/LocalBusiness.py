@@ -206,6 +206,7 @@ def setBody(family, families):
     
     body['attribute_requirements'] = {}
     body["attribute_requirements"]['ecommerce'] = attribute_requirements
+    body["attribute_requirements"]['mice'] = attribute_requirements
     
     ## plus Properties from Place! 
     

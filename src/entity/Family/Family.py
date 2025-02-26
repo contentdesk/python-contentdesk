@@ -395,6 +395,7 @@ def setBody(family, families):
         "attribute_as_image": family["attribute_as_image"],
         "attribute_requirements": {
             "ecommerce": attribute_requirements,
+            "mice": attribute_requirements,
         },
         "labels": {
             "en_US": family["label.en_US"],

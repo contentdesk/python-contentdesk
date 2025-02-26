@@ -380,6 +380,7 @@ def setBody(family, families):
         #attribute_requirements = family["attribute_requirements.ecommerce"].split(",")
     else:
         attribute_requirements = {"sku": "sku", "name": "name", "image": "image", "license": "license", "openstreetmap_id": "openstreetmap_id"}
+        attribute_requirementsMice = {"sku": "sku", "name": "name", "image": "image", "license": "license", "openstreetmap_id": "openstreetmap_id"}
 
     if family["attribute_as_label"] == None:
         family["attribute_as_label"] = "name"
@@ -400,6 +401,7 @@ def setBody(family, families):
         "attribute_as_image": family["attribute_as_image"],
         "attribute_requirements": {
             "ecommerce": attribute_requirements,
+            "mice": attribute_requirements,
         },
         "labels": {
             "en_US": family["label.en_US"],

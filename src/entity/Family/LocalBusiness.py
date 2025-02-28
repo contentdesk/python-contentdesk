@@ -155,11 +155,34 @@ def getProperties():
 
 def setBody(family, families):
     #body = Family.setBody(family, families)
-    print ("SET BODY - LocalBusiness!")
-    body = {}
-    body['attributes'] = {}
+    code = family["label"]
     
-    attribute_requirements = {"sku": "sku", "name": "name", "image": "image", "license": "license", "openstreetmap_id": "openstreetmap_id"}
+    print ("SET BODY - LocalBusiness!")
+    attribute_requirements = {
+        "sku": "sku", 
+        "name": "name", 
+        "image": "image", 
+        "license": "license", 
+        "openstreetmap_id": "openstreetmap_id"
+        }
+    
+    # Create body
+    body = {
+        "code": code,
+        "attribute_as_label": 'name',
+        "attribute_as_image": 'image',
+        "attribute_requirements": {
+            "ecommerce": attribute_requirements,
+            "mice": attribute_requirements,
+        },
+        "labels": {
+            "en_US": family["label.en_US"],
+            "de_CH": family["label.de_CH"],
+            "fr_FR": family["label.fr_FR"],
+            "it_IT": family["label.it_IT"],
+        }
+    }
+    body['attributes'] = {}
 
     body['attributes']['license'] = 'license'
     body['attributes']['copyrightHolder'] = 'copyrightHolder'
@@ -222,6 +245,6 @@ def setBody(family, families):
         body["attributes"][key] = value
     
     print ("SET BODY!")
-    debug.addToLogFileBody(str(family), body)
+    debug.addToLogFileBody(str(family['label']), body)
     
     return body

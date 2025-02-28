@@ -151,6 +151,7 @@ def getProperties():
     properties = {}
     
     # Allgemein
+    properties['sku'] = 'sku'
     properties['name'] = 'name'
     properties['description'] = 'description'
     properties['disambiguatingDescription'] = 'disambiguatingDescription'

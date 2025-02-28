@@ -8,41 +8,33 @@ import entity.Family.Event as Event
 import entity.Family.CivicStructure as CivicStructure
 import entity.Family.Product as Product
 
-def importFamilyEnitity(code):
+def importFamilyEnitity(code, parent):
     import_map = {
-        "MeetingRoom": ("entity.Family.MeetingRoom", "Load MeetingRoom"),
-        "TouristAttraction": ("entity.Family.TouristAttraction", "Load TouristAttraction"),
-        "Schedule": ("entity.Family.Schedule", "Load Schedule"),
-        "Offer": ("entity.Family.Offer", "Load Offer"),
+        "CivicStructure": ("entity.Family.CivicStructure", "Load CivicStructure"),
+        "Event": ("entity.Family.Event", "Load Event"),
+        "FoodEstablishment": ("entity.Family.FoodEstablishment", "Load FoodEstablishment"),
         "GuestCard": ("entity.Family.GuestCard", "Load GuestCard"),
-        "Trail": ("entity.Family.Trail", "Load Trail"),
-        "Recommendation": ("entity.Family.Recommendation", "Load Recommendation"),
+        "Landform": ("entity.Family.Landform", "Load Landform"),
+        "LocalBusiness": ("entity.Family.Place", "Load LocalBusiness"),
+        "LodgingBusiness": ("entity.Family.LodgingBusiness", "Load LodgingBusiness"),
+        "MediaObject": ("entity.Family.MediaObject", "Load MediaObject"),
+        "MeetingRoom": ("entity.Family.MeetingRoom", "Load MeetingRoom"),
+        "Offer": ("entity.Family.Offer", "Load Offer"),
         "Organization": ("entity.Family.Organization", "Load Organization"),
         "Place": ("entity.Family.Place", "Load Place"),
-    }
-
-    subclass_map = {
-        LodgingBusiness: ("entity.Family.LodgingBusiness", "Load LodgingBusiness"),
-        FoodEstablishment: ("entity.Family.FoodEstablishment", "Load FoodEstablishment"),
-        CivicStructure: ("entity.Family.CivicStructure", "Load CivicStructure"),
-        Event: ("entity.Family.Event", "Load Event"),
-        Landform: ("entity.Family.Landform", "Load Landform"),
-        Product: ("entity.Family.Product", "Load Product"),
-        LocalBusiness: ("entity.Family.Place", "Load LocalBusiness"),
+        "Product": ("entity.Family.Product", "Load Product"),
+        "Schedule": ("entity.Family.Schedule", "Load Schedule"),
+        "Tour": ("entity.Family.Tour", "Load Tour"),
+        "TouristAttraction": ("entity.Family.TouristAttraction", "Load TouristAttraction"),
+        "Trail": ("entity.Family.Trail", "Load Trail"),
+        "Webcam": ("entity.Family.Webcam", "Load Webcam"),
     }
     
-    if code in import_map:
+    if parent in import_map:
         import_path, message = import_map[code]
         print(message)
         import_path = __import__(import_path, fromlist=['Family'])
         return import_path
-
-    # Überprüfen, ob der Code in den Subklassen vorhanden ist
-    for cls, (import_path, message) in subclass_map.items():
-        if code in cls.getSubClasses():
-            print(message)
-            import_path = __import__(import_path, fromlist=['Family'])
-            return import_path
         
     # Default-Fall
     print("Load Family")
@@ -50,7 +42,7 @@ def importFamilyEnitity(code):
     return import_path
 
 def patchAkeneoFamily(family, families, target):
-    Family = importFamilyEnitity(family["label"])
+    Family = importFamilyEnitity(family["label"],family["parent"])
     print("PATCH Family: ", family["label"])
     print("- Parent Family: ", family["parent"])
     body = Family.setBody(family, families)

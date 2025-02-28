@@ -1,5 +1,6 @@
 import entity.Family.Family as Family
 import entity.Family.Place as Place
+import service.debug as debug
 
 def getSubClasses():
     subClasses = [
@@ -216,5 +217,7 @@ def setBody(family, families):
     for key, value in placeProperties.items():
         print(key, value)
         body["attributes"][key] = value
+        
+    debug.addToLogFileBody(family, body)
     
     return body

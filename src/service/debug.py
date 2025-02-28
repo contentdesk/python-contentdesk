@@ -13,6 +13,11 @@ def addToLogFile(code, data):
     with open("../../output/logs/families/"+code+".json", "w") as file:
         file.write(json.dumps(data))
         
+# DEBUG - Family Body
+def addToLogFileBody(code, data):
+    with open("../../output/logs/families/body/"+code+".json", "w") as file:
+        file.write(json.dumps(data))
+        
 # DEBUG - Migration
 def addToFileMigration(environment, attribute, name, data):
     # get current date and time

@@ -9,98 +9,45 @@ import entity.Family.CivicStructure as CivicStructure
 import entity.Family.Product as Product
 
 def importFamilyEnitity(code):
-    if (code == "MeetingRoom"):
-        print("Load MeetingRoom")
-        import entity.Family.MeetingRoom as Family
-    elif (code in LodgingBusiness.getSubClasses()):
-        print("Load LodgingBusiness")
-        import entity.Family.LodgingBusiness as Family
-    elif (code in FoodEstablishment.getSubClasses()):
-        print("Load FoodEstablishment")
-        import entity.Family.FoodEstablishment as Family
-    elif (code == "TouristAttraction"):
-        print("Load TouristAttraction")
-        import entity.Family.TouristAttraction as Family
-    elif (code in CivicStructure.getSubClasses()):
-        print("Load CivicStructure")
-        import entity.Family.CivicStructure as Family
-    elif (code == "Webcam" or
-          code == "LiveVideo" or
-          code == "StaticWebcam" or
-          code == "WebLink"):
-        print("Load Webcam")
-        import entity.Family.Webcam as Family
-    elif (code in Event.getSubClasses()):
-        print("Load Event")
-        import entity.Family.Event as Family
-    elif (code == "MediaObejct" or
-          code == "AudioObject" or
-          code == "VideoObject" or
-          code == "ImageObject"):
-        print("Load MediaObject")
-        import entity.Family.MediaObject as Family
-    elif (code in Landform.getSubClasses()):
-        print("Load Landform")
-        import entity.Family.Landform as Family
-    elif (code == "Schedule"):
-        print("Load Schedule")
-        import entity.Family.Schedule as Family
-    elif ( code in Product.getSubClasses()):
-        print("Load Product")
-        import entity.Family.Product as Family
-    elif (code == "Offer"):
-        print("Load Offer")
-        import entity.Family.Offer as Family
-    elif (code == "GuestCard"):
-        print("Load GuestCard")
-        import entity.Family.GuestCard as Family
-    elif (code == "Trail"):
-        print("Load Trail")
-        import entity.Family.Trail as Family
-    elif (code == "Recommendation"):
-        print("Load Recommendation")
-        import entity.Family.Recommendation as Family
-    elif (code == "Organization"):
-        print("Load Organization")
-        import entity.Family.Organization as Family
-    elif (code in LocalBusiness.getSubClasses()):
-        print("Load LocalBusiness")
-        import entity.Family.Place as Family
-    elif (code == "Place"):
-        print("Load Place")
-        import entity.Family.Place as Family
-    elif (code == "Tour" or
-          code == "Longdistance" or
-          code == "Route" or
-          code == "GlacierTour" or
-          code == "HighTour" or
-          code == "MotorisedTours" or
-          code == "BusTour" or
-          code == "CarTour" or
-          code == "MotorTour" or
-          code == "QuadTour" or
-          code == "SegwayTour" or
-          code == "ShipTour" or
-          code == "TrainTour" or
-          code == "ThemeTrail" or
-          code == "ViaFerrata" or
-          code == "Way" or
-          code == "BikeTrail" or
-          code == "CrossCountry" or
-          code == "HikingTrail" or
-          code == "NatureTrail" or
-          code == "SkiRoute" or
-          code == "SkiSlope" or
-          code == "SnowshoeTrail" or
-          code == "TobogganRun" or
-          code == "WinterHiking"):
-        print("Load Tour")
-        import entity.Family.Tour as Family
-    else:
-        # Default all 
-        print("Load Family")
-        import entity.Family.Family as Family
-    return Family
+    import_map = {
+        "MeetingRoom": ("entity.Family.MeetingRoom", "Load MeetingRoom"),
+        "TouristAttraction": ("entity.Family.TouristAttraction", "Load TouristAttraction"),
+        "Schedule": ("entity.Family.Schedule", "Load Schedule"),
+        "Offer": ("entity.Family.Offer", "Load Offer"),
+        "GuestCard": ("entity.Family.GuestCard", "Load GuestCard"),
+        "Trail": ("entity.Family.Trail", "Load Trail"),
+        "Recommendation": ("entity.Family.Recommendation", "Load Recommendation"),
+        "Organization": ("entity.Family.Organization", "Load Organization"),
+        "Place": ("entity.Family.Place", "Load Place"),
+    }
+
+    subclass_map = {
+        LodgingBusiness: ("entity.Family.LodgingBusiness", "Load LodgingBusiness"),
+        FoodEstablishment: ("entity.Family.FoodEstablishment", "Load FoodEstablishment"),
+        CivicStructure: ("entity.Family.CivicStructure", "Load CivicStructure"),
+        Event: ("entity.Family.Event", "Load Event"),
+        Landform: ("entity.Family.Landform", "Load Landform"),
+        Product: ("entity.Family.Product", "Load Product"),
+        LocalBusiness: ("entity.Family.Place", "Load LocalBusiness"),
+    }
+    
+    if code in import_map:
+        import_path, message = import_map[code]
+        print(message)
+        import_path = __import__(import_path, fromlist=['Family'])
+        return import_path
+
+    # Überprüfen, ob der Code in den Subklassen vorhanden ist
+    for cls, (import_path, message) in subclass_map.items():
+        if code in cls.getSubClasses():
+            print(message)
+            import_path = __import__(import_path, fromlist=['Family'])
+            return import_path
+        
+    # Default-Fall
+    print("Load Family")
+    import_path = __import__("entity.Family.Family", fromlist=['Family'])
+    return import_path
 
 def patchAkeneoFamily(family, families, target):
     Family = importFamilyEnitity(family["label"])

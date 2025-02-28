@@ -31,7 +31,7 @@ def importFamilyEnitity(code, parent):
     }
     
     if parent in import_map:
-        import_path, message = import_map[code]
+        import_path, message = import_map[parent]
         print(message)
         import_path = __import__(import_path, fromlist=['Family'])
         return import_path

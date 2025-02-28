@@ -149,6 +149,13 @@ def removeProperties(code, attributes):
 # Place specific properties
 def getProperties():
     properties = {}
+    
+    # Allgemein
+    properties['name'] = 'name'
+    properties['description'] = 'description'
+    properties['disambiguatingDescription'] = 'disambiguatingDescription'
+    properties['image'] = 'image'
+    properties['image_description'] = 'image_description'
 
     # Coordinations
     properties['longitude'] = 'longitude'
@@ -569,6 +576,7 @@ def setBody(family, families):
     attributes['metaDescription'] = 'metaDescription'
     attributes['canonicalUrl'] = 'canonicalUrl'
 
+    # License
     if 'license' in attributes:
         attributes['copyrightHolder'] = 'copyrightHolder'
         attributes['author'] = 'author'

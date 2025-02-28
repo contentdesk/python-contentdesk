@@ -154,7 +154,10 @@ def getProperties():
     return properties
 
 def setBody(family, families):
-    body = Family.setBody(family, families)
+    #body = Family.setBody(family, families)
+    print ("SET BODY - LocalBusiness!")
+    body = {}
+    body['attributes'] = {}
     
     attribute_requirements = {"sku": "sku", "name": "name", "image": "image", "license": "license", "openstreetmap_id": "openstreetmap_id"}
 
@@ -217,7 +220,8 @@ def setBody(family, families):
     for key, value in placeProperties.items():
         print(key, value)
         body["attributes"][key] = value
-        
-    debug.addToLogFileBody(family, body)
+    
+    print ("SET BODY!")
+    debug.addToLogFileBody(str(family), body)
     
     return body

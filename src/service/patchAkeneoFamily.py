@@ -7,6 +7,7 @@ import entity.Family.Landform as Landform
 import entity.Family.Event as Event
 import entity.Family.CivicStructure as CivicStructure
 import entity.Family.Product as Product
+import importlib
 
 def importFamilyEnitity(code, parent):
     import_map = {
@@ -15,7 +16,7 @@ def importFamilyEnitity(code, parent):
         "FoodEstablishment": ("entity.Family.FoodEstablishment", "Load FoodEstablishment"),
         "GuestCard": ("entity.Family.GuestCard", "Load GuestCard"),
         "Landform": ("entity.Family.Landform", "Load Landform"),
-        "LocalBusiness": ("entity.Family.Place", "Load LocalBusiness"),
+        "LocalBusiness": ("entity.Family.LocalBusiness", "Load LocalBusiness"),
         "LodgingBusiness": ("entity.Family.LodgingBusiness", "Load LodgingBusiness"),
         "MediaObject": ("entity.Family.MediaObject", "Load MediaObject"),
         "MeetingRoom": ("entity.Family.MeetingRoom", "Load MeetingRoom"),
@@ -32,9 +33,14 @@ def importFamilyEnitity(code, parent):
     
     if parent in import_map:
         import_path, message = import_map[parent]
-        print(message)
-        import_path = __import__(import_path, fromlist=['Family'])
-        return import_path
+        print(" - "+message)
+        #import_path = __import__(import_path, fromlist=['Family'])
+        module = importlib.import_module(import_path)
+        print(import_path)
+        #if hasattr(module, 'setBody'):
+        #    result = module.setBody(code, parent)  # Aufruf der Funktion get_info() aus dem Modul
+        #    print(f"{code} Info: {result}")
+        return module
         
     # Default-Fall
     print("Load Family")
@@ -42,10 +48,11 @@ def importFamilyEnitity(code, parent):
     return import_path
 
 def patchAkeneoFamily(family, families, target):
-    Family = importFamilyEnitity(family["label"],family["parent"])
-    print("PATCH Family: ", family["label"])
+    print (" - LOAD Module")
+    module = importFamilyEnitity(family["label"],family["parent"])
+    print("- PATCH Family: ", family["label"])
     print("- Parent Family: ", family["parent"])
-    body = Family.setBody(family, families)
+    body = module.setBody(family, families)
     response = patchFamily(family["label"], body, target)
     print("FINISH - patch Family: ", family["label"])
 

@@ -33,7 +33,7 @@ def importFamilyEnitity(code, parent):
     
     if parent in import_map:
         import_path, message = import_map[parent]
-        print(" - "+message)
+        print(" - Module - "+message)
         #import_path = __import__(import_path, fromlist=['Family'])
         module = importlib.import_module(import_path)
         print(import_path)
@@ -44,8 +44,9 @@ def importFamilyEnitity(code, parent):
         
     # Default-Fall
     print("Load Family")
-    import_path = __import__("entity.Family.Family", fromlist=['Family'])
-    return import_path
+    module = importlib.import_module("entity.Family.Family")
+    #import_path = __import__("entity.Family.Family", fromlist=['Family'])
+    return module
 
 def patchAkeneoFamily(family, families, target):
     print (" - LOAD Module")
@@ -53,6 +54,9 @@ def patchAkeneoFamily(family, families, target):
     print("- PATCH Family: ", family["label"])
     print("- Parent Family: ", family["parent"])
     body = module.setBody(family, families)
+    print(" - DEBUG - ", family['label'])
+    debug.addToLogFileBody(str(family['label']), body)
+    
     response = patchFamily(family["label"], body, target)
     print("FINISH - patch Family: ", family["label"])
 

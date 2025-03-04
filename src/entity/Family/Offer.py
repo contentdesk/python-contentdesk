@@ -86,6 +86,5 @@ def setBody(family, families):
     
     # only now demo and vgl
     #body['attributes']['avs_id'] = 'avs_id'
-    debug.addToLogFileBody(str(family['label']), body)
     
     return body

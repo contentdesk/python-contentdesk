@@ -165,5 +165,10 @@ def setBody(family, families):
         body['attributes']['image_09_scope_description'] = 'image_09_scope_description'
         body['attributes']['image_10_scope_description'] = 'image_10_scope_description'
         
+        body['attributes']['metaTitle'] = 'metaTitle'
+        body['attributes']['metaDescription'] = 'metaDescription'
+        body['attributes']['canonicalUrl'] = 'canonicalUrl'
+    
+        debug.addToLogFileBody(str(family['label']), body)
     
     return body

@@ -40,25 +40,38 @@ def getAttributeOptions():
     #print(json_data)
     return json.loads(json_data)
 
-def patchAttributeOptionsAkeneo(akeneo, attributeOptions):
-    for attributOption in attributeOptions:
-        print("Attribute: ", attributOption['attribute'])
-        print("Code: ", attributOption['code'])
-        attribute = attributOption['attribute']
-        code = str(attributOption['code'])
-        body = {
-            "code": str(attributOption['code']),
-            "attribute": attributOption['attribute'],
-            "sort_order": attributOption['sort_order'],
-            "labels": {
-                "en_US": attributOption['labels.en_US'],
-                "de_CH": attributOption['labels.de_CH'],
-                "fr_FR": attributOption['labels.fr_FR'],
-                "it_IT": attributOption['labels.it_IT'],
-            }
+def patchAttributeOptionsAkeneo(akeneo, attributOption):
+    print("Attribute: ", attributOption['attribute'])
+    print("Code: ", attributOption['code'])
+    attribute = attributOption['attribute']
+    code = str(attributOption['code'])
+    body = {
+        "code": str(attributOption['code']),
+        "attribute": attributOption['attribute'],
+        "sort_order": attributOption['sort_order'],
+        "labels": {
+            "en_US": attributOption['labels.en_US'],
+            "de_CH": attributOption['labels.de_CH'],
+            "fr_FR": attributOption['labels.fr_FR'],
+            "it_IT": attributOption['labels.it_IT'],
         }
-        response = akeneo.patchAttributOptionsByCode(code, attribute, body)
-        print(response)
+    }
+    response = akeneo.patchAttributOptionsByCode(code, attribute, body)
+    print(response)
+
+def checkAttributeOptionsInstance(target, attributeOptions):
+    for attributOption in attributeOptions:
+        if attributOption["instance"] != None:
+            checkInstanceArray = attributOption["instance"].split(",")
+            print(" - Check Instance: ", checkInstanceArray)
+            print(" - Host Instance: ", target.getHost())
+            if target.getHost() in checkInstanceArray:
+                patchAttributeOptionsAkeneo(target, attributOption)
+            else:
+                print(" - Skip Patching")
+                print(" - Not in Instance: ", target.getHost())
+        else:
+            patchAttributeOptionsAkeneo(target, attributOption)
 
 def main():
     environments = cliArguments.getEnvironment(sys)
@@ -77,11 +90,11 @@ def main():
         # leisure --> direct from discover.swiss Categories
 
         if arguments == None:
-            patchAttributeOptionsAkeneo(target, attributeOptions)
+            checkAttributeOptionsInstance(target, attributeOptions)
         else:
             # Filter Attribute Options by arguements (attribute)
             attributeOptions = [attribute for attribute in attributeOptions if attribute["attribute"] in arguments]
-            patchAttributeOptionsAkeneo(target, attributeOptions)
+            checkAttributeOptionsInstance(target, attributeOptions)
     print("FINISH PATCH ATTRIBUTES")
 
 if __name__ == '__main__':

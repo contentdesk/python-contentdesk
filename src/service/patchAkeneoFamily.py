@@ -41,12 +41,16 @@ def importFamilyEnitity(code, parent):
         #    result = module.setBody(code, parent)  # Aufruf der Funktion get_info() aus dem Modul
         #    print(f"{code} Info: {result}")
         return module
-        
-    # Default-Fall
-    print("Load Family")
-    module = importlib.import_module("entity.Family.Family")
-    #import_path = __import__("entity.Family.Family", fromlist=['Family'])
-    return module
+    elif "MeetingRoom" in code:
+        print(" - Module - Load MeetingRoom")
+        module = importlib.import_module("entity.Family.MeetingRoom")
+        return module
+    else:
+        # Default-Fall
+        print("Load Family")
+        module = importlib.import_module("entity.Family.Family")
+        #import_path = __import__("entity.Family.Family", fromlist=['Family'])
+        return module
 
 def patchAkeneoFamily(family, families, target):
     print (" - LOAD Module")

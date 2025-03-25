@@ -103,8 +103,9 @@ def setBody(family, families):
     
     body['attributes']['offers'] = 'offers'
     body['attributes']['price'] = 'price'
-    body['attributes']['priceValidFrom'] = 'priceValidFrom'
+
     body['attributes']['priceValidUntil'] = 'priceValidUntil'
+    body['attributes']['priceValidFrom'] = 'priceValidFrom'
     
     body['attributes']['validFrom'] = 'validFrom'
     body['attributes']['validThrough'] = 'validThrough'

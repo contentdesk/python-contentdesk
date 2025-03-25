@@ -54,7 +54,12 @@ def importFamilyEnitity(code, parent):
 
 def patchAkeneoFamily(family, families, target):
     print (" - LOAD Module")
-    module = importFamilyEnitity(family["label"],family["parent"])
+    print (" - Family: ", family["label"])
+    print (" - Parent: ", family["parent"])
+    if family["parent"] == None:
+        module = importFamilyEnitity(family["label"], family["label"])
+    else:
+        module = importFamilyEnitity(family["label"],family["parent"])
     print("- PATCH Family: ", family["label"])
     print("- Parent Family: ", family["parent"])
     body = module.setBody(family, families)

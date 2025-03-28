@@ -31,7 +31,15 @@ def importFamilyEnitity(code, parent):
         "Webcam": ("entity.Family.Webcam", "Load Webcam"),
     }
     
-    if parent in import_map:
+    if "MeetingRoom" in code:
+        print(" - Module - Load MeetingRoom")
+        module = importlib.import_module("entity.Family.MeetingRoom")
+        return module
+    elif "Webcam" in code:
+        print(" - Module - Load Webcam")
+        module = importlib.import_module("entity.Family.Webcam")
+        return module
+    elif parent in import_map:
         import_path, message = import_map[parent]
         print(" - Module - "+message)
         #import_path = __import__(import_path, fromlist=['Family'])
@@ -40,10 +48,6 @@ def importFamilyEnitity(code, parent):
         #if hasattr(module, 'setBody'):
         #    result = module.setBody(code, parent)  # Aufruf der Funktion get_info() aus dem Modul
         #    print(f"{code} Info: {result}")
-        return module
-    elif "MeetingRoom" in code:
-        print(" - Module - Load MeetingRoom")
-        module = importlib.import_module("entity.Family.MeetingRoom")
         return module
     else:
         # Default-Fall

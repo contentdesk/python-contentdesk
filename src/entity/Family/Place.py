@@ -157,6 +157,11 @@ def getProperties():
     properties['disambiguatingDescription'] = 'disambiguatingDescription'
     properties['image'] = 'image'
     properties['image_description'] = 'image_description'
+    
+    # License
+    properties['license'] = 'license'
+    properties['copyrightHolder'] = 'copyrightHolder'
+    properties['author'] = 'author'
 
     # Coordinations
     properties['longitude'] = 'longitude'
@@ -174,9 +179,39 @@ def getProperties():
     properties['honorificPrefix'] = 'honorificPrefix'
     properties['givenName'] = 'givenName'
     properties['familyName'] = 'familyName'
+    properties['telephone'] = 'telephone'
     properties['email'] = 'email'
+    properties['url'] = 'url'
     
     properties['openingHoursSpecification'] = 'openingHoursSpecification'
+    properties['openingHours'] = 'openingHours'
+    
+    # Media
+    properties['google_image_gallery_use_pro_channel'] = 'google_image_gallery_use_pro_channel'
+    properties['image_01_scope'] = 'image_01_scope'
+    properties['image_02_scope'] = 'image_02_scope'
+    properties['image_03_scope'] = 'image_03_scope'
+    properties['image_04_scope'] = 'image_04_scope'
+    properties['image_05_scope'] = 'image_05_scope'
+    properties['image_06_scope'] = 'image_06_scope'
+    properties['image_07_scope'] = 'image_07_scope'
+    properties['image_08_scope'] = 'image_08_scope'
+    properties['image_09_scope'] = 'image_09_scope'
+    properties['image_10_scope'] = 'image_10_scope'
+    
+    properties['image_01_scope_description'] = 'image_01_scope_description'
+    properties['image_02_scope_description'] = 'image_02_scope_description'
+    properties['image_03_scope_description'] = 'image_03_scope_description'
+    properties['image_04_scope_description'] = 'image_04_scope_description'
+    properties['image_05_scope_description'] = 'image_05_scope_description'
+    properties['image_06_scope_description'] = 'image_06_scope_description'
+    properties['image_07_scope_description'] = 'image_07_scope_description'
+    properties['image_08_scope_description'] = 'image_08_scope_description'
+    properties['image_09_scope_description'] = 'image_09_scope_description'
+    properties['image_10_scope_description'] = 'image_10_scope_description'
+    
+    properties['publicAccess'] = 'publicAccess'
+    properties['isAccessibleForFree'] = 'isAccessibleForFree'
     
     ## Contentdesk.io Settings
     properties['openstreetmap_id'] = 'openstreetmap_id'
@@ -613,5 +648,12 @@ def setBody(family, families):
 
     # add Attributes to Body
     body["attributes"] = attributes
+    
+    # Add and merge properties from Place    
+    placeProperties = getProperties()
+    
+    for key, value in placeProperties.items():
+        print(key, value)
+        body["attributes"][key] = value
     
     return body

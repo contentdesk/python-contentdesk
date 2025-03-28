@@ -5,7 +5,8 @@ def setBody(family, families):
     
     attribute_requirements = {
                                 "sku": "sku", 
-                                "name": "name", 
+                                "name": "name",
+                                "image": "image",
                                 "license": "license", 
                                 "embedUrl": "embedUrl",
                                 "latitude": "latitude",

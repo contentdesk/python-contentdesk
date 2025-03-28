@@ -181,6 +181,14 @@ def getProperties():
     ## Contentdesk.io Settings
     properties['openstreetmap_id'] = 'openstreetmap_id'
     
+    properties['search_text_pro_channel'] = 'search_text_pro_channel'
+    properties['promo_sort_order_scope'] = 'promo_sort_order_scope'
+    properties['potentialAction'] = 'potentialAction'
+    
+    properties['metaTitle'] = 'metaTitle'
+    properties['metaDescription'] = 'metaDescription'
+    properties['canonicalUrl'] = 'canonicalUrl'
+    
     return properties
 
 # TODO: CHEck if needed!

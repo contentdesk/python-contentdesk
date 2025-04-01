@@ -219,6 +219,7 @@ def getProperties():
     properties['search_text_pro_channel'] = 'search_text_pro_channel'
     properties['promo_sort_order_scope'] = 'promo_sort_order_scope'
     properties['potentialAction'] = 'potentialAction'
+    properties['target'] = 'target'
     
     properties['metaTitle'] = 'metaTitle'
     properties['metaDescription'] = 'metaDescription'

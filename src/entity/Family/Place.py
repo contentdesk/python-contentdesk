@@ -169,6 +169,7 @@ def getProperties():
     properties['latitude'] = 'latitude'
 
     # Address
+    properties['location'] = 'location'
     properties['streetAddress'] = 'streetAddress'
     properties['postalCode'] = 'postalCode'
     properties['addressLocality'] = 'addressLocality'
@@ -225,6 +226,8 @@ def getProperties():
     properties['metaTitle'] = 'metaTitle'
     properties['metaDescription'] = 'metaDescription'
     properties['canonicalUrl'] = 'canonicalUrl'
+    
+    properties['outdooractive_poi_category'] = 'outdooractive_poi_category'
     
     # Add and merge properties from Place    
     thingProperties = Thing.getProperties()

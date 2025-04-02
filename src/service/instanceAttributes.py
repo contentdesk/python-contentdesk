@@ -3,8 +3,6 @@ import importlib
 
 def getInstanceAttributes(target):
     print(" - LOAD InstanceAttributes")
-    print(" - Target: ", target)
-    print(target.getHost())
     
     if target.getHost() == "https://ziggy.contentdesk.io":
         print(" - LOAD InstanceAttributes for ziggy")

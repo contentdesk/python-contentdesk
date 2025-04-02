@@ -36,6 +36,10 @@ def importFamilyEnitity(code, parent):
         print(" - Module - Load FoodEstablishment")
         module = importlib.import_module("entity.Family.FoodEstablishment")
         return module
+    elif "LodgingBusiness" in code:
+        print(" - Module - Load LodgingBusiness")
+        module = importlib.import_module("entity.Family.LodgingBusiness")
+        return module
     elif parent in import_map:
         import_path, message = import_map[parent]
         print(" - Module - "+message)
@@ -65,7 +69,7 @@ def patchAkeneoFamily(family, families, target):
 
     # Set Body by Modul
     #print("- Parent Family: ", family["parent"])
-    body = module.setBody(family, families, target)
+    body = module.setBody(family, families)
     print(" - DEBUG - ", family['label'])
     debug.addToLogFileBody(str(family['label']), body)
     

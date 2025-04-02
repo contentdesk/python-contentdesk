@@ -33,7 +33,7 @@ def getProperties():
     
     return properties
 
-def setBody(family, families, target):
+def setBody(family, families):
     #body = Family.setBody(family, families)
     
     attribute_requirements = {

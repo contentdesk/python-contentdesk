@@ -31,6 +31,7 @@ def setBody(family, families):
     body['attributes']['latitude'] = 'latitude'
     body['attributes']['longitude'] = 'longitude'
     
+    body['attributes']['location'] = 'location'
     body['attributes']['streetAddress'] = 'streetAddress'
     body['attributes']['postalCode'] = 'postalCode'
     body['attributes']['addressLocality'] = 'addressLocality'

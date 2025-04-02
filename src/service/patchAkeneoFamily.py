@@ -39,6 +39,10 @@ def importFamilyEnitity(code, parent):
         print(" - Module - Load Webcam")
         module = importlib.import_module("entity.Family.Webcam")
         return module
+    elif "FoodEstablishment" in code:
+        print(" - Module - Load FoodEstablishment")
+        module = importlib.import_module("entity.Family.FoodEstablishment")
+        return module
     elif parent in import_map:
         import_path, message = import_map[parent]
         print(" - Module - "+message)

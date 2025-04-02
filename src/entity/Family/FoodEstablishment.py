@@ -1,6 +1,7 @@
 import service.debug as debug
 import entity.Family.Family as Family
 import entity.Family.Place as Place
+import entity.Family.LocalBusiness as LocalBusiness
 
 def getSubClasses():
     subClasses = [
@@ -26,6 +27,23 @@ def getSubClasses():
         "Winery"
     ]
     return subClasses
+
+def getProperties():
+    
+    properties = {}
+    
+    properties['acceptsReservations'] = 'acceptsReservations'
+    properties['servesCuisine'] = 'servesCuisine'
+    properties['starRating'] = 'starRating'
+    
+    # Add and merge properties from Place    
+    placeProperties = LocalBusiness.getProperties()
+    
+    for key, value in placeProperties.items():
+        print(key, value)
+        properties[key] = value
+        
+    return properties
 
 def setBody(family, families):
     body = Family.setBody(family, families)

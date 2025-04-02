@@ -151,6 +151,13 @@ def getProperties():
     properties['paymentAccepted'] = 'paymentAccepted'
     properties['priceRange'] = 'priceRange'
     
+    # Add and merge properties from Place    
+    placeProperties = Place.getProperties()
+    
+    for key, value in placeProperties.items():
+        print(key, value)
+        properties[key] = value
+    
     return properties
 
 def setBody(family, families):

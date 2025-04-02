@@ -1,5 +1,6 @@
 import service.debug as debug
 import json
+import entity.Family.Thing as Thing
 
 def merge_dicts(dict1, dict2):
     dict1.update(dict2)
@@ -210,7 +211,7 @@ def getProperties():
     properties['image_09_scope_description'] = 'image_09_scope_description'
     properties['image_10_scope_description'] = 'image_10_scope_description'
     
-    properties['publicAccess'] = 'publicAccess'
+    #properties['publicAccess'] = 'publicAccess'
     properties['isAccessibleForFree'] = 'isAccessibleForFree'
     
     ## Contentdesk.io Settings
@@ -224,6 +225,13 @@ def getProperties():
     properties['metaTitle'] = 'metaTitle'
     properties['metaDescription'] = 'metaDescription'
     properties['canonicalUrl'] = 'canonicalUrl'
+    
+    # Add and merge properties from Place    
+    thingProperties = Thing.getProperties()
+    
+    for key, value in thingProperties.items():
+        print(key, value)
+        properties[key] = value
     
     return properties
 
@@ -639,7 +647,7 @@ def setBody(family, families):
     #print("Attributes: ")
     #print(attributes)
     
-    attributes['publicAccess'] = 'publicAccess'
+    #attributes['publicAccess'] = 'publicAccess'
     attributes['isAccessibleForFree'] = 'isAccessibleForFree'
 
     # Remove Properties

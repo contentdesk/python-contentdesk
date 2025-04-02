@@ -69,7 +69,7 @@ def patchAkeneoFamily(family, families, target):
     print(" - DEBUG - ", family['label'])
     debug.addToLogFileBody(str(family['label']), body)
     
-    # Load instanceAttributes to body['attributes']
+    # Load instanceAttributes
     getInstanceAttributes = instanceAttributes.getInstanceAttributes(target)
         
     # Add instanceAttributes to body['attributes']

@@ -5,6 +5,9 @@ def getProperties():
     
     # Add spezific properties to all Types
     # properties['currenciesAccepted'] = 'currenciesAccepted'
+    properties['mainEntityOfPage'] = 'mainEntityOfPage'
+    properties['hlt_onboarding_mailing'] = 'hlt_onboarding_mailing'
+    properties['hlt_onboarding_code'] = 'hlt_onboarding_code'
     
     return properties
     

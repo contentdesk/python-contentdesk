@@ -240,7 +240,6 @@ def getProperties():
     thingProperties = Thing.getProperties()
     
     for key, value in thingProperties.items():
-        print(key, value)
         properties[key] = value
     
     return properties

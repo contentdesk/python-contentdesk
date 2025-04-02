@@ -61,16 +61,26 @@ def patchAkeneoFamily(family, families, target):
         module = importFamilyEnitity(family["label"], family["label"])
     else:
         module = importFamilyEnitity(family["label"],family["parent"])
-    
-    # Load instanceAttributes to body['attributes']
-    getInstanceAttributes = instanceAttributes.getInstanceAttributes(target)
-    print(getInstanceAttributes)
 
     print("- PATCH Family: ", family["label"])
     print("- Parent Family: ", family["parent"])
     body = module.setBody(family, families, target)
     print(" - DEBUG - ", family['label'])
     debug.addToLogFileBody(str(family['label']), body)
+    
+    # Load instanceAttributes to body['attributes']
+    getInstanceAttributes = instanceAttributes.getInstanceAttributes(target)
+    print(getInstanceAttributes)
+    
+    print(" Befor Body: ") 
+    print(body["attributes"])
+        
+    for key, value in getInstanceAttributes.items():
+        print(key, value)
+        body["attributes"][key] = value
+    
+    print(" After Body:")
+    print(body["attributes"])
     
     response = patchFamily(family["label"], body, target)
     print("FINISH - patch Family: ", family["label"])

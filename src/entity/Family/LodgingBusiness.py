@@ -41,14 +41,16 @@ def getProperties():
     properties['petsAllowed'] = 'petsAllowed'
     properties['starRating'] = 'starRating'
     
-    ## Contentdesk.io Settings
-    properties['superior'] = 'superior'
-    properties['garni'] = 'garni'
-
     properties['license'] = 'license'
     properties['copyrightHolder'] = 'copyrightHolder'
     properties['author'] = 'author'
     
+    ## Contentdesk.io Settings
+    properties['superior'] = 'superior'
+    properties['garni'] = 'garni'
+    properties['trustyou_id'] = 'trustyou_id'
+    properties['tripadvisor_id'] = 'tripadvisor_id'
+
     properties['award'] = 'award'
 
     properties['typicalAgeRange'] = 'typicalAgeRange'

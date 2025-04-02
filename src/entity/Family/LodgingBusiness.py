@@ -97,7 +97,6 @@ def getProperties():
     localBusinessProperties = LocalBusiness.getProperties()
     
     for key, value in localBusinessProperties.items():
-        print(key, value)
         properties[key] = value
     
     return properties

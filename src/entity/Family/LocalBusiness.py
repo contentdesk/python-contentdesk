@@ -151,11 +151,12 @@ def getProperties():
     properties['paymentAccepted'] = 'paymentAccepted'
     properties['priceRange'] = 'priceRange'
     
+    properties['award'] = 'award'
+    
     # Add and merge properties from Place    
     placeProperties = Place.getProperties()
     
     for key, value in placeProperties.items():
-        print(key, value)
         properties[key] = value
     
     return properties
@@ -195,7 +196,6 @@ def setBody(family, families):
     body["attribute_requirements"]['mice'] = attribute_requirements
         
     body['attributes'] = {}
-    
     body['attributes'] = getProperties()
     
     return body

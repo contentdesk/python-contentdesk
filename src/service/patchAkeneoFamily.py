@@ -1,12 +1,4 @@
 import service.debug as debug
-import entity.Family.Family as Family
-import entity.Family.LodgingBusiness as LodgingBusiness
-import entity.Family.LocalBusiness as LocalBusiness
-import entity.Family.FoodEstablishment as FoodEstablishment
-import entity.Family.Landform as Landform
-import entity.Family.Event as Event
-import entity.Family.CivicStructure as CivicStructure
-import entity.Family.Product as Product
 import importlib
 
 def importFamilyEnitity(code, parent):

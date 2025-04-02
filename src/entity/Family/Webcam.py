@@ -51,6 +51,8 @@ def setBody(family, families):
     
     body['attributes']['potentialAction'] = 'potentialAction'
     body['attributes']['target'] = 'target'
+    body['attributes']['search_text_pro_channel'] = 'search_text_pro_channel'
+    body['attributes']['promo_sort_order_scope'] = 'promo_sort_order_scope'
     
     body['attributes']['markerIcon'] = 'markerIcon'
 

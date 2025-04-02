@@ -1,6 +1,39 @@
 import entity.Family.Family as Family
 
-def setBody(family, families):
+def getProperties():
+    properties = {}
+    
+    properties['sku'] = 'sku'
+    properties['name'] = 'name'
+    properties['disambiguatingDescription'] = 'disambiguatingDescription'
+    properties['description'] = 'description'
+    properties['image'] = 'image'
+    properties['image_description'] = 'image_description'
+
+    properties['latitude'] = 'latitude'
+    properties['longitude'] = 'longitude'
+    
+    properties['contentUrl'] = 'contentUrl'
+    properties['embedUrl'] = 'embedUrl'
+    properties['thumbnailUrl'] = 'thumbnailUrl'
+    
+    properties['openstreetmap_id'] = 'openstreetmap_id'
+    properties['license'] = 'license'
+    properties['copyrightHolder'] = 'copyrightHolder'
+    properties['author'] = 'author'
+    
+    properties['leisure'] = 'leisure'
+    
+    properties['potentialAction'] = 'potentialAction'
+    properties['target'] = 'target'
+    properties['search_text_pro_channel'] = 'search_text_pro_channel'
+    properties['promo_sort_order_scope'] = 'promo_sort_order_scope'
+    
+    properties['markerIcon'] = 'markerIcon'
+    
+    return properties
+
+def setBody(family, families, target):
     #body = Family.setBody(family, families)
     
     attribute_requirements = {
@@ -28,32 +61,8 @@ def setBody(family, families):
     }
     
     body['attributes'] = {}
-    body['attributes']['sku'] = 'sku'
-    body['attributes']['name'] = 'name'
-    body['attributes']['disambiguatingDescription'] = 'disambiguatingDescription'
-    body['attributes']['description'] = 'description'
-    body['attributes']['image'] = 'image'
-    body['attributes']['image_description'] = 'image_description'
-
-    body['attributes']['latitude'] = 'latitude'
-    body['attributes']['longitude'] = 'longitude'
-    
-    body['attributes']['contentUrl'] = 'contentUrl'
-    body['attributes']['embedUrl'] = 'embedUrl'
-    body['attributes']['thumbnailUrl'] = 'thumbnailUrl'
-    
-    body['attributes']['openstreetmap_id'] = 'openstreetmap_id'
-    body['attributes']['license'] = 'license'
-    body['attributes']['copyrightHolder'] = 'copyrightHolder'
-    body['attributes']['author'] = 'author'
-    
-    body['attributes']['leisure'] = 'leisure'
-    
-    body['attributes']['potentialAction'] = 'potentialAction'
-    body['attributes']['target'] = 'target'
-    body['attributes']['search_text_pro_channel'] = 'search_text_pro_channel'
-    body['attributes']['promo_sort_order_scope'] = 'promo_sort_order_scope'
-    
-    body['attributes']['markerIcon'] = 'markerIcon'
+     
+    # Add and merge properties from getProperties    
+    body["attributes"] = getProperties()
 
     return body

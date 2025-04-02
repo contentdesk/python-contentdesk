@@ -1,5 +1,6 @@
 import service.debug as debug
 import importlib
+import service.instanceAttributes as instanceAttributes
 
 def importFamilyEnitity(code, parent):
     import_map = {
@@ -60,9 +61,14 @@ def patchAkeneoFamily(family, families, target):
         module = importFamilyEnitity(family["label"], family["label"])
     else:
         module = importFamilyEnitity(family["label"],family["parent"])
+    
+    # Load instanceAttributes to body['attributes']
+    getInstanceAttributes = instanceAttributes.getInstanceAttributes(target)
+    print(getInstanceAttributes)
+
     print("- PATCH Family: ", family["label"])
     print("- Parent Family: ", family["parent"])
-    body = module.setBody(family, families)
+    body = module.setBody(family, families, target)
     print(" - DEBUG - ", family['label'])
     debug.addToLogFileBody(str(family['label']), body)
     

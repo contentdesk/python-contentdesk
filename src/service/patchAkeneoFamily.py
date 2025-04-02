@@ -78,7 +78,6 @@ def patchAkeneoFamily(family, families, target):
         
     # Add instanceAttributes to body['attributes']
     for key, value in getInstanceAttributes.items():
-        print(key, value)
         body["attributes"][key] = value
     
     # Patch Family

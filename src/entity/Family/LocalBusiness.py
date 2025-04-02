@@ -142,7 +142,7 @@ def getSubClasses():
     #"LodgingBusiness",
     return subClasses
 
-# Place specific properties
+# Specific properties
 def getProperties():
     properties = {}
     
@@ -189,69 +189,13 @@ def setBody(family, families):
             "it_IT": family["label.it_IT"],
         }
     }
-    body['attributes'] = {}
 
-    body['attributes']['license'] = 'license'
-    body['attributes']['copyrightHolder'] = 'copyrightHolder'
-    body['attributes']['author'] = 'author'
-
-    body['attributes']['currenciesAccepted'] = 'currenciesAccepted'
-    body['attributes']['openingHours'] = 'openingHours'
-    body['attributes']['paymentAccepted'] = 'paymentAccepted'
-    body['attributes']['priceRange'] = 'priceRange'
-
-    body['attributes']['metaTitle'] = 'metaTitle'
-    body['attributes']['metaDescription'] = 'metaDescription'
-    body['attributes']['canonicalUrl'] = 'canonicalUrl'
-    
-    body['attributes']['openstreetmap_id'] = 'openstreetmap_id'
-
-    body['attributes']['image_summer'] = 'image_summer'
-    body['attributes']['image_winter'] = 'image_winter'
-
-    body['attributes']['image_01_scope'] = 'image_01_scope'
-    body['attributes']['image_02_scope'] = 'image_02_scope'
-    body['attributes']['image_03_scope'] = 'image_03_scope'
-    body['attributes']['image_04_scope'] = 'image_04_scope'
-    body['attributes']['image_05_scope'] = 'image_05_scope'
-    body['attributes']['image_06_scope'] = 'image_06_scope'
-    body['attributes']['image_07_scope'] = 'image_07_scope'
-    body['attributes']['image_08_scope'] = 'image_08_scope'
-    body['attributes']['image_09_scope'] = 'image_09_scope'
-    body['attributes']['image_10_scope'] = 'image_10_scope'
-
-    body['attributes']['image_01_scope_description'] = 'image_01_scope_description'
-    body['attributes']['image_02_scope_description'] = 'image_02_scope_description'
-    body['attributes']['image_03_scope_description'] = 'image_03_scope_description'
-    body['attributes']['image_04_scope_description'] = 'image_04_scope_description'
-    body['attributes']['image_05_scope_description'] = 'image_05_scope_description'
-    body['attributes']['image_06_scope_description'] = 'image_06_scope_description'
-    body['attributes']['image_07_scope_description'] = 'image_07_scope_description'
-    body['attributes']['image_08_scope_description'] = 'image_08_scope_description'
-    body['attributes']['image_09_scope_description'] = 'image_09_scope_description'
-    body['attributes']['image_10_scope_description'] = 'image_10_scope_description'
-    
-    # marker Icon
-    body['attributes']['markerIcon'] = 'markerIcon'
-    
-    # discover.swiss Testing
-    body['attributes']['parking'] = 'parking'
-    body['attributes']['publicTransport'] = 'publicTransport'
-    
     body['attribute_requirements'] = {}
     body["attribute_requirements"]['ecommerce'] = attribute_requirements
     body["attribute_requirements"]['mice'] = attribute_requirements
+        
+    body['attributes'] = {}
     
-    ## plus Properties from Place! 
-    
-    # Add and merge properties from Place    
-    placeProperties = Place.getProperties()
-    
-    for key, value in placeProperties.items():
-        print(key, value)
-        body["attributes"][key] = value
-    
-    print ("SET BODY!")
-    debug.addToLogFileBody(str(family['label']), body)
+    body['attributes'] = getProperties()
     
     return body

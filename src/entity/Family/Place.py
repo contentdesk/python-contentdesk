@@ -227,7 +227,14 @@ def getProperties():
     properties['metaDescription'] = 'metaDescription'
     properties['canonicalUrl'] = 'canonicalUrl'
     
+    # marker Icon
+    properties['markerIcon'] = 'markerIcon'
+    
     properties['outdooractive_poi_category'] = 'outdooractive_poi_category'
+    
+    # discover.swiss Testing
+    properties['parking'] = 'parking'
+    properties['publicTransport'] = 'publicTransport'
     
     # Add and merge properties from Place    
     thingProperties = Thing.getProperties()

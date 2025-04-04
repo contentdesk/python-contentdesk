@@ -49,7 +49,7 @@ def getProperties():
     properties['superior'] = 'superior'
     properties['garni'] = 'garni'
     properties['trustyou_id'] = 'trustyou_id'
-    properties['tripadvisor_id'] = 'tripadvisor_id'
+    properties['tomas_id'] = 'tomas_id'
 
     properties['award'] = 'award'
 

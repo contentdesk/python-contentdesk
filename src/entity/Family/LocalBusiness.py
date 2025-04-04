@@ -152,6 +152,7 @@ def getProperties():
     properties['priceRange'] = 'priceRange'
     
     properties['award'] = 'award'
+    properties['google_place_id'] = 'google_place_id'
     
     # Add and merge properties from Place    
     placeProperties = Place.getProperties()

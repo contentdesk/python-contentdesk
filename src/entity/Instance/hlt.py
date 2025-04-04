@@ -10,6 +10,5 @@ def getProperties():
     properties['hlt_onboarding_code'] = 'hlt_onboarding_code'
     properties['hlt_control'] = 'hlt_control'
     
-    
     return properties
     

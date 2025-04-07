@@ -10,6 +10,7 @@ def getProperties():
     properties['hlt_onboarding_code'] = 'hlt_onboarding_code'
     properties['hlt_onlboarding_formulartyp'] = 'hlt_onlboarding_formulartyp'
     properties['hlt_control'] = 'hlt_control'
+    properties['tripadvisor_id'] = 'tripadvisor_id'
     
     return properties
     

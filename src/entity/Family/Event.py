@@ -26,6 +26,8 @@ def getSubClasses():
     return subClasses
 
 def setBody(family, families):
+    # https://docs.discover.swiss/dev/reference/dataschema/definition/infocenter-classes/Event/
+    
     body = Family.setBody(family, families)
     
     body['attributes']['latitude'] = 'latitude'

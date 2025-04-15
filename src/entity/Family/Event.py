@@ -52,5 +52,7 @@ def setBody(family, families):
     body['attributes']['isAccessibleForFree'] = 'isAccessibleForFree'
     
     body['attributes']['duration'] = 'duration'
+    body['attributes']['price'] = 'price'
+    #body['attributes']['offer'] = 'offer'
     
     return body

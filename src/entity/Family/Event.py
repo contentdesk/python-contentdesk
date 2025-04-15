@@ -49,4 +49,6 @@ def setBody(family, families):
     
     body['attributes']['isAccessibleForFree'] = 'isAccessibleForFree'
     
+    body['attributes']['duration'] = 'duration'
+    
     return body

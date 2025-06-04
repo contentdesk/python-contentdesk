@@ -3,6 +3,7 @@ import importlib
 
 def getInstanceAttributes(target):
     print(" - LOAD InstanceAttributes")
+    attributes = {}
     
     if target.getHost() == "https://ziggy.contentdesk.io":
         print(" - LOAD InstanceAttributes for ziggy")
@@ -13,9 +14,9 @@ def getInstanceAttributes(target):
     elif target.getHost() == "https://hlt.pim.tso.ch":
         print(" - LOAD InstanceAttributes for hlt")
         instanceModule = importlib.import_module("entity.Instance.hlt")
-
-    attributes = {}
-
+    else:
+        print(" - LOAD InstanceAttributes for default")
+        instanceModule = importlib.import_module("entity.Instance.default")
     attributes = instanceModule.getProperties()
-    
+
     return attributes

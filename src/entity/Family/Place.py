@@ -354,6 +354,7 @@ def create(family, families, akeneo):
         attributes['givenName'] = 'givenName'
         attributes['familyName'] = 'familyName'
         attributes['email'] = 'email'
+        attributes['url'] = 'url'
 
     if (
         code == "FoodEstablishment" or
@@ -612,6 +613,7 @@ def setBody(family, families):
         attributes['givenName'] = 'givenName'
         attributes['familyName'] = 'familyName'
         attributes['email'] = 'email'
+        attributes['url'] = 'url'
 
     if (
         code == "FoodEstablishment" or

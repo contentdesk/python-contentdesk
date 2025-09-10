@@ -217,6 +217,10 @@ def getProperties():
     
     ## Contentdesk.io Settings
     properties['openstreetmap_id'] = 'openstreetmap_id'
+    properties['guidle_place_id'] = 'guidle_place_id'
+    properties['eventfrog_place_id'] = 'eventfrog_place_id'
+    properties['google_place_id'] = 'google_place_id'
+    properties['discoverId'] = 'discoverId'
     
     properties['search_text_pro_channel'] = 'search_text_pro_channel'
     properties['promo_sort_order_scope'] = 'promo_sort_order_scope'
@@ -244,7 +248,7 @@ def getProperties():
     
     return properties
 
-# TODO: CHEck if needed!
+# TODO: OLD? / CHECK if needed!
 def create(family, families, akeneo):
     code = family["label"]
 

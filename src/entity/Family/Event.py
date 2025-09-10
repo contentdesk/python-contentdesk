@@ -55,4 +55,7 @@ def setBody(family, families):
     body['attributes']['price'] = 'price'
     #body['attributes']['offer'] = 'offer'
     
+    body['attributes']['guidle_event_id'] = 'guidle_event_id'
+    body['attributes']['eventfrog_id'] = 'eventfrog_id'
+    
     return body

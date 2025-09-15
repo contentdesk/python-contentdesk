@@ -639,6 +639,7 @@ def setBody(family, families):
     attributes['promo_sort_order_scope'] = 'promo_sort_order_scope'
     attributes['potentialAction'] = 'potentialAction'
     attributes['openstreetmap_id'] = 'openstreetmap_id'
+    attributes['guidle_place_id'] = 'guidle_place_id'
     
     attributes['metaTitle'] = 'metaTitle'
     attributes['metaDescription'] = 'metaDescription'

@@ -1,25 +1,25 @@
 import importlib
 
 
-def getInstanceAttributes(target):
-    print(" - LOAD InstanceAttributes")
-    attributes = {}
+def getInstanceTypes(target):
+    print(" - LOAD InstanceTypes")
+    types = {}
     
     if target.getHost() == "https://ziggy.contentdesk.io":
-        print(" - LOAD InstanceAttributes for ziggy")
+        print(" - LOAD InstanceTypes for ziggy")
         instanceModule = importlib.import_module("entity.Instance.ziggy")
     elif target.getHost() == "https://demo.contentdesk.io":
-        print(" - LOAD InstanceAttributes for demo")
+        print(" - LOAD InstanceTypes for demo")
         instanceModule = importlib.import_module("entity.Instance.demo")
     elif target.getHost() == "https://hlt.contentdesk.io":
-        print(" - LOAD InstanceAttributes for hlt")
+        print(" - LOAD InstanceTypes for hlt")
         instanceModule = importlib.import_module("entity.Instance.hlt")
     elif target.getHost() == "https://sgbt.contentdesk.io":
-        print(" - LOAD InstanceAttributes for sgbt")
+        print(" - LOAD InstanceTypes for sgbt")
         instanceModule = importlib.import_module("entity.Instance.sgbt")
     else:
-        print(" - LOAD InstanceAttributes for default")
+        print(" - LOAD InstanceTypes for default")
         instanceModule = importlib.import_module("entity.Instance.default")
-    attributes = instanceModule.getProperties()
+    types = instanceModule.getTypes()
 
-    return attributes
+    return types

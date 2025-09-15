@@ -141,11 +141,16 @@ def createAttribute(attribute, akeneo):
     return response
 
 def createAttributesinAkeneo(target, attributes, importAttributes = None):
+    print("START - Create Attributes in Akeneo: ")
+    print(" - importAttributes: ", importAttributes)
     for attribute in attributes:
         if importAttributes != None:
+            #print(" - Check Attribute: ", attribute["label"])
             if attribute["label"] in importAttributes:
+                print("Pass")
                 pass
             else:
+                #print("Continue")
                 continue
         print ("Check Property if Attribut: "+ attribute["label"])
         if attribute["attribute"] == True:

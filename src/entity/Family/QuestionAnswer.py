@@ -1,4 +1,7 @@
 
+def getSettings():
+    label = "QuestionAnswer"
+
 def getProperties():
     properties = {}
     

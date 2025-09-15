@@ -49,14 +49,6 @@ def getSettings():
 def createFamilies(target, families, importFamilies = None):
     #filter families by label = Hotel
     #families = [family for family in families if family["label"] == "Hotel"]
-    
-    # Load instanceTypes
-    getInstanceTypes = instanceTypes.getInstanceTypes(target)
-    
-    # Add instanceTypes to families
-    for family in families:
-        for key, value in getInstanceTypes.items():
-            family[key] = value
 
     for family in families:
         if importFamilies != None:

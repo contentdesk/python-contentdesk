@@ -17,10 +17,11 @@ def importFamilyEnitity(code, parent):
         "Organization": ("entity.Family.Organization", "Load Organization"),
         "Place": ("entity.Family.Place", "Load Place"),
         "Product": ("entity.Family.Product", "Load Product"),
+        "Route": ("entity.Family.Tour", "Load Tour"),
         "Schedule": ("entity.Family.Schedule", "Load Schedule"),
         "Tour": ("entity.Family.Tour", "Load Tour"),
         "TouristAttraction": ("entity.Family.TouristAttraction", "Load TouristAttraction"),
-        "Trail": ("entity.Family.Trail", "Load Trail"),
+        "Trail": ("entity.Family.Trail", "Load Tour"),
         "Webcam": ("entity.Family.Webcam", "Load Webcam"),
     }
     
@@ -39,6 +40,10 @@ def importFamilyEnitity(code, parent):
     elif "LodgingBusiness" in code:
         print(" - Module - Load LodgingBusiness")
         module = importlib.import_module("entity.Family.LodgingBusiness")
+        return module
+    elif "Tour" in code or "Route" in code or "Trail" in code:
+        print(" - Module - Load Tour")
+        module = importlib.import_module("entity.Family.Tour")
         return module
     elif parent in import_map:
         import_path, message = import_map[parent]

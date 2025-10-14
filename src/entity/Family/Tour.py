@@ -41,7 +41,24 @@ def getProperties():
     properties['geo'] = 'geo'
     
     # Tour specific
-    properties['duration'] = 'duration'
+    properties['seasonOfYear'] = 'seasonOfYear'
+    properties['length'] = 'length'
+    properties['difficulty'] = 'difficulty'
+    properties['estimatedDuration'] = 'estimatedDuration'
+    properties['uphillElevation'] = 'uphillElevation'
+    properties['downhillElevation'] = 'downhillElevation'
+    properties['highestPoint'] = 'highestPoint'
+    properties['lowestPoint'] = 'lowestPoint'
+    properties['recommendedEquipment'] = 'recommendedEquipment'
+    properties['circularTrail'] = 'circularTrail'
+    properties['directions'] = 'directions'
+    properties['startingPointDescription'] = 'startingPointDescription'
+    properties['destination'] = 'destination'
+    properties['condition'] = 'condition'
+    properties['technique'] = 'technique'
+    properties['qualityOfExperience'] = 'qualityOfExperience'
+    properties['landscape'] = 'landscape'
+
 
     placeProperties = Place.getProperties()
     

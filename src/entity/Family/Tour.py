@@ -58,7 +58,7 @@ def getProperties():
     properties['technique'] = 'technique'
     properties['qualityOfExperience'] = 'qualityOfExperience'
     properties['landscape'] = 'landscape'
-
+    properties['HowToDirection'] = 'HowToDirection'
 
     placeProperties = Place.getProperties()
     

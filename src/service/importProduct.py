@@ -21,8 +21,12 @@ def extract():
 def extractTarget(products, target):
     backuptProducts = []
     for product in products:
-        print(" - Check Object: ", product['identifier'])
-        getProduct = target.getProductByCode(product['identifier'])
+        if 'identifier' in product:
+            print(" - Check Object: ", product['identifier'])
+            getProduct = target.getProductByCode(product['identifier'])
+        if 'sku' in product:
+            print(" - Check Object: ", product['sku'])
+            getProduct = target.getProductByCode(product['sku'])
         if getProduct:
             print("OK")
             backuptProducts.append(getProduct)
@@ -38,7 +42,7 @@ def transform(products):
         if 'identifier' in product:
             transformed_product['identifier'] = product['identifier']
         if 'sku' in product:
-            transformed_product['identifier'] = product['identifier']
+            transformed_product['sku'] = product['identifier']
         if 'family' in product:
             transformed_product['family'] = product['family']
         if 'categories' in product:

@@ -42,7 +42,7 @@ def transform(products):
         if 'identifier' in product:
             transformed_product['identifier'] = product['identifier']
         if 'sku' in product:
-            transformed_product['sku'] = product['identifier']
+            transformed_product['identifier'] = product['sku']
         if 'family' in product:
             transformed_product['family'] = product['family']
         if 'categories' in product:

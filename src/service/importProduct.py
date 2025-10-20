@@ -35,6 +35,8 @@ def transform(products):
     transformed_products = []
     for product in products:
         transformed_product = {}
+        if 'identifier' in product:
+            transformed_product['identifier'] = product['identifier']
         if 'sku' in product:
             transformed_product['identifier'] = product['sku']
         if 'family' in product:
@@ -49,7 +51,7 @@ def transform(products):
         # dynamic Attribut
         for key, value in product.items():
             print (key)
-            if key not in ['sku', 'family', 'categories', 'enabled', 'groups', 'parent', 'created', 'updated']:
+            if key not in ['sku', 'identifier', 'family', 'categories', 'enabled', 'groups', 'parent', 'created', 'updated']:
                 if '-' in key:
                     parts = key.split('-')
                     if len(parts) == 2:

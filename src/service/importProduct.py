@@ -12,15 +12,16 @@ def extract():
     for filename in os.listdir(input_folder):
         if filename.endswith('.csv'):
             with open(os.path.join(input_folder, filename), mode='r', encoding='utf-8') as file:
-                reader = csv.DictReader(file)
+                reader = csv.DictReader(file, delimiter=';')
                 for row in reader:
+                    print(" - Read Row: ", row)
                     products.append(row)
     return products
 
 def extractTarget(products, target):
     backuptProducts = []
     for product in products:
-        print(" - Check Objekct: ", product['identifier'])
+        print(" - Check Object: ", product['identifier'])
         getProduct = target.getProductByCode(product['identifier'])
         if getProduct:
             print("OK")

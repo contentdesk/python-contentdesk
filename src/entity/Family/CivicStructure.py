@@ -120,6 +120,7 @@ def getSubClasses():
         "WaysideCross",
         "Zoo",
         "TransportationSystemCivicStructure",
+        "TransportationSystem"
     ]
     return subClasses
 

@@ -1,5 +1,91 @@
 import service.debug as debug
 
+def getProperties():
+    properties = {}
+    
+    properties['sku'] = 'sku'
+    properties['name'] = 'name'
+    properties['disambiguatingDescription'] = 'disambiguatingDescription'
+    properties['description'] = 'description'
+    properties['image'] = 'image'
+    properties['image_description'] = 'image_description'
+
+    properties['latitude'] = 'latitude'
+    properties['longitude'] = 'longitude'
+    
+    properties['contentUrl'] = 'contentUrl'
+    properties['embedUrl'] = 'embedUrl'
+    properties['thumbnailUrl'] = 'thumbnailUrl'
+    
+    properties['openstreetmap_id'] = 'openstreetmap_id'
+    properties['license'] = 'license'
+    properties['copyrightHolder'] = 'copyrightHolder'
+    properties['author'] = 'author'
+    
+    properties['leisure'] = 'leisure'
+    
+    properties['potentialAction'] = 'potentialAction'
+    properties['target'] = 'target'
+    properties['search_text_pro_channel'] = 'search_text_pro_channel'
+    properties['promo_sort_order_scope'] = 'promo_sort_order_scope'
+    
+    properties['markerIcon'] = 'markerIcon'
+
+    # MeetingRoom specific properties
+    properties['seating_banquet'] = 'seating_banquet'
+    properties['seating_bar_table'] = 'seating_bar_table'
+    properties['seating_block'] = 'seating_block'
+    properties['seating_boardroom'] = 'seating_boardroom'
+    properties['seating_concert'] = 'seating_concert'
+    properties['seating_seminar'] = 'seating_seminar'
+    properties['seating_ushape'] = 'seating_ushape'
+
+    properties['openstreetmap_id'] = 'openstreetmap_id'
+    properties['license'] = 'license'
+    properties['copyrightHolder'] = 'copyrightHolder'
+    properties['author'] = 'author'
+
+    properties['amenityFeature'] = 'amenityFeature'
+    properties['occupancy'] = 'occupancy'
+    properties['floorLevel'] = 'floorLevel'
+    properties['floorSize'] = 'floorSize'
+    properties['maximumAttendeeCapacity'] = 'maximumAttendeeCapacity'
+    properties['yearBuilt'] = 'yearBuilt'
+    properties['offers'] = 'offers'
+    properties['priceRange'] = 'priceRange'
+
+    properties['latitude'] = 'latitude'
+    properties['longitude'] = 'longitude'
+
+    properties['leisure'] = 'leisure'
+
+    if 'image' in properties:
+        properties['image_description'] = 'image_description'
+        
+    properties['image_01_scope'] = 'image_01_scope'
+    properties['image_02_scope'] = 'image_02_scope'
+    properties['image_03_scope'] = 'image_03_scope'
+    properties['image_04_scope'] = 'image_04_scope'
+    properties['image_05_scope'] = 'image_05_scope'
+    properties['image_06_scope'] = 'image_06_scope'
+    properties['image_07_scope'] = 'image_07_scope'
+    properties['image_08_scope'] = 'image_08_scope'
+    properties['image_09_scope'] = 'image_09_scope'
+    properties['image_10_scope'] = 'image_10_scope'
+
+    properties['image_01_scope_description'] = 'image_01_scope_description'
+    properties['image_02_scope_description'] = 'image_02_scope_description'
+    properties['image_03_scope_description'] = 'image_03_scope_description'
+    properties['image_04_scope_description'] = 'image_04_scope_description'
+    properties['image_05_scope_description'] = 'image_05_scope_description'
+    properties['image_06_scope_description'] = 'image_06_scope_description'
+    properties['image_07_scope_description'] = 'image_07_scope_description'
+    properties['image_08_scope_description'] = 'image_08_scope_description'
+    properties['image_09_scope_description'] = 'image_09_scope_description'
+    properties['image_10_scope_description'] = 'image_10_scope_description'
+    
+    return properties
+
 def setBody(family, families):
     code = family["label"]
 
@@ -15,43 +101,7 @@ def setBody(family, families):
     #else:
     #    attributes = {"sku": "sku", "name": "name", "image": "image"}
 
-    attributes = {}
-    attributes['sku'] = 'sku'
-    attributes['name'] = 'name'
-    attributes['image'] = 'image'
-    
-    attributes['disambiguatingDescription'] = 'disambiguatingDescription'
-    attributes['description'] = 'description'
-
-    attributes['seating_banquet'] = 'seating_banquet'
-    attributes['seating_bar_table'] = 'seating_bar_table'
-    attributes['seating_block'] = 'seating_block'
-    attributes['seating_boardroom'] = 'seating_boardroom'
-    attributes['seating_concert'] = 'seating_concert'
-    attributes['seating_seminar'] = 'seating_seminar'
-    attributes['seating_ushape'] = 'seating_ushape'
-
-    attributes['openstreetmap_id'] = 'openstreetmap_id'
-    attributes['license'] = 'license'
-    attributes['copyrightHolder'] = 'copyrightHolder'
-    attributes['author'] = 'author'
-
-    attributes['amenityFeature'] = 'amenityFeature'
-    attributes['occupancy'] = 'occupancy'
-    attributes['floorLevel'] = 'floorLevel'
-    attributes['floorSize'] = 'floorSize'
-    attributes['maximumAttendeeCapacity'] = 'maximumAttendeeCapacity'
-    attributes['yearBuilt'] = 'yearBuilt'
-    attributes['offers'] = 'offers'
-    attributes['priceRange'] = 'priceRange'
-
-    attributes['latitude'] = 'latitude'
-    attributes['longitude'] = 'longitude'
-    
-    attributes['leisure'] = 'leisure'
-
-    if 'image' in attributes:
-        attributes['image_description'] = 'image_description'
+    attributes = getProperties()
     
     body = {
         "code": code,

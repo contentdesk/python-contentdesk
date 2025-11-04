@@ -235,6 +235,7 @@ def getProperties():
     properties['markerIcon'] = 'markerIcon'
     
     properties['outdooractive_poi_category'] = 'outdooractive_poi_category'
+    properties['outdooractive_poi_id'] = 'outdooractive_poi_id'
     
     # discover.swiss Testing
     properties['parking'] = 'parking'

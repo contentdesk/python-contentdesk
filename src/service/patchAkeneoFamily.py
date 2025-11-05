@@ -49,6 +49,10 @@ def importFamilyEnitity(code, parent):
         print(" - Module - Load CivicStructure")
         module = importlib.import_module("entity.Family.CivicStructure")
         return module
+    elif "QuestionAnswer" in code:
+        print(" - Module - Load QuestionAnswer")
+        module = importlib.import_module("entity.Family.QuestionAnswer")
+        return module
     elif parent in import_map:
         import_path, message = import_map[parent]
         print(" - Module - "+message)

@@ -9,7 +9,7 @@ def getProperties():
     
     properties['sku'] = 'sku'
     properties['name'] = 'name'
-    properties['description'] = 'description'
+    properties['text'] = 'text'
     
     properties['potentialAction'] = 'potentialAction'
     properties['target'] = 'target'
@@ -28,7 +28,7 @@ def setBody(family, families):
     body = {
         "code": code,
         "attribute_as_label": family["attribute_as_label"],
-        "attribute_as_image": family["attribute_as_image"],
+        "attribute_as_image": None,
         "attribute_requirements": {
             "ecommerce": attribute_requirements,
             "mice": attribute_requirements,

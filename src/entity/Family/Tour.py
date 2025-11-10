@@ -59,6 +59,12 @@ def getProperties():
     properties['qualityOfExperience'] = 'qualityOfExperience'
     properties['landscape'] = 'landscape'
     properties['HowToDirection'] = 'HowToDirection'
+    
+    # General Information
+    properties['openingHoursSpecification'] = 'openingHoursSpecification'
+    properties['openingHours'] = 'openingHours'
+    properties['specialOpeningHoursSpecification'] = 'specialOpeningHoursSpecification'
+    #properties['trailStatus'] = 'trailStatus'
 
     placeProperties = Place.getProperties()
     

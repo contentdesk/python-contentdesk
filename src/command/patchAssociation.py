@@ -62,6 +62,8 @@ def createAssociation(association, akeneo):
         body["is_quantified"] = False
     if association["is_two_way"] == None:
         body["is_two_way"] = False
+    else:
+        body["is_two_way"] = True
 
     try:
         response = akeneo.patchAssociationTypesByCode(code, body)

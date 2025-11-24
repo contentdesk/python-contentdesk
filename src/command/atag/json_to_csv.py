@@ -184,7 +184,7 @@ def build_locations_df(
 
         dfLocation = pd.DataFrame(
                 rows,
-                columns=["sku","fid", "name", "MeetingRoom", "containsPlace"]
+                columns=["sku","fid", "name", "MeetingRoom", "containsPlace", "shortDescription", "localityDescription"]
         )
         
         toCsv(dfLocation, "locations_debug.csv")  # Debug-Ausgabe der Rohdaten
@@ -249,25 +249,57 @@ def main(json_path: Path, out_dir: Path = Path(".")):
         loc_df = build_locations_df(raw, loc_sku_by_fid, room_skus_by_fid)
         dfLocation = loc_df.assign(
                 cms_fid=loc_df['fid'],
-                name=loc_df.get('name', ''),
-                disambiguatingDescription=loc_df.get('shortDescription', ''),
-                description=loc_df.get('localityDescription', ''),
-                MeetingRoomProducts=loc_df.get('MeetingRoom', ''),
-                containsPlace=loc_df.get('containsPlace', ''),
+                family = "EventVenue",
+                name = loc_df.get('name', ''),
+                disambiguatingDescription = loc_df.get('shortDescription', ''),
+                description = loc_df.get('localityDescription', ''),
+                MeetingRoomProducts = loc_df.get('MeetingRoom', ''),
+                containsPlace = loc_df.get('containsPlace', ''),
+                location = loc_df.get('contact_title', ''),
+                streetAddress = loc_df.get('contact_address', ''),
+                postalCode = loc_df.get('contact_plzort', ''),
+                addressLocality = loc_df.get('contact_plzort', ''),
+                telephone = loc_df.get('contact_phone', ''),
+                email = loc_df.get('contact_email', ''),
+                url = loc_df.get('contact_website', ''),
         )
-        dfLocation = dfLocation[['sku', 'cms_fid', 'name', 'MeetingRoomProducts', 'containsPlace']]
         
-        toCsv(loc_df, "locationsOriginal.csv", out_dir)
+        dfLocation['postalCode'] = dfLocation['postalCode'].str.split(' ').str[0]  # Nur PLZ, ohne Ortsteil
+        dfLocation['addressLocality'] = dfLocation['addressLocality'].str.split(' ').str[1]  # Nur Ortsteil, ohne PLZ
+        
+        dfLocation['url'] = dfLocation['url'].apply(lambda x: x if str(x).startswith('https') else f'https://{x}' if x else '')
+        
+        dfLocation = dfLocation[
+                ['sku', 
+                 'family', 
+                 'cms_fid', 
+                 'name', 
+                 'MeetingRoomProducts', 
+                 'containsPlace', 
+                 'disambiguatingDescription', 
+                 'description',
+                 'location',
+                 'streetAddress',
+                 'postalCode',
+                 'addressLocality',
+                 'telephone',
+                 'email',
+                 'url'
+                ]
+        ]
+        
         toCsv(dfLocation, "locations.csv", out_dir)
         
         # ---------- Rooms ----------
         rooms_df = build_rooms_df(raw, loc_sku_by_fid)
         dfRoom = rooms_df.assign(
                 cms_fid=rooms_df['fid'],
+                family="MeetingRoom",
                 name=rooms_df.get('name', ''),
                 containedInPlace=rooms_df.get('containedInPlace', ''),
+                
         )
-        dfRoom = dfRoom[['sku', 'cms_fid', 'name', 'containedInPlace']]
+        dfRoom = dfRoom[['sku', 'family', 'cms_fid', 'name', 'containedInPlace']]
         
         toCsv(rooms_df, "roomsOriginal.csv", out_dir)
         toCsv(dfRoom, "rooms.csv", out_dir)

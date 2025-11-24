@@ -163,6 +163,7 @@ def build_locations_df(
                 meeting_rooms = ", ".join(room_skus_by_fid.get(sku, []))
                 
                 flat["MeetingRoom"] = meeting_rooms
+                flat["containsPlace"] = meeting_rooms  # Alternativname für MeetingRoom
 
                 rows.append(flat)
 
@@ -196,13 +197,13 @@ def build_rooms_df(
                         flat["fid"] = fid
                         flat["sku"] = uuid.uuid4()
                         # explizit gefordert: Feld "location" mit der Location‑SKU
-                        flat["location"] = parent_sku
+                        flat["containedInPlace"] = parent_sku
                         rows.append(flat)
 
         df = pd.DataFrame(rows)
         # Spaltenreihenfolge: fid, location, sku, danach alphabetisch
         if not df.empty:
-                fixed = ["fid", "location", "sku"]
+                fixed = ["fid", "containedInPlace", "sku"]
                 rest = [c for c in df.columns if c not in fixed]
                 df = df[fixed + rest]
         return df

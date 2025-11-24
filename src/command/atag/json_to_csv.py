@@ -262,6 +262,7 @@ def main(json_path: Path, out_dir: Path = Path(".")):
                 telephone = loc_df.get('contact_phone', ''),
                 email = loc_df.get('contact_email', ''),
                 url = loc_df.get('contact_website', ''),
+                image = loc_df.get('pictures', '')
         )
         
         dfLocation['postalCode'] = dfLocation['postalCode'].str.split(' ').str[0]  # Nur PLZ, ohne Ortsteil
@@ -284,7 +285,8 @@ def main(json_path: Path, out_dir: Path = Path(".")):
                  'addressLocality',
                  'telephone',
                  'email',
-                 'url'
+                 'url',
+                 'image'
                 ]
         ]
         

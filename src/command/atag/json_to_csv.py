@@ -93,6 +93,10 @@ def extract_uuid_v4_from_dict(d: Dict[str, Any]) -> Optional[str]:
 
         return None
 
+def toCsv(df: pd.DataFrame, filename: str, out_dir: Path = Path(".")):
+        file_path = out_dir / filename
+        df.to_csv(file_path, index=False, encoding="utf-8", quotechar='"', quoting=1)
+        print(f"✅  {len(df)} Rows → {file_path}")
 
 def load_json(path: Path) -> List[Dict[str, Any]]:
         """Lädt das JSON‑File und gibt die Liste von Locations zurück."""
@@ -172,10 +176,15 @@ def build_locations_df(
                 flat["containsPlace"] = meeting_rooms  # Alternativname für MeetingRoom
 
                 rows.append(flat)
-
+                
         df = pd.DataFrame(rows)
+
+        dfLocation = pd.DataFrame(
+                rows,
+                columns=["fid", "MeetingRoom", "containsPlace"]
+        )
         
-        toCsv(df, "locations_debug.csv")  # Debug-Ausgabe der Rohdaten
+        toCsv(dfLocation, "locations_debug.csv")  # Debug-Ausgabe der Rohdaten
         
         # Spaltenreihenfolge: fid, sku, danach der Rest
         if not df.empty:
@@ -213,11 +222,6 @@ def build_rooms_df(
                 rest = [c for c in df.columns if c not in fixed]
                 df = df[fixed + rest]
         return df
-
-def toCsv(df: pd.DataFrame, filename: str, out_dir: Path = Path(".")):
-        file_path = out_dir / filename
-        df.to_csv(file_path, index=False, encoding="utf-8", quotechar='"', quoting=1)
-        print(f"✅  {len(df)} Rows → {file_path}")
 
 def main(json_path: Path, out_dir: Path = Path(".")):
         raw = load_json(json_path)

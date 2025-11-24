@@ -160,7 +160,7 @@ def build_locations_df(
 
                 fid = item.get("fid")
                 sku = loc_sku_by_fid.get(fid) or ""
-                meeting_rooms = ", ".join(room_skus_by_fid.get(sku, []))
+                meeting_rooms = ", ".join(room_skus_by_fid.get(fid, []))
                 
                 flat["MeetingRoom"] = meeting_rooms
                 flat["containsPlace"] = meeting_rooms  # Alternativname für MeetingRoom
@@ -232,8 +232,9 @@ def main(json_path: Path, out_dir: Path = Path(".")):
                 disambiguatingDescription=loc_df.get('shortDescription', ''),
                 description=loc_df.get('localityDescription', ''),
                 MeetingRoomProducts=loc_df.get('MeetingRoom', ''),
+                containsPlace=loc_df.get('containsPlace', ''),
         )
-        df = df[['sku', 'cms_fid', 'name', 'disambiguatingDescription', 'description', 'MeetingRoomProducts']]
+        df = df[['sku', 'cms_fid', 'name', 'disambiguatingDescription', 'description', 'MeetingRoomProducts', 'containsPlace']]
         
         toCsv(loc_df, "locationsOriginal.csv", out_dir)
         toCsv(df, "locations.csv", out_dir)
@@ -242,9 +243,9 @@ def main(json_path: Path, out_dir: Path = Path(".")):
         df = rooms_df.assign(
                 cms_fid=rooms_df['fid'],
                 name=rooms_df.get('name', ''),
-                locationProduct=rooms_df.get('location', ''),
+                containedInPlace=rooms_df.get('containedInPlace', ''),
         )
-        df = df[['sku', 'cms_fid', 'name', 'locationProduct']]
+        df = df[['sku', 'cms_fid', 'name', 'containedInPlace']]
         
         toCsv(rooms_df, "roomsOriginal.csv", out_dir)
         toCsv(df, "rooms.csv", out_dir)

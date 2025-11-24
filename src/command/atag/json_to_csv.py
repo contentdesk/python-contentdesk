@@ -205,6 +205,10 @@ def build_rooms_df(
                 df = df[fixed + rest]
         return df
 
+def toCsv(df: pd.DataFrame, filename: str, out_dir: Path = Path(".")):
+        file_path = out_dir / filename
+        df.to_csv(file_path, index=False, encoding="utf-8", quotechar='"', quoting=1)
+        print(f"✅  {len(df)} Rows → {file_path}")
 
 def main(json_path: Path, out_dir: Path = Path(".")):
         raw = load_json(json_path)
@@ -221,28 +225,26 @@ def main(json_path: Path, out_dir: Path = Path(".")):
         loc_df = build_locations_df(raw, loc_sku_by_fid, room_skus_by_fid)
         df = loc_df.assign(
                 cms_fid=loc_df['fid'],
-                shortDescription=loc_df.get('shortDescription', ''),
-                description=loc_df.get('localityDescription', '')
+                name=loc_df.get('name', ''),
+                disambiguatingDescription=loc_df.get('shortDescription', ''),
+                description=loc_df.get('localityDescription', ''),
+                MeetingRoomProducts=loc_df.get('MeetingRoom', ''),
         )
-        df = df[['sku', 'cms_fid', 'shortDescription', 'description'] + 
-                        [c for c in df.columns if c not in ['sku', 'cms_fid', 'shortDescription', 'description', 'fid']]]
+        df = df[['sku', 'cms_fid', 'name', 'disambiguatingDescription', 'description', 'MeetingRoomProducts']]
         
-        loc_file = out_dir / "locations.csv"
-        df.to_csv(loc_file, index=False, encoding="utf-8", quotechar='"', quoting=1)
-        print(f"✅  {len(df)} Locations → {loc_file}")
-
+        toCsv(loc_df, "locationsOriginal.csv", out_dir)
+        toCsv(df, "locations.csv", out_dir)
         # ---------- Rooms ----------
         rooms_df = build_rooms_df(raw, loc_sku_by_fid)
         df = rooms_df.assign(
                 cms_fid=rooms_df['fid'],
                 name=rooms_df.get('name', ''),
-                description=rooms_df.get('localityDescription', '')
+                locationProduct=rooms_df.get('location', ''),
         )
-        df = df[['sku', 'cms_fid', 'name', 'description'] + 
-                        [c for c in df.columns if c not in ['sku', 'cms_fid', 'name', 'description', 'fid']]]
-        rooms_file = out_dir / "rooms.csv"
-        df.to_csv(rooms_file, index=False, encoding="utf-8", quotechar='"', quoting=1)
-        print(f"✅  {len(df)} Rooms → {rooms_file}")
+        df = df[['sku', 'cms_fid', 'name', 'locationProduct']]
+        
+        toCsv(rooms_df, "roomsOriginal.csv", out_dir)
+        toCsv(df, "rooms.csv", out_dir)
 
 if __name__ == "__main__":
         # --------------------------------------------------------------

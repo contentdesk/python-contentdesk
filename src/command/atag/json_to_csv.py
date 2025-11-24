@@ -129,7 +129,13 @@ def precompute_skus(
                         if r_sku:
                                 room_skus.append(r_sku)
                 room_skus_by_fid[fid] = room_skus
-
+                
+        dfRoomSkus = pd.DataFrame(
+                [(k, ", ".join(v)) for k, v in room_skus_by_fid.items()],
+                columns=["fid", "room_skus"]
+        )
+                
+        toCsv(dfRoomSkus, "room_skus_debug.csv")  # Debug-Ausgabe der Room-SKUs      
         return loc_sku_by_fid, room_skus_by_fid
 
 

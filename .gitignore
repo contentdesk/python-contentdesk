@@ -10,3 +10,4 @@ src/config/__pycache__/ignoreTypes.cpython-311.pyc
 *.pyc
 input/*
 src/command/atag/locations_debug.csv
+src/command/atag/room_skus_debug.csv

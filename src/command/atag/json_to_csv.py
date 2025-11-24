@@ -167,6 +167,7 @@ def build_locations_df(
                 rows.append(flat)
 
         df = pd.DataFrame(rows)
+        
         # Spaltenreihenfolge: fid, sku, danach der Rest
         if not df.empty:
                 cols = ["fid", "sku"] + [c for c in df.columns if c not in ("fid", "sku")]
@@ -218,16 +219,30 @@ def main(json_path: Path, out_dir: Path = Path(".")):
 
         # ---------- Locations ----------
         loc_df = build_locations_df(raw, loc_sku_by_fid, room_skus_by_fid)
+        df = loc_df.assign(
+                cms_fid=loc_df['fid'],
+                shortDescription=loc_df.get('shortDescription', ''),
+                description=loc_df.get('localityDescription', '')
+        )
+        df = df[['sku', 'cms_fid', 'shortDescription', 'description'] + 
+                        [c for c in df.columns if c not in ['sku', 'cms_fid', 'shortDescription', 'description', 'fid']]]
+        
         loc_file = out_dir / "locations.csv"
-        loc_df.to_csv(loc_file, index=False, encoding="utf-8", quotechar='"', quoting=1)
-        print(f"✅  {len(loc_df)} Locations → {loc_file}")
+        df.to_csv(loc_file, index=False, encoding="utf-8", quotechar='"', quoting=1)
+        print(f"✅  {len(df)} Locations → {loc_file}")
 
         # ---------- Rooms ----------
         rooms_df = build_rooms_df(raw, loc_sku_by_fid)
+        df = rooms_df.assign(
+                cms_fid=rooms_df['fid'],
+                name=rooms_df.get('name', ''),
+                description=rooms_df.get('localityDescription', '')
+        )
+        df = df[['sku', 'cms_fid', 'name', 'description'] + 
+                        [c for c in df.columns if c not in ['sku', 'cms_fid', 'name', 'description', 'fid']]]
         rooms_file = out_dir / "rooms.csv"
-        rooms_df.to_csv(rooms_file, index=False, encoding="utf-8", quotechar='"', quoting=1)
-        print(f"✅  {len(rooms_df)} Rooms → {rooms_file}")
-
+        df.to_csv(rooms_file, index=False, encoding="utf-8", quotechar='"', quoting=1)
+        print(f"✅  {len(df)} Rooms → {rooms_file}")
 
 if __name__ == "__main__":
         # --------------------------------------------------------------
@@ -241,5 +256,5 @@ if __name__ == "__main__":
                 sys.exit(f"❌  Datei nicht gefunden: {json_file}")
 
         # Optional: Ausgabe‑Ordner (Standard: aktuelles Verzeichnis)
-        out_directory = Path("../../../output/import/atag/")
+        out_directory = Path("../../../input/atag/import/")
         main(json_file, out_directory)

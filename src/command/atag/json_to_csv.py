@@ -166,7 +166,6 @@ def build_locations_df(
                 flat.update(flatten_hotel(item.get("hotel", {})))
 
                 fid = item.get("fid")
-                sku = loc_sku_by_fid.get(fid) or ""
                 meeting_rooms = ", ".join(room_skus_by_fid.get(fid, []))
                 
                 flat["MeetingRoom"] = meeting_rooms
@@ -212,7 +211,12 @@ def build_rooms_df(
                         flat["containedInPlace"] = parent_sku
                         rows.append(flat)
 
-        df = pd.DataFrame(rows)
+        df = pd.DataFrame(rows,
+                columns=["sku", "fid", "name", "containedInPlace"]
+        )
+        
+        toCsv(df, "rooms_debug.csv")  # Debug-Ausgabe der Rohdaten
+        
         # Spaltenreihenfolge: fid, location, sku, danach alphabetisch
         if not df.empty:
                 fixed = ["fid", "containedInPlace", "sku"]
@@ -227,6 +231,8 @@ def main(json_path: Path, out_dir: Path = Path(".")):
         for entry in raw:
              if 'sku' not in entry or not is_uuid_v4_string(entry['sku']):
                  entry['sku'] = str(uuid.uuid4())
+                 
+        toCsv(pd.DataFrame(raw), "locations_with_skus_debug.csv", out_dir)  # Debug-Ausgabe der Rohdaten mit SKUs
 
         # SKUs vorab berechnen (Location + Rooms)
         loc_sku_by_fid, room_skus_by_fid = precompute_skus(raw)

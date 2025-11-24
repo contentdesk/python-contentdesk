@@ -11,3 +11,4 @@ src/config/__pycache__/ignoreTypes.cpython-311.pyc
 input/*
 src/command/atag/locations_debug.csv
 src/command/atag/room_skus_debug.csv
+src/command/atag/rooms_debug.csv

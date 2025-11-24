@@ -134,10 +134,7 @@ def precompute_skus(
                                 room_skus.append(r_sku)
                 room_skus_by_fid[fid] = room_skus
                 
-        dfRoomSkus = pd.DataFrame(
-                [(k, ", ".join(v)) for k, v in room_skus_by_fid.items()],
-                columns=["fid", "room_skus"]
-        )
+        dfRoomSkus = pd.DataFrame(room_skus_by_fid.items(), columns=["fid", "room_skus"])
                 
         toCsv(dfRoomSkus, "room_skus_debug.csv")  # Debug-Ausgabe der Room-SKUs      
         return loc_sku_by_fid, room_skus_by_fid
@@ -236,7 +233,7 @@ def main(json_path: Path, out_dir: Path = Path(".")):
 
         # ---------- Locations ----------
         loc_df = build_locations_df(raw, loc_sku_by_fid, room_skus_by_fid)
-        df = loc_df.assign(
+        dfLocation = loc_df.assign(
                 cms_fid=loc_df['fid'],
                 name=loc_df.get('name', ''),
                 disambiguatingDescription=loc_df.get('shortDescription', ''),
@@ -244,21 +241,22 @@ def main(json_path: Path, out_dir: Path = Path(".")):
                 MeetingRoomProducts=loc_df.get('MeetingRoom', ''),
                 containsPlace=loc_df.get('containsPlace', ''),
         )
-        df = df[['sku', 'cms_fid', 'name', 'disambiguatingDescription', 'description', 'MeetingRoomProducts', 'containsPlace']]
+        dfLocation = dfLocation[['sku', 'cms_fid', 'name', 'MeetingRoomProducts', 'containsPlace']]
         
         toCsv(loc_df, "locationsOriginal.csv", out_dir)
-        toCsv(df, "locations.csv", out_dir)
+        toCsv(dfLocation, "locations.csv", out_dir)
+        
         # ---------- Rooms ----------
         rooms_df = build_rooms_df(raw, loc_sku_by_fid)
-        df = rooms_df.assign(
+        dfRoom = rooms_df.assign(
                 cms_fid=rooms_df['fid'],
                 name=rooms_df.get('name', ''),
                 containedInPlace=rooms_df.get('containedInPlace', ''),
         )
-        df = df[['sku', 'cms_fid', 'name', 'containedInPlace']]
+        dfRoom = dfRoom[['sku', 'cms_fid', 'name', 'containedInPlace']]
         
         toCsv(rooms_df, "roomsOriginal.csv", out_dir)
-        toCsv(df, "rooms.csv", out_dir)
+        toCsv(dfRoom, "rooms.csv", out_dir)
 
 if __name__ == "__main__":
         # --------------------------------------------------------------

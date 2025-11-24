@@ -168,6 +168,8 @@ def build_locations_df(
 
         df = pd.DataFrame(rows)
         
+        toCsv(df, "locations_debug.csv")  # Debug-Ausgabe der Rohdaten
+        
         # Spaltenreihenfolge: fid, sku, danach der Rest
         if not df.empty:
                 cols = ["fid", "sku"] + [c for c in df.columns if c not in ("fid", "sku")]

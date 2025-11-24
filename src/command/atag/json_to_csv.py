@@ -117,9 +117,11 @@ def precompute_skus(
         """
         loc_sku_by_fid: Dict[Any, Optional[str]] = {}
         room_skus_by_fid: Dict[Any, List[str]] = {}
+        rooms: List[Dict[str, Any]] = []
 
         for item in raw_items:
                 fid = item.get("fid")
+                sku = item.get("sku")
                 # Location‑SKU aus Location‑Objekt (oder explizit aus fid)
                 loc_sku = extract_uuid_v4_from_dict(item)
                 if not loc_sku and is_uuid_v4_string(fid):
@@ -129,14 +131,19 @@ def precompute_skus(
                 # Room‑SKUs sammeln
                 room_skus: List[str] = []
                 for room in item.get("rooms", []) or []:
-                        r_sku = extract_uuid_v4_from_dict(room)
-                        if r_sku:
-                                room_skus.append(r_sku)
+                        r_sku = str(uuid.uuid4())
+                        room_skus.append(r_sku)
+                        room["sku"] = r_sku
+                        room["cms_fid"] = fid
+                        room["name"] = room.get("name", "")
+                        room['containedInPlace'] = sku
+                        rooms.append(room)
                 room_skus_by_fid[fid] = room_skus
                 
-        dfRoomSkus = pd.DataFrame(room_skus_by_fid.items(), columns=["fid", "room_skus"])
+        dfRoomSkus = pd.DataFrame(room_skus_by_fid.items(), columns=["cms_fid", "room_skus"])
                 
-        toCsv(dfRoomSkus, "room_skus_debug.csv")  # Debug-Ausgabe der Room-SKUs      
+        toCsv(dfRoomSkus, "room_skus_debug.csv")  # Debug-Ausgabe der Room-SKUs
+        toCsv(pd.DataFrame(rooms, columns=["sku", "cms_fid", "name", "containedInPlace"]), "rooms_debug_sku.csv")  # Debug-Ausgabe der Location-SKUs
         return loc_sku_by_fid, room_skus_by_fid
 
 
@@ -177,7 +184,7 @@ def build_locations_df(
 
         dfLocation = pd.DataFrame(
                 rows,
-                columns=["fid", "MeetingRoom", "containsPlace"]
+                columns=["sku","fid", "name", "MeetingRoom", "containsPlace"]
         )
         
         toCsv(dfLocation, "locations_debug.csv")  # Debug-Ausgabe der Rohdaten
@@ -206,7 +213,8 @@ def build_rooms_df(
                 for room in item.get("rooms", []) or []:
                         flat = {k: normalize_list_field(v) for k, v in room.items()}
                         flat["fid"] = fid
-                        flat["sku"] = uuid.uuid4()
+                        sku = extract_uuid_v4_from_dict(room)
+                        flat["sku"] = sku
                         # explizit gefordert: Feld "location" mit der Location‑SKU
                         flat["containedInPlace"] = parent_sku
                         rows.append(flat)
@@ -232,8 +240,8 @@ def main(json_path: Path, out_dir: Path = Path(".")):
              if 'sku' not in entry or not is_uuid_v4_string(entry['sku']):
                  entry['sku'] = str(uuid.uuid4())
                  
-        toCsv(pd.DataFrame(raw), "locations_with_skus_debug.csv", out_dir)  # Debug-Ausgabe der Rohdaten mit SKUs
-
+        #toCsv(pd.DataFrame(raw), "locations_with_skus_debug.csv", out_dir)  # Debug-Ausgabe der Rohdaten mit SKUs
+        
         # SKUs vorab berechnen (Location + Rooms)
         loc_sku_by_fid, room_skus_by_fid = precompute_skus(raw)
 

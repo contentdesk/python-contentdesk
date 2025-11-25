@@ -270,16 +270,30 @@ def main(json_path: Path, out_dir: Path = Path(".")):
         
         dfLocation['url'] = dfLocation['url'].apply(lambda x: x if str(x).startswith('https') else f'https://{x}' if x else '')
         
+        # image
         dfLocation['image'] = dfLocation['pictures'].apply(lambda x: str(x).split(', ')[0] if x else '').str.removeprefix("{'name': '").str.removesuffix("'")
         dfLocation['image_description'] = dfLocation['pictures'].apply(lambda x: str(x).split(', ')[1] if x else '').str.removeprefix("'legend': '").str.removesuffix("'}")
         
+        # Split pictures into 6 separate columns
+        pictures_split = dfLocation['pictures'].apply(
+                lambda x: str(x).split('}') if x else [''] * 10
+        )
+
+        for i in range(10):
+                dfLocation[f'picture_{i:02d}'] = pictures_split.apply(
+                        lambda lst: lst[i].strip().lstrip(',').strip() if i < len(lst) else ''
+                )
+        
+        # image 01
         dfLocation['image_01_scope'] = dfLocation['pictures'].apply(lambda x: str(x).split('}')[1] if x else '').str.removeprefix(", {'name': '").str.split("'").str[0]
         dfLocation['image_01_scope_description'] = dfLocation['pictures'].apply(lambda x: str(x).split('}')[1] if x else '').str.removeprefix(", {'name': '").str.split("'legend': '").str[1].str.removesuffix("'")
         
         # image 02
-        dfLocation['image_02_scope'] = dfLocation['pictures'].apply(lambda x: str(x).split('}')[2] if x else '').str.removeprefix(", {'name': '").str.split("'").str[0]
-        dfLocation['image_02_scope_description'] = dfLocation['pictures'].apply(lambda x: str(x).split('}')[2] if x else '').str.removeprefix(", {'name': '").str.split("'legend': '").str[1].str.removesuffix("'")
-        
+        #dfLocation['image_02_scope'] = dfLocation['pictures'].apply(lambda x: str(x).split("'name': '")[2] if x else '')
+        #dfLocation['image_02_scope_description'] = dfLocation['pictures']
+        # image 03
+        #dfLocation['image_03_scope'] = dfLocation['pictures'].apply(lambda x: str(x).split('}')[3] if x else '').str.removeprefix(", {'name': '").str.split("'").str[0]
+        #dfLocation['image_03_scope_description'] = dfLocation['pictures'].apply(lambda x: str(x).split('}')[3] if x else '').str.removeprefix(", {'name': '").str.split("'legend': '").str[1].str.removesuffix("'")
         
         dfLocation = dfLocation[
                 ['sku', 
@@ -301,8 +315,16 @@ def main(json_path: Path, out_dir: Path = Path(".")):
                  'image_description',
                  'image_01_scope',
                  'image_01_scope_description',
-                 'image_02_scope',
-                 'image_02_scope_description'
+                 'picture_00',
+                 'picture_01',
+                 'picture_02',
+                 'picture_03',
+                 'picture_04',
+                 'picture_05',
+                 'picture_06',
+                 'picture_07',
+                 'picture_08',
+                 'picture_09'
                 ]
         ]
         

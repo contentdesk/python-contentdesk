@@ -262,13 +262,17 @@ def main(json_path: Path, out_dir: Path = Path(".")):
                 telephone = loc_df.get('contact_phone', ''),
                 email = loc_df.get('contact_email', ''),
                 url = loc_df.get('contact_website', ''),
-                image = loc_df.get('pictures', '')
+                pictures = loc_df.get('pictures', '')
         )
         
         dfLocation['postalCode'] = dfLocation['postalCode'].str.split(' ').str[0]  # Nur PLZ, ohne Ortsteil
         dfLocation['addressLocality'] = dfLocation['addressLocality'].str.split(' ').str[1]  # Nur Ortsteil, ohne PLZ
         
         dfLocation['url'] = dfLocation['url'].apply(lambda x: x if str(x).startswith('https') else f'https://{x}' if x else '')
+        
+        dfLocation['image'] = dfLocation['pictures'].apply(lambda x: str(x).split(', ')[0] if x else '').str.removeprefix("{'name': '").str.removesuffix("'")
+        dfLocation['image_description'] = dfLocation['pictures'].apply(lambda x: str(x).split(', ')[1] if x else '').str.removeprefix("'legend': '").str.removesuffix("'")
+        dfLocation['image_01_scope'] = dfLocation['pictures']
         
         dfLocation = dfLocation[
                 ['sku', 
@@ -286,7 +290,9 @@ def main(json_path: Path, out_dir: Path = Path(".")):
                  'telephone',
                  'email',
                  'url',
-                 'image'
+                 'image',
+                 'image_description',
+                 'image_01_scope',
                 ]
         ]
         

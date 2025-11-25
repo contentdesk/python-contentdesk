@@ -59,6 +59,8 @@ def getProperties():
     properties['qualityOfExperience'] = 'qualityOfExperience'
     properties['landscape'] = 'landscape'
     properties['HowToDirection'] = 'HowToDirection'
+    properties['parking'] = 'parking'
+    properties['publicTransport'] = 'publicTransport'
     
     # General Information
     properties['openingHoursSpecification'] = 'openingHoursSpecification'

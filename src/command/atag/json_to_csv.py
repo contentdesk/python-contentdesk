@@ -271,8 +271,15 @@ def main(json_path: Path, out_dir: Path = Path(".")):
         dfLocation['url'] = dfLocation['url'].apply(lambda x: x if str(x).startswith('https') else f'https://{x}' if x else '')
         
         dfLocation['image'] = dfLocation['pictures'].apply(lambda x: str(x).split(', ')[0] if x else '').str.removeprefix("{'name': '").str.removesuffix("'")
-        dfLocation['image_description'] = dfLocation['pictures'].apply(lambda x: str(x).split(', ')[1] if x else '').str.removeprefix("'legend': '").str.removesuffix("'")
-        dfLocation['image_01_scope'] = dfLocation['pictures']
+        dfLocation['image_description'] = dfLocation['pictures'].apply(lambda x: str(x).split(', ')[1] if x else '').str.removeprefix("'legend': '").str.removesuffix("'}")
+        
+        dfLocation['image_01_scope'] = dfLocation['pictures'].apply(lambda x: str(x).split('}')[1] if x else '').str.removeprefix(", {'name': '").str.split("'").str[0]
+        dfLocation['image_01_scope_description'] = dfLocation['pictures'].apply(lambda x: str(x).split('}')[1] if x else '').str.removeprefix(", {'name': '").str.split("'legend': '").str[1].str.removesuffix("'")
+        
+        # image 02
+        dfLocation['image_02_scope'] = dfLocation['pictures'].apply(lambda x: str(x).split('}')[2] if x else '').str.removeprefix(", {'name': '").str.split("'").str[0]
+        dfLocation['image_02_scope_description'] = dfLocation['pictures'].apply(lambda x: str(x).split('}')[2] if x else '').str.removeprefix(", {'name': '").str.split("'legend': '").str[1].str.removesuffix("'")
+        
         
         dfLocation = dfLocation[
                 ['sku', 
@@ -293,6 +300,9 @@ def main(json_path: Path, out_dir: Path = Path(".")):
                  'image',
                  'image_description',
                  'image_01_scope',
+                 'image_01_scope_description',
+                 'image_02_scope',
+                 'image_02_scope_description'
                 ]
         ]
         

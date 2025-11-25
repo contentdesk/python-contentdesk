@@ -232,6 +232,14 @@ def build_rooms_df(
                 df = df[fixed + rest]
         return df
 
+def setImage(newColumnName: str, columName: str, dfLocation: pd.DataFrame) -> pd.DataFrame:
+        dfLocation[newColumnName] = dfLocation[columName].apply(lambda x: str(x).split("'name': '")[1] if x else '').str.split("'").str[0]
+        return dfLocation
+
+def setImageDescriptions(newColumnName: str, columName: str, dfLocation: pd.DataFrame) -> pd.DataFrame:
+        dfLocation[newColumnName] = dfLocation[columName].apply(lambda x: str(x).split("'name': '")[1] if x else '').str.removeprefix(", {'name': '").str.split("'legend': '").str[1].str.removesuffix("'")
+        return dfLocation
+
 def main(json_path: Path, out_dir: Path = Path(".")):
         raw = load_json(json_path)
         
@@ -289,11 +297,30 @@ def main(json_path: Path, out_dir: Path = Path(".")):
         dfLocation['image_01_scope_description'] = dfLocation['pictures'].apply(lambda x: str(x).split('}')[1] if x else '').str.removeprefix(", {'name': '").str.split("'legend': '").str[1].str.removesuffix("'")
         
         # image 02
-        #dfLocation['image_02_scope'] = dfLocation['pictures'].apply(lambda x: str(x).split("'name': '")[2] if x else '')
-        #dfLocation['image_02_scope_description'] = dfLocation['pictures']
+        dfLocation['image_02_scope'] = dfLocation['picture_02'].apply(lambda x: str(x).split("'name': '")[1] if x else '').str.split("'").str[0]
+        dfLocation['image_02_scope_description'] = dfLocation['picture_02'].apply(lambda x: str(x).split("'name': '")[1] if x else '').str.removeprefix(", {'name': '").str.split("'legend': '").str[1].str.removesuffix("'")
+        
         # image 03
-        #dfLocation['image_03_scope'] = dfLocation['pictures'].apply(lambda x: str(x).split('}')[3] if x else '').str.removeprefix(", {'name': '").str.split("'").str[0]
-        #dfLocation['image_03_scope_description'] = dfLocation['pictures'].apply(lambda x: str(x).split('}')[3] if x else '').str.removeprefix(", {'name': '").str.split("'legend': '").str[1].str.removesuffix("'")
+        dfLocation = setImage('image_03_scope', 'picture_03', dfLocation)
+        dfLocation = setImageDescriptions('image_03_scope_description', 'picture_03', dfLocation)
+        
+        dfLocation = setImage('image_04_scope', 'picture_04', dfLocation)
+        dfLocation = setImageDescriptions('image_04_scope_description', 'picture_04', dfLocation)
+        
+        dfLocation = setImage('image_05_scope', 'picture_05', dfLocation)
+        dfLocation = setImageDescriptions('image_05_scope_description', 'picture_05', dfLocation)
+        
+        dfLocation = setImage('image_06_scope', 'picture_06', dfLocation)
+        dfLocation = setImageDescriptions('image_06_scope_description', 'picture_06', dfLocation)
+        
+        dfLocation = setImage('image_07_scope', 'picture_07', dfLocation)
+        dfLocation = setImageDescriptions('image_07_scope_description', 'picture_07', dfLocation)
+        
+        dfLocation = setImage('image_08_scope', 'picture_08', dfLocation)
+        dfLocation = setImageDescriptions('image_08_scope_description', 'picture_08', dfLocation)
+        
+        dfLocation = setImage('image_09_scope', 'picture_09', dfLocation)
+        dfLocation = setImageDescriptions('image_09_scope_description', 'picture_09', dfLocation)
         
         dfLocation = dfLocation[
                 ['sku', 
@@ -315,16 +342,10 @@ def main(json_path: Path, out_dir: Path = Path(".")):
                  'image_description',
                  'image_01_scope',
                  'image_01_scope_description',
-                 'picture_00',
-                 'picture_01',
-                 'picture_02',
-                 'picture_03',
-                 'picture_04',
-                 'picture_05',
-                 'picture_06',
-                 'picture_07',
-                 'picture_08',
-                 'picture_09'
+                 'image_02_scope',
+                 'image_02_scope_description',
+                 'image_03_scope',
+                 'image_03_scope_description'
                 ]
         ]
         

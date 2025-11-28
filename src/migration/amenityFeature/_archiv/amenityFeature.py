@@ -4,7 +4,7 @@ import logging
 ############################################################################################################
 # https://tourismus.atlassian.net/browse/PIM-468
 # 1. Export all Products with Attribute features 
-# 2. Mapping amenityFeature   options
+# 2. Mapping amenityFeature  options
 # 3. Upload all Products with Attribute amenityFeature  
 ############################################################################################################
 

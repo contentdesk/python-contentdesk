@@ -218,12 +218,14 @@ def build_rooms_df(
                         # explizit gefordert: Feld "location" mit der Location‑SKU
                         flat["containedInPlace"] = parent_sku
                         rows.append(flat)
+                        
+        df = pd.DataFrame(rows)
 
-        df = pd.DataFrame(rows,
+        dfroom = pd.DataFrame(rows,
                 columns=["sku", "fid", "name", "containedInPlace"]
         )
         
-        toCsv(df, "rooms_debug.csv")  # Debug-Ausgabe der Rohdaten
+        toCsv(dfroom, "rooms_debug.csv")  # Debug-Ausgabe der Rohdaten
         
         # Spaltenreihenfolge: fid, location, sku, danach alphabetisch
         if not df.empty:
@@ -270,7 +272,10 @@ def main(json_path: Path, out_dir: Path = Path(".")):
                 telephone = loc_df.get('contact_phone', ''),
                 email = loc_df.get('contact_email', ''),
                 url = loc_df.get('contact_website', ''),
-                pictures = loc_df.get('pictures', '')
+                pictures = loc_df.get('pictures', ''),
+                gastro = loc_df.get('gastro', ''),
+                hotel = loc_df.get('hotel', ''),
+                extras = loc_df.get('extras', '')
         )
         
         dfLocation['postalCode'] = dfLocation['postalCode'].str.split(' ').str[0]  # Nur PLZ, ohne Ortsteil
@@ -323,29 +328,45 @@ def main(json_path: Path, out_dir: Path = Path(".")):
         dfLocation = setImageDescriptions('image_09_scope_description', 'picture_09', dfLocation)
         
         dfLocation = dfLocation[
-                ['sku', 
-                 'family', 
-                 'cms_fid', 
-                 'name', 
-                 'MeetingRoomProducts', 
-                 'containsPlace', 
-                 'disambiguatingDescription', 
-                 'description',
-                 'location',
-                 'streetAddress',
-                 'postalCode',
-                 'addressLocality',
-                 'telephone',
-                 'email',
-                 'url',
-                 'image',
-                 'image_description',
-                 'image_01_scope',
-                 'image_01_scope_description',
-                 'image_02_scope',
-                 'image_02_scope_description',
-                 'image_03_scope',
-                 'image_03_scope_description'
+                [
+                        'sku', 
+                        'family', 
+                        'cms_fid', 
+                        'name', 
+                        'MeetingRoomProducts', 
+                        'containsPlace', 
+                        'disambiguatingDescription', 
+                        'description',
+                        'location',
+                        'streetAddress',
+                        'postalCode',
+                        'addressLocality',
+                        'telephone',
+                        'email',
+                        'url',
+                        'image',
+                        'image_description',
+                        'image_01_scope',
+                        'image_01_scope_description',
+                        'image_02_scope',
+                        'image_02_scope_description',
+                        'image_03_scope',
+                        'image_03_scope_description',
+                        'image_04_scope',
+                        'image_04_scope_description',
+                        'image_05_scope',
+                        'image_05_scope_description',
+                        'image_06_scope',
+                        'image_06_scope_description',
+                        'image_07_scope',
+                        'image_07_scope_description',
+                        'image_08_scope',
+                        'image_08_scope_description',
+                        'image_09_scope',
+                        'image_09_scope_description',
+                        'gastro',
+                        'hotel',
+                        'extras'
                 ]
         ]
         
@@ -358,9 +379,17 @@ def main(json_path: Path, out_dir: Path = Path(".")):
                 family="MeetingRoom",
                 name=rooms_df.get('name', ''),
                 containedInPlace=rooms_df.get('containedInPlace', ''),
-                
+                seating_seminar=rooms_df.get('type_seminar_max', ''),
+                seating_concert=rooms_df.get('type_conzert_max', ''),
+                seating_ushape=rooms_df.get('type_uform_max', ''),
+                seating_banquet=rooms_df.get('type_banquet_max', ''),
+                events_wifi=rooms_df.get('opt_wlan', ''),	
+                events_beamer=rooms_df.get('opt_beamer', ''),
+                events_flipchartandpens=rooms_df.get('opt_flipchart', ''),
+                media_flatscreentv=rooms_df.get('opt_screen', ''),
+                events_microphone=rooms_df.get('opt_audio', ''),
         )
-        dfRoom = dfRoom[['sku', 'family', 'cms_fid', 'name', 'containedInPlace']]
+        dfRoom = dfRoom[['sku', 'family', 'cms_fid', 'name', 'containedInPlace', 'seating_seminar', 'seating_concert', 'seating_ushape', 'seating_banquet', 'events_wifi', 'events_beamer', 'events_flipchartandpens', 'media_flatscreentv', 'events_microphone']]
         
         toCsv(rooms_df, "roomsOriginal.csv", out_dir)
         toCsv(dfRoom, "rooms.csv", out_dir)

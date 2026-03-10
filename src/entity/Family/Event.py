@@ -48,6 +48,8 @@ def setBody(family, families):
     body['attributes']['startTime'] = 'startTime'
     body['attributes']['endTime'] = 'endTime'
     
+    body['attributes']['openingHours'] = 'openingHours'
+    
     body['attributes']['logo'] = 'logo'
     
     body['attributes']['image_01_scope'] = 'image_01_scope'

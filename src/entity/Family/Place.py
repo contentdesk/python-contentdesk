@@ -241,6 +241,9 @@ def getProperties():
     properties['parking'] = 'parking'
     properties['publicTransport'] = 'publicTransport'
     
+    # schema.org Places Properties
+    properties['amenityFeature'] = 'amenityFeature'
+    
     # Add and merge properties from Place    
     thingProperties = Thing.getProperties()
     

@@ -40,10 +40,13 @@ def setBody(family, families):
     body['attributes']['addressCountry'] = 'addressCountry'
     body['attributes']['addressRegion'] = 'addressRegion'
     
+    body['attributes']['legalName'] = 'legalName'
+    body['attributes']['honorificPrefix'] = 'honorificPrefix'
     body['attributes']['givenName'] = 'givenName'
     body['attributes']['familyName'] = 'familyName'
     body['attributes']['email'] = 'email'
     body['attributes']['telephone'] = 'telephone'
+    body['attributes']['url'] = 'url'
     
     body['attributes']['startTime'] = 'startTime'
     body['attributes']['endTime'] = 'endTime'

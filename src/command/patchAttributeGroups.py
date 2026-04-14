@@ -6,6 +6,7 @@ import sys
 sys.path.append("..")
 
 from service.loadEnv import loadEnv, getEnvironment
+import os
 import service.cliArguments as cliArguments
 
 def getAttributeGroups():
@@ -19,6 +20,11 @@ def getAttributeGroups():
     # Convert the DataFrame to a JSON object
     json_data = df.to_json(orient="records")
     # Write the JSON data to a file
+
+    # Create directory if it doesn't exist
+    output_dir = "../../output/index/akeneo"
+    os.makedirs(output_dir, exist_ok=True)
+
     with open("../../output/index/akeneo/attributeGroups.json", "w") as file:
         file.write(json_data)
 
@@ -49,6 +55,8 @@ def main():
 
     environments = cliArguments.getEnvironment(sys)
     arguemnts = cliArguments.getArguments(sys)
+
+    print(environments)
 
     print("START PATCH ATTRIBUTE GROUPS")
     for environment in environments:

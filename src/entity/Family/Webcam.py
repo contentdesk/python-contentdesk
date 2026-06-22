@@ -1,5 +1,17 @@
 import entity.Family.Family as Family
+import entity.Family.Place as Place
 
+def getSubClasses():
+    subClasses = [
+        "LiveVideo",
+        "StaticWebcam",
+        "WebLink"
+    ]
+
+    #"LodgingBusiness",
+    return subClasses
+
+# Specific properties
 def getProperties():
     properties = {}
     
@@ -30,6 +42,12 @@ def getProperties():
     properties['promo_sort_order_scope'] = 'promo_sort_order_scope'
     
     properties['markerIcon'] = 'markerIcon'
+    
+    # Add and merge properties from Place    
+    placeProperties = Place.getProperties()
+    
+    for key, value in placeProperties.items():
+        properties[key] = value
     
     return properties
 

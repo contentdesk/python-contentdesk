@@ -36,6 +36,8 @@ def getProperties():
     # body['attributes']['audience'] = 'audience' ?
     properties['availableLanguage'] = 'availableLanguage'
     properties['checkinTime'] = 'checkinTime'
+    properties['checkinTimeTo'] = 'checkinTimeTo'
+    properties['checkoutTimeFrom'] = 'checkoutTimeFrom'
     properties['checkoutTime'] = 'checkoutTime'
     properties['numberOfRooms'] = 'numberOfRooms'
     properties['petsAllowed'] = 'petsAllowed'
